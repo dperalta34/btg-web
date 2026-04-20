@@ -347,7 +347,7 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
   nav>div img{height:40px}
 
   /* HERO */
-  .hero{padding:16px 20px 0}
+  .hero{padding:28px 20px 0}
   .hero-inner{padding-bottom:16px !important;grid-template-columns:1fr !important;gap:16px !important}
   #scroll-canvas{max-width:100% !important;width:100% !important;border-radius:10px}
   .hero h1{font-size:clamp(30px,8vw,42px);letter-spacing:-.03em}
@@ -1433,7 +1433,7 @@ function loadFrame(i, cb) {
 }
 
 const isMobileDevice = window.innerWidth < 768;
-const preloadCount = isMobileDevice ? 20 : 10;
+const preloadCount = totalFrames;
 
 function drawFrame(index) {
   const img = loadedImages[index];
@@ -1463,7 +1463,7 @@ const statsBar = document.getElementById('map-section');
   const initFrame = Math.min(totalFrames - 1, Math.floor(progress * totalFrames));
   currentFrame = initFrame;
   loadFrame(initFrame, () => drawFrame(initFrame));
-  setTimeout(() => { for(let i=0;i<Math.min(preloadCount,totalFrames);i++) loadFrame(i); }, 200);
+  for(let i=0;i<preloadCount;i++) loadFrame(i);
 })();
 
 window.addEventListener('scroll', () => {
@@ -1630,7 +1630,7 @@ const mapObserver = new IntersectionObserver((entries) => {
     for(let i=0;i<mapTotalFrames;i++) loadMapFrame(i);
     mapObserver.disconnect();
   }
-}, { rootMargin: '500px' });
+}, { rootMargin: '1000px' });
 if (mapCanvas) mapObserver.observe(mapCanvas);
 
 function drawMapFrame(index) {
