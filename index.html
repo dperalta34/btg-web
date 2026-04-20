@@ -101,10 +101,10 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 .ticker-wrap::before,.ticker-wrap::after{content:'';position:absolute;top:0;width:80px;height:100%;z-index:2;pointer-events:none}
 .ticker-wrap::before{left:0;background:linear-gradient(to right,var(--off),transparent)}
 .ticker-wrap::after{right:0;background:linear-gradient(to left,var(--off),transparent)}
-.ticker{display:flex;width:max-content;animation:ticker 55s linear infinite}
+.ticker{display:flex;width:max-content;animation:ticker 55s linear infinite;will-change:transform;transform:translateZ(0)}
 .ticker:hover{animation-play-state:paused}
 .ticker-set{display:flex;align-items:center;gap:0}
-.aseg-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:0 32px;border-right:1px solid rgba(255,255,255,0.06);flex-shrink:0;height:72px}
+.aseg-item{display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:10px;padding:0 28px;border-right:1px solid rgba(255,255,255,0.06);flex-shrink:0;height:68px;white-space:nowrap}
 .aseg-logo{width:110px;height:36px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .aseg-logo img,.aseg-logo svg{max-width:110px;max-height:36px;width:auto;height:auto;object-fit:contain}
 .aseg-type{font-size:8px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:980px;display:inline-block;flex-shrink:0}
@@ -646,7 +646,35 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
         <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/Best_Doctors.png" alt="Best Doctors" loading="eager"></div><div class="aseg-type aseg-nicho">Nicho</div></div>
         <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/Continental.png" alt="Continental Assist" loading="eager"></div><div class="aseg-type aseg-nicho">Nicho</div></div>
       </div>
-      <div class="ticker-set" id="ticker-set-2" aria-hidden="true"></div>
+      <div class="ticker-set" id="ticker-set-2" aria-hidden="true">
+        <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/Sura.png" alt="" loading="eager"></div><div class="aseg-type aseg-ancla">Ancla</div></div>
+        <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/Zurich.png" alt="" loading="eager"></div><div class="aseg-type aseg-ancla">Ancla</div></div>
+        <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/BX+.png" alt="" loading="eager"></div><div class="aseg-type aseg-ancla">Ancla</div></div>
+        <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/HDI.png" alt="" loading="eager"></div><div class="aseg-type aseg-ancla">Ancla</div></div>
+        <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/Chubb.png" alt="" loading="eager"></div><div class="aseg-type aseg-ancla">Ancla</div></div>
+        <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/Qualitas.png" alt="" loading="eager"></div><div class="aseg-type aseg-ancla">Ancla</div></div>
+        <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/Afirme.png" alt="" loading="eager"></div><div class="aseg-type aseg-ancla">Ancla</div></div>
+        <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/GNP.png" alt="" loading="eager"></div><div class="aseg-type aseg-est">Estratégica</div></div>
+        <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/Bupa.png" alt="" loading="eager"></div><div class="aseg-type aseg-est">Estratégica</div></div>
+        <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/Axa.png" alt="" loading="eager"></div><div class="aseg-type aseg-est">Estratégica</div></div>
+        <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/AIG.png" alt="" loading="eager"></div><div class="aseg-type aseg-est">Estratégica</div></div>
+        <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/plan_seguro_logo2.png" alt="" loading="eager"></div><div class="aseg-type aseg-est">Estratégica</div></div>
+        <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/Thona.png" alt="" loading="eager"></div><div class="aseg-type aseg-est">Estratégica</div></div>
+        <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/La_Latino.png" alt="" loading="eager"></div><div class="aseg-type aseg-est">Estratégica</div></div>
+        <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/General_de_seguros_.webp" alt="" loading="eager"></div><div class="aseg-type aseg-est">Estratégica</div></div>
+        <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/Ana.png" alt="" loading="eager"></div><div class="aseg-type aseg-est">Estratégica</div></div>
+        <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/ANUARIO2016_logo_SEGUROSATLAS.png" alt="" loading="eager"></div><div class="aseg-type aseg-est">Estratégica</div></div>
+        <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/Sofimex.png" alt="" loading="eager"></div><div class="aseg-type aseg-nicho">Nicho</div></div>
+        <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/Aserta.svg" alt="" loading="eager"></div><div class="aseg-type aseg-nicho">Nicho</div></div>
+        <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/Logo_Dorama.png" alt="" loading="eager"></div><div class="aseg-type aseg-nicho">Nicho</div></div>
+        <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/Prevem.png" alt="" loading="eager"></div><div class="aseg-type aseg-nicho">Nicho</div></div>
+        <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/Skandia.png" alt="" loading="eager"></div><div class="aseg-type aseg-nicho">Nicho</div></div>
+        <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/GMX.png" alt="" loading="eager"></div><div class="aseg-type aseg-nicho">Nicho</div></div>
+        <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/Mapfre.svg" alt="" loading="eager"></div><div class="aseg-type aseg-nicho">Nicho</div></div>
+        <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/Climb_Re.png" alt="" loading="eager"></div><div class="aseg-type aseg-nicho">Nicho</div></div>
+        <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/Best_Doctors.png" alt="" loading="eager"></div><div class="aseg-type aseg-nicho">Nicho</div></div>
+        <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/Continental.png" alt="" loading="eager"></div><div class="aseg-type aseg-nicho">Nicho</div></div>
+      </div>
     </div>
   </div>
 </section>
@@ -1143,8 +1171,7 @@ document.querySelectorAll('.count-up').forEach(el=>el.textContent='0');
 })();
 
 // TICKER
-const s1=document.getElementById('ticker-set-1'),s2=document.getElementById('ticker-set-2');
-if(s1&&s2)s2.innerHTML=s1.innerHTML;
+// ticker-set-2 is hardcoded in HTML for reliable mobile rendering
 
 // REVEAL
 const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.1});
