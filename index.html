@@ -1161,16 +1161,15 @@ function runCounters(){
 // Reset immediately — script runs after DOM is parsed
 document.querySelectorAll('.count-up').forEach(el=>el.textContent='0');
 (function(){
-  var sb=document.getElementById('map-section');
-  if(!sb)return;
-  function check(){
-    if(sb.getBoundingClientRect().top<window.innerHeight*0.88){
+  var target=document.querySelector('.stat-rows');
+  if(!target)return;
+  var obs=new IntersectionObserver(function(entries){
+    if(entries[0].isIntersecting){
       runCounters();
-      window.removeEventListener('scroll',check);
+      obs.disconnect();
     }
-  }
-  check();
-  window.addEventListener('scroll',check,{passive:true});
+  },{threshold:0.3});
+  obs.observe(target);
 })();
 
 // TICKER
