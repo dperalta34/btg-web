@@ -402,6 +402,32 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
   .sec-h2{font-size:clamp(24px,6vw,34px)}
   .srv-inner,.cred-inner,.concursos-inner{padding:48px 20px}
   .sec-tag{margin-bottom:10px}
+
+  /* SERVICIOS — horizontal scroll en móvil */
+  .srv-strip{grid-template-columns:repeat(3,minmax(220px,1fr));overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;border-radius:16px}
+  .srv-card{scroll-snap-align:start;padding:24px 18px;min-width:220px}
+  .srv-card+.srv-card{border-left:1px solid rgba(255,255,255,0.05);border-top:none}
+  .srv-title{font-size:14px}
+  .srv-desc{font-size:12px}
+  .srv-nps-num{font-size:20px}
+
+  /* TICKER — reducir fades laterales */
+  .ticker-wrap::before,.ticker-wrap::after{width:40px}
+
+  /* COTIZACIONES — quitar blend-mode y forzar visibilidad en móvil */
+  img.cotiz-img-main,img.cotiz-img-main.visible{mix-blend-mode:normal;opacity:1 !important;filter:none !important;transform:none !important;animation:none !important}
+  .cotiz-img-outer{padding:0 12px}
+
+  /* UNIVERSIDAD — cédulas scrollables en móvil */
+  .lpath-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;justify-content:flex-start;padding:20px 16px;gap:8px}
+  .lpath-bubble{width:44px;height:44px;font-size:16px}
+  .lpath-item{flex:0 0 auto;min-width:60px}
+  .cedula-tip{min-width:180px;font-size:11px;bottom:calc(100% + 10px)}
+  .univ-right{overflow:hidden}
+
+  /* UNIVERSIDAD feats — columna única en móvil */
+  .univ-feats{flex-direction:column;padding:16px 20px 28px}
+  .univ-feat-row{width:100%}
 }
 
 @media(max-width:400px){
@@ -1176,6 +1202,15 @@ document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>ro.o
   }
   bubbles.forEach(function(b){
     b.addEventListener('mouseenter',function(){setActive(b)});
+    b.addEventListener('click',function(e){
+      e.stopPropagation();
+      var isActive=b.classList.contains('active');
+      bubbles.forEach(function(x){x.classList.remove('active')});
+      if(!isActive) b.classList.add('active');
+    });
+  });
+  document.addEventListener('click',function(){
+    bubbles.forEach(function(x){x.classList.remove('active')});
   });
   var lpObs=new IntersectionObserver(function(es){
     es.forEach(function(e){
@@ -1331,10 +1366,12 @@ function loadFrame(i, cb) {
   img.src = FRAMES[i];
 }
 
-// Load first frame immediately, then preload nearby on scroll
+// En móvil: solo frame estático, sin animación
+const isMobileDevice = window.innerWidth < 768;
 loadFrame(0, () => drawFrame(0));
-// Preload frames 1-10 after short delay
-setTimeout(() => { for(let i=1;i<Math.min(10,totalFrames);i++) loadFrame(i); }, 500);
+if (!isMobileDevice) {
+  setTimeout(() => { for(let i=1;i<Math.min(10,totalFrames);i++) loadFrame(i); }, 500);
+}
 
 function drawFrame(index) {
   const img = loadedImages[index];
@@ -1362,9 +1399,8 @@ window.addEventListener('scroll', () => {
   const scrolled    = window.scrollY - scrollStart;
   const progress    = Math.max(0, Math.min(1, scrolled / scrollRange));
   const frameIndex  = Math.min(totalFrames - 1, Math.floor(progress * totalFrames));
-  if (frameIndex !== currentFrame) {
+  if (!isMobileDevice && frameIndex !== currentFrame) {
     currentFrame = frameIndex;
-    // Load surrounding frames on demand
     for(let j=frameIndex;j<Math.min(frameIndex+8,totalFrames);j++) loadFrame(j);
     drawFrame(frameIndex);
   }
@@ -1510,13 +1546,15 @@ function loadMapFrame(i, cb) {
 
 // Load first frame immediately, preload rest when section nears viewport
 loadMapFrame(0, () => drawMapFrame(0));
-const mapObserver = new IntersectionObserver((entries) => {
-  if (entries[0].isIntersecting) {
-    for(let i=1;i<mapTotalFrames;i++) loadMapFrame(i);
-    mapObserver.disconnect();
-  }
-}, { rootMargin: '200px' });
-if (mapCanvas) mapObserver.observe(mapCanvas);
+if (!isMobileDevice) {
+  const mapObserver = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      for(let i=1;i<mapTotalFrames;i++) loadMapFrame(i);
+      mapObserver.disconnect();
+    }
+  }, { rootMargin: '200px' });
+  if (mapCanvas) mapObserver.observe(mapCanvas);
+}
 
 function drawMapFrame(index) {
   const img = mapLoadedImages[index];
