@@ -1367,10 +1367,7 @@ function loadFrame(i, cb) {
 }
 
 const isMobileDevice = window.innerWidth < 768;
-loadFrame(0, () => drawFrame(0));
-// Precargar primeros frames siempre, más en desktop
 const preloadCount = isMobileDevice ? 20 : 10;
-setTimeout(() => { for(let i=1;i<Math.min(preloadCount,totalFrames);i++) loadFrame(i); }, 300);
 
 function drawFrame(index) {
   const img = loadedImages[index];
@@ -1384,6 +1381,25 @@ function drawFrame(index) {
 // Scroll-driven frame control — completes before stats bar
 const heroSection = document.getElementById('scroll-video-container');
 const statsBar = document.getElementById('map-section');
+
+// Calculate correct initial frame for current scroll (avoids showing frame 0 flash)
+(function initHeroFrame() {
+  const wH = window.innerHeight;
+  const isMob = window.innerWidth < 768;
+  const sStart = heroSection ? heroSection.offsetTop - wH * 0.6 : 0;
+  const sEnd = heroSection
+    ? (isMob
+        ? heroSection.offsetTop + heroSection.offsetHeight * 0.12
+        : (statsBar ? statsBar.offsetTop - wH * 0.42 : heroSection.offsetTop + heroSection.offsetHeight * 0.9))
+    : 1;
+  const sRange = Math.max(sEnd - sStart, 1);
+  const progress = Math.max(0, Math.min(1, (window.scrollY - sStart) / sRange));
+  const initFrame = Math.min(totalFrames - 1, Math.floor(progress * totalFrames));
+  currentFrame = initFrame;
+  loadFrame(initFrame, () => drawFrame(initFrame));
+  setTimeout(() => { for(let i=0;i<Math.min(preloadCount,totalFrames);i++) loadFrame(i); }, 200);
+})();
+
 window.addEventListener('scroll', () => {
   if (!heroSection) return;
   const windowH = window.innerHeight;
