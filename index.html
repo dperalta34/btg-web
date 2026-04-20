@@ -1433,7 +1433,7 @@ function loadFrame(i, cb) {
 }
 
 const isMobileDevice = window.innerWidth < 768;
-const preloadCount = totalFrames;
+const preloadCount = isMobileDevice ? 20 : 30;
 
 function drawFrame(index) {
   const img = loadedImages[index];
@@ -1463,7 +1463,7 @@ const statsBar = document.getElementById('map-section');
   const initFrame = Math.min(totalFrames - 1, Math.floor(progress * totalFrames));
   currentFrame = initFrame;
   loadFrame(initFrame, () => drawFrame(initFrame));
-  for(let i=0;i<preloadCount;i++) loadFrame(i);
+  setTimeout(() => { for(let i=0;i<preloadCount;i++) loadFrame(i); }, 200);
 })();
 
 window.addEventListener('scroll', () => {
@@ -1630,7 +1630,7 @@ const mapObserver = new IntersectionObserver((entries) => {
     for(let i=0;i<mapTotalFrames;i++) loadMapFrame(i);
     mapObserver.disconnect();
   }
-}, { rootMargin: '1000px' });
+}, { rootMargin: '500px' });
 if (mapCanvas) mapObserver.observe(mapCanvas);
 
 function drawMapFrame(index) {
