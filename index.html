@@ -339,68 +339,68 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
   .mkt-title-wrap{padding:0 20px !important}
 
   /* SERVICIOS */
-  .srv-section{padding:48px 20px}
+  .srv-section{padding:24px 20px}
   .srv-strip{grid-template-columns:1fr;border-radius:14px}
-  .srv-card{padding:32px 24px}
+  .srv-card{padding:24px 18px}
   .srv-card+.srv-card{border-left:none;border-top:1px solid rgba(255,255,255,0.05)}
 
   /* NPS */
-  .nps-global{flex-direction:column;text-align:center;gap:28px}
+  .nps-global{flex-direction:column;text-align:center;gap:20px}
   .nps-scale{flex-wrap:wrap;justify-content:center}
   .nps-scale-item{padding:0 14px}
   .nps-txt{max-width:100%}
 
   /* SUSI + CAMI */
-  .dual-section{padding:48px 20px}
+  .dual-section{padding:24px 20px}
   .dual-grid{grid-template-columns:1fr}
   .feat-grid{grid-template-columns:1fr}
-  .dual-card,.dual-card-dark{padding:28px 20px}
+  .dual-card,.dual-card-dark{padding:22px 16px}
 
   /* DASHBOARD */
-  .dash-section{padding:48px 20px}
+  .dash-section{padding:24px 20px}
   .dash-grid{grid-template-columns:1fr}
-  .dash-3d{width:280px;height:220px;margin-bottom:32px}
+  .dash-3d{width:280px;height:220px;margin-bottom:24px}
   .panel-main{width:220px;height:160px}
   .panel-side{width:130px;height:110px;right:-10px}
   .panel-front{width:160px;height:95px}
 
   /* COTIZACIONES */
-  .cotiz-section{padding:48px 0 0}
-  .cotiz-header{padding:0 20px 40px}
-  .cotiz-grid{grid-template-columns:1fr;gap:32px}
+  .cotiz-section{padding:24px 0 0}
+  .cotiz-header{padding:0 20px 28px}
+  .cotiz-grid{grid-template-columns:1fr;gap:24px}
   .ramos-grid{grid-template-columns:1fr}
 
   /* UNIVERSIDAD */
-  .univ-section{padding:32px 0 0}
+  .univ-section{padding:20px 0 0}
   .univ-split{flex-direction:column;padding:0 20px}
-  .univ-left{padding-right:0;margin-bottom:32px;flex:unset;width:100%}
+  .univ-left{padding-right:0;margin-bottom:20px;flex:unset;width:100%}
   .univ-right{flex:unset;width:100%}
   .univ-h{font-size:30px}
-  .univ-feats{padding:20px 20px 32px;gap:10px;flex-wrap:wrap}
+  .univ-feats{padding:16px 20px 20px;gap:10px;flex-wrap:wrap}
 
   /* CREDENCIALES */
-  .cred-section{padding:48px 20px}
+  .cred-section{padding:24px 20px}
   .cert-grid{grid-template-columns:repeat(2,1fr);gap:14px}
   .medios-row{gap:8px}
   .medio-btn{font-size:12px;padding:7px 14px}
 
   /* INICIATIVAS */
-  .social-section{padding:40px 0 0}
+  .social-section{padding:24px 0 0}
   .social-section>div{padding:0 20px 8px}
 
   /* CONCURSOS */
-  .concursos-section{padding:48px 20px}
+  .concursos-section{padding:24px 20px}
   .concursos-grid{grid-template-columns:1fr}
   .concurso-illus{height:88px}
-  .concurso-card{padding:22px 20px}
+  .concurso-card{padding:18px 16px}
 
   /* FOOTER */
-  footer{padding:24px 20px}
-  footer>div{flex-direction:column;align-items:flex-start;gap:16px}
+  footer{padding:20px 20px}
+  footer>div{flex-direction:column;align-items:flex-start;gap:12px}
 
   /* GENERAL */
   .sec-h2{font-size:clamp(24px,6vw,34px)}
-  .srv-inner,.cred-inner,.concursos-inner{padding:48px 20px}
+  .srv-inner,.cred-inner,.concursos-inner{padding:24px 20px}
   .sec-tag{margin-bottom:10px}
 
   /* SERVICIOS — horizontal scroll en móvil */
@@ -1391,7 +1391,7 @@ window.addEventListener('scroll', () => {
   const scrollStart = heroSection.offsetTop - windowH * 0.6;
   // En móvil termina mucho antes (30% del recorrido del hero)
   const scrollEnd = isMobile
-    ? heroSection.offsetTop + heroSection.offsetHeight * 0.3
+    ? heroSection.offsetTop + heroSection.offsetHeight * 0.12
     : (statsBar ? statsBar.offsetTop - windowH * 0.42 : heroSection.offsetTop + heroSection.offsetHeight * 0.9);
   const scrollRange = Math.max(scrollEnd - scrollStart, 1);
   const scrolled    = window.scrollY - scrollStart;
@@ -1569,9 +1569,9 @@ window.addEventListener('scroll', () => {
   const windowH = window.innerHeight;
   const isMobile = window.innerWidth < 768;
   // En móvil termina muy rápido (apenas aparece la sección)
-  const scrollStart = mapSection.offsetTop - windowH * (isMobile ? 0.9 : 0.7);
+  const scrollStart = mapSection.offsetTop - windowH * (isMobile ? 1.1 : 0.7);
   const scrollEnd   = isMobile
-    ? mapSection.offsetTop - windowH * 0.2
+    ? mapSection.offsetTop - windowH * 0.5
     : mapSection.offsetTop - windowH * 0.1;
   const scrollRange = Math.max(scrollEnd - scrollStart, 1);
   const scrolled    = window.scrollY - scrollStart;
