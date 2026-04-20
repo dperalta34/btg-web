@@ -312,16 +312,17 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
   nav>div img{height:40px}
 
   /* HERO */
-  .hero{padding:48px 20px 0}
-  .hero-inner{padding-bottom:40px;grid-template-columns:1fr !important;gap:20px !important}
+  .hero{padding:16px 20px 0}
+  .hero-inner{padding-bottom:16px !important;grid-template-columns:1fr !important;gap:16px !important}
   #scroll-canvas{max-width:100% !important;width:100% !important;border-radius:10px}
   .hero h1{font-size:clamp(30px,8vw,42px);letter-spacing:-.03em}
   .hero-sub{font-size:15px}
   .eyebrow{font-size:10px}
 
   /* BTG EN EL MERCADO */
-  .mkt-desc{font-size:13px;margin-bottom:16px}
-  #map-section{grid-template-columns:1fr !important;padding:12px 20px 20px !important;gap:24px}
+  .mkt-desc{font-size:13px;margin-bottom:10px}
+  .mkt-title-wrap{padding-top:0 !important}
+  #map-section{grid-template-columns:1fr !important;padding:8px 20px 16px !important;gap:16px}
   #map-canvas{max-width:100% !important;border-radius:8px}
   .stat-rows{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid rgba(255,255,255,0.07);border-radius:14px;overflow:hidden}
   .stat-row{flex-direction:column;align-items:center;text-align:center;padding:16px 8px;border-right:1px solid rgba(255,255,255,0.07)}
@@ -1558,16 +1559,13 @@ function loadMapFrame(i, cb) {
   img.src = MAP_FRAMES[i];
 }
 
-// Load first frame immediately, preload rest when section nears viewport
-loadMapFrame(0, () => drawMapFrame(0));
-// Precargar frames del mapa cuando la sección entra al viewport
+// Precargar todos los frames del mapa cuando la sección está cerca
 const mapObserver = new IntersectionObserver((entries) => {
   if (entries[0].isIntersecting) {
-    const count = isMobileDevice ? 30 : mapTotalFrames;
-    for(let i=1;i<count;i++) loadMapFrame(i);
-    if (!isMobileDevice) mapObserver.disconnect();
+    for(let i=0;i<mapTotalFrames;i++) loadMapFrame(i);
+    mapObserver.disconnect();
   }
-}, { rootMargin: '300px' });
+}, { rootMargin: '500px' });
 if (mapCanvas) mapObserver.observe(mapCanvas);
 
 function drawMapFrame(index) {
@@ -1580,11 +1578,31 @@ function drawMapFrame(index) {
 }
 
 const mapSection = document.getElementById('map-section');
+
+function calcMapFrame() {
+  if (!mapSection) return 0;
+  const windowH = window.innerHeight;
+  const isMobile = window.innerWidth < 768;
+  const scrollStart = mapSection.offsetTop - windowH * (isMobile ? 1.1 : 0.7);
+  const scrollEnd   = isMobile
+    ? mapSection.offsetTop - windowH * 0.5
+    : mapSection.offsetTop - windowH * 0.1;
+  const scrollRange = Math.max(scrollEnd - scrollStart, 1);
+  const progress = Math.max(0, Math.min(1, (window.scrollY - scrollStart) / scrollRange));
+  return Math.min(mapTotalFrames - 1, Math.floor(progress * mapTotalFrames));
+}
+
+// Inicializar con el frame correcto para el scroll actual
+(function initMapFrame() {
+  const initFrame = calcMapFrame();
+  mapCurrentFrame = initFrame;
+  loadMapFrame(initFrame, () => drawMapFrame(initFrame));
+})();
+
 window.addEventListener('scroll', () => {
   if (!mapSection || !mapCtx) return;
   const windowH = window.innerHeight;
   const isMobile = window.innerWidth < 768;
-  // En móvil termina muy rápido (apenas aparece la sección)
   const scrollStart = mapSection.offsetTop - windowH * (isMobile ? 1.1 : 0.7);
   const scrollEnd   = isMobile
     ? mapSection.offsetTop - windowH * 0.5
