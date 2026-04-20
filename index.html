@@ -1366,12 +1366,11 @@ function loadFrame(i, cb) {
   img.src = FRAMES[i];
 }
 
-// En móvil: solo frame estático, sin animación
 const isMobileDevice = window.innerWidth < 768;
 loadFrame(0, () => drawFrame(0));
-if (!isMobileDevice) {
-  setTimeout(() => { for(let i=1;i<Math.min(10,totalFrames);i++) loadFrame(i); }, 500);
-}
+// Precargar primeros frames siempre, más en desktop
+const preloadCount = isMobileDevice ? 20 : 10;
+setTimeout(() => { for(let i=1;i<Math.min(preloadCount,totalFrames);i++) loadFrame(i); }, 300);
 
 function drawFrame(index) {
   const img = loadedImages[index];
@@ -1389,17 +1388,16 @@ window.addEventListener('scroll', () => {
   if (!heroSection) return;
   const windowH = window.innerHeight;
   const isMobile = window.innerWidth < 768;
-  // Start: when hero top enters view
   const scrollStart = heroSection.offsetTop - windowH * 0.6;
-  // End: mobile finishes faster since canvas is below title (more scroll needed)
-  const scrollEnd = statsBar
-    ? statsBar.offsetTop - windowH * (isMobile ? 0.1 : 0.42)
-    : heroSection.offsetTop + heroSection.offsetHeight * 0.9;
-  const scrollRange = scrollEnd - scrollStart;
+  // En móvil termina mucho antes (30% del recorrido del hero)
+  const scrollEnd = isMobile
+    ? heroSection.offsetTop + heroSection.offsetHeight * 0.3
+    : (statsBar ? statsBar.offsetTop - windowH * 0.42 : heroSection.offsetTop + heroSection.offsetHeight * 0.9);
+  const scrollRange = Math.max(scrollEnd - scrollStart, 1);
   const scrolled    = window.scrollY - scrollStart;
   const progress    = Math.max(0, Math.min(1, scrolled / scrollRange));
   const frameIndex  = Math.min(totalFrames - 1, Math.floor(progress * totalFrames));
-  if (!isMobileDevice && frameIndex !== currentFrame) {
+  if (frameIndex !== currentFrame) {
     currentFrame = frameIndex;
     for(let j=frameIndex;j<Math.min(frameIndex+8,totalFrames);j++) loadFrame(j);
     drawFrame(frameIndex);
@@ -1546,15 +1544,15 @@ function loadMapFrame(i, cb) {
 
 // Load first frame immediately, preload rest when section nears viewport
 loadMapFrame(0, () => drawMapFrame(0));
-if (!isMobileDevice) {
-  const mapObserver = new IntersectionObserver((entries) => {
-    if (entries[0].isIntersecting) {
-      for(let i=1;i<mapTotalFrames;i++) loadMapFrame(i);
-      mapObserver.disconnect();
-    }
-  }, { rootMargin: '200px' });
-  if (mapCanvas) mapObserver.observe(mapCanvas);
-}
+// Precargar frames del mapa cuando la sección entra al viewport
+const mapObserver = new IntersectionObserver((entries) => {
+  if (entries[0].isIntersecting) {
+    const count = isMobileDevice ? 30 : mapTotalFrames;
+    for(let i=1;i<count;i++) loadMapFrame(i);
+    if (!isMobileDevice) mapObserver.disconnect();
+  }
+}, { rootMargin: '300px' });
+if (mapCanvas) mapObserver.observe(mapCanvas);
 
 function drawMapFrame(index) {
   const img = mapLoadedImages[index];
@@ -1570,10 +1568,10 @@ window.addEventListener('scroll', () => {
   if (!mapSection || !mapCtx) return;
   const windowH = window.innerHeight;
   const isMobile = window.innerWidth < 768;
-  // Start when section enters view, end well before section bottom — very fast
-  const scrollStart = mapSection.offsetTop - windowH * 0.7;
+  // En móvil termina muy rápido (apenas aparece la sección)
+  const scrollStart = mapSection.offsetTop - windowH * (isMobile ? 0.9 : 0.7);
   const scrollEnd   = isMobile
-    ? mapSection.offsetTop + mapSection.offsetHeight * 0.8
+    ? mapSection.offsetTop - windowH * 0.2
     : mapSection.offsetTop - windowH * 0.1;
   const scrollRange = Math.max(scrollEnd - scrollStart, 1);
   const scrolled    = window.scrollY - scrollStart;
