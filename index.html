@@ -1179,7 +1179,7 @@ document.querySelectorAll('.count-up').forEach(el=>el.textContent='0');
       runCounters();
       obs.disconnect();
     }
-  },{threshold:0.3});
+  },{threshold:0.1});
   obs.observe(target);
 })();
 
@@ -1592,9 +1592,10 @@ function calcMapFrame() {
   if (!mapSection) return 0;
   const windowH = window.innerHeight;
   const isMobile = window.innerWidth < 768;
-  const scrollStart = mapSection.offsetTop - windowH * (isMobile ? 1.1 : 0.7);
+  const ref = isMobile && mapCanvas ? mapCanvas : mapSection;
+  const scrollStart = ref.offsetTop - windowH * (isMobile ? 1.1 : 0.7);
   const scrollEnd   = isMobile
-    ? mapSection.offsetTop - windowH * 0.5
+    ? ref.offsetTop - windowH * 0.3
     : mapSection.offsetTop - windowH * 0.1;
   const scrollRange = Math.max(scrollEnd - scrollStart, 1);
   const progress = Math.max(0, Math.min(1, (window.scrollY - scrollStart) / scrollRange));
@@ -1612,9 +1613,10 @@ window.addEventListener('scroll', () => {
   if (!mapSection || !mapCtx) return;
   const windowH = window.innerHeight;
   const isMobile = window.innerWidth < 768;
-  const scrollStart = mapSection.offsetTop - windowH * (isMobile ? 1.1 : 0.7);
+  const ref = isMobile && mapCanvas ? mapCanvas : mapSection;
+  const scrollStart = ref.offsetTop - windowH * (isMobile ? 1.1 : 0.7);
   const scrollEnd   = isMobile
-    ? mapSection.offsetTop - windowH * 0.5
+    ? ref.offsetTop - windowH * 0.3
     : mapSection.offsetTop - windowH * 0.1;
   const scrollRange = Math.max(scrollEnd - scrollStart, 1);
   const scrolled    = window.scrollY - scrollStart;
