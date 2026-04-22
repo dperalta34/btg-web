@@ -481,8 +481,9 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
   .sp-feat-icon{width:30px;height:30px;border-radius:9px;background:rgba(26,127,188,0.1);border:1px solid rgba(26,127,188,0.18);display:flex;align-items:center;justify-content:center;color:var(--blue)}
   .sp-feat-lbl{font-size:8px;color:rgba(228,238,245,0.35);text-align:center;letter-spacing:.02em}
   .susi-logo-wrap{display:flex;align-items:center;gap:10px;margin-bottom:12px}
-  .susi-logo-wrap img{width:44px;height:44px;filter:drop-shadow(0 0 8px rgba(26,127,188,0.6))}
+  .susi-logo-wrap img{width:auto;height:auto;max-width:160px;max-height:64px;filter:drop-shadow(0 0 10px rgba(26,127,188,0.35))}
   .susi-wordmark{font-size:22px;font-weight:800;letter-spacing:-.04em;color:var(--blue)}
+  .susi-tagline{font-size:15px;font-weight:400;color:rgba(30,50,80,0.65);letter-spacing:.01em;margin:2px 0 12px}
   /* CAMI live */
   .cami-live{display:flex;align-items:center;gap:6px;font-size:9px;font-weight:600;color:var(--cyan);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}
   .cami-pulse-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);flex-shrink:0;animation:pulse-dot 1.5s ease infinite}
@@ -860,18 +861,17 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
 <section class="dual-section" id="tecnologia">
   <div class="dual-inner">
     <div class="sec-tag t-blue">Plataformas exclusivas BTG</div>
-    <h2 class="sec-h2 h2-light">Soluciones para<br>nuestros agentes</h2>
+    <h2 class="sec-h2 h2-light" style="display:none">Soluciones para<br>nuestros agentes</h2>
     <div class="dual-grid">
       <div class="dual-card reveal-left">
         <div class="susi-logo-mobile">
           <div class="susi-logo-wrap">
-            <img src="SUSI/LOGO_SUSI.svg" alt="SUSI BTG">
-            <span class="susi-wordmark">SUSI</span>
+            <img src="SUSI/LOGO_SUSI.png" alt="SUSI BTG">
           </div>
         </div>
         <div class="dual-badge badge-blue">SUSI BTG</div>
-        <h3 class="h3-light">Tu sistema inteligente de cotización</h3>
-        <p class="p-light" style="font-size:13px;font-weight:300;line-height:1.6;margin-bottom:14px">Multicotizador exclusivo con <strong>10 aseguradoras en Autos</strong> y <strong>11 en GMM</strong> desde un solo panel profesional.</p>
+        <p class="susi-tagline"><strong>Su</strong> <strong>S</strong>istema <strong>I</strong>nteligente</p>
+        <p class="p-light" style="font-size:13px;font-weight:300;line-height:1.6;margin-bottom:14px">Multicotizador diseñado para nuestros agentes</p>
         <div class="susi-mockup">
           <input type="radio" name="sptab" id="sptab-autos" checked class="sp-radio">
           <input type="radio" name="sptab" id="sptab-gmm" class="sp-radio">
