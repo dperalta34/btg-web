@@ -464,10 +464,10 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
   .sp-disclaimer{font-size:9px;color:rgba(228,238,245,0.18);text-align:center;padding:6px 14px 8px;letter-spacing:.03em;font-style:italic}
   .susi-slider{width:100%;user-select:none;-webkit-user-select:none}
   .susi-slider-track{position:relative;height:52px;background:rgba(26,127,188,0.08);border:1px solid rgba(26,127,188,0.25);border-radius:26px;overflow:hidden;display:flex;align-items:center}
-  .susi-slider-fill{position:absolute;left:0;top:0;height:100%;width:52px;background:linear-gradient(90deg,rgba(26,127,188,0.35),rgba(0,201,224,0.2));border-radius:26px;transition:width .05s linear;pointer-events:none}
+  .susi-slider-fill{position:absolute;left:0;top:0;height:100%;width:52px;background:linear-gradient(90deg,rgba(26,127,188,0.35),rgba(0,201,224,0.2));border-radius:26px;pointer-events:none}
   .susi-slider-thumb{position:absolute;left:4px;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--cyan));display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 0 14px rgba(26,127,188,0.6);cursor:grab;z-index:2;transition:box-shadow .2s;flex-shrink:0}
   .susi-slider-thumb:active{cursor:grabbing;box-shadow:0 0 22px rgba(0,201,224,0.7)}
-  .susi-slider-label{position:absolute;left:0;right:0;text-align:center;font-size:13px;font-weight:600;color:rgba(228,238,245,0.55);letter-spacing:.04em;pointer-events:none;transition:opacity .2s;padding-left:44px}
+  .susi-slider-label{position:absolute;left:0;right:0;text-align:center;font-size:13px;font-weight:600;color:rgba(228,238,245,0.7);letter-spacing:.04em;pointer-events:none;transition:opacity .15s;padding-left:52px}
   .sp-vehicle{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.05);background:rgba(255,255,255,0.02)}
   .sp-vehicle-icon{width:28px;height:28px;border-radius:7px;background:rgba(26,127,188,0.15);border:1px solid rgba(26,127,188,0.25);display:flex;align-items:center;justify-content:center;color:var(--blue);flex-shrink:0}
   .sp-vehicle-info{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
@@ -1846,40 +1846,36 @@ window.addEventListener('scroll', () => {
     var label=document.getElementById('susiSliderLabel');
     var url=wrap.dataset.url;
     var track=wrap.querySelector('.susi-slider-track');
-    var dragging=false,startX=0,currentX=0,maxX=0;
+    var dragging=false,startX=0,curX=0,done=false;
 
-    function getMax(){return track.offsetWidth-thumb.offsetWidth-8;}
+    function maxX(){return track.offsetWidth-thumb.offsetWidth-8;}
     function setPos(x){
-      x=Math.max(0,Math.min(x,getMax()));
-      currentX=x;
+      x=Math.max(0,Math.min(x,maxX()));
+      curX=x;
       thumb.style.left=(4+x)+'px';
-      fill.style.width=(52+x)+'px';
-      var pct=x/getMax();
-      label.style.opacity=Math.max(0,1-pct*2);
-      if(pct>0.88){complete();}
+      fill.style.width=(thumb.offsetWidth+x)+'px';
+      label.style.opacity=Math.max(0,1-x/maxX()*2.2);
     }
     function complete(){
-      thumb.style.transition='left .3s ease';
-      fill.style.transition='width .3s ease';
-      setPos(getMax());
+      if(done)return; done=true;
+      setPos(maxX());
       label.style.opacity=0;
-      label.textContent='';
-      setTimeout(function(){window.open(url,'_blank');reset();},350);
-    }
-    function reset(){
+      // Navigate in same tab — works reliably on iOS Safari
+      location.href=url;
       setTimeout(function(){
-        thumb.style.transition='left .4s cubic-bezier(.4,0,.2,1)';
-        fill.style.transition='width .4s cubic-bezier(.4,0,.2,1)';
+        done=false;
+        thumb.style.transition='left .35s ease';
+        fill.style.transition='width .35s ease';
         setPos(0);
-        setTimeout(function(){
-          thumb.style.transition='';fill.style.transition='';
-          label.textContent='Desliza para entrar a SUSI';label.style.opacity='';
-        },420);
-      },200);
+        label.style.opacity=1;
+        setTimeout(function(){thumb.style.transition='';fill.style.transition='';},360);
+      },600);
     }
 
     thumb.addEventListener('touchstart',function(e){
-      dragging=true;startX=e.touches[0].clientX-currentX;
+      if(done)return;
+      dragging=true;
+      startX=e.touches[0].clientX-curX;
       thumb.style.transition='';fill.style.transition='';
       e.preventDefault();
     },{passive:false});
@@ -1889,15 +1885,20 @@ window.addEventListener('scroll', () => {
       e.preventDefault();
     },{passive:false});
     document.addEventListener('touchend',function(){
-      if(!dragging)return;
-      dragging=false;
-      if(currentX/getMax()<0.88){reset();}
+      if(!dragging)return; dragging=false;
+      if(curX/maxX()>=0.85){complete();}
+      else{
+        thumb.style.transition='left .3s ease';fill.style.transition='width .3s ease';
+        setPos(0);label.style.opacity=1;
+        setTimeout(function(){thumb.style.transition='';fill.style.transition='';},320);
+      }
     });
 
-    // Mouse fallback for desktop testing
     thumb.addEventListener('mousedown',function(e){
-      dragging=true;startX=e.clientX-currentX;
+      if(done)return;
+      dragging=true;startX=e.clientX-curX;
       thumb.style.transition='';fill.style.transition='';
+      e.preventDefault();
     });
     document.addEventListener('mousemove',function(e){if(!dragging)return;setPos(e.clientX-startX);});
     document.addEventListener('mouseup',function(){
