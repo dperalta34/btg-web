@@ -115,6 +115,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 /* SUSI MOCKUP + CAMI LIVE */
 .susi-mockup{display:none}.susi-logo-wrap{display:none}.susi-wordmark{display:none}.sp-header,.sp-result,.sp-footer,.sp-tabs,.sp-tab,.sp-stat,.sp-badge,.sp-cov,.sp-right,.sp-price,.sp-tag,.sp-sep,.sp-dot{box-sizing:border-box}
 .cami-live{display:none}
+.cami-logo-mobile{display:none}.cami-logo-wrap{display:none}.cami-mockup{display:none}.cami-tagline{display:none}.cami-desc-m{display:none}
 @keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.5)}}
 @keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
@@ -486,9 +487,53 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
   .susi-logo-wrap img{width:auto;height:auto;max-width:360px;max-height:144px;filter:drop-shadow(0 0 10px rgba(26,127,188,0.35))}
   .susi-wordmark{font-size:22px;font-weight:800;letter-spacing:-.04em;color:var(--blue)}
   .susi-tagline{font-size:15px;font-weight:400;color:rgba(30,50,80,0.65);letter-spacing:.01em;margin:2px 0 12px}
-  /* CAMI live */
-  .cami-live{display:flex;align-items:center;gap:6px;font-size:9px;font-weight:600;color:var(--cyan);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}
-  .cami-pulse-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);flex-shrink:0;animation:pulse-dot 1.5s ease infinite}
+  /* CAMI mobile */
+  .cami-logo-mobile{display:flex !important;justify-content:center;margin-bottom:16px}
+  .cami-logo-wrap{display:flex !important;align-items:center;justify-content:center}
+  .cami-logo-wrap img{width:auto;height:auto;max-width:360px;max-height:144px;filter:drop-shadow(0 0 10px rgba(0,201,224,0.35))}
+  .cami-tagline{display:block;text-align:center;font-size:15px;font-weight:400;color:rgba(228,238,245,0.65);letter-spacing:.01em;margin:2px 0 12px}
+  .cami-desc-m{display:block;font-size:13px;font-weight:300;color:rgba(228,238,245,0.45);line-height:1.6;margin-bottom:14px}
+  .dual-card-dark .dual-badge{display:flex;justify-content:center;margin-left:auto;margin-right:auto}
+  .dual-card-dark .h3-dark{display:none}
+  .dual-card-dark .feat-grid{display:none}
+  .dual-card-dark .cami-visual{display:none}
+  .dual-card-dark .cami-desktop-btn{display:none}
+  .dual-card-dark .cami-live{display:none}
+  .dual-card-dark>p.p-old{display:none}
+  /* CAMI mockup */
+  .cami-mockup{display:block;background:var(--dark);border:1px solid rgba(0,201,224,0.22);border-radius:14px;overflow:hidden;margin:14px 0;box-shadow:0 0 32px rgba(0,201,224,0.1),inset 0 1px 0 rgba(255,255,255,0.04)}
+  .cm-header{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.05);background:rgba(255,255,255,0.02)}
+  .cm-header-icon{width:28px;height:28px;border-radius:7px;background:rgba(0,201,224,0.12);border:1px solid rgba(0,201,224,0.22);display:flex;align-items:center;justify-content:center;color:var(--cyan);flex-shrink:0}
+  .cm-header-info{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+  .cm-header-title{font-size:10px;font-weight:700;color:rgba(228,238,245,0.85);letter-spacing:.02em}
+  .cm-header-sub{font-size:9px;color:rgba(228,238,245,0.3)}
+  .cm-live-badge{display:flex;align-items:center;gap:4px;font-size:8px;font-weight:700;color:var(--cyan);letter-spacing:.08em;text-transform:uppercase}
+  .cami-pulse-dot{width:5px;height:5px;border-radius:50%;background:var(--cyan);flex-shrink:0;animation:pulse-dot 1.5s ease infinite}
+  .cm-row{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.04);cursor:pointer}
+  .cm-row-last{border-bottom:none}
+  .cm-row-left{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
+  .cm-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+  .cm-dot-red{background:#ef4444;box-shadow:0 0 6px rgba(239,68,68,0.6)}
+  .cm-dot-yellow{background:#f59e0b;box-shadow:0 0 6px rgba(245,158,11,0.6)}
+  .cm-dot-green{background:#22c55e;box-shadow:0 0 6px rgba(34,197,94,0.6)}
+  .cm-row-detail{display:flex;flex-direction:column;gap:2px;min-width:0}
+  .cm-row-name{font-size:11px;font-weight:600;color:rgba(228,238,245,0.75);letter-spacing:.01em}
+  .cm-row-tag{font-size:9px;font-weight:600;padding:2px 7px;border-radius:4px;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+  .cm-tag-red{color:#ef4444;background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.2)}
+  .cm-tag-yellow{color:#f59e0b;background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.2)}
+  .cm-tag-green{color:#22c55e;background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.2)}
+  .cm-chevron{color:rgba(228,238,245,0.2);flex-shrink:0}
+  .cm-features{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid rgba(255,255,255,0.05);padding:10px 8px 8px}
+  .cm-feat{display:flex;flex-direction:column;align-items:center;gap:4px;padding:4px 2px}
+  .cm-feat-icon{width:26px;height:26px;border-radius:7px;background:rgba(0,201,224,0.1);border:1px solid rgba(0,201,224,0.18);display:flex;align-items:center;justify-content:center;color:var(--cyan)}
+  .cm-feat-lbl{font-size:7.5px;color:rgba(228,238,245,0.35);text-align:center;letter-spacing:.02em;line-height:1.3}
+  .cm-disclaimer{font-size:9px;color:rgba(228,238,245,0.18);text-align:center;padding:6px 14px 8px;letter-spacing:.03em;font-style:italic}
+  /* CAMI slider */
+  .cami-slider{width:100%;user-select:none;-webkit-user-select:none;touch-action:pan-y}
+  .cami-slider .susi-slider-track{background:#fff;box-shadow:0 2px 16px rgba(0,0,0,0.09),0 1px 3px rgba(0,0,0,0.05)}
+  .cami-slider .susi-slider-label{background:linear-gradient(90deg,#5aabb8 15%,#0a3a42 40%,#00C9E0 50%,#0a3a42 60%,#5aabb8 85%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:cami-shimmer 2.4s infinite linear}
+  @keyframes cami-shimmer{0%{background-position:120% 0}100%{background-position:-120% 0}}
+  .cami-live{display:none}
 
   /* DASHBOARD */
   .dash-section{padding:24px 20px}
@@ -969,10 +1014,21 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
         </div>
       </div>
       <div class="dual-card-dark reveal-right">
-        <div class="cami-live"><span class="cami-pulse-dot"></span>Monitoreo en tiempo real</div>
+        <!-- Mobile logo -->
+        <div class="cami-logo-mobile">
+          <div class="cami-logo-wrap">
+            <img src="CAMI/Logocaok.png" alt="CAMI BTG">
+          </div>
+        </div>
+        <!-- Badge -->
         <div class="dual-badge badge-cyan">CAMI BTG</div>
+        <!-- Mobile tagline & desc -->
+        <p class="cami-tagline"><strong>C</strong>entro de <strong>A</strong>tención y <strong>M</strong>onitoreo <strong>I</strong>ntegral</p>
+        <p class="cami-desc-m">Seguimiento en tiempo real de tus siniestros</p>
+        <!-- Desktop-only content -->
+        <div class="cami-live"><span class="cami-pulse-dot"></span>Monitoreo en tiempo real</div>
         <h3 class="h3-dark">Centro de Atención y Monitoreo Integral</h3>
-        <p style="font-size:14px;font-weight:300;line-height:1.7;margin-bottom:20px;color:rgba(228,238,245,0.45)">Seguimiento en tiempo real de todos tus reclamos desde cualquier dispositivo. Accesible, seguro y siempre disponible.</p>
+        <p class="p-old" style="font-size:14px;font-weight:300;line-height:1.7;margin-bottom:20px;color:rgba(228,238,245,0.45)">Seguimiento en tiempo real de todos tus reclamos desde cualquier dispositivo. Accesible, seguro y siempre disponible.</p>
         <div class="feat-grid">
           <div class="feat-item-dark"><div class="feat-dot-cyan"></div>Rápida respuesta</div>
           <div class="feat-item-dark"><div class="feat-dot-cyan"></div>Seguimiento en tiempo real</div>
@@ -985,8 +1041,80 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
           <div class="cami-row"><span class="cami-lbl">Reembolso GMM · #4798</span><span class="cami-status s-info">En revisión</span></div>
           <div class="cami-row"><span class="cami-lbl">Endoso · #4791</span><span class="cami-status s-ok">Emitido</span></div>
         </div>
+        <div class="cami-desktop-btn" style="margin-top:20px">
+          <a href="https://www.soybtg.com/cami" class="btn-primary" target="_blank" style="background:var(--cyan);color:#081A26">Entrar a CAMI →</a>
+        </div>
+        <!-- Mobile mockup -->
+        <div class="cami-mockup">
+          <div class="cm-header">
+            <div class="cm-header-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12h6M9 16h4M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2z"/></svg></div>
+            <div class="cm-header-info">
+              <span class="cm-header-title">Mis siniestros</span>
+              <span class="cm-header-sub">3 casos activos</span>
+            </div>
+            <div class="cm-live-badge"><span class="cami-pulse-dot"></span>LIVE</div>
+          </div>
+          <div class="cm-row">
+            <div class="cm-row-left">
+              <div class="cm-dot cm-dot-red"></div>
+              <div class="cm-row-detail">
+                <span class="cm-row-name">Siniestro Auto · #4821</span>
+                <span class="cm-row-tag cm-tag-red">Requiere tu atención</span>
+              </div>
+            </div>
+            <svg class="cm-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          </div>
+          <div class="cm-row">
+            <div class="cm-row-left">
+              <div class="cm-dot cm-dot-yellow"></div>
+              <div class="cm-row-detail">
+                <span class="cm-row-name">Siniestro GMM · #4807</span>
+                <span class="cm-row-tag cm-tag-yellow">Proceso de la aseguradora</span>
+              </div>
+            </div>
+            <svg class="cm-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          </div>
+          <div class="cm-row cm-row-last">
+            <div class="cm-row-left">
+              <div class="cm-dot cm-dot-green"></div>
+              <div class="cm-row-detail">
+                <span class="cm-row-name">Reembolso GMM · #4798</span>
+                <span class="cm-row-tag cm-tag-green">Completado</span>
+              </div>
+            </div>
+            <svg class="cm-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          </div>
+          <div class="cm-features">
+            <div class="cm-feat">
+              <div class="cm-feat-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+              <span class="cm-feat-lbl">Respuesta rápida</span>
+            </div>
+            <div class="cm-feat">
+              <div class="cm-feat-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+              <span class="cm-feat-lbl">Tiempo real</span>
+            </div>
+            <div class="cm-feat">
+              <div class="cm-feat-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg></div>
+              <span class="cm-feat-lbl">Accesibilidad total</span>
+            </div>
+            <div class="cm-feat">
+              <div class="cm-feat-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+              <span class="cm-feat-lbl">Seguridad de datos</span>
+            </div>
+          </div>
+          <div class="cm-disclaimer">✦ Pantalla ilustrativa · Datos de ejemplo · No representa valores reales</div>
+        </div>
+        <!-- Mobile slider -->
         <div style="margin-top:20px">
-          <a href="https://www.soybtg.com/susi" class="btn-primary" target="_blank" style="background:var(--cyan);color:#081A26">Entrar a CAMI →</a>
+          <div class="cami-slider" id="camiSlider" data-url="https://www.soybtg.com/cami">
+            <div class="susi-slider-track">
+              <div class="susi-slider-fill" id="camiSliderFill"></div>
+              <span class="susi-slider-label" id="camiSliderLabel">Desliza para entrar a CAMI</span>
+              <div class="susi-slider-thumb" id="camiSliderThumb">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1907,6 +2035,50 @@ window.addEventListener('scroll', () => {
   }
   if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initSlider);}
   else{initSlider();}
+})();
+
+// CAMI slider
+(function(){
+  function initCamiSlider(){
+    var wrap=document.getElementById('camiSlider');
+    if(!wrap)return;
+    var thumb=document.getElementById('camiSliderThumb');
+    var fill=document.getElementById('camiSliderFill');
+    var label=document.getElementById('camiSliderLabel');
+    var url=wrap.dataset.url;
+    var track=wrap.querySelector('.susi-slider-track');
+    var dragging=false,startX=0,curX=0,done=false;
+    function maxX(){return track.offsetWidth-thumb.offsetWidth-8;}
+    function setPos(x){
+      x=Math.max(0,Math.min(x,maxX()));curX=x;
+      thumb.style.left=(4+x)+'px';fill.style.width=x+'px';
+      label.style.opacity=Math.max(0,1-x/maxX()*1.4);
+    }
+    function complete(){
+      if(done)return;done=true;setPos(maxX());label.style.opacity=0;
+      location.href=url;
+      setTimeout(function(){
+        done=false;thumb.style.transition='left .35s ease';fill.style.transition='width .35s ease';
+        setPos(0);label.style.opacity=1;
+        setTimeout(function(){thumb.style.transition='';fill.style.transition='';},360);
+      },600);
+    }
+    function startDrag(cx){if(done)return;dragging=true;startX=cx-curX;thumb.classList.add('dragging');thumb.style.transition='';fill.style.transition='';}
+    function moveDrag(cx){if(!dragging)return;requestAnimationFrame(function(){setPos(cx-startX);});}
+    function endDrag(){
+      if(!dragging)return;dragging=false;thumb.classList.remove('dragging');
+      if(curX/maxX()>=0.85){complete();}
+      else{thumb.style.transition='left .38s cubic-bezier(.22,1,.36,1)';fill.style.transition='width .38s cubic-bezier(.22,1,.36,1)';setPos(0);label.style.opacity=1;setTimeout(function(){thumb.style.transition='';fill.style.transition='';},400);}
+    }
+    thumb.addEventListener('touchstart',function(e){startDrag(e.touches[0].clientX);e.preventDefault();},{passive:false});
+    document.addEventListener('touchmove',function(e){if(!dragging)return;moveDrag(e.touches[0].clientX);e.preventDefault();},{passive:false});
+    document.addEventListener('touchend',endDrag);
+    thumb.addEventListener('mousedown',function(e){startDrag(e.clientX);e.preventDefault();});
+    document.addEventListener('mousemove',function(e){moveDrag(e.clientX);});
+    document.addEventListener('mouseup',endDrag);
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initCamiSlider);}
+  else{initCamiSlider();}
 })();
 
 // NPS CIRCLE
