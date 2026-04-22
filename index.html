@@ -432,7 +432,7 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
 .dual-card-dark .cami-live{display:none}
 .dual-card-dark>p.p-old{display:none}
 /* CAMI mockup */
-.cami-mockup{display:block;background:#fff;border:1px solid rgba(0,201,224,0.2);border-radius:14px;overflow:hidden;margin:14px 0;box-shadow:0 4px 24px rgba(0,0,0,0.08);width:100%}
+.cami-mockup{display:flex;flex-direction:column;background:#fff;border:1px solid rgba(0,201,224,0.2);border-radius:14px;overflow:hidden;margin:14px 0;box-shadow:0 4px 24px rgba(0,0,0,0.08);width:100%}
 .cm-header{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid rgba(0,201,224,0.12);background:rgba(0,201,224,0.04)}
 .cm-header-icon{width:28px;height:28px;border-radius:7px;background:rgba(0,201,224,0.12);border:1px solid rgba(0,201,224,0.22);display:flex;align-items:center;justify-content:center;color:var(--cyan);flex-shrink:0}
 .cm-header-info{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
@@ -440,6 +440,7 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
 .cm-header-sub{font-size:9px;color:rgba(20,40,70,0.4)}
 .cm-live-badge{display:flex;align-items:center;gap:4px;font-size:8px;font-weight:700;color:var(--cyan);letter-spacing:.08em;text-transform:uppercase}
 .cami-pulse-dot{width:5px;height:5px;border-radius:50%;background:var(--cyan);flex-shrink:0;animation:pulse-dot 1.5s ease infinite}
+.cm-rows{flex:1;display:flex;flex-direction:column;justify-content:space-evenly}
 .cm-row{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid rgba(0,0,0,0.05);cursor:pointer}
 .cm-row-last{border-bottom:none}
 .cm-row-left{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
@@ -647,8 +648,8 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
   .btn-premium:hover{transform:translateY(-2px)}
   .btn-premium-susi{background:linear-gradient(135deg,#0d5c8a,#1A7FBC);color:#fff;box-shadow:0 4px 20px rgba(26,127,188,0.4)}
   .btn-premium-susi:hover{box-shadow:0 8px 28px rgba(26,127,188,0.55)}
-  .btn-premium-cami{background:linear-gradient(135deg,#030d1a,#071829);color:#fff;box-shadow:0 4px 20px rgba(0,0,0,0.4);border:1px solid rgba(0,201,224,0.15)}
-  .btn-premium-cami:hover{box-shadow:0 8px 28px rgba(0,201,224,0.25)}
+  .btn-premium-cami{background:#fff;color:#1A7FBC;box-shadow:0 4px 20px rgba(0,0,0,0.15);border:2px solid rgba(26,127,188,0.2)}
+  .btn-premium-cami:hover{box-shadow:0 8px 28px rgba(26,127,188,0.3);border-color:rgba(26,127,188,0.5)}
   .btn-premium svg{flex-shrink:0}
 }
 </style>
@@ -1032,7 +1033,7 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
           </div>
           <div class="sp-disclaimer">✦ Pantalla ilustrativa · Datos de ejemplo · No representa valores reales</div>
         </div>
-        <div class="susi-desktop-cta-wrap" style="margin-top:20px">
+        <div class="susi-desktop-cta-wrap">
           <div class="susi-slider" id="susiSlider" data-url="https://btg.segupoliza.com/#/pages/signin">
             <div class="susi-slider-track">
               <div class="susi-slider-fill" id="susiSliderFill"></div>
@@ -1086,6 +1087,7 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
             </div>
             <div class="cm-live-badge"><span class="cami-pulse-dot"></span>LIVE</div>
           </div>
+          <div class="cm-rows">
           <div class="cm-row">
             <div class="cm-row-left">
               <div class="cm-dot cm-dot-green"></div>
@@ -1115,6 +1117,7 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
               </div>
             </div>
             <svg class="cm-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          </div>
           </div>
           <div class="cm-features">
             <div class="cm-feat">
