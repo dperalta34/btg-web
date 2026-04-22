@@ -599,7 +599,11 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
 
   /* CREDENCIALES */
   .cred-section{padding:24px 20px}
-  .cert-grid{grid-template-columns:repeat(2,1fr);gap:14px}
+  .cert-grid{grid-template-columns:repeat(3,1fr);gap:8px}
+  .cert-card{padding:12px 6px 10px;gap:6px;cursor:pointer}
+  .cert-logo-wrap{width:68px;height:44px}
+  .cert-title{font-size:9px}
+  .cert-desc{display:none !important}
   .medios-row{gap:8px}
   .medio-btn{font-size:12px;padding:7px 14px}
 
@@ -1684,6 +1688,29 @@ document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>ro.o
     });
   },{threshold:.15});
   lpObs.observe(wrap);
+})();
+
+// CERT CARDS — modal on mobile
+(function(){
+  var cards=document.querySelectorAll('.cert-card');
+  var overlay=document.getElementById('cedulaOverlay');
+  var modalContent=document.getElementById('cedulaModalContent');
+  if(!overlay||!modalContent)return;
+  cards.forEach(function(card){
+    function openCert(){
+      var img=card.querySelector('.cert-logo-wrap img');
+      var title=card.querySelector('.cert-title');
+      var desc=card.querySelector('.cert-desc');
+      var html='';
+      if(img) html+='<div style="display:flex;justify-content:center;margin-bottom:12px"><div style="background:#fff;border-radius:10px;padding:10px 14px;display:inline-flex;align-items:center;justify-content:center"><img src="'+img.getAttribute('src')+'" alt="" style="max-width:90px;max-height:52px;object-fit:contain"></div></div>';
+      if(title) html+='<div class="cedula-tip-title">'+title.innerHTML+'</div>';
+      if(desc) html+='<p style="font-size:12.5px;color:rgba(228,238,245,.7);line-height:1.65;margin:0">'+desc.innerHTML+'</p>';
+      modalContent.innerHTML=html;
+      overlay.classList.add('open');
+    }
+    card.addEventListener('touchend',function(e){if(window.innerWidth<=768){e.preventDefault();e.stopPropagation();openCert();}});
+    card.addEventListener('click',function(e){if(window.innerWidth<=768){e.stopPropagation();openCert();}});
+  });
 })();
 
 // ── SCROLL VIDEO ANIMATION ──
