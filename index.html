@@ -460,6 +460,9 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
 .cm-feat-icon{width:26px;height:26px;border-radius:7px;background:rgba(0,201,224,0.1);border:1px solid rgba(0,201,224,0.18);display:flex;align-items:center;justify-content:center;color:var(--cyan)}
 .cm-feat-lbl{font-size:7.5px;color:rgba(20,40,70,0.4);text-align:center;letter-spacing:.02em;line-height:1.3}
 .cm-disclaimer{font-size:9px;color:rgba(20,40,70,0.25);text-align:center;padding:6px 14px 8px;letter-spacing:.03em;font-style:italic}
+.highlight-word{font-weight:900;font-size:1.12em;color:#1A7FBC}
+.cami-hw{color:#00C9E0}
+.susi-desc{font-size:13px;font-weight:300}
 /* CAMI slider */
 .cami-slider-wrap{display:none}
 .cami-slider{width:100%;user-select:none;-webkit-user-select:none;touch-action:pan-y}
@@ -638,8 +641,13 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
 @media(min-width:769px){
   .dual-card,.dual-card-dark{display:flex;flex-direction:column;align-items:center;text-align:center;padding:36px 32px;justify-content:flex-start}
   .dual-grid{align-items:stretch}
-  .susi-logo-wrap img{max-width:400px;max-height:160px}
-  .cami-logo-wrap img{max-width:400px;max-height:160px;filter:brightness(0) invert(1) drop-shadow(0 0 10px rgba(0,201,224,0.3))}
+  .susi-logo-mobile,.cami-logo-mobile{width:100%}
+  .susi-logo-wrap,.cami-logo-wrap{width:100%}
+  .susi-logo-wrap img{width:100%;max-height:200px;object-fit:contain}
+  .cami-logo-wrap img{width:100%;max-height:200px;object-fit:contain;filter:brightness(0) invert(1) drop-shadow(0 0 10px rgba(0,201,224,0.3))}
+  .dual-card .p-light,.cami-desc-m{font-size:15px !important;font-weight:400 !important}
+  .dual-card .p-light strong,.cami-desc-m strong{font-size:1.12em;font-weight:900 !important;color:#1A7FBC}
+  .dual-card-dark .cami-desc-m strong{color:#00C9E0}
   .susi-mockup,.cami-mockup{width:100%;margin:12px 0;flex:1}
   .susi-desktop-cta-wrap,.cami-desktop-btn{margin-top:auto;width:100%}
   .susi-slider{display:none}
@@ -950,7 +958,7 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
         </div>
         <div class="dual-badge badge-blue">SUSI BTG</div>
         <p class="susi-tagline"><strong>Su</strong> <strong>S</strong>istema <strong>I</strong>nteligente</p>
-        <p class="p-light" style="font-size:13px;font-weight:300;line-height:1.6;margin-bottom:14px;text-align:center"><strong style="font-weight:800;font-size:1.08em">Multicotizador</strong> diseñado para nuestros agentes</p>
+        <p class="p-light susi-desc" style="line-height:1.6;margin-bottom:14px;text-align:center"><strong class="highlight-word">Multicotizador</strong> diseñado para nuestros agentes</p>
         <div class="susi-mockup">
           <input type="radio" name="sptab" id="sptab-autos" checked class="sp-radio">
           <input type="radio" name="sptab" id="sptab-gmm" class="sp-radio">
@@ -1060,7 +1068,7 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
         <div class="dual-badge badge-cyan">CAMI BTG</div>
         <!-- Mobile tagline & desc -->
         <p class="cami-tagline"><strong>C</strong>entro de <strong>A</strong>tención y <strong>M</strong>onitoreo <strong>I</strong>ntegral</p>
-        <p class="cami-desc-m" style="text-align:center">Seguimiento en tiempo real de tus <strong style="font-weight:800;font-size:1.08em">siniestros</strong></p>
+        <p class="cami-desc-m" style="text-align:center">Seguimiento en tiempo real de tus <strong class="highlight-word cami-hw">siniestros</strong></p>
         <!-- Desktop-only content -->
         <div class="cami-live"><span class="cami-pulse-dot"></span>Monitoreo en tiempo real</div>
         <h3 class="h3-dark">Centro de Atención y Monitoreo Integral</h3>
