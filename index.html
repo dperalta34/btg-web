@@ -531,10 +531,10 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
   /* CAMI slider */
   .cami-slider-wrap{display:none}
   .cami-slider{width:100%;user-select:none;-webkit-user-select:none;touch-action:pan-y}
-  .cami-track-blue{background:var(--blue) !important;box-shadow:0 4px 20px rgba(26,127,188,0.4) !important}
-  .cami-label-white{background:linear-gradient(90deg,rgba(255,255,255,0.45) 15%,rgba(255,255,255,1) 50%,rgba(255,255,255,0.45) 85%) !important;background-size:220% 100% !important;-webkit-background-clip:text !important;background-clip:text !important;-webkit-text-fill-color:transparent !important;animation:cami-shimmer 2.4s infinite linear !important}
-  .cami-thumb-white{background:#fff !important;color:var(--blue) !important;box-shadow:0 2px 10px rgba(0,0,0,0.15) !important}
-  @keyframes cami-shimmer{0%{background-position:120% 0}100%{background-position:-120% 0}}
+  .cami-track-blue{background:#071829 !important;box-shadow:0 4px 20px rgba(0,0,0,0.35) !important}
+  .cami-label-white{background:linear-gradient(90deg,rgba(255,255,255,0.35) 10%,rgba(255,255,255,0.35) 30%,rgba(255,255,255,1) 50%,rgba(255,255,255,0.35) 70%,rgba(255,255,255,0.35) 90%) !important;background-size:250% 100% !important;-webkit-background-clip:text !important;background-clip:text !important;-webkit-text-fill-color:transparent !important;animation:cami-shimmer 2.4s infinite linear !important;color:transparent !important}
+  .cami-thumb-white{background:#fff !important;color:#071829 !important;box-shadow:0 2px 10px rgba(0,0,0,0.2) !important}
+  @keyframes cami-shimmer{0%{background-position:150% 0}100%{background-position:-150% 0}}
   .cami-slider-wrap{display:block;margin-top:16px}
   .cami-live{display:none}
 
@@ -921,7 +921,7 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
         </div>
         <div class="dual-badge badge-blue">SUSI BTG</div>
         <p class="susi-tagline"><strong>Su</strong> <strong>S</strong>istema <strong>I</strong>nteligente</p>
-        <p class="p-light" style="font-size:13px;font-weight:300;line-height:1.6;margin-bottom:14px">Multicotizador diseñado para nuestros agentes</p>
+        <p class="p-light" style="font-size:13px;font-weight:300;line-height:1.6;margin-bottom:14px;text-align:center">Multicotizador diseñado para nuestros agentes</p>
         <div class="susi-mockup">
           <input type="radio" name="sptab" id="sptab-autos" checked class="sp-radio">
           <input type="radio" name="sptab" id="sptab-gmm" class="sp-radio">
@@ -1027,7 +1027,7 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
         <div class="dual-badge badge-cyan">CAMI BTG</div>
         <!-- Mobile tagline & desc -->
         <p class="cami-tagline"><strong>C</strong>entro de <strong>A</strong>tención y <strong>M</strong>onitoreo <strong>I</strong>ntegral</p>
-        <p class="cami-desc-m">Seguimiento en tiempo real de tus siniestros</p>
+        <p class="cami-desc-m" style="text-align:center">Seguimiento en tiempo real de tus siniestros</p>
         <!-- Desktop-only content -->
         <div class="cami-live"><span class="cami-pulse-dot"></span>Monitoreo en tiempo real</div>
         <h3 class="h3-dark">Centro de Atención y Monitoreo Integral</h3>
@@ -1111,10 +1111,10 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
     </div>
     <!-- CAMI slider — mobile only, outside cards -->
     <div class="cami-slider-wrap">
-      <div class="cami-slider" id="camiSlider" data-url="https://www.soybtg.com/cami">
+      <div class="cami-slider" id="camiSlider" data-url="https://btgseguros-servicios.freshdesk.com/support/tickets/new">
         <div class="susi-slider-track cami-track-blue">
           <div class="susi-slider-fill" id="camiSliderFill"></div>
-          <span class="susi-slider-label cami-label-white" id="camiSliderLabel">Desliza para entrar a CAMI</span>
+          <span class="susi-slider-label cami-label-white" id="camiSliderLabel">Desliza para recibir atención</span>
           <div class="susi-slider-thumb cami-thumb-white" id="camiSliderThumb">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
