@@ -632,11 +632,15 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
   .cotiz-img-outer{padding:0 16px}
 
   /* UNIVERSIDAD — cédulas scrollables en móvil */
-  .lpath-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;justify-content:flex-start;padding:20px 16px;gap:8px}
+  .lpath-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;justify-content:flex-start;padding:20px 16px 12px;gap:8px}
   .lpath-bubble{width:44px;height:44px;font-size:16px}
   .lpath-item{flex:0 0 auto;min-width:60px}
-  .cedula-tip{min-width:180px;font-size:11px;bottom:calc(100% + 10px)}
-  .univ-right{overflow:hidden}
+  .cedula-tip{display:none !important}
+  .univ-right{overflow:visible}
+  /* Panel de cédula móvil */
+  .cedula-panel-mob{display:none;margin:0 16px 16px;background:#0b1e2d;border:1px solid rgba(0,201,224,.28);border-radius:14px;padding:14px 16px;animation:fadeInPanel .22s ease}
+  .cedula-panel-mob.open{display:block}
+  @keyframes fadeInPanel{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
 
   /* UNIVERSIDAD feats — columna única en móvil */
   .univ-feats{flex-direction:column;padding:16px 20px 28px}
@@ -1309,6 +1313,8 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
           <div class="lpath-letter-label">Cédula F</div>
         </div>
       </div>
+      <!-- Panel móvil — aparece bajo las burbujas al tocar -->
+      <div class="cedula-panel-mob" id="cedulaPanelMob"></div>
     </div>
   </div>
   <!-- FEATURES: full-width row -->
@@ -1604,17 +1610,34 @@ document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>ro.o
     line.style.right='auto';
     line.style.width=(ll-fl)+'px';
   }
+  var mobPanel=document.getElementById('cedulaPanelMob');
+  function showMobPanel(b){
+    if(!mobPanel)return;
+    var tip=b.querySelector('.cedula-tip');
+    if(!tip)return;
+    mobPanel.innerHTML=tip.innerHTML;
+    mobPanel.classList.remove('open');
+    void mobPanel.offsetWidth; // force reflow for animation
+    mobPanel.classList.add('open');
+  }
+  function hideMobPanel(){if(mobPanel)mobPanel.classList.remove('open');}
   bubbles.forEach(function(b){
     b.addEventListener('mouseenter',function(){setActive(b)});
     b.addEventListener('click',function(e){
       e.stopPropagation();
       var isActive=b.classList.contains('active');
       bubbles.forEach(function(x){x.classList.remove('active')});
-      if(!isActive) b.classList.add('active');
+      if(!isActive){
+        b.classList.add('active');
+        showMobPanel(b);
+      } else {
+        hideMobPanel();
+      }
     });
   });
   document.addEventListener('click',function(){
     bubbles.forEach(function(x){x.classList.remove('active')});
+    hideMobPanel();
   });
   var lpObs=new IntersectionObserver(function(es){
     es.forEach(function(e){
