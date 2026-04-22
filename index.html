@@ -115,7 +115,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 /* SUSI MOCKUP + CAMI LIVE */
 .susi-mockup{display:none}.susi-logo-wrap{display:none}.susi-wordmark{display:none}.sp-header,.sp-result,.sp-footer,.sp-tabs,.sp-tab,.sp-stat,.sp-badge,.sp-cov,.sp-right,.sp-price,.sp-tag,.sp-sep,.sp-dot{box-sizing:border-box}
 .cami-live{display:none}
-.cami-logo-mobile{display:none}.cami-logo-wrap{display:none}.cami-mockup{display:none}.cami-tagline{display:none}.cami-desc-m{display:none}
+.cami-logo-mobile{display:none}.cami-logo-wrap{display:none}.cami-mockup{display:none}.cami-tagline{display:none}.cami-desc-m{display:none}.cami-slider-wrap{display:none}.susi-desktop-cta{display:none}
 @keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.5)}}
 @keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
@@ -627,40 +627,38 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
 
 /* ── DESKTOP: SUSI + CAMI premium layout ── */
 @media(min-width:769px){
-  /* Show logos */
-  .susi-logo-mobile{display:flex;justify-content:center;margin-bottom:20px}
+  .dual-card,.dual-card-dark{display:flex;flex-direction:column;align-items:center;padding:32px 28px}
+  /* Logos */
+  .susi-logo-mobile{display:flex !important;justify-content:center;margin-bottom:18px}
   .susi-logo-wrap{display:flex !important;align-items:center;justify-content:center}
   .susi-logo-wrap img{max-width:200px;max-height:80px;filter:drop-shadow(0 0 10px rgba(26,127,188,0.3))}
-  .cami-logo-mobile{display:flex;justify-content:center;margin-bottom:20px}
+  .cami-logo-mobile{display:flex !important;justify-content:center;margin-bottom:18px}
   .cami-logo-wrap{display:flex !important;align-items:center;justify-content:center}
   .cami-logo-wrap img{max-width:200px;max-height:80px;filter:brightness(0) invert(1) drop-shadow(0 0 10px rgba(0,201,224,0.3))}
-  /* Center badges and taglines */
-  .dual-card .dual-badge,.dual-card-dark .dual-badge{display:flex;justify-content:center;margin-left:auto;margin-right:auto}
-  .susi-tagline{display:block;text-align:center;font-size:16px;color:rgba(30,50,80,0.6);margin:4px 0 14px}
-  .cami-tagline{display:block;text-align:center;font-size:16px;color:rgba(228,238,245,0.55);margin:4px 0 14px}
-  .cami-desc-m{display:block;text-align:center;font-size:13px;font-weight:300;color:rgba(228,238,245,0.4);margin-bottom:14px}
-  .dual-card>p.p-light{text-align:center}
-  /* Show mockups */
-  .susi-mockup{display:block}
-  .cami-mockup{display:block}
+  /* Badges, taglines, desc — centered, full width */
+  .dual-card .dual-badge,.dual-card-dark .dual-badge{margin-left:auto;margin-right:auto}
+  .susi-tagline{display:block !important;text-align:center;font-size:15px;color:rgba(30,50,80,0.6);margin:4px 0 10px;width:100%}
+  .cami-tagline{display:block !important;text-align:center;font-size:15px;color:rgba(228,238,245,0.55);margin:4px 0 10px;width:100%}
+  .cami-desc-m{display:block !important;text-align:center;font-size:13px;font-weight:300;color:rgba(228,238,245,0.4);margin-bottom:10px;width:100%}
+  .dual-card>p.p-light{text-align:center;width:100%}
+  /* Mockups — full width inside card */
+  .susi-mockup{display:block !important;width:100%;margin:10px 0}
+  .cami-mockup{display:block !important;width:100%;margin:10px 0}
   /* Hide old CAMI desktop content */
-  .dual-card-dark .h3-dark{display:none}
-  .dual-card-dark .feat-grid{display:none}
-  .dual-card-dark .cami-visual{display:none}
-  .dual-card-dark .p-old{display:none}
-  .dual-card-dark .cami-live{display:none}
-  .dual-card-dark .cami-desktop-btn{display:block}
-  /* Show SUSI desktop CTA, hide slider */
-  .susi-slider{display:none}
-  .susi-desktop-cta{display:block}
-  /* Premium CTA buttons */
-  .btn-premium{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px 24px;border-radius:14px;font-size:15px;font-weight:700;letter-spacing:.04em;text-decoration:none;text-align:center;transition:transform .2s,box-shadow .2s}
+  .dual-card-dark .h3-dark,.dual-card-dark .feat-grid,.dual-card-dark .cami-visual,.dual-card-dark .p-old,.dual-card-dark .cami-live{display:none !important}
+  /* Buttons — full width premium, no slider */
+  .susi-slider{display:none !important}
+  .susi-desktop-cta{display:flex !important;width:100%}
+  .dual-card-dark .cami-desktop-btn{display:block !important;width:100%}
+  .btn-premium{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px 24px;border-radius:14px;font-size:15px;font-weight:700;letter-spacing:.04em;text-decoration:none;transition:transform .2s,box-shadow .2s;cursor:pointer}
   .btn-premium:hover{transform:translateY(-2px)}
-  .btn-premium-susi{background:linear-gradient(135deg,#0d5c8a,#1A7FBC);color:#fff;box-shadow:0 4px 20px rgba(26,127,188,0.4)}
+  .btn-premium-susi{background:linear-gradient(135deg,#0d5c8a,#1A7FBC);color:#fff !important;box-shadow:0 4px 20px rgba(26,127,188,0.4)}
   .btn-premium-susi:hover{box-shadow:0 8px 28px rgba(26,127,188,0.55)}
-  .btn-premium-cami{background:linear-gradient(135deg,#030d1a,#071829);color:#fff;box-shadow:0 4px 20px rgba(0,0,0,0.4);border:1px solid rgba(0,201,224,0.15)}
-  .btn-premium-cami:hover{box-shadow:0 8px 28px rgba(0,201,224,0.25)}
+  .btn-premium-cami{background:linear-gradient(135deg,#030d1a,#071829);color:#fff !important;box-shadow:0 4px 20px rgba(0,0,0,0.4);border:1px solid rgba(0,201,224,0.15)}
+  .btn-premium-cami:hover{box-shadow:0 8px 28px rgba(0,201,224,0.25);border-color:rgba(0,201,224,0.4)}
   .btn-premium svg{flex-shrink:0}
+  /* Wrapper full width */
+  .dual-card>div[style*="margin-top:20px"],.dual-card-dark .cami-desktop-btn{width:100%}
 }
 </style>
 </head>
@@ -1053,7 +1051,7 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
               </div>
             </div>
           </div>
-          <a href="https://btg.segupoliza.com/#/pages/signin" target="_blank" class="btn-premium btn-premium-susi susi-desktop-cta" style="display:none">
+          <a href="https://btg.segupoliza.com/#/pages/signin" target="_blank" class="btn-premium btn-premium-susi susi-desktop-cta">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             Entrar a SUSI
           </a>
