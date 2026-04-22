@@ -436,6 +436,9 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
   .sp-radio{position:absolute;opacity:0;pointer-events:none}
   .sp-panel-gmm{display:none}
   .sp-last{border-bottom:none}
+  .sp-result{cursor:pointer;transition:background .18s,border-left .18s,padding-left .18s}
+  #spauto-1:checked ~ .sp-row-a1,#spauto-2:checked ~ .sp-row-a2,#spauto-3:checked ~ .sp-row-a3,
+  #spgmm-1:checked ~ .sp-row-g1,#spgmm-2:checked ~ .sp-row-g2,#spgmm-3:checked ~ .sp-row-g3{background:rgba(26,127,188,0.18) !important;border-left:2px solid var(--cyan);padding-left:12px}
   #sptab-gmm:checked ~ .sp-vehicle-block{display:none}
   #sptab-autos:checked ~ .sp-panel-gmm,#sptab-gmm:checked ~ .sp-panel-autos{display:none}
   #sptab-gmm:checked ~ .sp-panel-gmm{display:block}
