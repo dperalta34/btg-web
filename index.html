@@ -433,6 +433,17 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
   .sp-stat-n{font-size:15px;font-weight:800;color:var(--blue);letter-spacing:-.04em}
   .sp-stat-l{font-size:8px;color:rgba(228,238,245,0.28);text-transform:uppercase;letter-spacing:.05em}
   .sp-sep{height:22px;background:rgba(255,255,255,0.07)}
+  .sp-vehicle{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.05);background:rgba(255,255,255,0.02)}
+  .sp-vehicle-icon{width:28px;height:28px;border-radius:7px;background:rgba(26,127,188,0.15);border:1px solid rgba(26,127,188,0.25);display:flex;align-items:center;justify-content:center;color:var(--blue);flex-shrink:0}
+  .sp-vehicle-info{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+  .sp-vehicle-model{font-size:10px;font-weight:700;color:rgba(228,238,245,0.85);letter-spacing:.02em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .sp-vehicle-sub{font-size:9px;color:rgba(228,238,245,0.3);letter-spacing:.02em}
+  .sp-vehicle-chevron{color:rgba(228,238,245,0.25);flex-shrink:0}
+  .sp-section-lbl{font-size:9px;font-weight:600;color:rgba(228,238,245,0.25);text-transform:uppercase;letter-spacing:.08em;padding:8px 14px 4px}
+  .sp-features{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border-top:1px solid rgba(255,255,255,0.05);padding:10px 8px 8px}
+  .sp-feat{display:flex;flex-direction:column;align-items:center;gap:4px}
+  .sp-feat-icon{width:30px;height:30px;border-radius:9px;background:rgba(26,127,188,0.1);border:1px solid rgba(26,127,188,0.18);display:flex;align-items:center;justify-content:center;color:var(--blue)}
+  .sp-feat-lbl{font-size:8px;color:rgba(228,238,245,0.35);text-align:center;letter-spacing:.02em}
   .susi-logo-wrap{display:flex;align-items:center;gap:10px;margin-bottom:12px}
   .susi-logo-wrap img{width:44px;height:44px;filter:drop-shadow(0 0 8px rgba(26,127,188,0.6))}
   .susi-wordmark{font-size:22px;font-weight:800;letter-spacing:-.04em;color:var(--blue)}
@@ -826,40 +837,55 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
         <h3 class="h3-light">Tu sistema inteligente de cotización</h3>
         <p class="p-light" style="font-size:13px;font-weight:300;line-height:1.6;margin-bottom:14px">Multicotizador exclusivo con <strong>10 aseguradoras en Autos</strong> y <strong>11 en GMM</strong> desde un solo panel profesional.</p>
         <div class="susi-mockup">
-          <div class="sp-header">
-            <div class="sp-tabs">
-              <span class="sp-tab sp-tab-active"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v3"/><rect x="9" y="11" width="14" height="10" rx="2"/><circle cx="12" cy="21" r="1"/><circle cx="20" cy="21" r="1"/></svg>Autos</span>
-              <span class="sp-tab"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>GMM</span>
+          <!-- Vehicle selector -->
+          <div class="sp-vehicle">
+            <div class="sp-vehicle-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v3"/><rect x="9" y="11" width="14" height="10" rx="2"/><circle cx="12" cy="21" r="1"/><circle cx="20" cy="21" r="1"/></svg></div>
+            <div class="sp-vehicle-info">
+              <span class="sp-vehicle-model">AUDI A3 SEDAN SELECT · 2020</span>
+              <span class="sp-vehicle-sub">L4 FSI AUT · Cobertura Amplia</span>
             </div>
-            <span class="sp-badge">10 opciones</span>
+            <div class="sp-vehicle-chevron"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
           </div>
+          <!-- Coverage options -->
+          <div class="sp-section-lbl">Coberturas disponibles</div>
           <div class="sp-result sp-result-top">
-            <div class="sp-cov"><div class="sp-dot sp-dot-cyan"></div><span class="sp-cov-name">Cobertura Amplia</span></div>
-            <div class="sp-right"><span class="sp-price">$12,611</span><span class="sp-tag sp-tag-top">MEJOR PRECIO</span></div>
+            <div class="sp-cov"><div class="sp-dot sp-dot-cyan"></div><span class="sp-cov-name">Opción 1 · Amplia</span></div>
+            <div class="sp-right">
+              <span class="sp-price">$12,611</span>
+              <span class="sp-tag sp-tag-top">★ MEJOR PRECIO</span>
+            </div>
           </div>
           <div class="sp-result">
-            <div class="sp-cov"><div class="sp-dot sp-dot-blue"></div><span class="sp-cov-name">Cobertura Amplio</span></div>
+            <div class="sp-cov"><div class="sp-dot sp-dot-blue"></div><span class="sp-cov-name">Opción 2 · Amplio</span></div>
             <div class="sp-right"><span class="sp-price">$14,102</span><span class="sp-tag sp-tag-dim">AMPLIO</span></div>
           </div>
-          <div class="sp-result">
-            <div class="sp-cov"><div class="sp-dot sp-dot-dim"></div><span class="sp-cov-name">Cobertura Básica</span></div>
+          <div class="sp-result" style="border-bottom:none">
+            <div class="sp-cov"><div class="sp-dot sp-dot-dim"></div><span class="sp-cov-name">Opción 3 · Básica</span></div>
             <div class="sp-right"><span class="sp-price">$16,992</span><span class="sp-tag sp-tag-dim">BÁSICA</span></div>
           </div>
-          <div class="sp-footer">
-            <div class="sp-stat"><span class="sp-stat-n">10+</span><span class="sp-stat-l">Aseguradoras</span></div>
-            <div class="sp-sep"></div>
-            <div class="sp-stat"><span class="sp-stat-n">2</span><span class="sp-stat-l">Ramos</span></div>
-            <div class="sp-sep"></div>
-            <div class="sp-stat"><span class="sp-stat-n">100%</span><span class="sp-stat-l">Digital</span></div>
+          <!-- Feature icons -->
+          <div class="sp-features">
+            <div class="sp-feat">
+              <div class="sp-feat-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+              <span class="sp-feat-lbl">Descarga</span>
+            </div>
+            <div class="sp-feat">
+              <div class="sp-feat-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg></div>
+              <span class="sp-feat-lbl">Personaliza</span>
+            </div>
+            <div class="sp-feat">
+              <div class="sp-feat-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+              <span class="sp-feat-lbl">Agilidad</span>
+            </div>
+            <div class="sp-feat">
+              <div class="sp-feat-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+              <span class="sp-feat-lbl">Comparativo</span>
+            </div>
+            <div class="sp-feat">
+              <div class="sp-feat-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
+              <span class="sp-feat-lbl">Intuitivo</span>
+            </div>
           </div>
-        </div>
-        <div class="feat-grid">
-          <div class="feat-item"><div class="feat-dot"></div>Multicotizador GMM y Autos</div>
-          <div class="feat-item"><div class="feat-dot"></div>Paquetes por nivel hospitalario</div>
-          <div class="feat-item"><div class="feat-dot"></div>Personalización completa</div>
-          <div class="feat-item"><div class="feat-dot"></div>Diferenciadores de mercado</div>
-          <div class="feat-item"><div class="feat-dot"></div>Selección inteligente de autos</div>
-          <div class="feat-item"><div class="feat-dot"></div>10 + 11 aseguradoras</div>
         </div>
         <div style="margin-top:20px">
           <a href="https://www.soybtg.com/susi" class="btn-primary" target="_blank">Entrar a SUSI →</a>
