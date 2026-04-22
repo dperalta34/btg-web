@@ -51,6 +51,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 #mobile-menu.open .mm-link:nth-child(3){transition-delay:.14s}
 #mobile-menu.open .mm-link:nth-child(4){transition-delay:.19s}
 #mobile-menu.open .mm-link:nth-child(5){transition-delay:.24s}
+#mobile-menu.open .mm-link:nth-child(6){transition-delay:.29s}
 .mm-footer{display:flex;align-items:center;justify-content:space-between;padding-top:20px;border-top:1px solid rgba(255,255,255,0.07);opacity:0;transform:translateY(10px);transition:opacity .4s .3s cubic-bezier(.16,1,.3,1),transform .4s .3s cubic-bezier(.16,1,.3,1)}
 #mobile-menu.open .mm-footer{opacity:1;transform:translateY(0)}
 .mm-brand{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(228,238,245,0.2)}
@@ -463,6 +464,13 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
 .highlight-word{font-weight:900;font-size:1.12em;color:#1A7FBC}
 .cami-hw{color:#00C9E0}
 .susi-desc{font-size:13px;font-weight:300}
+/* Dashboard slider */
+.dash-slider-wrap{display:none}
+.dash-slider{width:100%;user-select:none;-webkit-user-select:none;touch-action:pan-y}
+.dash-track{background:linear-gradient(135deg,#0d5c8a,#1A7FBC) !important;box-shadow:0 4px 20px rgba(26,127,188,0.35) !important}
+.dash-slider .susi-slider-track{height:58px;border-radius:29px}
+.dash-slider .susi-slider-label{background:linear-gradient(90deg,rgba(255,255,255,0.25) 15%,rgba(255,255,255,1) 50%,rgba(255,255,255,0.25) 85%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:cami-shimmer 2.4s infinite linear;font-size:14px;font-weight:700;letter-spacing:.05em}
+.dash-thumb{background:#fff !important;color:#1A7FBC !important;box-shadow:0 2px 10px rgba(0,0,0,0.2) !important}
 /* CAMI slider */
 .cami-slider-wrap{display:none}
 .cami-slider{width:100%;user-select:none;-webkit-user-select:none;touch-action:pan-y}
@@ -554,7 +562,9 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
   /* DASHBOARD */
   .dash-section{padding:24px 20px}
   .dash-grid{grid-template-columns:1fr}
-  .dash-3d{width:280px;height:220px;margin-bottom:24px}
+  .dash-3d{width:280px;height:220px;margin-bottom:8px}
+  .dash-slider-wrap{display:block !important;margin-top:16px}
+  .dash-btn-desktop{display:none !important}
   .panel-main{width:220px;height:160px}
   .panel-side{width:130px;height:110px;right:-10px}
   .panel-front{width:160px;height:95px}
@@ -671,6 +681,7 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
     <li><a href="#universidad">Universidad</a></li>
     <li><a href="#credenciales">Credenciales</a></li>
     <li><a href="#concursos">Concursos</a></li>
+    <li><a href="dashboard.html">Dashboard BTG</a></li>
   </ul>
   <div class="nav-social">
     <a href="https://www.instagram.com/btgseguros/" target="_blank" rel="noopener" title="Instagram BTG">
@@ -704,6 +715,7 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
       <a href="#universidad" class="mm-link">Universidad<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       <a href="#credenciales" class="mm-link">Credenciales<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       <a href="#concursos" class="mm-link">Concursos<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="dashboard.html" class="mm-link">Dashboard BTG<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </nav>
     <div class="mm-footer">
       <span class="mm-brand"><span class="mm-dot"></span>BTG Seguros</span>
@@ -1212,8 +1224,19 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
         <div class="dash-feat"><div class="dash-feat-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><div class="dash-feat-title">Avance de convención y bono</div><div class="dash-feat-desc">Seguimiento en tiempo real a tus metas de producción BTG</div></div></div>
         <div class="dash-feat"><div class="dash-feat-icon"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div><div class="dash-feat-title">Siniestros y agenda comercial</div><div class="dash-feat-desc">Estado de siniestros activos, cotizaciones express y reuniones</div></div></div>
       </div>
-      <div style="margin-top:24px">
-        <a href="https://www.soybtg.com/dashboard-btg" class="btn-primary" target="_blank">Entrar al Dashboard →</a>
+      <div class="dash-btn-desktop" style="margin-top:24px">
+        <a href="dashboard.html" class="btn-primary" target="_blank">Entrar al Dashboard →</a>
+      </div>
+      <div class="dash-slider-wrap">
+        <div class="dash-slider" id="dashSlider" data-url="dashboard.html">
+          <div class="susi-slider-track dash-track">
+            <div class="susi-slider-fill" id="dashSliderFill"></div>
+            <span class="susi-slider-label" id="dashSliderLabel">Desliza para ver tu Dashboard</span>
+            <div class="susi-slider-thumb dash-thumb" id="dashSliderThumb">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -2128,6 +2151,50 @@ window.addEventListener('scroll', () => {
   }
   if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initCamiSlider);}
   else{initCamiSlider();}
+})();
+
+// Dashboard slider
+(function(){
+  function initDashSlider(){
+    var wrap=document.getElementById('dashSlider');
+    if(!wrap)return;
+    var thumb=document.getElementById('dashSliderThumb');
+    var fill=document.getElementById('dashSliderFill');
+    var label=document.getElementById('dashSliderLabel');
+    var url=wrap.dataset.url;
+    var track=wrap.querySelector('.susi-slider-track');
+    var dragging=false,startX=0,curX=0,done=false;
+    function maxX(){return track.offsetWidth-thumb.offsetWidth-8;}
+    function setPos(x){
+      x=Math.max(0,Math.min(x,maxX()));curX=x;
+      thumb.style.left=(4+x)+'px';fill.style.width=x+'px';
+      label.style.opacity=Math.max(0,1-x/maxX()*1.4);
+    }
+    function complete(){
+      if(done)return;done=true;setPos(maxX());label.style.opacity=0;
+      location.href=url;
+      setTimeout(function(){
+        done=false;thumb.style.transition='left .35s ease';fill.style.transition='width .35s ease';
+        setPos(0);label.style.opacity=1;
+        setTimeout(function(){thumb.style.transition='';fill.style.transition='';},360);
+      },600);
+    }
+    function startDrag(cx){if(done)return;dragging=true;startX=cx-curX;thumb.classList.add('dragging');thumb.style.transition='';fill.style.transition='';}
+    function moveDrag(cx){if(!dragging)return;requestAnimationFrame(function(){setPos(cx-startX);});}
+    function endDrag(){
+      if(!dragging)return;dragging=false;thumb.classList.remove('dragging');
+      if(curX/maxX()>=0.85){complete();}
+      else{thumb.style.transition='left .38s cubic-bezier(.22,1,.36,1)';fill.style.transition='width .38s cubic-bezier(.22,1,.36,1)';setPos(0);label.style.opacity=1;setTimeout(function(){thumb.style.transition='';fill.style.transition='';},400);}
+    }
+    thumb.addEventListener('touchstart',function(e){startDrag(e.touches[0].clientX);e.preventDefault();},{passive:false});
+    document.addEventListener('touchmove',function(e){if(!dragging)return;moveDrag(e.touches[0].clientX);e.preventDefault();},{passive:false});
+    document.addEventListener('touchend',endDrag);
+    thumb.addEventListener('mousedown',function(e){startDrag(e.clientX);e.preventDefault();});
+    document.addEventListener('mousemove',function(e){moveDrag(e.clientX);});
+    document.addEventListener('mouseup',endDrag);
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initDashSlider);}
+  else{initDashSlider();}
 })();
 
 // NPS CIRCLE
