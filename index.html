@@ -461,7 +461,16 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
 .cm-feat-icon{width:26px;height:26px;border-radius:7px;background:rgba(0,201,224,0.1);border:1px solid rgba(0,201,224,0.18);display:flex;align-items:center;justify-content:center;color:var(--cyan)}
 .cm-feat-lbl{font-size:7.5px;color:rgba(20,40,70,0.4);text-align:center;letter-spacing:.02em;line-height:1.3}
 .cm-disclaimer{font-size:9px;color:rgba(20,40,70,0.25);text-align:center;padding:6px 14px 8px;letter-spacing:.03em;font-style:italic}
-.cedula-all-mob{display:none}
+/* Cédula modal móvil */
+.cedula-modal-overlay{display:none;position:fixed;inset:0;background:rgba(3,13,26,0.55);z-index:999;align-items:center;justify-content:center;padding:20px}
+.cedula-modal-overlay.open{display:flex}
+.cedula-modal{background:#0b1e2d;border:1px solid rgba(0,201,224,.3);border-radius:18px;padding:20px 18px 18px;width:100%;max-width:300px;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.cedula-modal-close{position:absolute;top:10px;right:10px;width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.08);border:none;color:rgba(228,238,245,.6);font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;line-height:1}
+.cedula-modal-close:active{background:rgba(255,255,255,.16)}
+.cedula-modal .cedula-tip-title{font-size:11px;font-weight:700;color:var(--cyan);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;display:block}
+.cedula-modal ul{margin:0;padding:0;list-style:none}
+.cedula-modal li{font-size:12.5px;color:rgba(228,238,245,.7);line-height:1.65;padding-left:12px;position:relative}
+.cedula-modal li::before{content:'·';position:absolute;left:0;color:var(--cyan)}
 .highlight-word{font-weight:900;font-size:1.12em;color:#1A7FBC}
 .cami-hw{color:#00C9E0}
 .susi-desc{font-size:13px;font-weight:300}
@@ -638,13 +647,6 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
   .lpath-item{flex:0 0 auto;min-width:60px}
   .cedula-tip{display:none !important}
   .univ-right{overflow:visible}
-  /* Marco único con todas las cédulas */
-  .cedula-all-mob{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin:0 16px 16px;background:rgba(0,201,224,.15);border:1px solid rgba(0,201,224,.22);border-radius:14px;overflow:hidden}
-  .cam-cell{background:#0b1e2d;padding:11px 12px}
-  .cam-hdr{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
-  .cam-cell ul{margin:0;padding:0;list-style:none}
-  .cam-cell li{font-size:10px;color:rgba(228,238,245,.6);line-height:1.55;padding-left:10px;position:relative}
-  .cam-cell li::before{content:'·';position:absolute;left:0;color:rgba(0,201,224,.7)}
 
   /* UNIVERSIDAD feats — columna única en móvil */
   .univ-feats{flex-direction:column;padding:16px 20px 28px}
@@ -1317,33 +1319,6 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
           <div class="lpath-letter-label">Cédula F</div>
         </div>
       </div>
-      <!-- Marco único móvil — todas las cédulas visibles -->
-      <div class="cedula-all-mob">
-        <div class="cam-cell">
-          <div class="cam-hdr" style="color:#00C9E0">A — Vida</div>
-          <ul><li>Seguros de vida individual y colectivo</li><li>A&E personas físicas</li><li>Automóviles, Hogar</li><li>Embarcaciones recreativas</li></ul>
-        </div>
-        <div class="cam-cell">
-          <div class="cam-hdr" style="color:#1A7FBC">B — Empresarial</div>
-          <ul><li>Vida (trabajadores y socios)</li><li>Gastos Médicos</li><li>A&E laborales, Autos empresa</li><li>Incendio, RC, Transporte, Robo</li></ul>
-        </div>
-        <div class="cam-cell">
-          <div class="cam-hdr" style="color:#8aabcc">C — Riesgos Especiales</div>
-          <ul><li>Grandes riesgos e incendios</li><li>Marítimos y transporte</li><li>Pólizas de riesgos especiales</li></ul>
-        </div>
-        <div class="cam-cell">
-          <div class="cam-hdr" style="color:#00C9E0">D — Agrícola</div>
-          <ul><li>Riesgos agrícolas</li><li>Riesgos de animales</li><li>Seguro de vida campesino</li></ul>
-        </div>
-        <div class="cam-cell">
-          <div class="cam-hdr" style="color:#1A7FBC">E — Crédito</div>
-          <ul><li>Seguros de Crédito</li><li>Garantías financieras</li></ul>
-        </div>
-        <div class="cam-cell">
-          <div class="cam-hdr" style="color:#8aabcc">F — Fianzas</div>
-          <ul><li>Seguros de Fianzas</li><li>Caución y seguros masivos</li><li>Patrimonio empresarial</li></ul>
-        </div>
-      </div>
     </div>
   </div>
   <!-- FEATURES: full-width row -->
@@ -1639,34 +1614,36 @@ document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>ro.o
     line.style.right='auto';
     line.style.width=(ll-fl)+'px';
   }
-  var mobPanel=document.getElementById('cedulaPanelMob');
-  function showMobPanel(b){
-    if(!mobPanel)return;
+  var overlay=document.getElementById('cedulaOverlay');
+  var modalContent=document.getElementById('cedulaModalContent');
+  var closeBtn=document.getElementById('cedulaClose');
+  function openModal(b){
     var tip=b.querySelector('.cedula-tip');
-    if(!tip)return;
-    mobPanel.innerHTML=tip.innerHTML;
-    mobPanel.classList.remove('open');
-    void mobPanel.offsetWidth; // force reflow for animation
-    mobPanel.classList.add('open');
+    if(!overlay||!tip)return;
+    modalContent.innerHTML=tip.innerHTML;
+    overlay.classList.add('open');
   }
-  function hideMobPanel(){if(mobPanel)mobPanel.classList.remove('open');}
+  function closeModal(){
+    if(overlay) overlay.classList.remove('open');
+    bubbles.forEach(function(x){x.classList.remove('active')});
+  }
+  if(closeBtn) closeBtn.addEventListener('click',function(e){e.stopPropagation();closeModal();});
+  if(overlay) overlay.addEventListener('click',function(e){if(e.target===overlay)closeModal();});
   bubbles.forEach(function(b){
-    b.addEventListener('mouseenter',function(){setActive(b)});
+    b.addEventListener('mouseenter',function(){if(window.innerWidth>768)setActive(b);});
     b.addEventListener('click',function(e){
       e.stopPropagation();
-      var isActive=b.classList.contains('active');
-      bubbles.forEach(function(x){x.classList.remove('active')});
-      if(!isActive){
-        b.classList.add('active');
-        showMobPanel(b);
+      if(window.innerWidth<=768){
+        openModal(b);
       } else {
-        hideMobPanel();
+        var isActive=b.classList.contains('active');
+        bubbles.forEach(function(x){x.classList.remove('active')});
+        if(!isActive) b.classList.add('active');
       }
     });
   });
   document.addEventListener('click',function(){
-    bubbles.forEach(function(x){x.classList.remove('active')});
-    hideMobPanel();
+    if(window.innerWidth>768) bubbles.forEach(function(x){x.classList.remove('active')});
   });
   var lpObs=new IntersectionObserver(function(es){
     es.forEach(function(e){
@@ -2323,5 +2300,13 @@ if(basesOvl)basesOvl.addEventListener('click',function(e){if(e.target===this)clo
     <img id="bases-img" src="" alt="Bases del concurso">
   </div>
 </div>
+<!-- Cédula modal -->
+<div class="cedula-modal-overlay" id="cedulaOverlay">
+  <div class="cedula-modal" id="cedulaModal">
+    <button class="cedula-modal-close" id="cedulaClose" aria-label="Cerrar">✕</button>
+    <div id="cedulaModalContent"></div>
+  </div>
+</div>
+
 </body>
 </html>
