@@ -641,10 +641,12 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
   img.cotiz-img-main,img.cotiz-img-main.visible{mix-blend-mode:multiply;opacity:1 !important;filter:none !important;transform:none !important;animation:none !important;margin:0 !important;border-radius:16px}
   .cotiz-img-outer{padding:0 16px}
 
-  /* UNIVERSIDAD — cédulas scrollables en móvil */
-  .lpath-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;justify-content:flex-start;padding:20px 16px 12px;gap:8px}
-  .lpath-bubble{width:44px;height:44px;font-size:16px}
-  .lpath-item{flex:0 0 auto;min-width:60px}
+  /* UNIVERSIDAD — cédulas en cuadrícula 3×2 en móvil */
+  .lpath-wrap{overflow:visible;-webkit-overflow-scrolling:unset;flex-wrap:wrap;justify-content:center;padding:12px 4px 8px;gap:14px 8px}
+  .lpath-line{display:none}
+  .lpath-bubble{width:48px;height:48px;font-size:18px}
+  .lpath-item{flex:0 0 calc(33.33% - 6px);min-width:unset;align-items:center}
+  .lpath-letter-label{font-size:10px}
   .cedula-tip{display:none !important}
   .univ-right{overflow:visible}
 
@@ -1627,15 +1629,27 @@ document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>ro.o
     if(overlay) overlay.classList.remove('open');
     bubbles.forEach(function(x){x.classList.remove('active')});
   }
-  if(closeBtn) closeBtn.addEventListener('click',function(e){e.stopPropagation();closeModal();});
-  if(overlay) overlay.addEventListener('click',function(e){if(e.target===overlay)closeModal();});
+  if(closeBtn){
+    closeBtn.addEventListener('click',function(e){e.stopPropagation();closeModal();});
+    closeBtn.addEventListener('touchend',function(e){e.preventDefault();e.stopPropagation();closeModal();});
+  }
+  if(overlay){
+    overlay.addEventListener('click',function(e){if(e.target===overlay)closeModal();});
+    overlay.addEventListener('touchend',function(e){if(e.target===overlay){e.preventDefault();closeModal();}});
+  }
   bubbles.forEach(function(b){
     b.addEventListener('mouseenter',function(){if(window.innerWidth>768)setActive(b);});
+    // Mobile: touchend fires reliably on iOS Safari
+    b.addEventListener('touchend',function(e){
+      if(window.innerWidth<=768){
+        e.preventDefault();
+        e.stopPropagation();
+        openModal(b);
+      }
+    });
     b.addEventListener('click',function(e){
       e.stopPropagation();
-      if(window.innerWidth<=768){
-        openModal(b);
-      } else {
+      if(window.innerWidth>768){
         var isActive=b.classList.contains('active');
         bubbles.forEach(function(x){x.classList.remove('active')});
         if(!isActive) b.classList.add('active');
