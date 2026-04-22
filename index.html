@@ -165,7 +165,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 .dual-card:hover{border-color:var(--blue);transform:translateY(-2px)}
 .dual-card-dark{background:var(--dark);border:1px solid var(--bl);border-radius:20px;padding:40px;transition:border-color .3s,transform .3s}
 .dual-card-dark:hover{border-color:var(--blue);transform:translateY(-2px)}
-.dual-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:980px;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px}
+.susi-logo-mobile{display:none}.dual-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:980px;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px}
 .badge-blue{background:rgba(26,127,188,0.1);border:1px solid rgba(26,127,188,0.2);color:var(--blue)}
 .badge-cyan{background:rgba(0,201,224,0.08);border:1px solid rgba(0,201,224,0.15);color:var(--cyan)}
 .dual-card h3,.dual-card-dark h3{font-size:26px;font-weight:700;letter-spacing:-.04em;margin-bottom:10px}
@@ -391,10 +391,17 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
   .nps-txt{max-width:100%}
 
   /* SUSI + CAMI */
-  .dual-section{padding:24px 20px}
-  .dual-grid{grid-template-columns:1fr}
-  .feat-grid{grid-template-columns:1fr}
-  .dual-card,.dual-card-dark{padding:22px 16px}
+  .dual-section{padding:20px 16px}
+  .dual-grid{grid-template-columns:1fr;gap:14px;margin-top:20px}
+  .dual-card,.dual-card-dark{padding:18px 16px;border-radius:16px}
+  .dual-card h3,.dual-card-dark h3{font-size:18px;margin-bottom:8px}
+  .feat-grid{grid-template-columns:1fr 1fr;gap:8px}
+  .feat-item,.feat-item-dark{padding:8px 10px;font-size:12px;gap:6px;border-radius:8px}
+  .susi-logo-mobile{display:flex;align-items:center;margin-bottom:14px}
+  .cami-visual{margin-top:14px;gap:6px}
+  .cami-row{padding:9px 12px}
+  .cami-lbl{font-size:11px}
+  .dual-badge{margin-bottom:10px}
 
   /* DASHBOARD */
   .dash-section{padding:24px 20px}
@@ -772,6 +779,7 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
     <h2 class="sec-h2 h2-light">Soluciones para<br>nuestros agentes</h2>
     <div class="dual-grid">
       <div class="dual-card reveal-left">
+        <div class="susi-logo-mobile"><img src="SUSI/LOGO_SUSI.svg" alt="SUSI BTG" width="64" height="64"></div>
         <div class="dual-badge badge-blue">SUSI BTG</div>
         <h3 class="h3-light">Tu sistema inteligente de cotización</h3>
         <p class="p-light" style="font-size:14px;font-weight:300;line-height:1.7;margin-bottom:20px">Multicotizador exclusivo con 10 aseguradoras en Autos y 11 en GMM. Cotiza, personaliza y presenta diferenciadores de mercado desde un solo panel profesional.</p>
