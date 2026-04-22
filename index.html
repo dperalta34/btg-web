@@ -447,6 +447,11 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
   #spgmm-1:checked ~ .sp-row-g1 .sp-cov-sub,#spgmm-2:checked ~ .sp-row-g2 .sp-cov-sub,#spgmm-3:checked ~ .sp-row-g3 .sp-cov-sub{color:rgba(228,238,245,0.45)}
   #spauto-1:checked ~ .sp-row-a1 .sp-tag,#spauto-2:checked ~ .sp-row-a2 .sp-tag,#spauto-3:checked ~ .sp-row-a3 .sp-tag,
   #spgmm-1:checked ~ .sp-row-g1 .sp-tag,#spgmm-2:checked ~ .sp-row-g2 .sp-tag,#spgmm-3:checked ~ .sp-row-g3 .sp-tag{opacity:1}
+  .sp-selected{background:linear-gradient(90deg,rgba(26,127,188,0.18),rgba(26,127,188,0.06)) !important;border-left:2px solid var(--cyan) !important;padding-left:12px !important}
+  .sp-selected .sp-cov-name{color:rgba(228,238,245,0.95) !important}
+  .sp-selected .sp-price{color:var(--cyan) !important;text-shadow:0 0 10px rgba(0,201,224,0.45) !important}
+  .sp-selected .sp-cov-sub{color:rgba(228,238,245,0.45) !important}
+  .sp-selected .sp-tag{opacity:1 !important}
   #sptab-gmm:checked ~ .sp-vehicle-block{display:none}
   #sptab-autos:checked ~ .sp-panel-gmm,#sptab-gmm:checked ~ .sp-panel-autos{display:none}
   #sptab-gmm:checked ~ .sp-panel-gmm{display:block}
@@ -887,7 +892,7 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
           <input type="radio" name="spauto" id="spauto-1" checked class="sp-radio">
           <input type="radio" name="spauto" id="spauto-2" class="sp-radio">
           <input type="radio" name="spauto" id="spauto-3" class="sp-radio">
-          <label for="spauto-1" class="sp-result sp-result-top sp-row-a1">
+          <label for="spauto-1" class="sp-result sp-result-top sp-row-a1 sp-selected">
             <div class="sp-cov"><div class="sp-dot sp-dot-cyan"></div><span class="sp-cov-name">Opción 1 · Cob. Amplia</span></div>
             <div class="sp-right"><span class="sp-price">$12,611</span><span class="sp-tag sp-tag-top">★ MEJOR PRECIO</span></div>
           </label>
@@ -904,7 +909,7 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
           <input type="radio" name="spgmm" id="spgmm-1" checked class="sp-radio">
           <input type="radio" name="spgmm" id="spgmm-2" class="sp-radio">
           <input type="radio" name="spgmm" id="spgmm-3" class="sp-radio">
-          <label for="spgmm-1" class="sp-result sp-result-top sp-row-g1">
+          <label for="spgmm-1" class="sp-result sp-result-top sp-row-g1 sp-selected">
             <div class="sp-cov"><div class="sp-dot sp-dot-cyan"></div><div class="sp-cov-detail"><span class="sp-cov-name">Plus · Nacional</span><span class="sp-cov-sub">S.A. $50M · Ded. $35,000 · Coaseg. 10%</span></div></div>
             <div class="sp-right"><span class="sp-price">$30,574</span><span class="sp-tag sp-tag-top">PLUS</span></div>
           </label>
@@ -1800,6 +1805,22 @@ window.addEventListener('scroll', () => {
     drawMapFrame(frameIndex);
   }
 });
+
+// SUSI mockup row selection
+(function(){
+  function initSusiRows(){
+    document.querySelectorAll('.sp-panel-autos .sp-result, .sp-panel-gmm .sp-result').forEach(function(row){
+      row.addEventListener('click',function(){
+        var panel=this.closest('.sp-panel-autos')||this.closest('.sp-panel-gmm');
+        if(!panel)return;
+        panel.querySelectorAll('.sp-result').forEach(function(r){r.classList.remove('sp-selected');});
+        this.classList.add('sp-selected');
+      });
+    });
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initSusiRows);}
+  else{initSusiRows();}
+})();
 
 // NPS CIRCLE
 const arc=document.getElementById('nps-arc');
