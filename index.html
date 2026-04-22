@@ -288,6 +288,7 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
 .social-tab-logo img{max-width:100%;max-height:100%;object-fit:contain;filter:grayscale(100%) opacity(.3);transition:filter .35s,transform .35s}
 .social-tab.active .social-tab-logo img,.social-tab:hover .social-tab-logo img{filter:grayscale(0%) opacity(1);transform:scale(1.08)}
 .social-tab-name{font-size:10.5px;font-weight:700;color:var(--muted);text-align:center;letter-spacing:.04em;text-transform:uppercase;line-height:1.4;transition:color .3s}
+.social-panel-logo{display:none}
 .social-tab.active .social-tab-name,.social-tab:hover .social-tab-name{color:var(--blue)}
 .social-display{position:relative;min-height:148px;margin-top:0;padding:0}
 .social-panel{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:44px 80px 32px;opacity:0;transform:translateY(10px);transition:opacity .45s ease,transform .45s ease;pointer-events:none}
@@ -609,17 +610,15 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
 
   /* INICIATIVAS */
   .social-section{padding:28px 0 28px}
-  .social-inner{padding:0}
-  .social-inner .sec-tag,.social-inner h2,.social-inner>.sec-p{padding:0 20px}
-  .social-strip{margin:20px 0 0;overflow-x:auto;-webkit-overflow-scrolling:touch;justify-content:flex-start;padding:0 16px 2px;scrollbar-width:none}
-  .social-strip::-webkit-scrollbar{display:none}
-  .social-tab{flex:0 0 auto;width:120px;padding:16px 10px 14px;gap:10px}
-  .social-tab-logo{width:86px;height:56px}
-  .social-tab-logo img{filter:none !important;opacity:.4;transition:opacity .3s;transform:none !important}
-  .social-tab.active .social-tab-logo img,.social-tab:hover .social-tab-logo img{opacity:1}
-  .social-tab-name{font-size:9px;letter-spacing:.02em}
-  .social-display{min-height:190px}
-  .social-panel{padding:20px 20px 16px}
+  .social-inner{padding:0 20px}
+  .social-strip{margin:20px -20px 0;justify-content:stretch;overflow-x:visible}
+  .social-tab{flex:1;max-width:none;padding:12px 4px 10px;gap:4px}
+  .social-tab-logo{display:none}
+  .social-tab-name{font-size:8.5px;letter-spacing:.03em}
+  .social-display{min-height:260px}
+  .social-panel{padding:16px 0 12px}
+  .social-panel-logo{display:flex;justify-content:center;margin-bottom:14px}
+  .social-panel-logo img{max-width:160px;max-height:100px;object-fit:contain;filter:none}
   .social-panel-title{font-size:17px}
   .social-panel-desc{font-size:12.5px;line-height:1.7}
 
@@ -1468,26 +1467,31 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
 
     <div class="social-display">
       <div class="social-panel active" data-panel="0">
+        <div class="social-panel-logo"><img src="Logos_Iniciativas_sociales/Amasfac_Sección_Toluca.svg" alt="Amasfac" loading="lazy"></div>
         <div class="social-panel-tag">Gremio asegurador</div>
         <div class="social-panel-title">Amasfac Sección Toluca</div>
         <div class="social-panel-desc">Apoyamos activamente a la Asociación Mexicana de Agentes de Seguros y Fianzas en su sección Toluca, fortaleciendo la capacitación, representación y desarrollo profesional del gremio asegurador en la región centro del país.</div>
       </div>
       <div class="social-panel" data-panel="1">
+        <div class="social-panel-logo"><img src="Logos_Iniciativas_sociales/Asociación_Hogar_Infantil.svg" alt="Hogar Infantil" loading="lazy"></div>
         <div class="social-panel-tag">Infancia y familia</div>
         <div class="social-panel-title">Asociación Hogar Infantil</div>
         <div class="social-panel-desc">Colaboramos con el Hogar Infantil brindando apoyo integral a niños y jóvenes en situación vulnerable. Creemos que invertir en la infancia es construir el México que todos queremos.</div>
       </div>
       <div class="social-panel" data-panel="2">
+        <div class="social-panel-logo"><img src="Logos_Iniciativas_sociales/Criantia.svg" alt="Criantia" loading="lazy"></div>
         <div class="social-panel-tag">Desarrollo humano</div>
         <div class="social-panel-title">Criantia</div>
         <div class="social-panel-desc">Respaldamos a Criantia en su misión de generar impacto social positivo y sostenible en las comunidades donde operamos, promoviendo el crecimiento humano desde una perspectiva integral y de largo plazo.</div>
       </div>
       <div class="social-panel" data-panel="3">
+        <div class="social-panel-logo"><img src="Logos_Iniciativas_sociales/DSoy_Agente_Actualizado.svg" alt="Soy Agente Actualizado" loading="lazy"></div>
         <div class="social-panel-tag">Educación profesional</div>
         <div class="social-panel-title">Soy Agente Actualizado</div>
         <div class="social-panel-desc">Impulsamos la capacitación continua de agentes de seguros a nivel nacional. Elevar el estándar profesional del sector no es solo un compromiso gremial — es parte del ADN de BTG.</div>
       </div>
       <div class="social-panel" data-panel="4">
+        <div class="social-panel-logo"><img src="Logos_Iniciativas_sociales/Fondo_para_la_paz.svg" alt="Fondo para la Paz" loading="lazy"></div>
         <div class="social-panel-tag">Bienestar comunitario</div>
         <div class="social-panel-title">Fondo para la Paz</div>
         <div class="social-panel-desc">Contribuimos activamente al Fondo para la Paz, apoyando iniciativas de reconciliación, cohesión social y bienestar comunitario. Porque el desarrollo sostenible comienza donde hay paz.</div>
