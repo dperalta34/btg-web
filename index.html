@@ -624,6 +624,44 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
 @media(max-width:400px){
   .hero h1{font-size:22px;letter-spacing:.03em}
 }
+
+/* ── DESKTOP: SUSI + CAMI premium layout ── */
+@media(min-width:769px){
+  /* Show logos */
+  .susi-logo-mobile{display:flex;justify-content:center;margin-bottom:20px}
+  .susi-logo-wrap{display:flex !important;align-items:center;justify-content:center}
+  .susi-logo-wrap img{max-width:200px;max-height:80px;filter:drop-shadow(0 0 10px rgba(26,127,188,0.3))}
+  .cami-logo-mobile{display:flex;justify-content:center;margin-bottom:20px}
+  .cami-logo-wrap{display:flex !important;align-items:center;justify-content:center}
+  .cami-logo-wrap img{max-width:200px;max-height:80px;filter:brightness(0) invert(1) drop-shadow(0 0 10px rgba(0,201,224,0.3))}
+  /* Center badges and taglines */
+  .dual-card .dual-badge,.dual-card-dark .dual-badge{display:flex;justify-content:center;margin-left:auto;margin-right:auto}
+  .susi-tagline{display:block;text-align:center;font-size:16px;color:rgba(30,50,80,0.6);margin:4px 0 14px}
+  .cami-tagline{display:block;text-align:center;font-size:16px;color:rgba(228,238,245,0.55);margin:4px 0 14px}
+  .cami-desc-m{display:block;text-align:center;font-size:13px;font-weight:300;color:rgba(228,238,245,0.4);margin-bottom:14px}
+  .dual-card>p.p-light{text-align:center}
+  /* Show mockups */
+  .susi-mockup{display:block}
+  .cami-mockup{display:block}
+  /* Hide old CAMI desktop content */
+  .dual-card-dark .h3-dark{display:none}
+  .dual-card-dark .feat-grid{display:none}
+  .dual-card-dark .cami-visual{display:none}
+  .dual-card-dark .p-old{display:none}
+  .dual-card-dark .cami-live{display:none}
+  .dual-card-dark .cami-desktop-btn{display:block}
+  /* Show SUSI desktop CTA, hide slider */
+  .susi-slider{display:none}
+  .susi-desktop-cta{display:block}
+  /* Premium CTA buttons */
+  .btn-premium{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px 24px;border-radius:14px;font-size:15px;font-weight:700;letter-spacing:.04em;text-decoration:none;text-align:center;transition:transform .2s,box-shadow .2s}
+  .btn-premium:hover{transform:translateY(-2px)}
+  .btn-premium-susi{background:linear-gradient(135deg,#0d5c8a,#1A7FBC);color:#fff;box-shadow:0 4px 20px rgba(26,127,188,0.4)}
+  .btn-premium-susi:hover{box-shadow:0 8px 28px rgba(26,127,188,0.55)}
+  .btn-premium-cami{background:linear-gradient(135deg,#030d1a,#071829);color:#fff;box-shadow:0 4px 20px rgba(0,0,0,0.4);border:1px solid rgba(0,201,224,0.15)}
+  .btn-premium-cami:hover{box-shadow:0 8px 28px rgba(0,201,224,0.25)}
+  .btn-premium svg{flex-shrink:0}
+}
 </style>
 </head>
 <!-- NAV -->
@@ -1015,6 +1053,10 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
               </div>
             </div>
           </div>
+          <a href="https://btg.segupoliza.com/#/pages/signin" target="_blank" class="btn-premium btn-premium-susi susi-desktop-cta" style="display:none">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            Entrar a SUSI
+          </a>
         </div>
       </div>
       <div class="dual-card-dark reveal-right">
@@ -1046,7 +1088,10 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
           <div class="cami-row"><span class="cami-lbl">Endoso · #4791</span><span class="cami-status s-ok">Emitido</span></div>
         </div>
         <div class="cami-desktop-btn" style="margin-top:20px">
-          <a href="https://www.soybtg.com/cami" class="btn-primary" target="_blank" style="background:var(--cyan);color:#081A26">Entrar a CAMI →</a>
+          <a href="https://btgseguros-servicios.freshdesk.com/support/tickets/new" target="_blank" class="btn-premium btn-premium-cami">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            Recibir atención
+          </a>
         </div>
         <!-- Mobile mockup -->
         <div class="cami-mockup">
