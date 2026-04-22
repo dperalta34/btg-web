@@ -113,7 +113,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 .aseg-est{background:rgba(184,150,46,0.12);color:rgba(210,175,80,0.8)}
 .aseg-nicho{background:rgba(29,158,117,0.12);color:rgba(60,190,150,0.8)}
 /* SUSI MOCKUP + CAMI LIVE */
-.susi-mockup{display:none}
+.susi-mockup{display:none}.susi-logo-wrap{display:none}.susi-wordmark{display:none}.sp-header,.sp-result,.sp-footer,.sp-tabs,.sp-tab,.sp-stat,.sp-badge,.sp-cov,.sp-right,.sp-price,.sp-tag,.sp-sep,.sp-dot{box-sizing:border-box}
 .cami-live{display:none}
 @keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.5)}}
 @keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
@@ -401,22 +401,41 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
   .dual-card h3,.dual-card-dark h3{font-size:18px;margin-bottom:8px}
   .feat-grid{grid-template-columns:1fr 1fr;gap:8px}
   .feat-item,.feat-item-dark{padding:8px 10px;font-size:12px;gap:6px;border-radius:8px}
-  .susi-logo-mobile{display:flex;align-items:center;margin-bottom:12px}
+  .susi-logo-mobile{display:block;margin-bottom:12px}
   .cami-visual{margin-top:12px;gap:6px}
   .cami-row{padding:9px 12px}
   .cami-lbl{font-size:11px}
   .dual-badge{margin-bottom:10px}
-  /* Mockup */
-  .susi-mockup{display:block;background:rgba(26,127,188,0.06);border:1px solid rgba(26,127,188,0.15);border-radius:12px;padding:12px 14px;margin:12px 0 14px}
-  .mock-tabs{display:flex;gap:6px;margin-bottom:10px}
-  .mock-tab{font-size:11px;font-weight:500;padding:4px 12px;border-radius:6px;color:rgba(8,26,38,0.4);background:rgba(26,127,188,0.07);border:1px solid rgba(26,127,188,0.12)}
-  .mock-tab-active{background:var(--blue);color:#fff;border-color:var(--blue)}
-  .mock-result{display:flex;align-items:center;gap:8px;margin-bottom:8px}
-  .mock-brand{font-size:11px;font-weight:500;color:rgba(8,26,38,0.7);min-width:52px}
-  .mock-bar{flex:1;height:5px;background:rgba(26,127,188,0.12);border-radius:3px;overflow:hidden}
-  .mock-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--cyan));border-radius:3px}
-  .mock-price{font-size:11px;font-weight:700;color:var(--blue);min-width:44px;text-align:right}
-  .mock-footer{font-size:10px;color:rgba(8,26,38,0.35);text-align:center;padding-top:8px;border-top:1px solid rgba(26,127,188,0.1);letter-spacing:.03em}
+  /* SUSI Preview Card */
+  .susi-mockup{display:block;background:var(--dark);border:1px solid rgba(26,127,188,0.22);border-radius:14px;overflow:hidden;margin:14px 0;box-shadow:0 0 32px rgba(26,127,188,0.12),inset 0 1px 0 rgba(255,255,255,0.04)}
+  .sp-header{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;border-bottom:1px solid rgba(255,255,255,0.05)}
+  .sp-tabs{display:flex;gap:6px}
+  .sp-tab{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:500;padding:4px 10px;border-radius:6px;color:rgba(228,238,245,0.3);border:1px solid rgba(255,255,255,0.07)}
+  .sp-tab-active{color:#fff;background:rgba(26,127,188,0.22);border-color:rgba(26,127,188,0.4)}
+  .sp-badge{font-size:9px;font-weight:600;color:var(--cyan);letter-spacing:.06em;text-transform:uppercase;opacity:.8}
+  .sp-result{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.04);gap:10px}
+  .sp-result-top{background:linear-gradient(90deg,rgba(26,127,188,0.1),transparent)}
+  .sp-cov{display:flex;align-items:center;gap:8px;flex:1;min-width:0}
+  .sp-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+  .sp-dot-cyan{background:var(--cyan);box-shadow:0 0 6px var(--cyan)}
+  .sp-dot-blue{background:var(--blue)}
+  .sp-dot-dim{background:rgba(228,238,245,0.2)}
+  .sp-cov-name{font-size:12px;color:rgba(228,238,245,0.55);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .sp-result-top .sp-cov-name{color:rgba(228,238,245,0.9)}
+  .sp-right{display:flex;flex-direction:column;align-items:flex-end;gap:2px;flex-shrink:0}
+  .sp-price{font-size:14px;font-weight:800;letter-spacing:-.03em;color:rgba(228,238,245,0.25)}
+  .sp-result-top .sp-price{color:var(--cyan);text-shadow:0 0 12px rgba(0,201,224,0.5)}
+  .sp-tag{font-size:9px;font-weight:600;padding:1px 6px;border-radius:4px;letter-spacing:.04em}
+  .sp-tag-top{background:rgba(0,201,224,0.12);color:var(--cyan);border:1px solid rgba(0,201,224,0.2)}
+  .sp-tag-dim{background:rgba(255,255,255,0.04);color:rgba(228,238,245,0.25);border:1px solid rgba(255,255,255,0.06)}
+  .sp-footer{display:grid;grid-template-columns:1fr 1px 1fr 1px 1fr;align-items:center;padding:10px 14px;background:rgba(255,255,255,0.02)}
+  .sp-stat{display:flex;flex-direction:column;align-items:center;gap:1px}
+  .sp-stat-n{font-size:15px;font-weight:800;color:var(--blue);letter-spacing:-.04em}
+  .sp-stat-l{font-size:8px;color:rgba(228,238,245,0.28);text-transform:uppercase;letter-spacing:.05em}
+  .sp-sep{height:22px;background:rgba(255,255,255,0.07)}
+  .susi-logo-wrap{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+  .susi-logo-wrap img{width:44px;height:44px;filter:drop-shadow(0 0 8px rgba(26,127,188,0.6))}
+  .susi-wordmark{font-size:22px;font-weight:800;letter-spacing:-.04em;color:var(--blue)}
   /* CAMI live */
   .cami-live{display:flex;align-items:center;gap:6px;font-size:9px;font-weight:600;color:var(--cyan);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}
   .cami-pulse-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);flex-shrink:0;animation:pulse-dot 1.5s ease infinite}
@@ -797,33 +816,42 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
     <h2 class="sec-h2 h2-light">Soluciones para<br>nuestros agentes</h2>
     <div class="dual-grid">
       <div class="dual-card reveal-left">
-        <div class="susi-logo-mobile"><img src="SUSI/LOGO_SUSI.svg" alt="SUSI BTG" width="52" height="52"></div>
+        <div class="susi-logo-mobile">
+          <div class="susi-logo-wrap">
+            <img src="SUSI/LOGO_SUSI.svg" alt="SUSI BTG">
+            <span class="susi-wordmark">SUSI</span>
+          </div>
+        </div>
         <div class="dual-badge badge-blue">SUSI BTG</div>
         <h3 class="h3-light">Tu sistema inteligente de cotización</h3>
         <p class="p-light" style="font-size:13px;font-weight:300;line-height:1.6;margin-bottom:14px">Multicotizador exclusivo con <strong>10 aseguradoras en Autos</strong> y <strong>11 en GMM</strong> desde un solo panel profesional.</p>
         <div class="susi-mockup">
-          <div class="mock-tabs">
-            <span class="mock-tab mock-tab-active">🚗 Autos</span>
-            <span class="mock-tab">🏥 GMM</span>
+          <div class="sp-header">
+            <div class="sp-tabs">
+              <span class="sp-tab sp-tab-active"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v3"/><rect x="9" y="11" width="14" height="10" rx="2"/><circle cx="12" cy="21" r="1"/><circle cx="20" cy="21" r="1"/></svg>Autos</span>
+              <span class="sp-tab"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>GMM</span>
+            </div>
+            <span class="sp-badge">10 opciones</span>
           </div>
-          <div class="mock-results">
-            <div class="mock-result">
-              <span class="mock-brand">Quálitas</span>
-              <div class="mock-bar"><div class="mock-fill" style="width:88%"></div></div>
-              <span class="mock-price">$2,890</span>
-            </div>
-            <div class="mock-result">
-              <span class="mock-brand">GNP</span>
-              <div class="mock-bar"><div class="mock-fill" style="width:72%"></div></div>
-              <span class="mock-price">$3,120</span>
-            </div>
-            <div class="mock-result">
-              <span class="mock-brand">HDI</span>
-              <div class="mock-bar"><div class="mock-fill" style="width:60%"></div></div>
-              <span class="mock-price">$3,450</span>
-            </div>
+          <div class="sp-result sp-result-top">
+            <div class="sp-cov"><div class="sp-dot sp-dot-cyan"></div><span class="sp-cov-name">Cobertura Amplia</span></div>
+            <div class="sp-right"><span class="sp-price">$12,611</span><span class="sp-tag sp-tag-top">MEJOR PRECIO</span></div>
           </div>
-          <div class="mock-footer">10 aseguradoras · Autos &amp; GMM · Personalizable</div>
+          <div class="sp-result">
+            <div class="sp-cov"><div class="sp-dot sp-dot-blue"></div><span class="sp-cov-name">Cobertura Amplio</span></div>
+            <div class="sp-right"><span class="sp-price">$14,102</span><span class="sp-tag sp-tag-dim">AMPLIO</span></div>
+          </div>
+          <div class="sp-result">
+            <div class="sp-cov"><div class="sp-dot sp-dot-dim"></div><span class="sp-cov-name">Cobertura Básica</span></div>
+            <div class="sp-right"><span class="sp-price">$16,992</span><span class="sp-tag sp-tag-dim">BÁSICA</span></div>
+          </div>
+          <div class="sp-footer">
+            <div class="sp-stat"><span class="sp-stat-n">10+</span><span class="sp-stat-l">Aseguradoras</span></div>
+            <div class="sp-sep"></div>
+            <div class="sp-stat"><span class="sp-stat-n">2</span><span class="sp-stat-l">Ramos</span></div>
+            <div class="sp-sep"></div>
+            <div class="sp-stat"><span class="sp-stat-n">100%</span><span class="sp-stat-l">Digital</span></div>
+          </div>
         </div>
         <div class="feat-grid">
           <div class="feat-item"><div class="feat-dot"></div>Multicotizador GMM y Autos</div>
