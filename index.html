@@ -635,12 +635,12 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
 
 /* ── DESKTOP: ajustes tamaño y botones ── */
 @media(min-width:769px){
-  .dual-card,.dual-card-dark{display:flex;flex-direction:column;align-items:center;text-align:center;padding:36px 32px}
+  .dual-card,.dual-card-dark{display:flex;flex-direction:column;align-items:center;text-align:center;padding:36px 32px;justify-content:flex-start}
   .dual-grid{align-items:stretch}
-  .dual-card-dark{justify-content:flex-start}
   .susi-logo-wrap img{max-width:200px;max-height:80px}
   .cami-logo-wrap img{max-width:200px;max-height:80px;filter:brightness(0) invert(1) drop-shadow(0 0 10px rgba(0,201,224,0.3))}
-  .susi-mockup,.cami-mockup{width:100%;margin:12px 0}
+  .susi-mockup,.cami-mockup{width:100%;margin:12px 0;flex:1}
+  .susi-desktop-cta-wrap,.cami-desktop-btn{margin-top:auto;width:100%}
   .susi-slider{display:none}
   .susi-desktop-cta,.dual-card-dark .cami-desktop-btn{display:flex !important;width:100%}
   .btn-premium{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px 24px;border-radius:14px;font-size:15px;font-weight:700;letter-spacing:.04em;text-decoration:none;transition:transform .2s,box-shadow .2s}
@@ -1032,7 +1032,7 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
           </div>
           <div class="sp-disclaimer">✦ Pantalla ilustrativa · Datos de ejemplo · No representa valores reales</div>
         </div>
-        <div style="margin-top:20px">
+        <div class="susi-desktop-cta-wrap" style="margin-top:20px">
           <div class="susi-slider" id="susiSlider" data-url="https://btg.segupoliza.com/#/pages/signin">
             <div class="susi-slider-track">
               <div class="susi-slider-fill" id="susiSliderFill"></div>
@@ -1136,7 +1136,7 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
           </div>
           <div class="cm-disclaimer">✦ Pantalla ilustrativa · Datos de ejemplo · No representa valores reales</div>
         </div>
-        <div class="cami-desktop-btn" style="margin-top:16px;width:100%">
+        <div class="cami-desktop-btn" style="width:100%">
           <a href="https://btgseguros-servicios.freshdesk.com/support/tickets/new" target="_blank" class="btn-premium btn-premium-cami">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             Recibir atención de siniestros
