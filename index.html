@@ -405,11 +405,11 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
   .feat-grid{grid-template-columns:1fr 1fr;gap:8px}
   .feat-item,.feat-item-dark{padding:8px 10px;font-size:12px;gap:6px;border-radius:8px}
   .susi-tagline{text-align:center}
-  /* Mobile: mostrar slider, ocultar botón fijo */
-  .susi-slider{display:block}
+  /* Mobile: slider sí, botón fijo no */
+  .susi-slider{display:block !important}
   .susi-desktop-cta{display:none !important}
   .dual-card-dark .cami-desktop-btn{display:none !important}
-  .cami-slider-wrap{display:block;margin-top:16px}
+  .cami-slider-wrap{display:block !important;margin-top:16px}
   .dual-card .dual-badge{display:flex;justify-content:center;margin-left:auto;margin-right:auto}
   .cami-visual{margin-top:12px;gap:6px}
   .cami-row{padding:9px 12px}
@@ -632,23 +632,14 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
   .hero h1{font-size:22px;letter-spacing:.03em}
 }
 
-/* ── DESKTOP: SUSI + CAMI ── */
+/* ── DESKTOP: ajustes tamaño y botones ── */
 @media(min-width:769px){
-  .dual-card,.dual-card-dark{display:flex;flex-direction:column;align-items:center;padding:32px 28px}
+  .dual-card,.dual-card-dark{display:flex;flex-direction:column;align-items:center;text-align:center;padding:36px 32px}
   .susi-logo-wrap img{max-width:200px;max-height:80px}
-  .cami-logo-wrap img{max-width:200px;max-height:80px}
-  .susi-logo-mobile{margin-bottom:18px}
-  .cami-logo-mobile{margin-bottom:18px}
-  .susi-tagline{font-size:15px;color:rgba(30,50,80,0.6);margin:4px 0 10px;width:100%}
-  .cami-tagline{font-size:15px;color:rgba(228,238,245,0.55);margin:4px 0 10px;width:100%}
-  .cami-desc-m{font-size:13px;color:rgba(228,238,245,0.4);margin-bottom:10px;width:100%}
-  .dual-card>p.p-light{text-align:center;width:100%}
-  .susi-mockup,.cami-mockup{width:100%;margin:10px 0}
-  .dual-card .dual-badge,.dual-card-dark .dual-badge{margin-left:auto;margin-right:auto}
-  /* Slider oculto en desktop, botón fijo visible */
+  .cami-logo-wrap img{max-width:200px;max-height:80px;filter:brightness(0) invert(1) drop-shadow(0 0 10px rgba(0,201,224,0.3))}
+  .susi-mockup,.cami-mockup{width:100%;margin:12px 0}
   .susi-slider{display:none}
-  .susi-desktop-cta{width:100%}
-  .dual-card-dark .cami-desktop-btn{width:100%}
+  .susi-desktop-cta,.dual-card-dark .cami-desktop-btn{display:flex !important;width:100%}
   .btn-premium{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px 24px;border-radius:14px;font-size:15px;font-weight:700;letter-spacing:.04em;text-decoration:none;transition:transform .2s,box-shadow .2s}
   .btn-premium:hover{transform:translateY(-2px)}
   .btn-premium-susi{background:linear-gradient(135deg,#0d5c8a,#1A7FBC);color:#fff;box-shadow:0 4px 20px rgba(26,127,188,0.4)}
@@ -1082,12 +1073,6 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
           <div class="cami-row"><span class="cami-lbl">Reembolso GMM · #4798</span><span class="cami-status s-info">En revisión</span></div>
           <div class="cami-row"><span class="cami-lbl">Endoso · #4791</span><span class="cami-status s-ok">Emitido</span></div>
         </div>
-        <div class="cami-desktop-btn" style="margin-top:20px">
-          <a href="https://btgseguros-servicios.freshdesk.com/support/tickets/new" target="_blank" class="btn-premium btn-premium-cami">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            Recibir atención
-          </a>
-        </div>
         <!-- Mobile mockup -->
         <div class="cami-mockup">
           <div class="cm-header">
@@ -1147,6 +1132,12 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
             </div>
           </div>
           <div class="cm-disclaimer">✦ Pantalla ilustrativa · Datos de ejemplo · No representa valores reales</div>
+        </div>
+        <div class="cami-desktop-btn" style="margin-top:16px;width:100%">
+          <a href="https://btgseguros-servicios.freshdesk.com/support/tickets/new" target="_blank" class="btn-premium btn-premium-cami">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            Recibir atención
+          </a>
         </div>
       </div>
     </div>
