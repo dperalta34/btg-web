@@ -112,6 +112,10 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 .aseg-ancla{background:rgba(26,127,188,0.15);color:rgba(100,180,230,0.8)}
 .aseg-est{background:rgba(184,150,46,0.12);color:rgba(210,175,80,0.8)}
 .aseg-nicho{background:rgba(29,158,117,0.12);color:rgba(60,190,150,0.8)}
+/* SUSI MOCKUP + CAMI LIVE */
+.susi-mockup{display:none}
+.cami-live{display:none}
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.5)}}
 @keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
 /* SECTION COMMONS */
@@ -397,11 +401,25 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
   .dual-card h3,.dual-card-dark h3{font-size:18px;margin-bottom:8px}
   .feat-grid{grid-template-columns:1fr 1fr;gap:8px}
   .feat-item,.feat-item-dark{padding:8px 10px;font-size:12px;gap:6px;border-radius:8px}
-  .susi-logo-mobile{display:flex;align-items:center;margin-bottom:14px}
-  .cami-visual{margin-top:14px;gap:6px}
+  .susi-logo-mobile{display:flex;align-items:center;margin-bottom:12px}
+  .cami-visual{margin-top:12px;gap:6px}
   .cami-row{padding:9px 12px}
   .cami-lbl{font-size:11px}
   .dual-badge{margin-bottom:10px}
+  /* Mockup */
+  .susi-mockup{display:block;background:rgba(26,127,188,0.06);border:1px solid rgba(26,127,188,0.15);border-radius:12px;padding:12px 14px;margin:12px 0 14px}
+  .mock-tabs{display:flex;gap:6px;margin-bottom:10px}
+  .mock-tab{font-size:11px;font-weight:500;padding:4px 12px;border-radius:6px;color:rgba(8,26,38,0.4);background:rgba(26,127,188,0.07);border:1px solid rgba(26,127,188,0.12)}
+  .mock-tab-active{background:var(--blue);color:#fff;border-color:var(--blue)}
+  .mock-result{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+  .mock-brand{font-size:11px;font-weight:500;color:rgba(8,26,38,0.7);min-width:52px}
+  .mock-bar{flex:1;height:5px;background:rgba(26,127,188,0.12);border-radius:3px;overflow:hidden}
+  .mock-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--cyan));border-radius:3px}
+  .mock-price{font-size:11px;font-weight:700;color:var(--blue);min-width:44px;text-align:right}
+  .mock-footer{font-size:10px;color:rgba(8,26,38,0.35);text-align:center;padding-top:8px;border-top:1px solid rgba(26,127,188,0.1);letter-spacing:.03em}
+  /* CAMI live */
+  .cami-live{display:flex;align-items:center;gap:6px;font-size:9px;font-weight:600;color:var(--cyan);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}
+  .cami-pulse-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);flex-shrink:0;animation:pulse-dot 1.5s ease infinite}
 
   /* DASHBOARD */
   .dash-section{padding:24px 20px}
@@ -779,10 +797,34 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
     <h2 class="sec-h2 h2-light">Soluciones para<br>nuestros agentes</h2>
     <div class="dual-grid">
       <div class="dual-card reveal-left">
-        <div class="susi-logo-mobile"><img src="SUSI/LOGO_SUSI.svg" alt="SUSI BTG" width="64" height="64"></div>
+        <div class="susi-logo-mobile"><img src="SUSI/LOGO_SUSI.svg" alt="SUSI BTG" width="52" height="52"></div>
         <div class="dual-badge badge-blue">SUSI BTG</div>
         <h3 class="h3-light">Tu sistema inteligente de cotización</h3>
-        <p class="p-light" style="font-size:14px;font-weight:300;line-height:1.7;margin-bottom:20px">Multicotizador exclusivo con 10 aseguradoras en Autos y 11 en GMM. Cotiza, personaliza y presenta diferenciadores de mercado desde un solo panel profesional.</p>
+        <p class="p-light" style="font-size:13px;font-weight:300;line-height:1.6;margin-bottom:14px">Multicotizador exclusivo con <strong>10 aseguradoras en Autos</strong> y <strong>11 en GMM</strong> desde un solo panel profesional.</p>
+        <div class="susi-mockup">
+          <div class="mock-tabs">
+            <span class="mock-tab mock-tab-active">🚗 Autos</span>
+            <span class="mock-tab">🏥 GMM</span>
+          </div>
+          <div class="mock-results">
+            <div class="mock-result">
+              <span class="mock-brand">Quálitas</span>
+              <div class="mock-bar"><div class="mock-fill" style="width:88%"></div></div>
+              <span class="mock-price">$2,890</span>
+            </div>
+            <div class="mock-result">
+              <span class="mock-brand">GNP</span>
+              <div class="mock-bar"><div class="mock-fill" style="width:72%"></div></div>
+              <span class="mock-price">$3,120</span>
+            </div>
+            <div class="mock-result">
+              <span class="mock-brand">HDI</span>
+              <div class="mock-bar"><div class="mock-fill" style="width:60%"></div></div>
+              <span class="mock-price">$3,450</span>
+            </div>
+          </div>
+          <div class="mock-footer">10 aseguradoras · Autos &amp; GMM · Personalizable</div>
+        </div>
         <div class="feat-grid">
           <div class="feat-item"><div class="feat-dot"></div>Multicotizador GMM y Autos</div>
           <div class="feat-item"><div class="feat-dot"></div>Paquetes por nivel hospitalario</div>
@@ -796,6 +838,7 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
         </div>
       </div>
       <div class="dual-card-dark reveal-right">
+        <div class="cami-live"><span class="cami-pulse-dot"></span>Monitoreo en tiempo real</div>
         <div class="dual-badge badge-cyan">CAMI BTG</div>
         <h3 class="h3-dark">Centro de Atención y Monitoreo Integral</h3>
         <p style="font-size:14px;font-weight:300;line-height:1.7;margin-bottom:20px;color:rgba(228,238,245,0.45)">Seguimiento en tiempo real de todos tus reclamos desde cualquier dispositivo. Accesible, seguro y siempre disponible.</p>
