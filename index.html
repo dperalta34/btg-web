@@ -445,7 +445,7 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
   .sp-tab{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:500;padding:4px 10px;border-radius:6px;color:rgba(228,238,245,0.3);border:1px solid rgba(255,255,255,0.07);cursor:pointer;transition:all .2s}
   .sp-cov-detail{display:flex;flex-direction:column;gap:1px}
   .sp-cov-sub{font-size:9px;color:rgba(228,238,245,0.28)}
-  .sp-cotizando{font-size:10px;font-weight:500;color:var(--cyan);opacity:.6;animation:pulse-dot 1.8s ease infinite}
+  .sp-disclaimer{font-size:9px;color:rgba(228,238,245,0.18);text-align:center;padding:6px 14px 8px;letter-spacing:.03em;font-style:italic}
   .sp-vehicle{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.05);background:rgba(255,255,255,0.02)}
   .sp-vehicle-icon{width:28px;height:28px;border-radius:7px;background:rgba(26,127,188,0.15);border:1px solid rgba(26,127,188,0.25);display:flex;align-items:center;justify-content:center;color:var(--blue);flex-shrink:0}
   .sp-vehicle-info{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
@@ -858,8 +858,8 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
               <label for="sptab-autos" class="sp-tab sp-tab-l-autos"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v3"/><rect x="9" y="11" width="14" height="10" rx="2"/><circle cx="12" cy="21" r="1"/><circle cx="20" cy="21" r="1"/></svg>Autos</label>
               <label for="sptab-gmm" class="sp-tab sp-tab-l-gmm"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>GMM</label>
             </div>
-            <span class="sp-badge sp-badge-autos">10 opciones</span>
-            <span class="sp-badge sp-badge-gmm">11 opciones</span>
+            <span class="sp-badge sp-badge-autos">10 aseguradoras</span>
+            <span class="sp-badge sp-badge-gmm">11 aseguradoras</span>
           </div>
           <!-- Vehicle selector -->
           <div class="sp-vehicle sp-vehicle-block">
@@ -900,7 +900,7 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
           </div>
           <div class="sp-result sp-last">
             <div class="sp-cov"><div class="sp-dot sp-dot-dim"></div><div class="sp-cov-detail"><span class="sp-cov-name">Flex Plus · Nacional</span><span class="sp-cov-sub">S.A. $80M · Diamante</span></div></div>
-            <div class="sp-right"><span class="sp-cotizando">◌ Cotizando…</span></div>
+            <div class="sp-right"><span class="sp-price">$41,139</span><span class="sp-tag sp-tag-dim">FLEX</span></div>
           </div>
           </div><!-- /panel-gmm -->
           <!-- Feature icons -->
@@ -926,6 +926,7 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
               <span class="sp-feat-lbl">Intuitivo</span>
             </div>
           </div>
+          <div class="sp-disclaimer">✦ Pantalla ilustrativa · Datos de ejemplo · No representa valores reales</div>
         </div>
         <div style="margin-top:20px">
           <a href="https://www.soybtg.com/susi" class="btn-primary" target="_blank">Entrar a SUSI →</a>
