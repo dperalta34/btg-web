@@ -2088,10 +2088,8 @@ function calcMapFrame() {
   const windowH = window.innerHeight;
   const isMobile = window.innerWidth < 768;
   const ref = isMobile && mapCanvas ? mapCanvas : mapSection;
-  const scrollStart = ref.offsetTop - windowH * (isMobile ? 1.1 : 0.7);
-  const scrollEnd   = isMobile
-    ? ref.offsetTop - windowH * 0.3
-    : mapSection.offsetTop - windowH * 0.1;
+  const scrollStart = ref.offsetTop - windowH * 1.1;
+  const scrollEnd   = ref.offsetTop - windowH * 0.3;
   const scrollRange = Math.max(scrollEnd - scrollStart, 1);
   const progress = Math.max(0, Math.min(1, (window.scrollY - scrollStart) / scrollRange));
   return Math.min(mapTotalFrames - 1, Math.floor(progress * mapTotalFrames));
@@ -2109,10 +2107,8 @@ window.addEventListener('scroll', () => {
   const windowH = window.innerHeight;
   const isMobile = window.innerWidth < 768;
   const ref = isMobile && mapCanvas ? mapCanvas : mapSection;
-  const scrollStart = ref.offsetTop - windowH * (isMobile ? 1.1 : 0.7);
-  const scrollEnd   = isMobile
-    ? ref.offsetTop - windowH * 0.3
-    : mapSection.offsetTop - windowH * 0.1;
+  const scrollStart = ref.offsetTop - windowH * 1.1;
+  const scrollEnd   = ref.offsetTop - windowH * 0.3;
   const scrollRange = Math.max(scrollEnd - scrollStart, 1);
   const scrolled    = window.scrollY - scrollStart;
   const progress    = Math.max(0, Math.min(1, scrolled / scrollRange));
