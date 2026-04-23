@@ -68,7 +68,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 .hero h1{font-size:clamp(36px,5.6vw,68px);font-weight:800;line-height:1.08;letter-spacing:.06em;color:#F5F9FC;margin-bottom:20px;text-transform:uppercase}
 .hero h1 em{font-style:normal;color:var(--cyan);text-shadow:0 0 28px rgba(0,201,224,0.45)}
 .hero-sub{font-size:19px;font-weight:300;color:rgba(228,238,245,0.5);max-width:580px;line-height:1.65}
-.hero-canvas-label{position:absolute;bottom:-18px;right:20px;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(228,238,245,0.7);pointer-events:none;display:none;background:rgba(3,13,26,0.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(0,201,224,0.22);border-radius:24px;padding:9px 18px;box-shadow:0 8px 32px rgba(0,0,0,0.35),0 0 0 1px rgba(0,201,224,0.06);white-space:nowrap}
+.hero-canvas-label{position:absolute;bottom:-20px;right:0;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(228,238,245,0.92);pointer-events:none;display:none;background:rgba(3,13,26,0.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(0,201,224,0.45);border-radius:24px;padding:10px 20px;box-shadow:0 8px 32px rgba(0,0,0,0.45),0 0 20px rgba(0,201,224,0.12),inset 0 1px 0 rgba(255,255,255,0.06);white-space:nowrap;opacity:0;transform:translateY(10px);transition:opacity .6s ease,transform .6s ease}
 .stats-bar{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.06);border-bottom:none;border-radius:18px 18px 0 0;margin-top:60px;overflow:hidden;max-width:1100px;margin-left:auto;margin-right:auto}
 .stat{padding:34px 40px;background:var(--dark)}
 .stat+.stat{border-left:1px solid rgba(255,255,255,0.06)}
@@ -781,7 +781,7 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
     </div>
     <div style="display:flex;align-items:center;justify-content:center;position:relative">
       <canvas id="scroll-canvas" style="width:100%;max-width:720px;height:auto;border-radius:12px;display:block"></canvas>
-      <div class="hero-canvas-label"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--cyan);margin-right:8px;vertical-align:middle;box-shadow:0 0 8px rgba(0,201,224,0.6)"></span>Promotoría de Seguros&nbsp;&nbsp;·&nbsp;&nbsp;Agentes Consolidados</div>
+      <div class="hero-canvas-label" id="heroCanvasLabel"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--cyan);margin-right:9px;vertical-align:middle;box-shadow:0 0 10px rgba(0,201,224,0.8),0 0 4px rgba(0,201,224,1)"></span>Promotoría Líder en Agentes de Seguros Consolidados</div>
     </div>
   </div>
   <!-- BTG EN EL MERCADO -->
@@ -1926,6 +1926,15 @@ window.addEventListener('scroll', () => {
     currentFrame = frameIndex;
     for(let j=frameIndex;j<Math.min(frameIndex+8,totalFrames);j++) loadFrame(j);
     drawFrame(frameIndex);
+  }
+  // Reveal canvas label in sync with animation (starts at 30% progress)
+  if(window.innerWidth >= 769){
+    const label = document.getElementById('heroCanvasLabel');
+    if(label){
+      const labelProgress = Math.max(0, Math.min(1, (progress - 0.3) / 0.4));
+      label.style.opacity = labelProgress;
+      label.style.transform = `translateY(${(1-labelProgress)*10}px)`;
+    }
   }
 });
 
