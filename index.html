@@ -61,14 +61,13 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 .mm-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);display:inline-block;margin-right:6px;flex-shrink:0}
 
 /* HERO */
-.hero{background:var(--dark);padding:110px 60px 0;position:relative}
+.hero{background:var(--dark);padding:110px 60px 0}
 .hero-inner{max-width:1100px;margin:0 auto;padding-bottom:0}
 .eyebrow{font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:20px;display:flex;align-items:center;gap:10px}
 .eyebrow::before{content:'';width:20px;height:1px;background:var(--blue)}
 .hero h1{font-size:clamp(36px,5.6vw,68px);font-weight:800;line-height:1.08;letter-spacing:.06em;color:#F5F9FC;margin-bottom:20px;text-transform:uppercase}
 .hero h1 em{font-style:normal;color:var(--cyan);text-shadow:0 0 28px rgba(0,201,224,0.45)}
 .hero-sub{font-size:19px;font-weight:300;color:rgba(228,238,245,0.5);max-width:580px;line-height:1.65}
-.hero-canvas-label{position:absolute;bottom:-20px;right:0;font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;pointer-events:none;display:none;background:rgba(255,255,255,0.04);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.08);border-radius:24px;padding:10px 22px;white-space:nowrap;opacity:0;transform:translateY(10px);transition:opacity .6s ease,transform .6s ease}
 .stats-bar{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.06);border-bottom:none;border-radius:18px 18px 0 0;margin-top:60px;overflow:hidden;max-width:1100px;margin-left:auto;margin-right:auto}
 .stat{padding:34px 40px;background:var(--dark)}
 .stat+.stat{border-left:1px solid rgba(255,255,255,0.06)}
@@ -685,8 +684,6 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
 /* ── DESKTOP: ajustes tamaño y botones ── */
 @media(min-width:769px){
   .dual-card,.dual-card-dark{display:flex;flex-direction:column;align-items:center;text-align:center;padding:36px 32px;justify-content:flex-start}
-  .eyebrow{display:none}
-  .hero-canvas-label{display:block !important}
   .dual-grid{align-items:stretch}
   .susi-logo-mobile,.cami-logo-mobile{width:100%}
   .susi-logo-wrap,.cami-logo-wrap{width:100%}
@@ -782,7 +779,7 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
     </div>
     <div style="display:flex;align-items:center;justify-content:center;position:relative">
       <canvas id="scroll-canvas" style="width:100%;max-width:720px;height:auto;border-radius:12px;display:block"></canvas>
-      <div class="hero-canvas-label" id="heroCanvasLabel"><span style="background:linear-gradient(90deg,rgba(228,238,245,0.25) 0%,rgba(228,238,245,0.9) 35%,rgba(0,201,224,0.85) 55%,rgba(228,238,245,0.9) 75%,rgba(228,238,245,0.25) 100%);background-size:280% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:cami-shimmer 4s ease-in-out infinite">Promotoría Líder en Agentes de Seguros Consolidados</span></div>
+
     </div>
   </div>
   <!-- BTG EN EL MERCADO -->
@@ -1928,15 +1925,7 @@ window.addEventListener('scroll', () => {
     for(let j=frameIndex;j<Math.min(frameIndex+8,totalFrames);j++) loadFrame(j);
     drawFrame(frameIndex);
   }
-  // Reveal canvas label in sync with animation (starts at 30% progress)
-  if(window.innerWidth >= 769){
-    const label = document.getElementById('heroCanvasLabel');
-    if(label){
-      const labelProgress = Math.max(0, Math.min(1, (progress - 0.3) / 0.4));
-      label.style.opacity = labelProgress;
-      label.style.transform = `translateY(${(1-labelProgress)*10}px)`;
-    }
-  }
+
 });
 
 // ── MAP SCROLL ANIMATION ──
