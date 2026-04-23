@@ -1891,11 +1891,11 @@ const statsBar = document.getElementById('map-section');
 (function initHeroFrame() {
   const wH = window.innerHeight;
   const isMob = window.innerWidth < 768;
-  const sStart = heroSection ? heroSection.offsetTop - wH * 0.6 : 0;
+  const sStart = heroSection ? heroSection.offsetTop - wH * 0.1 : 0;
   const sEnd = heroSection
     ? (isMob
         ? heroSection.offsetTop + heroSection.offsetHeight * 0.12
-        : heroSection.offsetTop + heroSection.offsetHeight * 0.55)
+        : heroSection.offsetTop + heroSection.offsetHeight * 0.25)
     : 1;
   const sRange = Math.max(sEnd - sStart, 1);
   const progress = Math.max(0, Math.min(1, (window.scrollY - sStart) / sRange));
@@ -1909,11 +1909,11 @@ window.addEventListener('scroll', () => {
   if (!heroSection) return;
   const windowH = window.innerHeight;
   const isMobile = window.innerWidth < 768;
-  const scrollStart = heroSection.offsetTop - windowH * 0.6;
+  const scrollStart = heroSection.offsetTop - windowH * 0.1;
   // En móvil termina mucho antes (30% del recorrido del hero)
   const scrollEnd = isMobile
     ? heroSection.offsetTop + heroSection.offsetHeight * 0.12
-    : heroSection.offsetTop + heroSection.offsetHeight * 0.55;
+    : heroSection.offsetTop + heroSection.offsetHeight * 0.25;
   const scrollRange = Math.max(scrollEnd - scrollStart, 1);
   const scrolled    = window.scrollY - scrollStart;
   const progress    = Math.max(0, Math.min(1, scrolled / scrollRange));
