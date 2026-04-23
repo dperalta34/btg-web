@@ -611,14 +611,15 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
   /* INICIATIVAS */
   .social-section{padding:28px 0 28px}
   .social-inner{padding:0 20px}
-  .social-strip{margin:20px -20px 0;justify-content:stretch;overflow-x:visible}
-  .social-tab{flex:1;max-width:none;padding:12px 4px 10px;gap:4px}
-  .social-tab-logo{display:none}
+  .social-strip{margin:20px -20px 0;overflow-x:auto;-webkit-overflow-scrolling:touch;justify-content:flex-start;padding:0 16px 2px;scrollbar-width:none}
+  .social-strip::-webkit-scrollbar{display:none}
+  .social-tab{flex:0 0 auto;width:110px;padding:14px 8px 12px;gap:8px}
+  .social-tab-logo{width:80px;height:54px;display:flex}
+  .social-tab-logo img{filter:none !important;opacity:1 !important;transform:none !important;transition:none}
   .social-tab-name{font-size:8.5px;letter-spacing:.03em}
-  .social-display{min-height:260px}
-  .social-panel{padding:16px 0 12px}
-  .social-panel-logo{display:flex;justify-content:center;margin-bottom:14px}
-  .social-panel-logo img{max-width:160px;max-height:100px;object-fit:contain;filter:none}
+  .social-panel-logo{display:none}
+  .social-display{min-height:190px}
+  .social-panel{padding:20px 0 16px}
   .social-panel-title{font-size:17px}
   .social-panel-desc{font-size:12.5px;line-height:1.7}
 
