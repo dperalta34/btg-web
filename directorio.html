@@ -649,6 +649,19 @@ if(dlBtn){
   menu.addEventListener('click', function(e){ if(e.target===menu) closeMenu(); });
 })();
 
+/* ── Mobile PDF: Google Docs Viewer (escala perfecto en iOS/Android) ── */
+(function(){
+  var isMobile = window.innerWidth <= 768 || /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  if(!isMobile) return;
+  var pdfPath = 'Directorio_BTG/DIRECTORIO_BTG_2026.pdf';
+  var pdfUrl  = encodeURIComponent(window.location.origin + '/' + pdfPath);
+  var wrap = document.querySelector('.dir-viewer-frame');
+  if(!wrap) return;
+  wrap.innerHTML =
+    '<iframe src="https://docs.google.com/viewer?url=' + pdfUrl + '&embedded=true"' +
+    ' width="100%" height="100%" style="border:none;display:block" allowfullscreen></iframe>';
+})();
+
 /* ── Mobile submenu ── */
 var mmHead = document.getElementById('mm-material');
 var mmSub  = document.getElementById('mm-material-sub');
