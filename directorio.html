@@ -96,139 +96,188 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 .dir-eyebrow{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:14px;display:flex;align-items:center;gap:10px;}
 .dir-eyebrow::before{content:'';width:22px;height:1px;background:rgba(26,127,188,0.5)}
 .dir-h1{font-size:clamp(34px,5vw,62px);font-weight:800;letter-spacing:-.04em;line-height:1.04;color:#F5F9FC;margin-bottom:14px;}
-.dir-h1 em{font-style:normal;color:var(--gold);text-shadow:0 0 28px rgba(184,150,46,0.38)}
+.dir-h1 em{font-style:normal;color:var(--cyan);text-shadow:0 0 28px rgba(0,201,224,0.4)}
 .dir-sub{font-size:16px;font-weight:300;color:rgba(228,238,245,0.45);max-width:480px;line-height:1.65;}
 .dir-meta{margin-top:22px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
 .dir-pill{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:500;color:rgba(228,238,245,0.4);background:rgba(26,127,188,0.07);border:1px solid rgba(26,127,188,0.16);padding:5px 13px;border-radius:20px;}
 .dir-pill b{color:var(--blue);font-weight:700}
 
-/* ─── HERO: CAJA 3D PREMIUM (estilo directorio) ─── */
-.dir-header-visual{display:flex;align-items:center;justify-content:center;position:relative;min-height:400px;}
-.dir-glow{
-  position:absolute;width:520px;height:340px;
-  background:radial-gradient(ellipse at 50% 62%,rgba(26,127,188,0.22) 0%,rgba(0,201,224,0.1) 38%,transparent 68%);
-  filter:blur(60px);pointer-events:none;z-index:0;
+/* ═══════════════════════════════════════
+   HERO: CAJA 3D PREMIUM — DIRECTORIO BTG
+   ═══════════════════════════════════════ */
+.dir-header-visual{
+  display:flex;align-items:center;justify-content:center;
+  position:relative;min-height:420px;
 }
-.dir-scene{perspective:1400px;position:relative;z-index:1;}
+/* Glow atmosférico azul — la caja "emite" luz */
+.dir-glow{
+  position:absolute;width:560px;height:380px;
+  background:
+    radial-gradient(ellipse at 40% 55%,rgba(0,201,224,0.14) 0%,transparent 45%),
+    radial-gradient(ellipse at 65% 45%,rgba(26,127,188,0.2) 0%,transparent 55%);
+  filter:blur(64px);pointer-events:none;z-index:0;
+}
+.dir-scene{perspective:1500px;position:relative;z-index:1;}
 
-/* Caja 3D horizontal */
+/* ── CAJA 3D (landscape) ── */
 .dir-box{
-  width:390px;height:210px;
+  width:400px;height:214px;
   position:relative;transform-style:preserve-3d;
-  transform:rotateX(18deg) rotateY(-26deg);
-  animation:boxFloat 5s ease-in-out infinite;
-  filter:drop-shadow(0 38px 64px rgba(0,0,0,0.85));
+  transform:rotateX(20deg) rotateY(-28deg);
+  animation:boxFloat 6s ease-in-out infinite;
+  filter:
+    drop-shadow(0 42px 70px rgba(0,0,0,0.9))
+    drop-shadow(0 0 60px rgba(0,201,224,0.06));
 }
 @keyframes boxFloat{
-  0%,100%{transform:rotateX(18deg) rotateY(-26deg) translateY(0)}
-  50%{transform:rotateX(14deg) rotateY(-21deg) translateY(-16px)}
+  0%,100%{transform:rotateX(20deg) rotateY(-28deg) translateY(0)}
+  50%  {transform:rotateX(15deg) rotateY(-22deg) translateY(-18px)}
 }
 
-/* ── CARA LATERAL IZQUIERDA ── */
+/* ── CARA LATERAL (profundidad izquierda) ──
+   En sombra — simula material oscuro tipo aluminio anodizado */
 .box-side{
-  position:absolute;width:68px;height:100%;top:0;left:0;
+  position:absolute;width:72px;height:100%;top:0;left:0;
   transform:rotateY(-90deg);transform-origin:left center;
-  background:linear-gradient(to right,#01050b,#091826);
-  border-radius:6px 0 0 6px;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+  background:linear-gradient(to right,#010407,#070f1a,#0a1626);
+  border-radius:8px 0 0 8px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;
 }
-.box-side::after{
-  content:'';position:absolute;right:0;top:12%;bottom:12%;width:1px;
-  background:linear-gradient(to bottom,transparent,rgba(26,127,188,0.35),transparent);
+/* Borde iluminado derecho (arista donde toca la cara frontal) */
+.box-side::before{
+  content:'';position:absolute;right:0;top:0;bottom:0;width:1px;
+  background:linear-gradient(to bottom,
+    transparent 0%,rgba(255,255,255,0.22) 25%,
+    rgba(0,201,224,0.18) 55%,rgba(255,255,255,0.08) 80%,transparent 100%);
 }
 .box-side-txt{
   writing-mode:vertical-rl;transform:rotate(180deg);
-  font-size:7px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;
-  color:rgba(255,255,255,0.18);
+  font-size:6.5px;font-weight:800;letter-spacing:.26em;text-transform:uppercase;
+  color:rgba(255,255,255,0.14);
 }
 
-/* ── TAPA SUPERIOR ── */
+/* ── TAPA SUPERIOR (recibe más luz — ligeramente más clara) ── */
 .box-lid{
-  position:absolute;width:100%;height:68px;top:0;left:0;
+  position:absolute;width:100%;height:72px;top:0;left:0;
   transform:rotateX(90deg);transform-origin:top center;
-  background:linear-gradient(175deg,#0f2540 0%,#071322 100%);
+  background:linear-gradient(175deg,#0c1e35 0%,#060e1c 100%);
   overflow:hidden;
 }
+/* Arista superior — la más iluminada de toda la caja */
 .box-lid::before{
   content:'';position:absolute;top:0;left:0;right:0;height:1.5px;
-  background:linear-gradient(90deg,transparent,rgba(26,127,188,0.7),rgba(0,201,224,0.5),transparent);
+  background:linear-gradient(90deg,
+    transparent 0%,rgba(255,255,255,0.3) 20%,
+    rgba(0,201,224,0.6) 50%,rgba(255,255,255,0.2) 80%,transparent 100%);
 }
+/* Reflexión difusa en la tapa */
 .box-lid::after{
   content:'';position:absolute;inset:0;
-  background:linear-gradient(to bottom,rgba(255,255,255,0.05) 0%,transparent 55%);
+  background:linear-gradient(to bottom,rgba(255,255,255,0.06) 0%,transparent 50%);
 }
 .box-lid-inner{
-  position:absolute;inset:0;display:flex;align-items:center;padding:0 22px;gap:10px;z-index:1;
+  position:absolute;inset:0;display:flex;align-items:center;
+  padding:0 20px;gap:9px;z-index:2;
 }
-.box-lid-logo{width:28px;opacity:0.4;filter:brightness(0) invert(1);flex-shrink:0}
-.box-lid-label{font-size:8px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,0.3);flex:1}
-.box-lid-year{font-size:8px;font-weight:800;color:rgba(0,201,224,0.55);letter-spacing:.1em}
+.box-lid-logo{width:26px;opacity:0.45;filter:brightness(0) invert(1);flex-shrink:0}
+.box-lid-label{
+  font-size:7.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(255,255,255,0.28);flex:1;
+}
+.box-lid-year{
+  font-size:7.5px;font-weight:800;letter-spacing:.1em;
+  color:rgba(0,201,224,0.5);
+}
 
-/* ── CARA FRONTAL PRINCIPAL ── */
+/* ── CARA FRONTAL (héroe de la composición) ── */
 .box-front{
   position:absolute;inset:0;
-  background:linear-gradient(158deg,#111c2e 0%,#070c16 100%);
-  border-radius:0 8px 8px 0;overflow:hidden;
-  display:flex;align-items:center;
-  padding:0 32px;gap:0;
+  /* Gradiente en capas: fuente de luz top-left, oscuridad bottom-right */
+  background:
+    radial-gradient(ellipse at 18% 22%, rgba(26,127,188,0.18) 0%, transparent 48%),
+    radial-gradient(ellipse at 80% 80%, rgba(0,0,0,0.35) 0%, transparent 45%),
+    linear-gradient(152deg,#101b2c 0%,#080e1a 60%,#040810 100%);
+  border-radius:0 10px 10px 0;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:22px 30px 22px 28px;gap:0;
 }
-/* Gloss sutil */
+/* Gloss — reflexión de luz top-left */
 .box-front::after{
   content:'';position:absolute;inset:0;
-  background:linear-gradient(138deg,rgba(255,255,255,0.07) 0%,transparent 40%);
+  background:linear-gradient(142deg,rgba(255,255,255,0.09) 0%,transparent 38%);
   pointer-events:none;border-radius:inherit;z-index:5;
 }
-/* Línea azul-cyan en el tope */
+/* Arista cyan en la parte superior de la cara frontal */
 .box-front::before{
   content:'';position:absolute;top:0;left:0;right:0;height:2px;z-index:6;
-  background:linear-gradient(90deg,transparent,rgba(26,127,188,0.9),rgba(0,201,224,0.65),transparent);
-}
-/* Textura muy sutil (dot grid) */
-.box-dots{
-  position:absolute;inset:0;z-index:1;opacity:0.04;
-  background-image:radial-gradient(circle,rgba(255,255,255,1) 1px,transparent 1px);
-  background-size:18px 18px;pointer-events:none;
-}
-/* Luz ambiente azul desde el centro */
-.box-ambient{
-  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  width:280px;height:180px;z-index:1;
-  background:radial-gradient(ellipse at center,rgba(26,127,188,0.1) 0%,transparent 68%);
-  pointer-events:none;
+  background:linear-gradient(90deg,
+    rgba(26,127,188,0.5) 0%,rgba(0,201,224,0.9) 40%,
+    rgba(0,201,224,0.6) 60%,rgba(26,127,188,0.2) 100%);
 }
 
-/* Área logo izquierda */
-.box-brand{
-  display:flex;flex-direction:column;align-items:center;gap:6px;
-  flex-shrink:0;width:96px;position:relative;z-index:2;
-}
-.box-brand-img{width:56px;filter:brightness(0) invert(1);opacity:0.92}
-.box-brand-name{
-  font-size:10px;font-weight:700;letter-spacing:.06em;
-  color:rgba(255,255,255,0.55);text-align:center;line-height:1.35;
+/* Textura de fondo ultra sutil */
+.box-texture{
+  position:absolute;inset:0;z-index:1;pointer-events:none;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 28px,
+      rgba(255,255,255,0.013) 28px,
+      rgba(255,255,255,0.013) 29px
+    );
 }
 
-/* Línea divisora vertical */
-.box-vdivider{
-  width:1.5px;align-self:stretch;margin:20px 28px;flex-shrink:0;
-  background:linear-gradient(to bottom,transparent,rgba(255,255,255,0.28),transparent);
+/* Watermark logo fondo — gran tamaño, muy baja opacidad */
+.box-wm{
+  position:absolute;right:18px;bottom:12px;
+  width:60px;opacity:0.055;
+  filter:brightness(0) invert(1);z-index:1;
+}
+
+/* ── TIPOGRAFÍA FRONTAL ── */
+/* "DIRECTORIO" — héroe absoluto */
+.box-dir-title{
+  font-size:52px;font-weight:900;color:#ffffff;
+  letter-spacing:.04em;line-height:1;
+  position:relative;z-index:2;margin-bottom:8px;
+  text-shadow:
+    0 1px 0 rgba(255,255,255,0.1),
+    0 4px 28px rgba(0,0,0,0.7);
+}
+/* Separador */
+.box-sep{
+  width:100%;height:1px;position:relative;z-index:2;margin-bottom:10px;
+  background:linear-gradient(to right,rgba(255,255,255,0.25),rgba(255,255,255,0.07),transparent 70%);
+}
+/* Fila inferior: logo + BTG [neon] + SEGUROS */
+.box-brand-row{
+  display:flex;align-items:center;gap:10px;
   position:relative;z-index:2;
 }
-
-/* Área de texto derecha */
-.box-text{flex:1;position:relative;z-index:2;}
-.box-dir-title{
-  font-size:46px;font-weight:900;color:#ffffff;
-  letter-spacing:-.03em;line-height:1;margin-bottom:6px;
-  text-shadow:0 2px 24px rgba(0,0,0,0.6);
+.box-brand-logo{
+  width:30px;flex-shrink:0;
+  filter:brightness(0) invert(1);opacity:0.7;
 }
-.box-dir-sub{
-  font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
-  color:rgba(255,255,255,0.38);display:flex;align-items:center;gap:6px;
+.box-brand-dot{
+  width:3px;height:3px;border-radius:50%;
+  background:rgba(255,255,255,0.22);flex-shrink:0;
 }
-.box-dir-sub em{
-  font-style:normal;color:var(--cyan);
-  text-shadow:0 0 22px rgba(0,201,224,0.55),0 0 8px rgba(0,201,224,0.35);
+/* "BTG" con glow neon real */
+.box-btg{
+  font-size:15px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--cyan);
+  text-shadow:
+    0 0 4px rgba(0,201,224,1),
+    0 0 10px rgba(0,201,224,0.9),
+    0 0 22px rgba(0,201,224,0.65),
+    0 0 48px rgba(0,201,224,0.35),
+    0 0 88px rgba(0,201,224,0.15);
+}
+/* "SEGUROS" — apagado, jerárquicamente secundario */
+.box-seguros{
+  font-size:15px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(255,255,255,0.35);
 }
 
 /* ─── PDF VIEWER SECTION ─── */
@@ -254,7 +303,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
   gap:16px;
 }
 .dir-viewer-bar-left{display:flex;align-items:center;gap:10px}
-.dir-viewer-bar-left svg{color:var(--gold);flex-shrink:0}
+.dir-viewer-bar-left svg{color:var(--blue);flex-shrink:0}
 .dir-viewer-bar-title{font-size:13px;font-weight:600;color:rgba(228,238,245,0.75);letter-spacing:-.01em}
 .dir-viewer-bar-sub{font-size:11px;color:rgba(228,238,245,0.3);margin-top:1px}
 
@@ -475,19 +524,15 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
         </div>
         <!-- Cara frontal -->
         <div class="box-front">
-          <div class="box-dots"></div>
-          <div class="box-ambient"></div>
-          <!-- Logo + nombre -->
-          <div class="box-brand">
-            <img src="btg-logo.png" class="box-brand-img" alt="BTG">
-            <span class="box-brand-name">BTG<br>Seguros</span>
-          </div>
-          <!-- Divisor vertical -->
-          <div class="box-vdivider"></div>
-          <!-- Texto directorio -->
-          <div class="box-text">
-            <div class="box-dir-title">DIRECTORIO</div>
-            <div class="box-dir-sub"><em>BTG</em>&nbsp;SEGUROS</div>
+          <div class="box-texture"></div>
+          <img src="btg-logo.png" class="box-wm" alt="">
+          <div class="box-dir-title">DIRECTORIO</div>
+          <div class="box-sep"></div>
+          <div class="box-brand-row">
+            <img src="btg-logo.png" class="box-brand-logo" alt="">
+            <div class="box-brand-dot"></div>
+            <span class="box-btg">BTG</span>
+            <span class="box-seguros">SEGUROS</span>
           </div>
         </div>
       </div>
@@ -506,7 +551,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
     <!-- Toolbar -->
     <div class="dir-viewer-bar">
       <div class="dir-viewer-bar-left">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold)"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--blue)"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
         <div>
           <div class="dir-viewer-bar-title">Directorio Equipo BTG Seguros 2026</div>
           <div class="dir-viewer-bar-sub">PDF · Equipo interno · Edición oficial 2026</div>
