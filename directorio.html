@@ -102,117 +102,128 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 .dir-pill{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:500;color:rgba(228,238,245,0.4);background:rgba(26,127,188,0.07);border:1px solid rgba(26,127,188,0.16);padding:5px 13px;border-radius:20px;}
 .dir-pill b{color:var(--blue);font-weight:700}
 
-/* ─── HERO: 3D UI PANEL ─── */
-.dir-header-visual{display:flex;align-items:center;justify-content:center;position:relative;min-height:420px;}
-.dir-glow{position:absolute;width:400px;height:400px;background:radial-gradient(ellipse at 55% 50%,rgba(184,150,46,0.18) 0%,rgba(26,127,188,0.22) 40%,transparent 68%);filter:blur(52px);pointer-events:none;z-index:0;}
+/* ─── HERO: 3D BOX + PHONE ─── */
+.dir-header-visual{display:flex;align-items:center;justify-content:center;position:relative;min-height:380px;}
+.dir-glow{position:absolute;width:480px;height:320px;background:radial-gradient(ellipse at 50% 60%,rgba(184,150,46,0.16) 0%,rgba(26,127,188,0.2) 40%,transparent 70%);filter:blur(56px);pointer-events:none;z-index:0;}
 .dir-scene{perspective:1400px;position:relative;z-index:1;}
 
-/* Panel 3D */
-.dp-panel{
-  width:300px;height:400px;
+/* ── 3D BOX (horizontal/landscape) ── */
+.dir-box{
+  width:340px;height:210px;
   position:relative;transform-style:preserve-3d;
-  transform:rotateY(-22deg) rotateX(7deg);
-  animation:dpFloat 5s ease-in-out infinite;
-  filter:drop-shadow(0 32px 56px rgba(0,0,0,0.75));
+  transform:rotateX(20deg) rotateY(-28deg);
+  animation:boxFloat 5s ease-in-out infinite;
+  filter:drop-shadow(0 32px 56px rgba(0,0,0,0.78));
 }
-@keyframes dpFloat{
-  0%,100%{transform:rotateY(-22deg) rotateX(7deg) translateY(0)}
-  50%{transform:rotateY(-17deg) rotateX(5deg) translateY(-16px)}
+@keyframes boxFloat{
+  0%,100%{transform:rotateX(20deg) rotateY(-28deg) translateY(0)}
+  50%{transform:rotateX(16deg) rotateY(-23deg) translateY(-16px)}
 }
-/* Left edge (thickness) */
-.dp-edge{
-  position:absolute;width:22px;height:100%;top:0;left:0;
+/* Left end face */
+.box-side{
+  position:absolute;width:60px;height:100%;top:0;left:0;
   transform:rotateY(-90deg);transform-origin:left center;
-  background:linear-gradient(to right,#030b15,#0a1e38);
-  border-radius:8px 0 0 8px;
+  background:linear-gradient(to right,#020a14,#0c2240);
+  border-radius:6px 0 0 6px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;
 }
-/* Top face */
-.dp-top{
-  position:absolute;width:100%;height:22px;top:0;left:0;
+.box-side-txt{
+  writing-mode:vertical-rl;transform:rotate(180deg);
+  font-size:7px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(255,255,255,0.22);
+}
+/* Top face / lid */
+.box-lid{
+  position:absolute;width:100%;height:60px;top:0;left:0;
   transform:rotateX(90deg);transform-origin:top center;
-  background:linear-gradient(to bottom,#162f55,#0a1e38);
+  background:linear-gradient(to bottom,#1c4270,#0d2448);
+  display:flex;align-items:center;justify-content:space-between;padding:0 22px;
 }
-/* Screen face */
-.dp-screen{
+.box-lid::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(184,150,46,0.7),transparent);
+}
+.box-lid-brand{font-size:8px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,0.35)}
+.box-lid-year{font-size:9px;font-weight:800;color:rgba(184,150,46,0.75);letter-spacing:.1em}
+/* Front face */
+.box-front{
   position:absolute;inset:0;
-  background:linear-gradient(160deg,#0e2240 0%,#060e1c 100%);
-  border-radius:0 14px 14px 0;
-  overflow:hidden;display:flex;flex-direction:column;
-}
-/* Screen gloss */
-.dp-screen::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(255,255,255,0.09) 0%,transparent 45%);
-  pointer-events:none;border-radius:inherit;z-index:10;
-}
-/* Gold top accent line */
-.dp-screen::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,transparent,rgba(184,150,46,0.9),rgba(0,201,224,0.5),transparent);
-  z-index:11;pointer-events:none;
-}
-
-/* ── CHROME BAR ── */
-.dp-chrome{
-  height:34px;background:rgba(0,0,0,0.35);
-  border-bottom:1px solid rgba(255,255,255,0.06);
-  display:flex;align-items:center;padding:0 12px;gap:8px;flex-shrink:0;position:relative;z-index:2;
-}
-.dp-dots{display:flex;gap:4px;margin-right:4px}
-.dp-dot{width:7px;height:7px;border-radius:50%}
-.dp-dot-r{background:rgba(255,95,86,0.55)}
-.dp-dot-y{background:rgba(255,189,46,0.55)}
-.dp-dot-g{background:rgba(40,200,64,0.45)}
-.dp-chrome-title{font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-left:4px}
-.dp-chrome-badge{margin-left:auto;font-size:7px;font-weight:700;letter-spacing:.08em;color:rgba(184,150,46,0.7);background:rgba(184,150,46,0.1);border:1px solid rgba(184,150,46,0.25);border-radius:4px;padding:2px 6px}
-
-/* ── SEARCH BAR ── */
-.dp-search{
-  margin:10px 12px 6px;height:24px;
-  background:rgba(255,255,255,0.04);
-  border:1px solid rgba(255,255,255,0.08);
-  border-radius:6px;display:flex;align-items:center;padding:0 10px;gap:6px;
-  position:relative;z-index:2;flex-shrink:0;
-}
-.dp-search svg{opacity:0.3;flex-shrink:0}
-.dp-search-txt{font-size:8px;color:rgba(255,255,255,0.25);letter-spacing:.02em}
-
-/* ── SECTION LABEL ── */
-.dp-section{padding:6px 12px 4px;font-size:7px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,0.22);position:relative;z-index:2;flex-shrink:0}
-
-/* ── CONTACT LIST ── */
-.dp-list{flex:1;padding:2px 8px 8px;display:flex;flex-direction:column;gap:3px;overflow:hidden;position:relative;z-index:2}
-.dp-row{
-  display:flex;align-items:center;gap:8px;
-  padding:6px 8px;border-radius:8px;
-  background:rgba(255,255,255,0.025);
-  border:1px solid rgba(255,255,255,0.04);
-  transition:background .2s;
-}
-.dp-avatar{
-  width:28px;height:28px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  font-size:8.5px;font-weight:800;flex-shrink:0;
-  letter-spacing:0;
-}
-.dp-info{flex:1;min-width:0}
-.dp-name{font-size:8.5px;font-weight:600;color:rgba(255,255,255,0.72);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.dp-role{font-size:7px;color:rgba(255,255,255,0.28);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.dp-status{width:6px;height:6px;border-radius:50%;flex-shrink:0}
-.dp-status-on{background:rgba(0,201,224,0.7)}
-.dp-status-off{background:rgba(255,255,255,0.15)}
-
-/* ── PANEL FOOTER ── */
-.dp-footer{
-  height:28px;background:rgba(0,0,0,0.25);
-  border-top:1px solid rgba(255,255,255,0.05);
+  background:linear-gradient(155deg,#152e56 0%,#070f1e 100%);
+  border-radius:0 8px 8px 0;overflow:hidden;
   display:flex;align-items:center;justify-content:space-between;
-  padding:0 12px;flex-shrink:0;position:relative;z-index:2;
+  padding:22px 26px;
 }
-.dp-footer-txt{font-size:7px;color:rgba(255,255,255,0.2);letter-spacing:.06em}
-.dp-footer-count{font-size:7px;font-weight:700;color:rgba(0,201,224,0.5);letter-spacing:.04em}
-/* BTG Logo watermark */
-.dp-logo{position:absolute;bottom:36px;right:12px;width:36px;opacity:0.1;filter:brightness(0) invert(1);z-index:3;pointer-events:none}
+.box-front::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,0.09) 0%,transparent 44%);
+  pointer-events:none;border-radius:inherit;
+}
+.box-front::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(184,150,46,0.9),rgba(0,201,224,0.35),transparent);
+}
+.box-grid{
+  position:absolute;inset:0;opacity:0.03;
+  background-image:linear-gradient(rgba(0,201,224,1) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,201,224,1) 1px,transparent 1px);
+  background-size:24px 24px;pointer-events:none;
+}
+.box-streak{
+  position:absolute;top:-40px;left:-20px;
+  width:110px;height:400px;
+  background:linear-gradient(105deg,transparent,rgba(255,255,255,0.05) 50%,transparent);
+  transform:rotate(15deg);pointer-events:none;
+}
+/* Left text block inside front */
+.box-text{
+  display:flex;flex-direction:column;gap:6px;
+  position:relative;z-index:1;max-width:150px;
+}
+.box-label{font-size:8px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(184,150,46,0.82)}
+.box-title{font-size:22px;font-weight:900;color:#fff;letter-spacing:-.03em;line-height:1;text-shadow:0 2px 16px rgba(0,0,0,0.5)}
+.box-sub{font-size:8px;font-weight:400;color:rgba(255,255,255,0.32);line-height:1.5}
+.box-edition{
+  margin-top:10px;font-size:7px;font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;color:rgba(255,255,255,0.18);
+  padding-top:8px;border-top:1px solid rgba(255,255,255,0.1);
+}
+.box-logo{width:40px;opacity:0.14;filter:brightness(0) invert(1);margin-top:8px}
+
+/* ── PHONE (sunken in box) ── */
+.box-phone-wrap{position:relative;z-index:1;flex-shrink:0}
+.box-phone{
+  width:76px;height:148px;
+  background:#020a14;
+  border-radius:16px;
+  border:2.5px solid rgba(0,0,0,0.85);
+  box-shadow:
+    inset 0 8px 28px rgba(0,0,0,0.95),
+    inset 0 2px 8px rgba(0,0,0,0.7),
+    0 0 0 1px rgba(255,255,255,0.07),
+    0 4px 14px rgba(0,0,0,0.55);
+  overflow:hidden;
+  display:flex;flex-direction:column;
+}
+.phone-notch{
+  width:26px;height:7px;background:#020a14;
+  border-radius:0 0 5px 5px;margin:0 auto;flex-shrink:0;
+}
+.phone-screen{flex:1;background:#050f1c;padding:4px 5px;overflow:hidden;display:flex;flex-direction:column;gap:3px}
+.phone-status{display:flex;align-items:center;justify-content:space-between;padding:0 1px 2px}
+.phone-time{font-size:5.5px;font-weight:700;color:rgba(255,255,255,0.55)}
+.phone-icons{display:flex;gap:2px;align-items:center}
+.phone-icon-dot{width:3px;height:3px;border-radius:50%;background:rgba(0,201,224,0.55)}
+.phone-header{
+  background:linear-gradient(135deg,#1a3a70,#0d1e3c);
+  border-radius:5px;padding:5px 5px 4px;flex-shrink:0;
+}
+.phone-header-lbl{font-size:4.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(184,150,46,0.8)}
+.phone-header-ttl{font-size:9.5px;font-weight:900;color:#fff;line-height:1;margin-top:1px}
+.phone-contacts{display:flex;flex-direction:column;gap:3px}
+.phone-row{display:flex;align-items:center;gap:4px;padding:3px 3px;background:rgba(255,255,255,0.03);border-radius:4px}
+.phone-av{width:15px;height:15px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:5px;font-weight:800;flex-shrink:0}
+.phone-cname{font-size:5.5px;font-weight:600;color:rgba(255,255,255,0.65);line-height:1}
+.phone-crole{font-size:4.5px;color:rgba(255,255,255,0.25);line-height:1;margin-top:0.5px}
 
 /* ─── PDF VIEWER SECTION ─── */
 .dir-section{max-width:1100px;margin:0 auto;padding:0 60px 80px}
@@ -288,12 +299,12 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 
   .dir-header{padding:36px 20px 28px;grid-template-columns:1fr;gap:0;}
   .dir-header-visual{
-    order:-1;min-height:0;height:290px;overflow:visible;
-    padding:16px 0 0;margin-bottom:18px;
+    order:-1;min-height:0;height:260px;overflow:visible;
+    padding:20px 0 0;margin-bottom:18px;
     display:flex;align-items:flex-start;justify-content:center;
   }
-  .dir-glow{width:240px;height:240px}
-  .dir-scene{transform:scale(0.78);transform-origin:center top}
+  .dir-glow{width:260px;height:200px}
+  .dir-scene{transform:scale(0.72);transform-origin:center top}
   .dir-header-text{text-align:center}
   .dir-eyebrow{justify-content:center;display:none}
   .dir-sub{margin:0 auto}
@@ -429,91 +440,80 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 
   <!-- LEFT: Text -->
   <div class="dir-header-text">
-    <div class="dir-eyebrow">Material Agentes · BTG Seguros</div>
+    <div class="dir-eyebrow">Material Interno · BTG Seguros</div>
     <h1 class="dir-h1">Directorio<br><em>BTG</em></h1>
-    <p class="dir-sub">Toda la red BTG Seguros en un solo lugar: agentes, proveedores y aliados estratégicos 2026.</p>
+    <p class="dir-sub">El directorio oficial del equipo interno BTG Seguros. Todos los contactos en un solo lugar.</p>
     <div class="dir-meta">
       <span class="dir-pill">Edición <b>2026</b></span>
-      <span class="dir-pill">Uso <b>interno</b></span>
+      <span class="dir-pill">Equipo <b>interno</b></span>
     </div>
   </div>
 
-  <!-- RIGHT: 3D Floating UI Panel -->
+  <!-- RIGHT: 3D Box + Phone -->
   <div class="dir-header-visual">
     <div class="dir-glow"></div>
     <div class="dir-scene">
-      <div class="dp-panel">
-        <!-- Depth edges -->
-        <div class="dp-edge"></div>
-        <div class="dp-top"></div>
-        <!-- Screen -->
-        <div class="dp-screen">
-          <!-- Window chrome -->
-          <div class="dp-chrome">
-            <div class="dp-dots">
-              <div class="dp-dot dp-dot-r"></div>
-              <div class="dp-dot dp-dot-y"></div>
-              <div class="dp-dot dp-dot-g"></div>
-            </div>
-            <span class="dp-chrome-title">Directorio BTG Seguros</span>
-            <span class="dp-chrome-badge">2026</span>
+      <div class="dir-box">
+        <!-- Left end face -->
+        <div class="box-side">
+          <span class="box-side-txt">Directorio</span>
+          <span class="box-side-txt">BTG · 2026</span>
+        </div>
+        <!-- Top lid -->
+        <div class="box-lid">
+          <span class="box-lid-brand">BTG Seguros</span>
+          <span class="box-lid-year">2026</span>
+        </div>
+        <!-- Front face -->
+        <div class="box-front">
+          <div class="box-grid"></div>
+          <div class="box-streak"></div>
+          <!-- Left: branding text -->
+          <div class="box-text">
+            <div class="box-label">Directorio Oficial</div>
+            <div class="box-title">Equipo<br>BTG</div>
+            <div class="box-sub">Contactos del equipo interno BTG Seguros</div>
+            <div class="box-edition">Edición 2026 · Uso interno</div>
+            <img src="btg-logo.png" class="box-logo" alt="">
           </div>
-          <!-- Search -->
-          <div class="dp-search">
-            <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-            <span class="dp-search-txt">Buscar agente, proveedor o aliado…</span>
-          </div>
-          <!-- Section -->
-          <div class="dp-section">Contactos · 8 de 248</div>
-          <!-- Contact rows -->
-          <div class="dp-list">
-            <div class="dp-row">
-              <div class="dp-avatar" style="background:rgba(26,127,188,0.25);border:1px solid rgba(26,127,188,0.4);color:rgba(0,201,224,0.85)">AM</div>
-              <div class="dp-info"><div class="dp-name">Ana Martínez</div><div class="dp-role">Gerente de Agentes · Zona Norte</div></div>
-              <div class="dp-status dp-status-on"></div>
-            </div>
-            <div class="dp-row">
-              <div class="dp-avatar" style="background:rgba(184,150,46,0.2);border:1px solid rgba(184,150,46,0.35);color:rgba(184,150,46,0.9)">CR</div>
-              <div class="dp-info"><div class="dp-name">Carlos Romero</div><div class="dp-role">Agente Senior · Élite BTG</div></div>
-              <div class="dp-status dp-status-on"></div>
-            </div>
-            <div class="dp-row">
-              <div class="dp-avatar" style="background:rgba(0,201,224,0.15);border:1px solid rgba(0,201,224,0.3);color:rgba(0,201,224,0.8)">LP</div>
-              <div class="dp-info"><div class="dp-name">Laura Pedraza</div><div class="dp-role">Directora Regional · Zona Sur</div></div>
-              <div class="dp-status dp-status-on"></div>
-            </div>
-            <div class="dp-row">
-              <div class="dp-avatar" style="background:rgba(42,172,224,0.18);border:1px solid rgba(42,172,224,0.3);color:rgba(42,172,224,0.85)">MG</div>
-              <div class="dp-info"><div class="dp-name">Miguel García</div><div class="dp-role">Asesor Comercial · Alianzas</div></div>
-              <div class="dp-status dp-status-off"></div>
-            </div>
-            <div class="dp-row">
-              <div class="dp-avatar" style="background:rgba(26,127,188,0.22);border:1px solid rgba(26,127,188,0.35);color:rgba(26,127,188,0.9)">RT</div>
-              <div class="dp-info"><div class="dp-name">Roberto Torres</div><div class="dp-role">Coordinador de Canal BTG</div></div>
-              <div class="dp-status dp-status-on"></div>
-            </div>
-            <div class="dp-row">
-              <div class="dp-avatar" style="background:rgba(184,150,46,0.18);border:1px solid rgba(184,150,46,0.3);color:rgba(184,150,46,0.85)">SV</div>
-              <div class="dp-info"><div class="dp-name">Sara Valencia</div><div class="dp-role">Agente Premium · Zona Centro</div></div>
-              <div class="dp-status dp-status-on"></div>
-            </div>
-            <div class="dp-row">
-              <div class="dp-avatar" style="background:rgba(0,201,224,0.13);border:1px solid rgba(0,201,224,0.25);color:rgba(0,201,224,0.75)">JA</div>
-              <div class="dp-info"><div class="dp-name">Juan Arango</div><div class="dp-role">Gestor de Proveedores</div></div>
-              <div class="dp-status dp-status-off"></div>
-            </div>
-            <div class="dp-row">
-              <div class="dp-avatar" style="background:rgba(42,172,224,0.15);border:1px solid rgba(42,172,224,0.28);color:rgba(42,172,224,0.8)">PN</div>
-              <div class="dp-info"><div class="dp-name">Patricia Niño</div><div class="dp-role">Analista · Aliados Estratégicos</div></div>
-              <div class="dp-status dp-status-on"></div>
+          <!-- Right: sunken phone -->
+          <div class="box-phone-wrap">
+            <div class="box-phone">
+              <div class="phone-notch"></div>
+              <div class="phone-screen">
+                <div class="phone-status">
+                  <span class="phone-time">9:41</span>
+                  <div class="phone-icons">
+                    <div class="phone-icon-dot"></div>
+                    <div class="phone-icon-dot"></div>
+                    <div class="phone-icon-dot"></div>
+                  </div>
+                </div>
+                <div class="phone-header">
+                  <div class="phone-header-lbl">BTG Seguros</div>
+                  <div class="phone-header-ttl">Directorio</div>
+                </div>
+                <div class="phone-contacts">
+                  <div class="phone-row">
+                    <div class="phone-av" style="background:rgba(26,127,188,0.3);color:rgba(0,201,224,0.9)">DP</div>
+                    <div><div class="phone-cname">Dir. General</div><div class="phone-crole">Gerencia BTG</div></div>
+                  </div>
+                  <div class="phone-row">
+                    <div class="phone-av" style="background:rgba(184,150,46,0.25);color:rgba(184,150,46,0.9)">CM</div>
+                    <div><div class="phone-cname">Dir. Comercial</div><div class="phone-crole">Área Comercial</div></div>
+                  </div>
+                  <div class="phone-row">
+                    <div class="phone-av" style="background:rgba(0,201,224,0.18);color:rgba(0,201,224,0.85)">AO</div>
+                    <div><div class="phone-cname">Ger. Operaciones</div><div class="phone-crole">Ops · BTG</div></div>
+                  </div>
+                  <div class="phone-row">
+                    <div class="phone-av" style="background:rgba(42,172,224,0.2);color:rgba(42,172,224,0.9)">LM</div>
+                    <div><div class="phone-cname">Coordinadora</div><div class="phone-crole">Equipo Interno</div></div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <!-- Panel footer -->
-          <div class="dp-footer">
-            <span class="dp-footer-txt">BTG Seguros · Uso interno</span>
-            <span class="dp-footer-count">248 contactos</span>
-          </div>
-          <img src="btg-logo.png" class="dp-logo" alt="">
         </div>
       </div>
     </div>
@@ -533,8 +533,8 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
       <div class="dir-viewer-bar-left">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold)"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
         <div>
-          <div class="dir-viewer-bar-title">Directorio BTG Seguros 2026</div>
-          <div class="dir-viewer-bar-sub">PDF · Uso interno · Edición oficial</div>
+          <div class="dir-viewer-bar-title">Directorio Equipo BTG Seguros 2026</div>
+          <div class="dir-viewer-bar-sub">PDF · Equipo interno · Edición oficial 2026</div>
         </div>
       </div>
       <a class="btn-dl-dir" id="btn-dl" href="Directorio_BTG/DIRECTORIO_BTG_2026.pdf" download>
