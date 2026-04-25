@@ -335,6 +335,14 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 /* Mobile fallback */
 .dir-viewer-mobile{display:none}
 
+/* Download bar — below the PDF viewer */
+.dir-viewer-actions{
+  display:flex;align-items:center;justify-content:center;
+  padding:14px 18px;
+  background:rgba(8,20,32,0.8);
+  border-top:1px solid rgba(26,127,188,0.14);
+}
+
 /* ─── FOOTER ─── */
 .dir-footer{
   max-width:1100px;margin:0 auto;padding:24px 60px;
@@ -359,7 +367,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 
   /* HEADER GRID */
   .dir-header{
-    padding:24px 20px 28px;
+    padding:10px 20px 28px;
     grid-template-columns:1fr;
     gap:0;
   }
@@ -367,10 +375,10 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
   /* 3D BOX VISUAL */
   .dir-header-visual{
     order:-1;
-    min-height:0;height:220px;
+    min-height:0;height:210px;
     overflow:visible;
-    padding:14px 0 0;
-    margin-bottom:22px;
+    padding:6px 0 0;
+    margin-bottom:20px;
     display:flex;align-items:flex-start;justify-content:center;
   }
   .dir-glow{
@@ -408,11 +416,9 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
   .dir-viewer-bar-left{gap:8px}
   .dir-viewer-bar-title{font-size:13px}
   .dir-viewer-bar-sub{display:none}
-  /* Full-width download button in bar */
-  .btn-dl-dir{
-    width:100%;justify-content:center;
-    padding:11px 16px;font-size:13px;
-  }
+  /* Download actions bar — full width on mobile */
+  .dir-viewer-actions{padding:12px 16px}
+  .btn-dl-dir{width:100%;justify-content:center;padding:12px 16px;font-size:14px}
 
   /* HIDE iframe, SHOW mobile fallback */
   .dir-viewer-frame{display:none}
@@ -631,31 +637,32 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
           <div class="dir-viewer-bar-sub">PDF · Equipo interno · Edición oficial 2026</div>
         </div>
       </div>
-      <a class="btn-dl-dir" id="btn-dl" href="Directorio_BTG/DIRECTORIO_BTG_2026.pdf" download>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Descargar PDF
-      </a>
     </div>
     <!-- Inline PDF viewer (desktop) -->
     <div class="dir-viewer-frame">
-      <iframe src="Directorio_BTG/DIRECTORIO_BTG_2026.pdf#toolbar=1&navpanes=0&scrollbar=1" allowfullscreen></iframe>
+      <object data="Directorio_BTG/DIRECTORIO_BTG_2026.pdf" type="application/pdf" width="100%" height="100%">
+        <iframe src="Directorio_BTG/DIRECTORIO_BTG_2026.pdf" width="100%" height="100%" style="border:none"></iframe>
+      </object>
     </div>
     <!-- Mobile fallback -->
     <div class="dir-viewer-mobile">
       <div class="dir-viewer-mobile-icon">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color:var(--blue)"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
       </div>
-      <p class="dir-viewer-mobile-txt">Consulta el directorio completo directamente en tu navegador o descárgalo en tu dispositivo.</p>
+      <p class="dir-viewer-mobile-txt">Consulta el directorio completo directamente en tu navegador.</p>
       <div class="dir-viewer-mobile-btns">
         <a class="btn-open-pdf" href="Directorio_BTG/DIRECTORIO_BTG_2026.pdf" target="_blank">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
           Ver Directorio
         </a>
-        <a class="btn-dl-mobile" id="btn-dl-mobile" href="Directorio_BTG/DIRECTORIO_BTG_2026.pdf" download>
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Descargar
-        </a>
       </div>
+    </div>
+    <!-- Download bar (below PDF on all screens) -->
+    <div class="dir-viewer-actions">
+      <a class="btn-dl-dir" id="btn-dl" href="Directorio_BTG/DIRECTORIO_BTG_2026.pdf" download>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Descargar PDF
+      </a>
     </div>
   </div>
 
