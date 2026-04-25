@@ -89,6 +89,22 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 .mm-social a{width:42px;height:42px;border-radius:50%;background:rgba(26,127,188,0.12);border:1px solid rgba(26,127,188,0.22);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background .2s,border-color .2s}
 .mm-social a:hover{background:var(--blue);border-color:var(--blue)}
 .mm-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);display:inline-block;margin-right:6px;flex-shrink:0}
+/* Mobile submenu Material Agentes */
+.mm-item{display:block;padding:0;border-bottom:1px solid rgba(255,255,255,0.05);opacity:0;transform:translateX(-24px);transition:opacity .42s cubic-bezier(.16,1,.3,1),transform .42s cubic-bezier(.16,1,.3,1)}
+#mobile-menu.open .mm-item{opacity:1;transform:translateX(0);transition-delay:.34s}
+.mm-item-head{display:flex;align-items:center;justify-content:space-between;padding:14px 0;font-size:22px;font-weight:400;color:rgba(228,238,245,0.28);letter-spacing:-.03em;text-decoration:none;transition:color .22s;gap:12px;width:100%}
+.mm-item-head:hover,.mm-item-head:active{color:#E4EEF5}
+.mm-item-head.open{color:rgba(228,238,245,0.65)}
+.mm-chevron{transition:transform .3s cubic-bezier(.16,1,.3,1);flex-shrink:0}
+.mm-item-head.open .mm-chevron{transform:rotate(90deg)}
+.mm-sub{max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.16,1,.3,1)}
+.mm-sub.open{max-height:70px}
+.mm-sublink{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 0 13px 18px;font-size:17px;font-weight:400;color:rgba(0,201,224,0.65);letter-spacing:-.02em;text-decoration:none;transition:color .2s}
+.mm-sublink:hover,.mm-sublink:active{color:var(--cyan)}
+.mm-sublink svg{opacity:0.5;flex-shrink:0}
+@media(max-height:680px){
+  .mm-item-head{padding:10px 0;font-size:19px}
+}
 
 /* HERO */
 .hero{background:var(--dark);padding:110px 60px 0}
@@ -790,7 +806,16 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
       <a href="#credenciales" class="mm-link">Credenciales<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       <a href="#concursos" class="mm-link">Concursos<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       <a href="dashboard.html" class="mm-link">Dashboard BTG<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-      <a href="boletines.html" class="mm-link">Boletín Agentes<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <div class="mm-item">
+        <a href="#" class="mm-item-head" id="mm-material">Material Agentes
+          <svg class="mm-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <div class="mm-sub" id="mm-material-sub">
+          <a href="boletines.html" class="mm-sublink">Boletín Agentes
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
     </nav>
     <div class="mm-footer">
       <span class="mm-brand"><span class="mm-dot"></span>BTG Seguros</span>
@@ -2400,6 +2425,16 @@ if(basesOvl)basesOvl.addEventListener('click',function(e){if(e.target===this)clo
   document.addEventListener('keydown',function(e){
     if(e.key==='Escape')closeMenu();
   });
+  /* Material Agentes toggle */
+  var mmHead=document.getElementById('mm-material');
+  var mmSub=document.getElementById('mm-material-sub');
+  if(mmHead&&mmSub){
+    mmHead.addEventListener('click',function(e){
+      e.preventDefault();
+      mmHead.classList.toggle('open');
+      mmSub.classList.toggle('open');
+    });
+  }
 })();
 
 </script>
