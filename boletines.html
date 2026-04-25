@@ -395,27 +395,30 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
   .bl-header-visual{
     order:-1;
     min-height:0;
-    padding:16px 0 32px;
+    padding:12px 0 28px;
     display:flex;align-items:center;justify-content:center;
   }
-  .bl-book-glow{width:200px;height:200px}
-  .bl-bigbook{
-    width:152px;height:207px;
-  }
-  .bb-spine{width:28px}
-  .bb-top{height:28px}
-  .bb-front{padding:14px 13px 13px}
-  .bb-brand{font-size:6.5px;margin-bottom:3px}
-  .bb-label{font-size:8.5px;margin-bottom:8px}
-  .bb-title{font-size:18px;margin-bottom:3px}
-  .bb-subtitle{font-size:9px;margin-bottom:10px}
-  .bb-sep{margin-bottom:8px}
-  .bb-items{gap:6px}
-  .bb-item{gap:7px}
-  .bb-item-icon{width:20px;height:20px;border-radius:5px}
-  .bb-item-icon svg{width:10px;height:10px}
-  .bb-item-txt{font-size:9px}
-  .bb-edition{font-size:6.5px;padding-top:8px}
+  .bl-book-glow{width:220px;height:220px}
+  /* Libro proporcionado: ancho × 1.6 de ratio como desktop */
+  .bl-bigbook{width:148px;height:238px}
+  .bb-spine{width:26px}
+  .bb-top{height:26px}
+  /* Padding interior más compacto */
+  .bb-front{padding:10px 11px 10px}
+  .bb-brand{font-size:6px;margin-bottom:2px}
+  .bb-label{font-size:7.5px;letter-spacing:.18em;margin-bottom:6px}
+  .bb-title{font-size:15px;line-height:1;margin-bottom:2px}
+  .bb-subtitle{font-size:8px;margin-bottom:6px}
+  .bb-sep{margin-bottom:6px}
+  .bb-items{gap:5px}
+  .bb-item{gap:6px}
+  .bb-item-icon{width:18px;height:18px;border-radius:4px}
+  .bb-item-icon svg{width:9px;height:9px;stroke-width:1.6}
+  .bb-item-txt{font-size:8px;line-height:1.2}
+  .bb-edition{font-size:6px;padding-top:6px;padding-right:40px}
+  /* Logo BTG en hero book más pequeño en mobile */
+  .bb-front>img[src="btg-logo.png"]{width:34px !important;bottom:8px !important;right:8px !important}
+  /* Texto centrado */
   .bl-header-text{text-align:center}
   .bl-eyebrow{justify-content:center}
   .bl-sub{margin:0 auto}
