@@ -392,7 +392,8 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 
   /* SECTION */
   .dir-section{padding:0 0 56px}
-  .dir-divider{padding:0 20px;margin-bottom:16px}
+  .dir-divider{padding:0 20px;margin-bottom:16px;justify-content:center}
+  .dir-divider::before{max-width:none}
 
   /* VIEWER CARD — compact bar, full-width iframe */
   .dir-viewer{border-radius:0;border-left:none;border-right:none}
@@ -403,8 +404,12 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
   .dir-viewer-actions{padding:10px 16px}
   .btn-dl-dir{width:100%;justify-content:center;padding:11px 16px;font-size:14px}
 
-  /* PDF iframe — tall on mobile so it fills the screen */
-  .dir-viewer-frame{height:80vh;min-height:440px;max-height:none}
+  /* PDF iframe — altura = 1 página landscape (ratio 0.568) + toolbar Google Docs (~55px) */
+  .dir-viewer-frame{
+    height:calc(56vw + 55px);
+    min-height:270px;
+    max-height:none;
+  }
 
   /* FOOTER */
   .dir-footer{
