@@ -347,6 +347,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 
 /* ─── MOBILE ─── */
 @media(max-width:768px){
+  /* NAV */
   nav{padding:11px 16px}
   .nav-links{display:none}
   .nav-social{position:absolute;left:50%;transform:translateX(-50%);gap:8px}
@@ -356,56 +357,123 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
   nav>div img{height:36px !important}
   body{padding-top:60px}
 
-  .dir-header{padding:36px 20px 28px;grid-template-columns:1fr;gap:0;}
+  /* HEADER GRID */
+  .dir-header{
+    padding:24px 20px 28px;
+    grid-template-columns:1fr;
+    gap:0;
+  }
+
+  /* 3D BOX VISUAL */
   .dir-header-visual{
-    order:-1;min-height:0;height:260px;overflow:visible;
-    padding:20px 0 0;margin-bottom:18px;
+    order:-1;
+    min-height:0;height:220px;
+    overflow:visible;
+    padding:14px 0 0;
+    margin-bottom:22px;
     display:flex;align-items:flex-start;justify-content:center;
   }
-  .dir-glow{width:260px;height:200px}
-  .dir-scene{transform:scale(0.62);transform-origin:center top}
+  .dir-glow{
+    width:320px;height:240px;
+    filter:blur(48px);
+  }
+  .dir-scene{transform:scale(0.64);transform-origin:center top}
+
+  /* TEXT BLOCK */
   .dir-header-text{text-align:center}
   .dir-eyebrow{justify-content:center;display:none}
-  .dir-sub{margin:0 auto}
-  .dir-meta{justify-content:center}
-  .dir-h1{font-size:clamp(30px,9vw,46px)}
-  .dir-sub{font-size:15px;max-width:100%}
+  .dir-h1{
+    font-size:clamp(28px,8.5vw,44px);
+    margin-bottom:10px;
+  }
+  .dir-sub{
+    margin:0 auto;
+    font-size:14px;
+    max-width:100%;
+    color:rgba(228,238,245,0.4);
+  }
 
-  .dir-section{padding:0 0 60px}
+  /* SECTION */
+  .dir-section{padding:0 0 56px}
   .dir-divider{padding:0 20px;margin-bottom:20px}
 
-  /* Viewer */
+  /* VIEWER CARD */
   .dir-viewer{border-radius:0;border-left:none;border-right:none}
-  .dir-viewer-bar{padding:10px 16px;flex-wrap:wrap;gap:10px}
-  .dir-viewer-bar-title{font-size:12px}
+  .dir-viewer-bar{
+    padding:12px 16px;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:10px;
+  }
+  .dir-viewer-bar-left{gap:8px}
+  .dir-viewer-bar-title{font-size:13px}
   .dir-viewer-bar-sub{display:none}
+  /* Full-width download button in bar */
+  .btn-dl-dir{
+    width:100%;justify-content:center;
+    padding:11px 16px;font-size:13px;
+  }
 
-  /* On mobile, hide iframe PDF (iOS Safari doesn't support it) and show fallback */
+  /* HIDE iframe, SHOW mobile fallback */
   .dir-viewer-frame{display:none}
   .dir-viewer-mobile{
-    display:flex;flex-direction:column;align-items:center;justify-content:center;
-    gap:20px;padding:48px 24px;text-align:center;
+    display:flex;flex-direction:column;
+    align-items:center;justify-content:center;
+    gap:18px;padding:40px 24px;text-align:center;
   }
   .dir-viewer-mobile-icon{
-    width:64px;height:64px;border-radius:16px;
-    background:rgba(26,127,188,0.1);border:1px solid rgba(26,127,188,0.22);
+    width:60px;height:60px;border-radius:14px;
+    background:rgba(26,127,188,0.1);
+    border:1px solid rgba(26,127,188,0.22);
     display:flex;align-items:center;justify-content:center;
   }
-  .dir-viewer-mobile-txt{font-size:14px;font-weight:300;color:rgba(228,238,245,0.45);line-height:1.6;max-width:280px}
+  .dir-viewer-mobile-txt{
+    font-size:14px;font-weight:300;
+    color:rgba(228,238,245,0.4);
+    line-height:1.65;max-width:260px;
+  }
+  .dir-viewer-mobile-btns{
+    display:flex;gap:10px;flex-wrap:wrap;justify-content:center;width:100%;
+  }
   .btn-open-pdf{
-    display:inline-flex;align-items:center;gap:9px;padding:14px 32px;
-    background:var(--blue);color:#fff;font-size:14px;font-weight:600;
-    border:none;border-radius:10px;cursor:pointer;text-decoration:none;
+    flex:1;min-width:130px;
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:13px 20px;
+    background:var(--blue);color:#fff;
+    font-size:14px;font-weight:600;
+    border:none;border-radius:10px;
+    cursor:pointer;text-decoration:none;
     transition:background .2s;font-family:var(--font);
   }
-  .btn-open-pdf:hover{background:var(--blue2)}
+  .btn-open-pdf:active{background:var(--blue2)}
+  .btn-dl-mobile{
+    flex:1;min-width:130px;
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:13px 20px;
+    background:rgba(26,127,188,0.1);
+    color:rgba(228,238,245,0.65);
+    font-size:14px;font-weight:600;
+    border:1px solid rgba(26,127,188,0.25);border-radius:10px;
+    cursor:pointer;text-decoration:none;
+    transition:background .2s,color .2s;font-family:var(--font);
+  }
+  .btn-dl-mobile:active{background:rgba(26,127,188,0.2);color:#E4EEF5}
 
-  .dir-footer{padding:24px 20px;flex-direction:column;align-items:flex-start;gap:6px}
+  /* FOOTER */
+  .dir-footer{
+    padding:20px 20px 28px;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:6px;
+  }
 }
-@media(max-width:380px){
-  .dir-scene{transform:scale(0.62);transform-origin:center top}
-  .dir-header-visual{height:265px}
+
+@media(max-width:390px){
+  .dir-scene{transform:scale(0.58);transform-origin:center top}
+  .dir-header-visual{height:200px}
+  .dir-h1{font-size:clamp(26px,8vw,40px)}
 }
+
 @media(max-height:680px){
   .mm-link{padding:10px 0;font-size:19px}
   .mm-item-head{padding:10px 0;font-size:19px}
@@ -577,8 +645,17 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
       <div class="dir-viewer-mobile-icon">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color:var(--blue)"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
       </div>
-      <p class="dir-viewer-mobile-txt">Abre el directorio completo directamente en tu navegador o descárgalo.</p>
-      <a class="btn-open-pdf" href="Directorio_BTG/DIRECTORIO_BTG_2026.pdf" target="_blank">Ver Directorio</a>
+      <p class="dir-viewer-mobile-txt">Consulta el directorio completo directamente en tu navegador o descárgalo en tu dispositivo.</p>
+      <div class="dir-viewer-mobile-btns">
+        <a class="btn-open-pdf" href="Directorio_BTG/DIRECTORIO_BTG_2026.pdf" target="_blank">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          Ver Directorio
+        </a>
+        <a class="btn-dl-mobile" id="btn-dl-mobile" href="Directorio_BTG/DIRECTORIO_BTG_2026.pdf" download>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Descargar
+        </a>
+      </div>
     </div>
   </div>
 
@@ -632,6 +709,15 @@ if(dlBtn){
   burger.addEventListener('click', function(){ if(burger.classList.contains('open')) closeMenu(); else openMenu(); });
   menu.addEventListener('click', function(e){ if(e.target===menu) closeMenu(); });
 })();
+
+/* ── Mobile download button ── */
+var dlMobile = document.getElementById('btn-dl-mobile');
+if(dlMobile){
+  dlMobile.addEventListener('click', function(e){
+    e.preventDefault();
+    triggerDownload(dlMobile.getAttribute('href'), 'DIRECTORIO_BTG_2026.pdf');
+  });
+}
 
 /* ── Mobile submenu ── */
 var mmHead = document.getElementById('mm-material');
