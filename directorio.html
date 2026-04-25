@@ -102,128 +102,105 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 .dir-pill{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:500;color:rgba(228,238,245,0.4);background:rgba(26,127,188,0.07);border:1px solid rgba(26,127,188,0.16);padding:5px 13px;border-radius:20px;}
 .dir-pill b{color:var(--blue);font-weight:700}
 
-/* ─── HERO: 3D BOX + PHONE ─── */
-.dir-header-visual{display:flex;align-items:center;justify-content:center;position:relative;min-height:380px;}
-.dir-glow{position:absolute;width:480px;height:320px;background:radial-gradient(ellipse at 50% 60%,rgba(184,150,46,0.16) 0%,rgba(26,127,188,0.2) 40%,transparent 70%);filter:blur(56px);pointer-events:none;z-index:0;}
+/* ─── HERO: 3D BOX VOLUMÉTRICA + ÍCONO CELULAR ─── */
+.dir-header-visual{display:flex;align-items:center;justify-content:center;position:relative;min-height:400px;}
+.dir-glow{
+  position:absolute;width:500px;height:360px;
+  background:radial-gradient(ellipse at 50% 65%,rgba(0,201,224,0.12) 0%,rgba(26,127,188,0.18) 35%,transparent 68%);
+  filter:blur(60px);pointer-events:none;z-index:0;
+}
 .dir-scene{perspective:1400px;position:relative;z-index:1;}
 
-/* ── 3D BOX (horizontal/landscape) ── */
+/* Caja 3D horizontal */
 .dir-box{
-  width:340px;height:210px;
+  width:340px;height:220px;
   position:relative;transform-style:preserve-3d;
-  transform:rotateX(20deg) rotateY(-28deg);
+  transform:rotateX(22deg) rotateY(-30deg);
   animation:boxFloat 5s ease-in-out infinite;
-  filter:drop-shadow(0 32px 56px rgba(0,0,0,0.78));
+  filter:drop-shadow(0 36px 60px rgba(0,0,0,0.82));
 }
 @keyframes boxFloat{
-  0%,100%{transform:rotateX(20deg) rotateY(-28deg) translateY(0)}
-  50%{transform:rotateX(16deg) rotateY(-23deg) translateY(-16px)}
+  0%,100%{transform:rotateX(22deg) rotateY(-30deg) translateY(0)}
+  50%{transform:rotateX(17deg) rotateY(-24deg) translateY(-18px)}
 }
-/* Left end face */
+
+/* ── CARA IZQUIERDA (profundidad lateral) ── */
 .box-side{
-  position:absolute;width:60px;height:100%;top:0;left:0;
+  position:absolute;width:72px;height:100%;top:0;left:0;
   transform:rotateY(-90deg);transform-origin:left center;
-  background:linear-gradient(to right,#020a14,#0c2240);
-  border-radius:6px 0 0 6px;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;
+  background:linear-gradient(to right,#010609,#0b1e36);
+  border-radius:8px 0 0 8px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+}
+.box-side::after{
+  content:'';position:absolute;right:0;top:10%;bottom:10%;width:1px;
+  background:linear-gradient(to bottom,transparent,rgba(184,150,46,0.25),transparent);
 }
 .box-side-txt{
   writing-mode:vertical-rl;transform:rotate(180deg);
-  font-size:7px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;
-  color:rgba(255,255,255,0.22);
+  font-size:7px;font-weight:800;letter-spacing:.24em;text-transform:uppercase;
+  color:rgba(255,255,255,0.2);
 }
-/* Top face / lid */
+
+/* ── CARA SUPERIOR (tapa con profundidad) ── */
 .box-lid{
-  position:absolute;width:100%;height:60px;top:0;left:0;
+  position:absolute;width:100%;height:72px;top:0;left:0;
   transform:rotateX(90deg);transform-origin:top center;
-  background:linear-gradient(to bottom,#1c4270,#0d2448);
-  display:flex;align-items:center;justify-content:space-between;padding:0 22px;
+  background:linear-gradient(175deg,#1d4878 0%,#0c2244 100%);
+  display:flex;align-items:center;padding:0 24px;gap:12px;
 }
 .box-lid::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(184,150,46,0.7),transparent);
+  content:'';position:absolute;top:0;left:0;right:0;height:1.5px;
+  background:linear-gradient(90deg,transparent,rgba(184,150,46,0.75),rgba(0,201,224,0.35),transparent);
 }
-.box-lid-brand{font-size:8px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,0.35)}
-.box-lid-year{font-size:9px;font-weight:800;color:rgba(184,150,46,0.75);letter-spacing:.1em}
-/* Front face */
+.box-lid::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to bottom,rgba(255,255,255,0.06) 0%,transparent 60%);
+  pointer-events:none;
+}
+.box-lid-logo{width:32px;opacity:0.35;filter:brightness(0) invert(1);flex-shrink:0}
+.box-lid-label{font-size:8px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,0.35);flex:1}
+.box-lid-year{font-size:9px;font-weight:800;color:rgba(184,150,46,0.7);letter-spacing:.1em;flex-shrink:0}
+
+/* ── CARA FRONTAL ── */
 .box-front{
   position:absolute;inset:0;
-  background:linear-gradient(155deg,#152e56 0%,#070f1e 100%);
-  border-radius:0 8px 8px 0;overflow:hidden;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:22px 26px;
+  background:linear-gradient(155deg,#132645 0%,#050c18 100%);
+  border-radius:0 10px 10px 0;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
 }
+/* Gloss */
 .box-front::after{
   content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(255,255,255,0.09) 0%,transparent 44%);
-  pointer-events:none;border-radius:inherit;
+  background:linear-gradient(140deg,rgba(255,255,255,0.08) 0%,transparent 42%);
+  pointer-events:none;border-radius:inherit;z-index:3;
 }
+/* Gold top line */
 .box-front::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,transparent,rgba(184,150,46,0.9),rgba(0,201,224,0.35),transparent);
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;z-index:4;
+  background:linear-gradient(90deg,transparent,rgba(184,150,46,0.85),rgba(0,201,224,0.3),transparent);
 }
-.box-grid{
-  position:absolute;inset:0;opacity:0.03;
-  background-image:linear-gradient(rgba(0,201,224,1) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(0,201,224,1) 1px,transparent 1px);
-  background-size:24px 24px;pointer-events:none;
+/* Subtle dot grid */
+.box-dots{
+  position:absolute;inset:0;z-index:1;opacity:0.06;
+  background-image:radial-gradient(circle,rgba(0,201,224,1) 1px,transparent 1px);
+  background-size:20px 20px;pointer-events:none;
 }
-.box-streak{
-  position:absolute;top:-40px;left:-20px;
-  width:110px;height:400px;
-  background:linear-gradient(105deg,transparent,rgba(255,255,255,0.05) 50%,transparent);
-  transform:rotate(15deg);pointer-events:none;
-}
-/* Left text block inside front */
-.box-text{
-  display:flex;flex-direction:column;gap:6px;
-  position:relative;z-index:1;max-width:150px;
-}
-.box-label{font-size:8px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(184,150,46,0.82)}
-.box-title{font-size:22px;font-weight:900;color:#fff;letter-spacing:-.03em;line-height:1;text-shadow:0 2px 16px rgba(0,0,0,0.5)}
-.box-sub{font-size:8px;font-weight:400;color:rgba(255,255,255,0.32);line-height:1.5}
-.box-edition{
-  margin-top:10px;font-size:7px;font-weight:600;letter-spacing:.12em;
-  text-transform:uppercase;color:rgba(255,255,255,0.18);
-  padding-top:8px;border-top:1px solid rgba(255,255,255,0.1);
-}
-.box-logo{width:40px;opacity:0.14;filter:brightness(0) invert(1);margin-top:8px}
+/* Corner accent brackets */
+.box-corner{position:absolute;width:18px;height:18px;z-index:2}
+.box-corner-tl{top:14px;left:14px;border-top:1.5px solid rgba(184,150,46,0.5);border-left:1.5px solid rgba(184,150,46,0.5)}
+.box-corner-tr{top:14px;right:14px;border-top:1.5px solid rgba(184,150,46,0.5);border-right:1.5px solid rgba(184,150,46,0.5)}
+.box-corner-bl{bottom:14px;left:14px;border-bottom:1.5px solid rgba(184,150,46,0.5);border-left:1.5px solid rgba(184,150,46,0.5)}
+.box-corner-br{bottom:14px;right:14px;border-bottom:1.5px solid rgba(184,150,46,0.5);border-right:1.5px solid rgba(184,150,46,0.5)}
 
-/* ── PHONE (sunken in box) ── */
-.box-phone-wrap{position:relative;z-index:1;flex-shrink:0}
-.box-phone{
-  width:76px;height:148px;
-  background:#020a14;
-  border-radius:16px;
-  border:2.5px solid rgba(0,0,0,0.85);
-  box-shadow:
-    inset 0 8px 28px rgba(0,0,0,0.95),
-    inset 0 2px 8px rgba(0,0,0,0.7),
-    0 0 0 1px rgba(255,255,255,0.07),
-    0 4px 14px rgba(0,0,0,0.55);
-  overflow:hidden;
-  display:flex;flex-direction:column;
+/* Glow detrás del ícono */
+.box-phone-glow{
+  position:absolute;width:160px;height:200px;z-index:1;
+  background:radial-gradient(ellipse at center,rgba(0,201,224,0.18) 0%,transparent 65%);
+  filter:blur(18px);pointer-events:none;
 }
-.phone-notch{
-  width:26px;height:7px;background:#020a14;
-  border-radius:0 0 5px 5px;margin:0 auto;flex-shrink:0;
-}
-.phone-screen{flex:1;background:#050f1c;padding:4px 5px;overflow:hidden;display:flex;flex-direction:column;gap:3px}
-.phone-status{display:flex;align-items:center;justify-content:space-between;padding:0 1px 2px}
-.phone-time{font-size:5.5px;font-weight:700;color:rgba(255,255,255,0.55)}
-.phone-icons{display:flex;gap:2px;align-items:center}
-.phone-icon-dot{width:3px;height:3px;border-radius:50%;background:rgba(0,201,224,0.55)}
-.phone-header{
-  background:linear-gradient(135deg,#1a3a70,#0d1e3c);
-  border-radius:5px;padding:5px 5px 4px;flex-shrink:0;
-}
-.phone-header-lbl{font-size:4.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(184,150,46,0.8)}
-.phone-header-ttl{font-size:9.5px;font-weight:900;color:#fff;line-height:1;margin-top:1px}
-.phone-contacts{display:flex;flex-direction:column;gap:3px}
-.phone-row{display:flex;align-items:center;gap:4px;padding:3px 3px;background:rgba(255,255,255,0.03);border-radius:4px}
-.phone-av{width:15px;height:15px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:5px;font-weight:800;flex-shrink:0}
-.phone-cname{font-size:5.5px;font-weight:600;color:rgba(255,255,255,0.65);line-height:1}
-.phone-crole{font-size:4.5px;color:rgba(255,255,255,0.25);line-height:1;margin-top:0.5px}
+/* Ícono celular */
+.box-phone-icon{position:relative;z-index:2;flex-shrink:0}
 
 /* ─── PDF VIEWER SECTION ─── */
 .dir-section{max-width:1100px;margin:0 auto;padding:0 60px 80px}
@@ -304,7 +281,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
     display:flex;align-items:flex-start;justify-content:center;
   }
   .dir-glow{width:260px;height:200px}
-  .dir-scene{transform:scale(0.72);transform-origin:center top}
+  .dir-scene{transform:scale(0.68);transform-origin:center top}
   .dir-header-text{text-align:center}
   .dir-eyebrow{justify-content:center;display:none}
   .dir-sub{margin:0 auto}
@@ -449,70 +426,57 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
     </div>
   </div>
 
-  <!-- RIGHT: 3D Box + Phone -->
+  <!-- RIGHT: 3D Box + Phone Icon -->
   <div class="dir-header-visual">
     <div class="dir-glow"></div>
     <div class="dir-scene">
       <div class="dir-box">
-        <!-- Left end face -->
+        <!-- Cara lateral izquierda -->
         <div class="box-side">
           <span class="box-side-txt">Directorio</span>
-          <span class="box-side-txt">BTG · 2026</span>
+          <span class="box-side-txt">BTG 2026</span>
         </div>
-        <!-- Top lid -->
+        <!-- Tapa superior -->
         <div class="box-lid">
-          <span class="box-lid-brand">BTG Seguros</span>
+          <img src="btg-logo.png" class="box-lid-logo" alt="">
+          <span class="box-lid-label">BTG Seguros</span>
           <span class="box-lid-year">2026</span>
         </div>
-        <!-- Front face -->
+        <!-- Cara frontal -->
         <div class="box-front">
-          <div class="box-grid"></div>
-          <div class="box-streak"></div>
-          <!-- Left: branding text -->
-          <div class="box-text">
-            <div class="box-label">Directorio Oficial</div>
-            <div class="box-title">Equipo<br>BTG</div>
-            <div class="box-sub">Contactos del equipo interno BTG Seguros</div>
-            <div class="box-edition">Edición 2026 · Uso interno</div>
-            <img src="btg-logo.png" class="box-logo" alt="">
-          </div>
-          <!-- Right: sunken phone -->
-          <div class="box-phone-wrap">
-            <div class="box-phone">
-              <div class="phone-notch"></div>
-              <div class="phone-screen">
-                <div class="phone-status">
-                  <span class="phone-time">9:41</span>
-                  <div class="phone-icons">
-                    <div class="phone-icon-dot"></div>
-                    <div class="phone-icon-dot"></div>
-                    <div class="phone-icon-dot"></div>
-                  </div>
-                </div>
-                <div class="phone-header">
-                  <div class="phone-header-lbl">BTG Seguros</div>
-                  <div class="phone-header-ttl">Directorio</div>
-                </div>
-                <div class="phone-contacts">
-                  <div class="phone-row">
-                    <div class="phone-av" style="background:rgba(26,127,188,0.3);color:rgba(0,201,224,0.9)">DP</div>
-                    <div><div class="phone-cname">Dir. General</div><div class="phone-crole">Gerencia BTG</div></div>
-                  </div>
-                  <div class="phone-row">
-                    <div class="phone-av" style="background:rgba(184,150,46,0.25);color:rgba(184,150,46,0.9)">CM</div>
-                    <div><div class="phone-cname">Dir. Comercial</div><div class="phone-crole">Área Comercial</div></div>
-                  </div>
-                  <div class="phone-row">
-                    <div class="phone-av" style="background:rgba(0,201,224,0.18);color:rgba(0,201,224,0.85)">AO</div>
-                    <div><div class="phone-cname">Ger. Operaciones</div><div class="phone-crole">Ops · BTG</div></div>
-                  </div>
-                  <div class="phone-row">
-                    <div class="phone-av" style="background:rgba(42,172,224,0.2);color:rgba(42,172,224,0.9)">LM</div>
-                    <div><div class="phone-cname">Coordinadora</div><div class="phone-crole">Equipo Interno</div></div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="box-dots"></div>
+          <div class="box-corner box-corner-tl"></div>
+          <div class="box-corner box-corner-tr"></div>
+          <div class="box-corner box-corner-bl"></div>
+          <div class="box-corner box-corner-br"></div>
+          <div class="box-phone-glow"></div>
+          <!-- Ícono celular premium (solo silueta) -->
+          <div class="box-phone-icon">
+            <svg width="74" height="134" viewBox="0 0 74 134" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Cuerpo principal -->
+              <rect x="1.5" y="1.5" width="71" height="131" rx="16" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.55)" stroke-width="1.5"/>
+              <!-- Brillo lateral izquierdo -->
+              <rect x="1.5" y="1.5" width="6" height="131" rx="16" fill="rgba(255,255,255,0.06)" stroke="none"/>
+              <!-- Dynamic island -->
+              <rect x="26" y="10" width="22" height="8" rx="4" fill="rgba(5,15,28,0.95)" stroke="rgba(255,255,255,0.18)" stroke-width="0.75"/>
+              <!-- Cámara en dynamic island -->
+              <circle cx="42" cy="14" r="2.2" fill="rgba(0,201,224,0.35)" stroke="rgba(0,201,224,0.5)" stroke-width="0.5"/>
+              <circle cx="42" cy="14" r="1" fill="rgba(0,201,224,0.6)"/>
+              <!-- Pantalla -->
+              <rect x="6" y="24" width="62" height="90" rx="6" fill="rgba(26,127,188,0.1)" stroke="rgba(0,201,224,0.2)" stroke-width="0.75"/>
+              <!-- Brillo de pantalla -->
+              <rect x="6" y="24" width="62" height="12" rx="6" fill="rgba(255,255,255,0.05)" stroke="none"/>
+              <!-- Home indicator -->
+              <rect x="28" y="123" width="18" height="3" rx="1.5" fill="rgba(255,255,255,0.5)"/>
+              <!-- Botón volumen superior -->
+              <rect x="-0.5" y="40" width="2.5" height="16" rx="1.25" fill="rgba(255,255,255,0.28)" stroke="none"/>
+              <!-- Botón volumen inferior -->
+              <rect x="-0.5" y="60" width="2.5" height="16" rx="1.25" fill="rgba(255,255,255,0.28)" stroke="none"/>
+              <!-- Botón encendido -->
+              <rect x="72" y="46" width="2.5" height="22" rx="1.25" fill="rgba(255,255,255,0.28)" stroke="none"/>
+              <!-- Reflejo en pantalla (diagonal) -->
+              <path d="M12 28 L32 26" stroke="rgba(255,255,255,0.12)" stroke-width="3" stroke-linecap="round"/>
+            </svg>
           </div>
         </div>
       </div>
