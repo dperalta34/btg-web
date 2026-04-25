@@ -395,29 +395,14 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
   .bl-header-visual{
     order:-1;
     min-height:0;
-    padding:12px 0 28px;
-    display:flex;align-items:center;justify-content:center;
+    height:280px;
+    overflow:visible;
+    padding:16px 0 0;
+    display:flex;align-items:flex-start;justify-content:center;
   }
-  .bl-book-glow{width:220px;height:220px}
-  /* Libro proporcionado: ancho × 1.6 de ratio como desktop */
-  .bl-bigbook{width:148px;height:238px}
-  .bb-spine{width:26px}
-  .bb-top{height:26px}
-  /* Padding interior más compacto */
-  .bb-front{padding:10px 11px 10px}
-  .bb-brand{font-size:6px;margin-bottom:2px}
-  .bb-label{font-size:7.5px;letter-spacing:.18em;margin-bottom:6px}
-  .bb-title{font-size:15px;line-height:1;margin-bottom:2px}
-  .bb-subtitle{font-size:8px;margin-bottom:6px}
-  .bb-sep{margin-bottom:6px}
-  .bb-items{gap:5px}
-  .bb-item{gap:6px}
-  .bb-item-icon{width:18px;height:18px;border-radius:4px}
-  .bb-item-icon svg{width:9px;height:9px;stroke-width:1.6}
-  .bb-item-txt{font-size:8px;line-height:1.2}
-  .bb-edition{font-size:6px;padding-top:6px;padding-right:40px}
-  /* Logo BTG en hero book más pequeño en mobile */
-  .bb-front>img[src="btg-logo.png"]{width:34px !important;bottom:8px !important;right:8px !important}
+  .bl-book-glow{width:280px;height:280px}
+  /* Escalar escena uniformemente: proporciones idénticas al escritorio */
+  .bl-book-scene{transform:scale(0.75);transform-origin:center top}
   /* Texto centrado */
   .bl-header-text{text-align:center}
   .bl-eyebrow{justify-content:center}
@@ -482,8 +467,8 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
   .book{width:120px;height:165px}
   .book-month{font-size:18px}
   .book-actions{width:120px}
-  .bl-bigbook{width:158px;height:215px}
-  .bb-title{font-size:18px}
+  .bl-book-scene{transform:scale(0.66);transform-origin:center top}
+  .bl-header-visual{height:250px}
   .btn-ver,.btn-dl{min-height:36px;font-size:10px}
 }
 </style>
