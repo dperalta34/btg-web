@@ -36,7 +36,7 @@ function row(label, value) {
   </tr>`;
 }
 
-function buildHtml({ nombre, cua, correo, mes, monto, folio }) {
+function buildHtml({ nombre, correo, mes, monto, folio }) {
   const amount = formatMXN(monto);
   const ts = formatTimestamp();
 
@@ -75,7 +75,6 @@ function buildHtml({ nombre, cua, correo, mes, monto, folio }) {
         <tr><td style="background:#071628;border:1px solid rgba(26,127,188,0.22);border-top:none;border-radius:0 0 16px 16px;padding:8px 36px 32px">
           <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse">
             ${row('Agente', esc(nombre))}
-            ${row('Clave CUA', esc(cua))}
             ${row('Correo', `<a href="mailto:${esc(correo)}" style="color:#1A7FBC;text-decoration:none">${esc(correo)}</a>`)}
             ${row('Mes facturado', esc(mes))}
             ${row('Monto', `<strong style="color:#F5F9FC">${amount}</strong>`)}
@@ -99,8 +98,8 @@ function buildHtml({ nombre, cua, correo, mes, monto, folio }) {
 </html>`;
 }
 
-async function sendFactura({ nombre, cua, correo, mes, monto, folio, pdfFile, xmlFile }) {
-  const html = buildHtml({ nombre, cua, correo, mes, monto, folio });
+async function sendFactura({ nombre, correo, mes, monto, folio, pdfFile, xmlFile }) {
+  const html = buildHtml({ nombre, correo, mes, monto, folio });
 
   await resend.emails.send({
     from: process.env.MAIL_FROM || 'onboarding@resend.dev',

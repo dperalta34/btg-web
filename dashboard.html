@@ -116,6 +116,7 @@
 
     <!-- FORM VIEW -->
     <div id="facFormView">
+      <img src="btg-logo.png" alt="BTG Seguros" style="height:36px;display:block;margin-bottom:20px;opacity:.9">
       <div class="fac-eyebrow">Facturación de comisiones</div>
       <div class="fac-modal-title">Subir Factura</div>
       <div class="fac-modal-sub">Para liberar el pago de tus comisiones del mes</div>
@@ -130,20 +131,12 @@
           <span class="fac-err" id="errNombre"></span>
         </div>
 
-        <!-- CUA + Correo -->
-        <div class="fac-row">
-          <div class="fac-field">
-            <label class="fac-label" for="facCUA">Clave CUA</label>
-            <input class="fac-input" type="text" id="facCUA" name="cua"
-                   placeholder="CUA00000000" required>
-            <span class="fac-err" id="errCUA"></span>
-          </div>
-          <div class="fac-field">
-            <label class="fac-label" for="facCorreo">Correo</label>
-            <input class="fac-input" type="email" id="facCorreo" name="correo"
-                   placeholder="agente@correo.com" autocomplete="email" required>
-            <span class="fac-err" id="errCorreo"></span>
-          </div>
+        <!-- Correo -->
+        <div class="fac-field">
+          <label class="fac-label" for="facCorreo">Correo del agente</label>
+          <input class="fac-input" type="email" id="facCorreo" name="correo"
+                 placeholder="agente@correo.com" autocomplete="email" required>
+          <span class="fac-err" id="errCorreo"></span>
         </div>
 
         <!-- Mes + Monto -->

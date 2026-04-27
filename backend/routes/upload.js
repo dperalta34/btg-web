@@ -16,10 +16,10 @@ router.post('/upload-factura', upload.fields([
   { name: 'xml', maxCount: 1 },
 ]), async (req, res) => {
   try {
-    const { nombre, cua, correo, mes, monto } = req.body || {};
+    const { nombre, correo, mes, monto } = req.body || {};
 
     // Required field check
-    if (!nombre || !cua || !correo || !mes || !monto) {
+    if (!nombre || !correo || !mes || !monto) {
       return res.status(400).json({ message: 'Todos los campos son requeridos.' });
     }
 
@@ -41,7 +41,7 @@ router.post('/upload-factura', upload.fields([
     const folio = `BTG-FAC-${Date.now()}`;
 
     // Send email with attachments
-    await sendFactura({ nombre, cua, correo, mes, monto, folio, pdfFile, xmlFile });
+    await sendFactura({ nombre, correo, mes, monto, folio, pdfFile, xmlFile });
 
     console.log(`[${new Date().toISOString()}] OK | Folio: ${folio}`);
 

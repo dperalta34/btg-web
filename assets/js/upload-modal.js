@@ -42,7 +42,6 @@
   var resultView = document.getElementById('facResult');
 
   var inNombre = document.getElementById('facNombre');
-  var inCUA    = document.getElementById('facCUA');
   var inCorreo = document.getElementById('facCorreo');
   var selMes   = document.getElementById('facSelMes');
   var selAnio  = document.getElementById('facSelAnio');
@@ -149,7 +148,6 @@
     // Text fields
     var textFields = [
       { el: inNombre, id: 'errNombre', msg: 'Ingresa el nombre del agente.' },
-      { el: inCUA,    id: 'errCUA',    msg: 'Ingresa la clave CUA.' },
       { el: inCorreo, id: 'errCorreo', msg: 'Ingresa el correo del agente.' },
       { el: inMonto,  id: 'errMonto',  msg: 'Ingresa el monto facturado.' },
     ];
@@ -213,7 +211,6 @@
 
     var fd = new FormData();
     fd.append('nombre', inNombre.value.trim());
-    fd.append('cua',    inCUA.value.trim());
     fd.append('correo', inCorreo.value.trim());
     fd.append('mes',    mesTexto);
     fd.append('monto',  inMonto.value.trim());
