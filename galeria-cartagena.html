@@ -186,6 +186,9 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 .pw-btn:active{transform:translateY(0)}
 .pw-err{font-size:12px;color:rgba(255,90,90,0.75);margin-top:10px;text-align:center;min-height:16px}
 .pw-divider{width:40px;height:1px;background:rgba(26,127,188,0.2);margin:32px auto 0}
+.pw-icon-wrap{width:80px;height:80px;border-radius:20px;background:rgba(26,127,188,0.08);border:1px solid rgba(0,201,224,0.15);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.pw-icon-wrap svg{width:52px;height:52px}
+.pw-flag{font-size:22px;margin-bottom:18px;line-height:1;letter-spacing:2px}
 @keyframes pw-shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
 @media(max-width:480px){.pw-box{max-width:100%;padding:0 24px}.pw-title{font-size:19px}}
 
@@ -196,6 +199,20 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 <!-- PASSWORD GATE -->
 <div class="pw-gate" id="pw-gate">
   <div class="pw-box">
+    <div class="pw-icon-wrap">
+      <svg viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="34" y="52" width="28" height="26" rx="2" stroke="#00C9E0" stroke-width="2.5" fill="rgba(0,201,224,0.04)"/>
+          <path d="M44 78 L44 68 Q48 62 52 68 L52 78" stroke="#00C9E0" stroke-width="2" fill="rgba(0,201,224,0.06)"/>
+          <rect x="38" y="36" width="20" height="18" rx="1" stroke="#00C9E0" stroke-width="2.2" fill="rgba(0,201,224,0.04)"/>
+          <circle cx="48" cy="44" r="7" stroke="#00C9E0" stroke-width="2"/>
+          <line x1="48" y1="40" x2="48" y2="44" stroke="#00C9E0" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="48" y1="44" x2="51" y2="46" stroke="#00C9E0" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M36 36 L36 30 L40 30 L40 34 L44 34 L44 30 L52 30 L52 34 L56 34 L56 30 L60 30 L60 36" stroke="#00C9E0" stroke-width="2.2" stroke-linejoin="round"/>
+          <path d="M14 78 L34 78" stroke="#00C9E0" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M62 78 L82 78" stroke="#00C9E0" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M14 78 L14 68 L18 68 L18 72 L22 72 L22 68 L26 68 L26 72 L30 72 L30 68 L34 68" stroke="rgba(0,201,224,0.5)" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M62 68 L66 68 L66 72 L70 72 L70 68 L74 68 L74 72 L78 72 L78 68 L82 68 L82 78" stroke="rgba(0,201,224,0.5)" stroke-width="2" stroke-linejoin="round"/></svg>
+    </div>
+    <div class="pw-flag">🇨🇴</div>
     <img src="btg-logo.png" alt="BTG Seguros" class="pw-logo">
     <div class="pw-badge">Galería Privada · BTG Seguros</div>
     <div class="pw-title">Convención Cartagena</div>
