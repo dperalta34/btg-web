@@ -185,35 +185,33 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
   #mobile-menu{display:block}
   nav>div img{height:36px !important}
   body{padding-top:60px}
-  .hero{min-height:calc(100svh - 60px);padding:40px 20px 0;flex-direction:column;align-items:stretch;justify-content:space-between}
-  .hero-inner{display:flex;flex-direction:column;gap:0;max-width:none}
-  .hero-left{padding-bottom:32px}
-  .hero-h1{font-size:clamp(36px,10vw,52px)}
-  .hero-sub{font-size:14px;margin-bottom:24px;max-width:none}
-  .hero-actions{gap:12px;margin-bottom:20px}
+  .hero{min-height:calc(100svh - 60px);padding:36px 20px 0;flex-direction:column;align-items:stretch}
+  .hero-inner{display:flex;flex-direction:column;flex:1;gap:0}
+  .hero-left{flex:1;display:flex;flex-direction:column;justify-content:center;padding-bottom:24px}
+  .hero-h1{font-size:clamp(34px,9.5vw,50px)}
+  .hero-sub{font-size:14px;line-height:1.65;margin-bottom:22px;max-width:none}
+  .hero-actions{gap:10px;margin-bottom:18px;flex-wrap:wrap}
   .hero-email{margin-top:0}
+  /* card grid */
   .hero-visual{
-    display:flex !important;
+    display:grid !important;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
     position:static;
     height:auto;
-    overflow-x:auto;
-    overflow-y:hidden;
-    gap:10px;
-    padding:4px 20px 44px;
-    margin:0 -20px;
-    align-items:flex-start;
-    scrollbar-width:none;
-    -webkit-overflow-scrolling:touch;
+    padding-bottom:40px;
+    align-items:start;
   }
-  .hero-visual::-webkit-scrollbar{display:none}
-  .fp{position:relative;flex-shrink:0;min-width:185px}
+  .fp{position:relative;min-width:0;padding:14px 15px}
   .fp-1,.fp-2,.fp-3,.fp-4,.fp-5{top:0;left:0}
-  .fp-2,.fp-4{margin-top:24px}
+  .fp-2,.fp-4{margin-top:20px}
+  .fp-5{display:none}
+  .fp-title{font-size:13px}
+  .fp-num{font-size:9px}
   .fp-1{animation:float 5s ease-in-out 0s infinite}
   .fp-2{animation:float 5s ease-in-out 1s infinite}
   .fp-3{animation:float 5s ease-in-out 2s infinite}
   .fp-4{animation:float 5s ease-in-out 3s infinite}
-  .fp-5{animation:float 5s ease-in-out .5s infinite}
   .board{padding:0 0 72px}
   .board-header{padding:32px 16px 18px;flex-direction:column;align-items:flex-start;gap:8px}
   .board-panels{grid-template-columns:1fr;border-radius:0;border-left:none;border-right:none}
