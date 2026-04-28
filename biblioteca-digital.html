@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biblioteca Digital · BTG Seguros</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --dark:#04111A;--card:#071C2C;--blue:#1A7FBC;--blue2:#2AACE0;
+  --cyan:#00C9E0;--bl:rgba(255,255,255,0.07);
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;
+}
+html{scroll-behavior:smooth;background:var(--dark)}
+body{font-family:var(--font);color:#E4EEF5;overflow-x:clip;background:var(--dark);-webkit-font-smoothing:antialiased;padding-top:64px}
+
+/* ─── NAV ─── */
+nav{display:flex;align-items:center;justify-content:space-between;padding:14px 60px;background:var(--dark);border-bottom:1px solid var(--bl);position:fixed;top:0;left:0;right:0;width:100%;z-index:300}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{font-size:13px;color:rgba(228,238,245,0.55);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:#E4EEF5}
+.nav-links a.active{color:#E4EEF5}
+.nav-drop{position:relative}
+.nav-drop>a{display:flex;align-items:center;gap:5px}
+.nav-drop>a svg{transition:transform .2s;flex-shrink:0}
+.nav-drop:hover>a svg,.nav-drop:focus-within>a svg{transform:rotate(180deg)}
+.nav-dropmenu{position:absolute;top:calc(100% + 14px);right:0;background:rgba(4,14,26,0.97);backdrop-filter:blur(18px);border:1px solid rgba(26,127,188,0.2);border-radius:12px;padding:6px;min-width:210px;opacity:0;pointer-events:none;transform:translateY(-8px) scale(.97);transition:opacity .22s,transform .22s;z-index:400}
+.nav-drop:hover .nav-dropmenu,.nav-drop:focus-within .nav-dropmenu{opacity:1;pointer-events:all;transform:translateY(0) scale(1)}
+.nav-dropmenu a{display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:8px;font-size:13px;color:rgba(228,238,245,0.6);text-decoration:none;transition:background .15s,color .15s;white-space:nowrap}
+.nav-dropmenu a:hover,.nav-dropmenu a.active{background:rgba(26,127,188,0.15);color:#E4EEF5}
+.nav-dropmenu a svg{flex-shrink:0;color:var(--blue)}
+.nav-social{display:flex;align-items:center;gap:10px}
+.nav-social a{width:36px;height:36px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background .2s;flex-shrink:0}
+.nav-social a:hover{background:var(--blue2)}
+.nav-burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:38px;height:38px;background:rgba(26,127,188,0.1);border:1px solid rgba(26,127,188,0.22);border-radius:10px;cursor:pointer;padding:9px 8px;flex-shrink:0;transition:background .2s;position:relative;z-index:301}
+.nav-burger span{display:block;width:100%;height:2px;background:#E4EEF5;border-radius:2px;transition:transform .38s cubic-bezier(.16,1,.3,1),opacity .22s;transform-origin:center}
+.nav-burger.open{background:rgba(26,127,188,0.2);border-color:rgba(26,127,188,0.4)}
+.nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-burger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* ─── MOBILE MENU ─── */
+#mobile-menu{display:none;position:fixed;inset:0;z-index:299;background:rgba(6,17,27,0.98);opacity:0;transition:opacity .3s ease;pointer-events:none}
+#mobile-menu.open{opacity:1;pointer-events:all}
+.mm-inner{display:flex;flex-direction:column;height:100%;padding:100px 32px 32px;box-sizing:border-box}
+.mm-links{display:flex;flex-direction:column;gap:0;overflow-y:auto;-webkit-overflow-scrolling:touch;flex:1}
+.mm-link{font-size:22px;font-weight:400;color:rgba(228,238,245,0.28);letter-spacing:-.03em;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:space-between;gap:12px;transition:color .22s;text-decoration:none}
+.mm-link svg{flex-shrink:0;opacity:0.4;transition:opacity .22s}
+.mm-link:active,.mm-link:hover{color:#E4EEF5}
+.mm-link:hover svg{opacity:0.6}
+.mm-link.active{color:var(--cyan)}
+.mm-footer{display:flex;align-items:center;justify-content:space-between;padding-top:20px;border-top:1px solid rgba(255,255,255,0.07);margin-top:4px}
+.mm-brand{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(228,238,245,0.2)}
+.mm-social{display:flex;gap:10px}
+.mm-social a{width:42px;height:42px;border-radius:50%;background:rgba(26,127,188,0.12);border:1px solid rgba(26,127,188,0.22);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background .2s}
+.mm-social a:hover{background:var(--blue)}
+.mm-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);display:inline-block;margin-right:6px;flex-shrink:0}
+.mm-item{display:block;padding:0;border-bottom:1px solid rgba(255,255,255,0.05)}
+.mm-item-head{display:flex;align-items:center;justify-content:space-between;padding:14px 0;font-size:22px;font-weight:400;color:rgba(228,238,245,0.28);letter-spacing:-.03em;gap:12px;width:100%;background:none;border:none;cursor:pointer;font-family:var(--font)}
+.mm-item-head:hover,.mm-item-head:active{color:#E4EEF5}
+.mm-item-head.open{color:rgba(228,238,245,0.65)}
+.mm-chevron{transition:transform .3s cubic-bezier(.16,1,.3,1);flex-shrink:0}
+.mm-item-head.open .mm-chevron{transform:rotate(90deg)}
+.mm-sub{max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.16,1,.3,1)}
+.mm-sub.open{max-height:260px}
+.mm-sublink{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 0 13px 18px;font-size:17px;font-weight:400;color:rgba(0,201,224,0.65);letter-spacing:-.02em;text-decoration:none;transition:color .2s}
+.mm-sublink.active{color:var(--cyan)}
+.mm-sublink:hover,.mm-sublink:active{color:var(--cyan)}
+.mm-sublink svg{opacity:0.5;flex-shrink:0}
+
+/* ─── HERO ─── */
+.bib-hero{
+  position:relative;padding:80px 60px 72px;overflow:hidden;
+  background:linear-gradient(165deg,#051828 0%,#030d18 60%,#04111a 100%);
+}
+.bib-hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(26,127,188,0.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(26,127,188,0.06) 1px,transparent 1px);
+  background-size:64px 64px;pointer-events:none;
+}
+.bib-hero-orb{
+  position:absolute;border-radius:50%;pointer-events:none;
+}
+.bib-orb-1{width:700px;height:700px;top:-200px;right:-150px;background:radial-gradient(circle,rgba(26,127,188,0.12) 0%,transparent 65%)}
+.bib-orb-2{width:400px;height:400px;bottom:-100px;left:-80px;background:radial-gradient(circle,rgba(0,201,224,0.07) 0%,transparent 65%)}
+.bib-hero-inner{position:relative;z-index:2;max-width:1240px;margin:0 auto;display:flex;align-items:center;gap:80px}
+.bib-hero-text{flex:1;min-width:0}
+.bib-eyebrow{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.bib-eyebrow::before{content:'';width:24px;height:1px;background:rgba(26,127,188,0.7)}
+.bib-h1{font-size:clamp(42px,5.5vw,72px);font-weight:800;letter-spacing:-.04em;line-height:1;color:#F5F9FC;margin-bottom:20px}
+.bib-h1 em{font-style:normal;color:var(--cyan);text-shadow:0 0 40px rgba(0,201,224,0.35)}
+.bib-sub{font-size:16px;color:rgba(228,238,245,0.5);line-height:1.7;max-width:520px;margin-bottom:32px}
+.bib-stats{display:flex;gap:24px;flex-wrap:wrap}
+.bib-stat{display:flex;align-items:center;gap:8px;background:rgba(26,127,188,0.08);border:1px solid rgba(26,127,188,0.18);padding:8px 16px;border-radius:30px}
+.bib-stat-num{font-size:20px;font-weight:800;color:#F5F9FC;letter-spacing:-.02em}
+.bib-stat-lbl{font-size:12px;color:rgba(228,238,245,0.45);font-weight:500}
+/* Hero visual */
+.bib-hero-visual{
+  flex-shrink:0;width:280px;height:320px;position:relative;
+  display:flex;align-items:center;justify-content:center;
+}
+.bib-stack-card{
+  position:absolute;width:160px;height:220px;border-radius:12px;
+  background:linear-gradient(145deg,#0d2a45,#061828);
+  border:1px solid rgba(26,127,188,0.25);
+  box-shadow:0 20px 60px rgba(0,0,0,0.4);
+}
+.bib-stack-card:nth-child(1){transform:rotate(-6deg) translate(-30px,8px);opacity:.4}
+.bib-stack-card:nth-child(2){transform:rotate(-2.5deg) translate(-10px,3px);opacity:.65}
+.bib-stack-cover{
+  position:relative;width:175px;height:240px;border-radius:12px;
+  overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,0.5),0 0 0 1px rgba(26,127,188,0.35),0 0 60px rgba(26,127,188,0.15);
+}
+.bib-stack-cover img{width:100%;height:100%;object-fit:cover}
+
+/* ─── SECTION HEADERS ─── */
+.bib-section{max-width:1240px;margin:0 auto;padding:64px 60px 80px}
+.bib-section-title{display:flex;align-items:center;gap:16px;margin-bottom:40px}
+.bib-section-title h2{font-size:22px;font-weight:700;color:#F5F9FC;letter-spacing:-.02em}
+.bib-section-title::after{content:'';flex:1;height:1px;background:rgba(26,127,188,0.12)}
+.bib-section-badge{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;border-radius:6px;flex-shrink:0}
+.badge-available{background:rgba(0,201,224,0.12);border:1px solid rgba(0,201,224,0.3);color:var(--cyan)}
+.badge-soon{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:rgba(228,238,245,0.45)}
+
+/* ─── FEATURED CARD (GMM) ─── */
+.bib-featured{
+  display:grid;grid-template-columns:280px 1fr;gap:0;
+  background:rgba(7,22,38,0.9);
+  border:1px solid rgba(26,127,188,0.35);
+  border-radius:24px;overflow:hidden;
+  box-shadow:0 0 0 1px rgba(26,127,188,0.1),0 32px 80px rgba(0,0,0,0.4),0 0 80px rgba(26,127,188,0.08);
+  margin-bottom:64px;
+  transition:transform .3s ease,box-shadow .3s ease;
+}
+.bib-featured:hover{
+  transform:translateY(-4px);
+  box-shadow:0 0 0 1px rgba(26,127,188,0.25),0 40px 100px rgba(0,0,0,0.45),0 0 100px rgba(26,127,188,0.14);
+}
+.bib-feat-cover{
+  position:relative;background:#030e1a;
+  display:flex;align-items:stretch;overflow:hidden;
+}
+.bib-feat-cover img{
+  width:100%;height:100%;object-fit:cover;object-position:center;
+  display:block;min-height:360px;
+}
+.bib-feat-cover::after{
+  content:'';position:absolute;top:0;right:0;bottom:0;width:60px;
+  background:linear-gradient(to right,transparent,rgba(7,22,38,0.9));
+}
+.bib-feat-body{
+  padding:44px 48px;display:flex;flex-direction:column;justify-content:center;
+  background:linear-gradient(135deg,rgba(10,28,46,0.8) 0%,rgba(4,17,26,0.95) 100%);
+  position:relative;overflow:hidden;
+}
+.bib-feat-body::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,rgba(0,201,224,0.5),rgba(26,127,188,0.3),transparent);
+}
+.bib-feat-tag{display:inline-flex;align-items:center;gap:6px;margin-bottom:20px;
+  font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--cyan);
+}
+.bib-feat-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px rgba(0,201,224,0.7);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+.bib-feat-title{font-size:32px;font-weight:800;color:#F5F9FC;letter-spacing:-.03em;line-height:1.1;margin-bottom:8px}
+.bib-feat-sub{font-size:14px;color:rgba(228,238,245,0.4);font-weight:600;letter-spacing:.04em;margin-bottom:20px}
+.bib-feat-desc{font-size:14px;color:rgba(228,238,245,0.55);line-height:1.75;margin-bottom:32px;max-width:420px}
+.bib-feat-meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:32px}
+.bib-meta-pill{font-size:11px;font-weight:600;padding:5px 12px;border-radius:20px;border:1px solid rgba(255,255,255,0.1);color:rgba(228,238,245,0.5)}
+.bib-btn-ver{
+  display:inline-flex;align-items:center;gap:8px;
+  background:linear-gradient(135deg,#1A7FBC,#0f5a8a);
+  color:#fff;font-size:14px;font-weight:700;letter-spacing:.02em;
+  padding:14px 28px;border-radius:12px;text-decoration:none;
+  border:none;cursor:pointer;font-family:var(--font);
+  transition:transform .2s,box-shadow .2s,background .2s;
+  box-shadow:0 8px 24px rgba(26,127,188,0.35);
+  width:fit-content;
+}
+.bib-btn-ver:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 32px rgba(26,127,188,0.5);
+  background:linear-gradient(135deg,#2AACE0,#1A7FBC);
+}
+.bib-btn-ver svg{width:16px;height:16px;transition:transform .2s}
+.bib-btn-ver:hover svg{transform:translateX(3px)}
+
+/* ─── EBOOK GRID ─── */
+.bib-grid{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:24px;
+}
+.bib-card{
+  background:rgba(7,20,32,0.8);border:1px solid rgba(255,255,255,0.07);
+  border-radius:20px;overflow:hidden;
+  transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease;
+  display:flex;flex-direction:column;
+}
+.bib-card:hover{
+  transform:translateY(-6px);
+  border-color:rgba(26,127,188,0.25);
+  box-shadow:0 20px 50px rgba(0,0,0,0.35);
+}
+.bib-card-cover{
+  position:relative;width:100%;aspect-ratio:2/3;overflow:hidden;
+  background:#030e1a;flex-shrink:0;
+}
+.bib-card-cover img{
+  width:100%;height:100%;object-fit:cover;object-position:center;
+  display:block;filter:saturate(0.7) brightness(0.65);
+  transition:filter .3s ease,transform .3s ease;
+}
+.bib-card:hover .bib-card-cover img{filter:saturate(0.8) brightness(0.75);transform:scale(1.02)}
+.bib-card-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(4,17,26,0.9) 0%,transparent 50%);
+  display:flex;align-items:flex-end;padding:16px;
+}
+.bib-card-soon-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  background:rgba(255,180,0,0.12);border:1px solid rgba(255,180,0,0.3);
+  color:rgba(255,200,50,0.85);padding:4px 10px;border-radius:6px;
+}
+.bib-card-body{padding:18px 18px 20px;display:flex;flex-direction:column;gap:14px;flex:1}
+.bib-card-name{font-size:13px;font-weight:700;color:rgba(228,238,245,0.75);letter-spacing:-.01em;line-height:1.3}
+.bib-btn-soon{
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);
+  color:rgba(228,238,245,0.3);font-size:12px;font-weight:600;letter-spacing:.02em;
+  padding:10px 16px;border-radius:10px;cursor:default;
+  font-family:var(--font);width:100%;
+}
+
+/* ─── FOOTER ─── */
+.bib-footer{
+  max-width:1240px;margin:0 auto;padding:0 60px 48px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-top:1px solid rgba(255,255,255,0.06);padding-top:28px;
+}
+.bib-footer-txt{font-size:11px;color:rgba(228,238,245,0.2);letter-spacing:.05em;text-transform:uppercase}
+.bib-footer-logo{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(228,238,245,0.15)}
+
+/* ─── MOBILE ─── */
+@media(max-width:768px){
+  nav{padding:12px 16px;position:fixed}
+  .nav-links{display:none}
+  .nav-social{position:absolute;left:50%;transform:translateX(-50%);gap:8px}
+  .nav-social a{width:30px;height:30px}
+  .nav-burger{display:flex}
+  #mobile-menu{display:block}
+  nav>div img{height:36px !important}
+  body{padding-top:60px}
+
+  .bib-hero{padding:40px 20px 44px}
+  .bib-hero-inner{flex-direction:column;gap:36px}
+  .bib-hero-visual{display:none}
+  .bib-h1{font-size:clamp(34px,10vw,52px)}
+  .bib-sub{font-size:15px}
+  .bib-stats{gap:10px}
+  .bib-stat{padding:6px 12px}
+  .bib-stat-num{font-size:17px}
+
+  .bib-section{padding:40px 20px 60px}
+  .bib-section-title{margin-bottom:28px}
+  .bib-section-title h2{font-size:18px}
+
+  .bib-featured{grid-template-columns:1fr;margin-bottom:40px}
+  .bib-feat-cover{max-height:280px}
+  .bib-feat-cover::after{display:none}
+  .bib-feat-body{padding:28px 24px 32px}
+  .bib-feat-title{font-size:24px}
+  .bib-feat-desc{font-size:13px;margin-bottom:24px}
+  .bib-feat-meta{margin-bottom:24px}
+
+  .bib-grid{grid-template-columns:repeat(2,1fr);gap:16px}
+
+  .bib-footer{padding:0 20px 40px;flex-direction:column;gap:8px;align-items:flex-start;padding-top:24px}
+}
+@media(max-width:400px){
+  .bib-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div><a href="index.html" style="display:block"><img id="btg-logo-img" src="btg-logo.png" alt="BTG — Black Tower Group" style="height:56px;width:auto;display:block"></a></div>
+  <ul class="nav-links">
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="index.html#siniestros">Siniestros</a></li>
+    <li><a href="index.html#tecnologia">Multicotizador</a></li>
+    <li><a href="index.html#universidad">Universidad</a></li>
+    <li><a href="index.html#concursos">Concursos</a></li>
+    <li><a href="index.html#credenciales">Credenciales</a></li>
+    <li><a href="bolsa-de-trabajo.html">Bolsa de Trabajo</a></li>
+    <li class="nav-drop">
+      <a href="#" class="active">Material Agentes<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="nav-dropmenu">
+        <a href="boletines.html"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Boletín Agentes</a>
+        <a href="directorio.html"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Directorio BTG</a>
+        <a href="convenciones.html"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Galería Convenciones</a>
+        <a href="biblioteca-digital.html" class="active"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Biblioteca Digital</a>
+      </div>
+    </li>
+  </ul>
+  <div class="nav-social">
+    <a href="https://www.instagram.com/btgseguros/" target="_blank" rel="noopener" title="Instagram"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+    <a href="https://www.facebook.com/BTGSeguros/" target="_blank" rel="noopener" title="Facebook"><svg width="17" height="17" viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+    <a href="https://www.linkedin.com/company/btg-consultores-de-riesgo/" target="_blank" rel="noopener" title="LinkedIn"><svg width="17" height="17" viewBox="0 0 24 24" fill="white"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+  </div>
+  <button class="nav-burger" id="nav-burger" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div id="mobile-menu" role="dialog" aria-label="Navegación">
+  <div class="mm-inner">
+    <nav class="mm-links">
+      <a href="dashboard.html" class="mm-link">Dashboard<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="index.html#siniestros" class="mm-link">Siniestros<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="index.html#tecnologia" class="mm-link">Multicotizador<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="index.html#universidad" class="mm-link">Universidad<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="index.html#concursos" class="mm-link">Concursos<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="index.html#credenciales" class="mm-link">Credenciales<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="bolsa-de-trabajo.html" class="mm-link">Bolsa de Trabajo<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <div class="mm-item">
+        <button class="mm-item-head open" id="mm-material">Material Agentes<svg class="mm-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+        <div class="mm-sub open" id="mm-material-sub">
+          <a href="boletines.html" class="mm-sublink">Boletín Agentes<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          <a href="directorio.html" class="mm-sublink">Directorio BTG<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          <a href="convenciones.html" class="mm-sublink">Galería Convenciones<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          <a href="biblioteca-digital.html" class="mm-sublink active">Biblioteca Digital<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+      </div>
+    </nav>
+    <div class="mm-footer">
+      <span class="mm-brand"><span class="mm-dot"></span>BTG Seguros</span>
+      <div class="mm-social">
+        <a href="https://www.instagram.com/btgseguros/" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        <a href="https://www.facebook.com/BTGSeguros/" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        <a href="https://www.linkedin.com/company/btg-consultores-de-riesgo/" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="bib-hero">
+  <div class="bib-hero-orb bib-orb-1"></div>
+  <div class="bib-hero-orb bib-orb-2"></div>
+  <div class="bib-hero-inner">
+    <div class="bib-hero-text">
+      <div class="bib-eyebrow">BTG Seguros · Material Agentes</div>
+      <h1 class="bib-h1">Biblioteca<br><em>Digital</em></h1>
+      <p class="bib-sub">Recursos educativos de alta calidad creados por BTG Seguros para potenciar el conocimiento técnico de nuestros agentes.</p>
+      <div class="bib-stats">
+        <div class="bib-stat">
+          <span class="bib-stat-num">6</span>
+          <span class="bib-stat-lbl">E-books</span>
+        </div>
+        <div class="bib-stat">
+          <span class="bib-stat-num">1</span>
+          <span class="bib-stat-lbl">Disponible ahora</span>
+        </div>
+        <div class="bib-stat">
+          <span class="bib-stat-num">5</span>
+          <span class="bib-stat-lbl">Próximamente</span>
+        </div>
+      </div>
+    </div>
+    <div class="bib-hero-visual" aria-hidden="true">
+      <div class="bib-stack-card"></div>
+      <div class="bib-stack-card"></div>
+      <div class="bib-stack-cover">
+        <img src="biblioteca_digital/portada_ebook_gmm.png" alt="E-book GMM BTG 2026">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<div class="bib-section">
+
+  <!-- FEATURED: GMM (disponible) -->
+  <div class="bib-section-title">
+    <h2>Disponible ahora</h2>
+    <span class="bib-section-badge badge-available">● Publicado</span>
+  </div>
+
+  <div class="bib-featured">
+    <div class="bib-feat-cover">
+      <img src="biblioteca_digital/portada_ebook_gmm.png" alt="E-book Gastos Médicos Mayores BTG 2026">
+    </div>
+    <div class="bib-feat-body">
+      <div class="bib-feat-tag">Disponible ahora</div>
+      <div class="bib-feat-title">Gastos Médicos<br>Mayores BTG 2026</div>
+      <div class="bib-feat-sub">E-book · Edición 2026</div>
+      <p class="bib-feat-desc">Guía técnica completa sobre Gastos Médicos Mayores: coberturas, exclusiones, manejo de siniestros, comparativo de aseguradoras y estrategias de venta. Conocimiento esencial para todo agente BTG.</p>
+      <div class="bib-feat-meta">
+        <span class="bib-meta-pill">GMM</span>
+        <span class="bib-meta-pill">Técnico</span>
+        <span class="bib-meta-pill">Edición 2026</span>
+        <span class="bib-meta-pill">PDF</span>
+      </div>
+      <a class="bib-btn-ver" href="biblioteca_digital/Ebook%20GMM%20BTG%202026%20.pdf" target="_blank" rel="noopener">
+        Ver E-book
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- UPCOMING GRID -->
+  <div class="bib-section-title">
+    <h2>Próximamente</h2>
+    <span class="bib-section-badge badge-soon">En preparación</span>
+  </div>
+
+  <div class="bib-grid">
+
+    <!-- Auto -->
+    <div class="bib-card">
+      <div class="bib-card-cover">
+        <img src="biblioteca_digital/portada_ebook_auto.png" alt="E-book Seguro de Auto">
+        <div class="bib-card-overlay">
+          <span class="bib-card-soon-badge">Próximamente</span>
+        </div>
+      </div>
+      <div class="bib-card-body">
+        <div class="bib-card-name">Seguro de Auto</div>
+        <button class="bib-btn-soon" disabled>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Disponible próximamente
+        </button>
+      </div>
+    </div>
+
+    <!-- Cyber -->
+    <div class="bib-card">
+      <div class="bib-card-cover">
+        <img src="biblioteca_digital/portada_ebook_cyber.png" alt="E-book Ciberseguros">
+        <div class="bib-card-overlay">
+          <span class="bib-card-soon-badge">Próximamente</span>
+        </div>
+      </div>
+      <div class="bib-card-body">
+        <div class="bib-card-name">Ciberseguros</div>
+        <button class="bib-btn-soon" disabled>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Disponible próximamente
+        </button>
+      </div>
+    </div>
+
+    <!-- Daños -->
+    <div class="bib-card">
+      <div class="bib-card-cover">
+        <img src="biblioteca_digital/portada_ebook_daños.png" alt="E-book Seguro de Daños">
+        <div class="bib-card-overlay">
+          <span class="bib-card-soon-badge">Próximamente</span>
+        </div>
+      </div>
+      <div class="bib-card-body">
+        <div class="bib-card-name">Seguro de Daños</div>
+        <button class="bib-btn-soon" disabled>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Disponible próximamente
+        </button>
+      </div>
+    </div>
+
+    <!-- Hogar -->
+    <div class="bib-card">
+      <div class="bib-card-cover">
+        <img src="biblioteca_digital/portada_ebook_hogar.png" alt="E-book Seguro de Hogar">
+        <div class="bib-card-overlay">
+          <span class="bib-card-soon-badge">Próximamente</span>
+        </div>
+      </div>
+      <div class="bib-card-body">
+        <div class="bib-card-name">Seguro de Hogar</div>
+        <button class="bib-btn-soon" disabled>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Disponible próximamente
+        </button>
+      </div>
+    </div>
+
+    <!-- Siniestros GMM -->
+    <div class="bib-card">
+      <div class="bib-card-cover">
+        <img src="biblioteca_digital/portada_ebook_siniestros_gmm.png" alt="E-book Siniestros en GMM">
+        <div class="bib-card-overlay">
+          <span class="bib-card-soon-badge">Próximamente</span>
+        </div>
+      </div>
+      <div class="bib-card-body">
+        <div class="bib-card-name">Siniestros en GMM</div>
+        <button class="bib-btn-soon" disabled>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Disponible próximamente
+        </button>
+      </div>
+    </div>
+
+  </div><!-- /bib-grid -->
+</div><!-- /bib-section -->
+
+<!-- FOOTER -->
+<footer class="bib-footer">
+  <span class="bib-footer-txt">BTG Seguros · Biblioteca Digital · Uso exclusivo agentes</span>
+  <span class="bib-footer-logo">BTG Seguros</span>
+</footer>
+
+<script>
+// Mobile menu
+(function(){
+  var burger=document.getElementById('nav-burger');
+  var menu=document.getElementById('mobile-menu');
+  if(!burger||!menu)return;
+  function openMenu(){
+    burger.classList.add('open');menu.classList.add('open');
+    document.body.style.overflow='hidden';
+    burger.setAttribute('aria-label','Cerrar menú');
+  }
+  function closeMenu(){
+    burger.classList.remove('open');menu.classList.remove('open');
+    document.body.style.overflow='';
+    burger.setAttribute('aria-label','Abrir menú');
+  }
+  burger.addEventListener('click',function(){
+    menu.classList.contains('open')?closeMenu():openMenu();
+  });
+  menu.querySelectorAll('.mm-link').forEach(function(l){l.addEventListener('click',closeMenu);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMenu();});
+  // Material Agentes submenu toggle
+  var mmHead=document.getElementById('mm-material');
+  var mmSub=document.getElementById('mm-material-sub');
+  if(mmHead&&mmSub){
+    mmHead.addEventListener('click',function(e){
+      e.preventDefault();
+      mmHead.classList.toggle('open');
+      mmSub.classList.toggle('open');
+    });
+  }
+})();
+</script>
+</body>
+</html>
