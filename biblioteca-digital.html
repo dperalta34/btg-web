@@ -92,28 +92,11 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 .bib-h1{font-size:clamp(42px,5.5vw,72px);font-weight:800;letter-spacing:-.04em;line-height:1;color:#F5F9FC;margin-bottom:20px}
 .bib-h1 em{font-style:normal;color:var(--cyan);text-shadow:0 0 40px rgba(0,201,224,0.35)}
 .bib-sub{font-size:16px;color:rgba(228,238,245,0.5);line-height:1.7;max-width:520px;margin-bottom:32px}
-.bib-stats{display:flex;gap:24px;flex-wrap:wrap}
-.bib-stat{display:flex;align-items:center;gap:8px;background:rgba(26,127,188,0.08);border:1px solid rgba(26,127,188,0.18);padding:8px 16px;border-radius:30px}
-.bib-stat-num{font-size:20px;font-weight:800;color:#F5F9FC;letter-spacing:-.02em}
-.bib-stat-lbl{font-size:12px;color:rgba(228,238,245,0.45);font-weight:500}
 /* Hero visual */
 .bib-hero-visual{
-  flex-shrink:0;width:280px;height:320px;position:relative;
+  flex-shrink:0;width:260px;height:260px;position:relative;
   display:flex;align-items:center;justify-content:center;
 }
-.bib-stack-card{
-  position:absolute;width:160px;height:220px;border-radius:12px;
-  background:linear-gradient(145deg,#0d2a45,#061828);
-  border:1px solid rgba(26,127,188,0.25);
-  box-shadow:0 20px 60px rgba(0,0,0,0.4);
-}
-.bib-stack-card:nth-child(1){transform:rotate(-6deg) translate(-30px,8px);opacity:.4}
-.bib-stack-card:nth-child(2){transform:rotate(-2.5deg) translate(-10px,3px);opacity:.65}
-.bib-stack-cover{
-  position:relative;width:175px;height:240px;border-radius:12px;
-  overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,0.5),0 0 0 1px rgba(26,127,188,0.35),0 0 60px rgba(26,127,188,0.15);
-}
-.bib-stack-cover img{width:100%;height:100%;object-fit:cover}
 
 /* ─── SECTION HEADERS ─── */
 .bib-section{max-width:1240px;margin:0 auto;padding:64px 60px 80px}
@@ -259,9 +242,6 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
   .bib-hero-visual{display:none}
   .bib-h1{font-size:clamp(34px,10vw,52px)}
   .bib-sub{font-size:15px}
-  .bib-stats{gap:10px}
-  .bib-stat{padding:6px 12px}
-  .bib-stat-num{font-size:17px}
 
   .bib-section{padding:40px 20px 60px}
   .bib-section-title{margin-bottom:28px}
@@ -355,28 +335,86 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
     <div class="bib-hero-text">
       <div class="bib-eyebrow">BTG Seguros · Material Agentes</div>
       <h1 class="bib-h1">Biblioteca<br><em>Digital</em></h1>
-      <p class="bib-sub">Recursos educativos de alta calidad creados por BTG Seguros para potenciar el conocimiento técnico de nuestros agentes.</p>
-      <div class="bib-stats">
-        <div class="bib-stat">
-          <span class="bib-stat-num">6</span>
-          <span class="bib-stat-lbl">E-books</span>
-        </div>
-        <div class="bib-stat">
-          <span class="bib-stat-num">1</span>
-          <span class="bib-stat-lbl">Disponible ahora</span>
-        </div>
-        <div class="bib-stat">
-          <span class="bib-stat-num">5</span>
-          <span class="bib-stat-lbl">Próximamente</span>
-        </div>
-      </div>
+      <p class="bib-sub">Recursos de alta calidad creados para nuestros agentes.</p>
     </div>
     <div class="bib-hero-visual" aria-hidden="true">
-      <div class="bib-stack-card"></div>
-      <div class="bib-stack-card"></div>
-      <div class="bib-stack-cover">
-        <img src="biblioteca_digital/portada_ebook_gmm.png" alt="E-book GMM BTG 2026">
-      </div>
+      <svg width="260" height="260" viewBox="0 0 260 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="bib-glow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#1A7FBC" stop-opacity="0.22"/>
+            <stop offset="100%" stop-color="#1A7FBC" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="bib-inner" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#0d2a45"/>
+            <stop offset="100%" stop-color="#061828"/>
+          </radialGradient>
+          <linearGradient id="bib-page-l" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#c8dff0"/>
+            <stop offset="100%" stop-color="#8ab8d8"/>
+          </linearGradient>
+          <linearGradient id="bib-page-r" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#a8cfe8"/>
+            <stop offset="100%" stop-color="#6da5c8"/>
+          </linearGradient>
+          <linearGradient id="bib-spine" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#2AACE0"/>
+            <stop offset="100%" stop-color="#1A7FBC"/>
+          </linearGradient>
+          <filter id="bib-blur">
+            <feGaussianBlur stdDeviation="18" result="blur"/>
+          </filter>
+          <filter id="bib-glow-f">
+            <feGaussianBlur stdDeviation="3" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <!-- ambient glow -->
+        <circle cx="130" cy="130" r="110" fill="url(#bib-glow)" filter="url(#bib-blur)"/>
+        <!-- outer ring -->
+        <circle cx="130" cy="130" r="108" stroke="rgba(26,127,188,0.12)" stroke-width="1"/>
+        <!-- dashed mid ring -->
+        <circle cx="130" cy="130" r="86" stroke="rgba(26,127,188,0.1)" stroke-width="1" stroke-dasharray="5 10" stroke-linecap="round"/>
+        <!-- icon background circle -->
+        <circle cx="130" cy="130" r="68" fill="url(#bib-inner)" stroke="rgba(26,127,188,0.3)" stroke-width="1.5"/>
+        <!-- subtle inner glow -->
+        <circle cx="130" cy="130" r="52" fill="rgba(26,127,188,0.06)"/>
+
+        <!-- OPEN BOOK icon centered -->
+        <!-- Left page -->
+        <path d="M130 98 C130 98 108 100 96 106 L96 154 C108 148 130 146 130 146 Z" fill="url(#bib-page-l)" opacity="0.92"/>
+        <!-- Right page -->
+        <path d="M130 98 C130 98 152 100 164 106 L164 154 C152 148 130 146 130 146 Z" fill="url(#bib-page-r)" opacity="0.85"/>
+        <!-- Spine -->
+        <rect x="128" y="96" width="4" height="52" rx="2" fill="url(#bib-spine)"/>
+        <!-- Left page lines (text lines) -->
+        <line x1="104" y1="113" x2="126" y2="111" stroke="rgba(4,17,26,0.25)" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="104" y1="119" x2="126" y2="117" stroke="rgba(4,17,26,0.2)" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="104" y1="125" x2="126" y2="123" stroke="rgba(4,17,26,0.2)" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="104" y1="131" x2="122" y2="129.5" stroke="rgba(4,17,26,0.15)" stroke-width="1.5" stroke-linecap="round"/>
+        <!-- Right page lines -->
+        <line x1="134" y1="111" x2="156" y2="113" stroke="rgba(4,17,26,0.2)" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="134" y1="117" x2="156" y2="119" stroke="rgba(4,17,26,0.18)" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="134" y1="123" x2="156" y2="125" stroke="rgba(4,17,26,0.15)" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="134" y1="129.5" x2="150" y2="131" stroke="rgba(4,17,26,0.12)" stroke-width="1.5" stroke-linecap="round"/>
+        <!-- spine glow line -->
+        <line x1="130" y1="98" x2="130" y2="146" stroke="rgba(42,172,224,0.6)" stroke-width="1" stroke-linecap="round" filter="url(#bib-glow-f)"/>
+
+        <!-- sparkle top-right -->
+        <g transform="translate(176,72)">
+          <line x1="0" y1="-7" x2="0" y2="7" stroke="#2AACE0" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+          <line x1="-7" y1="0" x2="7" y2="0" stroke="#2AACE0" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+          <line x1="-4" y1="-4" x2="4" y2="4" stroke="#2AACE0" stroke-width="1" stroke-linecap="round" opacity="0.35"/>
+          <line x1="4" y1="-4" x2="-4" y2="4" stroke="#2AACE0" stroke-width="1" stroke-linecap="round" opacity="0.35"/>
+        </g>
+        <!-- sparkle bottom-left small -->
+        <g transform="translate(82,178)">
+          <line x1="0" y1="-4" x2="0" y2="4" stroke="#1A7FBC" stroke-width="1.2" stroke-linecap="round" opacity="0.5"/>
+          <line x1="-4" y1="0" x2="4" y2="0" stroke="#1A7FBC" stroke-width="1.2" stroke-linecap="round" opacity="0.5"/>
+        </g>
+        <!-- dot accent -->
+        <circle cx="178" cy="152" r="3" fill="#1A7FBC" opacity="0.5"/>
+        <circle cx="82" cy="112" r="2" fill="#2AACE0" opacity="0.4"/>
+      </svg>
     </div>
   </div>
 </section>
