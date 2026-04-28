@@ -193,22 +193,27 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
   .hero-text{order:0;margin-bottom:24px}
   .hero-h1{font-size:clamp(34px,9.5vw,50px)}
   .hero-sub{font-size:14px;line-height:1.65;margin-bottom:0;max-width:none}
-  /* cards block — order 1, fixed height container, cards overlap inside */
+  /* cards — 2-col grid, right column overlaps left by 24px via negative margin */
   .hero-visual{
     order:1;
-    display:block !important;
-    position:relative;
-    height:232px;
-    margin-bottom:28px;
+    display:grid !important;
+    grid-template-columns:1fr 1fr;
+    row-gap:10px;
+    column-gap:0;
+    position:static;
+    height:auto;
+    margin-bottom:24px;
   }
-  .fp{position:absolute;width:56%;max-width:195px;min-width:0;padding:13px 14px}
-  .fp-1{top:0;   left:2%; right:auto;z-index:5;animation:float 6s ease-in-out 0s   infinite}
-  .fp-2{top:36px;left:auto;right:2%; z-index:4;animation:float 6s ease-in-out 1.5s infinite}
-  .fp-3{top:72px;left:2%; right:auto;z-index:3;animation:float 6s ease-in-out 3s   infinite}
-  .fp-4{top:108px;left:auto;right:2%;z-index:2;animation:float 6s ease-in-out 4.5s infinite}
-  .fp-5{top:144px;left:22%;right:auto;z-index:1;animation:float 6s ease-in-out 0.8s infinite}
-  .fp-title{font-size:13px}
+  .fp{position:relative;min-width:0;width:100%;padding:12px 14px;top:0;left:0;right:0}
+  /* left column */
+  .fp-1,.fp-3{z-index:1}
+  /* right column: overlap left card by 24px + shift down for diagonal stagger */
+  .fp-2,.fp-4{z-index:2;margin-left:-24px;margin-top:16px}
+  /* fp-5: centrada sola abajo */
+  .fp-5{grid-column:1/-1;width:50%;margin:0 auto;z-index:0}
+  .fp-title{font-size:12px}
   .fp-num{font-size:9px}
+  .fp-office{font-size:10px}
   /* badge + button — order 2 */
   .hero-actions{order:2;gap:10px;margin-bottom:16px;flex-wrap:wrap}
   .hero-email{order:3}
