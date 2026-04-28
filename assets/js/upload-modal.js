@@ -3,7 +3,7 @@
   'use strict';
 
   // ── Change this URL if the backend runs on a different port ──
-  var BACKEND_URL = 'http://localhost:3000/api/upload-factura';
+  var BACKEND_URL = '/api/upload-factura';
 
   // ── Populate month & year selects ─────────────────────────────
   var MONTHS = ['Enero','Febrero','Marzo','Abril','Mayo','Junio',

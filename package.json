@@ -1,0 +1,9 @@
+{
+  "name": "btg-sitio",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "busboy": "^1.6.0",
+    "resend": "^3.2.0"
+  }
+}

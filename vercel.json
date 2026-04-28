@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/upload-factura.js": {
+      "maxDuration": 30
+    }
+  }
+}
