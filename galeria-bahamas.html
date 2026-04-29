@@ -169,6 +169,9 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 @keyframes pw-shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
 @media(max-width:480px){.pw-box{max-width:100%;padding:0 24px}.pw-title{font-size:19px}}
 
+/* ─── PRIVACY BTN ─── */
+.privacy-btn{font-size:11px;font-weight:500;color:rgba(228,238,245,0.28);text-decoration:none;border:1px solid rgba(255,255,255,0.1);padding:5px 14px;border-radius:20px;letter-spacing:.04em;transition:color .2s,border-color .2s,background .2s;white-space:nowrap}
+.privacy-btn:hover{color:rgba(228,238,245,0.55);border-color:rgba(26,127,188,0.35);background:rgba(26,127,188,0.07)}
 </style>
 </head>
 <body>
@@ -304,7 +307,10 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 
 <footer class="gal-footer">
   <span class="gal-footer-txt">© BTG Seguros · Material exclusivo para agentes · Uso interno</span>
+  <div style="display:flex;align-items:center;gap:14px">
+  <a href="aviso-de-privacidad.html" class="privacy-btn">Aviso de Privacidad</a>
   <a href="convenciones.html" class="gal-footer-link">← Galería Convenciones</a>
+</div>
 </footer>
 
 <script>
