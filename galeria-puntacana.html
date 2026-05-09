@@ -38,21 +38,37 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 .nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
 .nav-burger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
 .nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-#mobile-menu{display:none;position:fixed;inset:0;z-index:299;background:rgba(6,17,27,0.98);opacity:0;transition:opacity .3s ease;pointer-events:none}
+/* ─── MOBILE MENU ─── */
+#mobile-menu{display:none;position:fixed;inset:0;z-index:500;background:rgba(4,11,18,0.99);opacity:0;transition:opacity .28s ease;pointer-events:none;flex-direction:column}
 #mobile-menu.open{opacity:1;pointer-events:all}
-.mm-inner{display:flex;flex-direction:column;height:100%;padding:100px 32px 32px;box-sizing:border-box}
-.mm-links{display:flex;flex-direction:column;gap:0;flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
-.mm-link{font-size:22px;font-weight:400;color:rgba(228,238,245,0.28);letter-spacing:-.03em;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:space-between;gap:12px;transition:color .22s;text-decoration:none}
-.mm-link svg{flex-shrink:0;opacity:0.4;transition:opacity .22s}
-.mm-link:active{color:var(--cyan)}.mm-link:hover{color:#E4EEF5}
-.mm-link:hover svg{opacity:0.6;transform:translateX(0)}
-.mm-link.active{color:var(--cyan)}
-.mm-footer{display:flex;align-items:center;justify-content:space-between;padding-top:20px;border-top:1px solid rgba(255,255,255,0.07)}
+.mm-topbar{display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:62px;border-bottom:1px solid rgba(255,255,255,0.07);flex-shrink:0}
+.mm-topbar-logo{height:38px;width:auto;display:block}
+.mm-close-btn{width:38px;height:38px;background:rgba(26,127,188,0.1);border:1px solid rgba(26,127,188,0.22);border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#E4EEF5;transition:background .2s;padding:0;flex-shrink:0}
+.mm-close-btn:hover,.mm-close-btn:active{background:rgba(26,127,188,0.25)}
+.mm-links{display:flex;flex-direction:column;gap:0;overflow-y:auto;-webkit-overflow-scrolling:touch;flex:1;padding:4px 24px 0}
+.mm-link{font-size:22px;font-weight:400;color:rgba(228,238,245,0.35);letter-spacing:-.03em;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:space-between;gap:12px;transition:color .22s;text-decoration:none}
+.mm-link svg{flex-shrink:0;opacity:.4;transition:opacity .22s}
+.mm-link:active,.mm-link:hover{color:#E4EEF5}
+.mm-link:hover svg{opacity:.6}
+.mm-link.active{color:var(--cyan,#00C9E0)}
+.mm-item{display:block;padding:0;border-bottom:1px solid rgba(255,255,255,0.05)}
+.mm-item-head{display:flex;align-items:center;justify-content:space-between;padding:14px 0;font-size:22px;font-weight:400;color:rgba(228,238,245,0.35);letter-spacing:-.03em;gap:12px;width:100%;background:none;border:none;cursor:pointer;font-family:inherit}
+.mm-item-head:hover,.mm-item-head:active{color:#E4EEF5}
+.mm-item-head.open{color:rgba(228,238,245,0.7)}
+.mm-chevron{transition:transform .3s cubic-bezier(.16,1,.3,1);flex-shrink:0;opacity:.4}
+.mm-item-head.open .mm-chevron{transform:rotate(90deg);opacity:.7}
+.mm-sub{max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.16,1,.3,1)}
+.mm-sub.open{max-height:300px}
+.mm-sublink{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 0 13px 16px;font-size:17px;font-weight:400;color:rgba(0,201,224,0.6);letter-spacing:-.02em;text-decoration:none;transition:color .2s}
+.mm-sublink.active{color:#00C9E0}
+.mm-sublink:hover,.mm-sublink:active{color:#00C9E0}
+.mm-sublink svg{opacity:.5;flex-shrink:0}
+.mm-footer{display:flex;align-items:center;justify-content:space-between;padding:16px 24px 28px;border-top:1px solid rgba(255,255,255,0.07);flex-shrink:0}
 .mm-brand{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(228,238,245,0.2)}
 .mm-social{display:flex;gap:10px}
-.mm-social a{width:42px;height:42px;border-radius:50%;background:rgba(26,127,188,0.12);border:1px solid rgba(26,127,188,0.22);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background .2s}
-.mm-social a:hover{background:var(--blue)}
-.mm-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);display:inline-block;margin-right:6px}
+.mm-social a{width:40px;height:40px;border-radius:50%;background:rgba(26,127,188,0.12);border:1px solid rgba(26,127,188,0.22);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background .2s}
+.mm-social a:hover{background:var(--blue,#1A7FBC)}
+.mm-dot{width:6px;height:6px;border-radius:50%;background:#00C9E0;display:inline-block;margin-right:6px;flex-shrink:0}
 .mm-item{display:block;padding:0;border-bottom:1px solid rgba(255,255,255,0.05)}
 .mm-item-head{display:flex;align-items:center;justify-content:space-between;padding:14px 0;font-size:22px;font-weight:400;color:rgba(228,238,245,0.28);letter-spacing:-.03em;gap:12px;width:100%;background:none;border:none;cursor:pointer;font-family:var(--font)}
 .mm-item-head:hover,.mm-item-head:active{color:#E4EEF5}
@@ -209,12 +225,12 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 
 /* ─── MOBILE ─── */
 @media(max-width:768px){
+  #mobile-menu{display:flex}
   nav{padding:11px 16px}
   .nav-links{display:none}
   .nav-social{position:absolute;left:50%;transform:translateX(-50%);gap:8px}
   .nav-social a{width:30px;height:30px}
   .nav-burger{display:flex}
-  #mobile-menu{display:block}
   nav>div img{height:36px !important}
   body{padding-top:60px}
 
@@ -306,7 +322,6 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
     <div class="pw-err" id="pw-err"></div>
     <div class="pw-divider"></div>
   </div>
-</div>
 
 <!-- NAV -->
 <nav>
@@ -338,7 +353,10 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 
 <!-- MOBILE MENU -->
 <div id="mobile-menu" role="dialog" aria-label="Navegación">
-  <div class="mm-inner">
+  <div class="mm-topbar">
+    <a href="index.html"><img src="btg-logo.png" alt="BTG Seguros" class="mm-topbar-logo"></a>
+    <button class="mm-close-btn" id="mm-close-btn" aria-label="Cerrar menú"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
     <nav class="mm-links">
       <a href="index.html#tecnologia" class="mm-link">Multicotizador<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       <a href="index.html#universidad" class="mm-link">Universidad<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
@@ -365,7 +383,6 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
       </div>
     </div>
   </div>
-</div>
 
 <!-- PAGE HEADER -->
 <div class="gal-header">
