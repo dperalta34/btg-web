@@ -2512,14 +2512,7 @@ document.addEventListener('DOMContentLoaded',function(){
     document.body.style.overflow='';
     burger.setAttribute('aria-label','Abrir menú');
   }
-  var _burgerTouched=false;
-  burger.addEventListener('touchstart',function(e){
-    e.preventDefault();
-    _burgerTouched=true;
-    menu.classList.contains('open')?closeMenu():openMenu();
-  },{passive:false});
   burger.addEventListener('click',function(){
-    if(_burgerTouched){_burgerTouched=false;return;}
     menu.classList.contains('open')?closeMenu():openMenu();
   });
   menu.querySelectorAll('.mm-link').forEach(function(link){
