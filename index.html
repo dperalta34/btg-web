@@ -1634,9 +1634,9 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
           <p class="concurso-desc">Volvemos a la cancha. El segundo torneo BTG–SURA se juega en tres sedes: Querétaro, Guadalajara y Ciudad de México.</p>
           <div class="concurso-detail">QRO: 18 mayo · GDL: 28 mayo · CDMX: 4 junio</div>
           <div class="btn-bases btn-bases-multi">
-            <button data-bases-src="Concursos/padel_CDMX.png" onclick="openBases('Concursos/padel_CDMX.png')">CDMX</button>
-            <button data-bases-src="Concursos/padel_QRO.png" onclick="openBases('Concursos/padel_QRO.png')">QRO</button>
-            <button data-bases-src="Concursos/padel_GDL.png" onclick="openBases('Concursos/padel_GDL.png')">GDL</button>
+            <button data-bases-src="Concursos/padel_CDMX.png">CDMX</button>
+            <button data-bases-src="Concursos/padel_QRO.png">QRO</button>
+            <button data-bases-src="Concursos/padel_GDL.png">GDL</button>
           </div>
         </div>
       </div>
@@ -1652,7 +1652,7 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
           <div class="concurso-prize">⚽ MetLife Stadium · NY · 18–20 Jul 2026</div>
           <p class="concurso-desc">Por cada $1M MXN de prima pagada obtienes un boleto de rifa para la Final del Mundial. Sin límite de boletos.</p>
           <div class="concurso-detail">Vuelo CDMX–NY, hospedaje y boleto doble · 1 ene–31 may 2026</div>
-          <div class="btn-bases"><button data-bases-src="Concursos/Bases_Mundial.png" onclick="openBases('Concursos/Bases_Mundial.png')">Bases completas</button></div>
+          <div class="btn-bases"><button data-bases-src="Concursos/Bases_Mundial.png">Bases completas</button></div>
         </div>
       </div>
       <!-- === CARD 3: NASCAR === -->
@@ -1681,7 +1681,7 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
           <div class="concurso-prize">🏎 F1 · CDMX · 30 Oct–1 Nov 2026</div>
           <p class="concurso-desc">Sé testigo del regreso de Checo Pérez. Los 24 mejores en prima de crecimiento ganan boletos al Gran Premio de México.</p>
           <div class="concurso-detail">Prima mínima: $200,000 MXN · Mar–Sep 2026 · 24 lugares</div>
-          <div class="btn-bases"><button data-bases-src="Concursos/Bases_F1.png" onclick="openBases('Concursos/Bases_F1.png')">Bases completas</button></div>
+          <div class="btn-bases"><button data-bases-src="Concursos/Bases_F1.png">Bases completas</button></div>
         </div>
       </div>
       <!-- === CARD 5: ROMA === -->
@@ -1696,7 +1696,7 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
           <div class="concurso-prize">🌍 Roma, Italia · 1–8 Nov 2026</div>
           <p class="concurso-desc">¿Te quedaste fuera de esta edición? Conoce las bases y comienza a construir tu lugar en la próxima convención BTG.</p>
           <div class="concurso-detail">Ant.: Buenos Aires · Cartagena · Mediterráneo · Punta Cana · Cancún</div>
-          <div class="btn-bases"><button data-bases-src="Concursos/Bases_convención_BTG_2026.png" onclick="openBases('Concursos/Bases_convención_BTG_2026.png')">Bases completas</button></div>
+          <div class="btn-bases"><button data-bases-src="Concursos/Bases_convención_BTG_2026.png">Bases completas</button></div>
         </div>
       </div>
     </div>
@@ -2485,21 +2485,15 @@ if(arc){
 })();
 
 
-// wire up bases buttons + overlay (overlay is after </script> so use DOMContentLoaded)
-(function(){
-  // Buttons are in DOM now — add programmatic listeners
-  document.querySelectorAll('.btn-bases button').forEach(function(btn){
-    var src=btn.getAttribute('data-bases-src');
-    if(!src)return;
-    btn.addEventListener('click',function(e){e.stopPropagation();openBases(src);});
-    btn.addEventListener('touchend',function(e){e.preventDefault();e.stopPropagation();openBases(src);});
-  });
-  // Overlay is parsed after this script — wire via DOMContentLoaded
-  document.addEventListener('DOMContentLoaded',function(){
-    var ovl=document.getElementById('bases-overlay');
-    if(ovl)ovl.addEventListener('click',function(e){if(e.target===ovl)closeBases();});
-  });
-})();
+// Concurso bases buttons — wire via click (works on all devices)
+document.querySelectorAll('.btn-bases button[data-bases-src]').forEach(function(btn){
+  btn.addEventListener('click',function(){openBases(btn.getAttribute('data-bases-src'));});
+});
+// bases-overlay click-outside: wired at DOMContentLoaded (overlay is after </script>)
+document.addEventListener('DOMContentLoaded',function(){
+  var ovl=document.getElementById('bases-overlay');
+  if(ovl)ovl.addEventListener('click',function(e){if(e.target===ovl)closeBases();});
+});
 
 // MOBILE MENU
 (function(){
@@ -2518,9 +2512,9 @@ if(arc){
     document.body.style.overflow='';
     burger.setAttribute('aria-label','Abrir menú');
   }
-  function toggleMenu(){menu.classList.contains('open')?closeMenu():openMenu();}
-  burger.addEventListener('click',toggleMenu);
-  burger.addEventListener('touchend',function(e){e.preventDefault();toggleMenu();});
+  burger.addEventListener('click',function(){
+    menu.classList.contains('open')?closeMenu():openMenu();
+  });
   menu.querySelectorAll('.mm-link').forEach(function(link){
     link.addEventListener('click',closeMenu);
   });
