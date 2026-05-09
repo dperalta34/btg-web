@@ -557,7 +557,6 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
 .cami-live{display:none}
 
 @media(max-width:768px){
-  #mobile-menu{display:flex}
   /* NAV */
   nav{padding:12px 16px;position:fixed}
   .nav-links{display:none}
@@ -827,7 +826,7 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
     </a>
   </div>
   <!-- HAMBURGER (mobile only) -->
-  <button class="nav-burger" id="nav-burger" aria-label="Abrir menú">
+  <button class="nav-burger" id="nav-burger" aria-label="Abrir menú" onclick="window._mmToggle&&window._mmToggle()">
     <span></span><span></span><span></span>
   </button>
 </nav>
@@ -2500,18 +2499,29 @@ document.addEventListener('DOMContentLoaded',function(){
   var burger=document.getElementById('nav-burger');
   var menu=document.getElementById('mobile-menu');
   if(!burger||!menu)return;
+
   function openMenu(){
-    burger.classList.add('open');
+    menu.style.display='flex';
+    menu.offsetHeight; // force reflow so transition plays
     menu.classList.add('open');
+    burger.classList.add('open');
     document.body.style.overflow='hidden';
     burger.setAttribute('aria-label','Cerrar menú');
   }
   function closeMenu(){
-    burger.classList.remove('open');
     menu.classList.remove('open');
+    burger.classList.remove('open');
     document.body.style.overflow='';
     burger.setAttribute('aria-label','Abrir menú');
+    setTimeout(function(){
+      if(!menu.classList.contains('open'))menu.style.display='none';
+    },300);
   }
+
+  window._mmToggle=function(){
+    menu.classList.contains('open')?closeMenu():openMenu();
+  };
+
   burger.addEventListener('click',function(){
     menu.classList.contains('open')?closeMenu():openMenu();
   });
@@ -2521,7 +2531,6 @@ document.addEventListener('DOMContentLoaded',function(){
   document.addEventListener('keydown',function(e){
     if(e.key==='Escape')closeMenu();
   });
-  /* Material Agentes toggle */
   var mmHead=document.getElementById('mm-material');
   var mmSub=document.getElementById('mm-material-sub');
   if(mmHead&&mmSub){
@@ -2531,7 +2540,6 @@ document.addEventListener('DOMContentLoaded',function(){
       mmSub.classList.toggle('open');
     });
   }
-
   var mmCloseBtn=document.getElementById('mm-close-btn');
   if(mmCloseBtn)mmCloseBtn.addEventListener('click',closeMenu);
 })();
