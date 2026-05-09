@@ -270,7 +270,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 .cotiz-header{max-width:1100px;margin:0 auto;padding:0 60px 0}
 .cotiz-img-outer{position:relative;max-width:1100px;margin:0 auto;padding:0 20px}
 .cotiz-img-glow{position:absolute;top:40%;left:50%;transform:translate(-50%,-50%);width:72%;height:52%;background:radial-gradient(ellipse,rgba(26,127,188,.14) 0%,rgba(0,201,224,.06) 50%,transparent 72%);filter:blur(80px);pointer-events:none;z-index:0;animation:glow-pulse 5s ease-in-out infinite alternate}
-img.cotiz-img-main{width:100%;height:auto;display:block;margin:-7% 0;position:relative;z-index:1;mix-blend-mode:multiply;opacity:0;filter:blur(14px);transform:perspective(1400px) rotateX(16deg) scale(0.88) translateY(48px);transition:opacity 1.4s cubic-bezier(.16,1,.3,1),filter 1.3s ease,transform 1.4s cubic-bezier(.16,1,.3,1)}
+img.cotiz-img-main{width:100%;height:auto;display:block;margin:-7% 0;position:relative;z-index:1;mix-blend-mode:multiply;opacity:0;filter:blur(14px);transform:perspective(1400px) rotateX(16deg) scale(0.88) translateY(48px);transition:opacity 1.4s cubic-bezier(.16,1,.3,1),filter 1.3s ease,transform 1.4s cubic-bezier(.16,1,.3,1);pointer-events:none}
 img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px) rotateX(0deg) scale(1) translateY(0);animation:cotiz-levitate 7s ease-in-out 1.4s infinite}
 @keyframes cotiz-levitate{0%,100%{transform:translateY(0) rotate(0deg) scale(1)}40%{transform:translateY(-12px) rotate(.25deg) scale(1.005)}70%{transform:translateY(-7px) rotate(-.2deg) scale(1.002)}}
 @keyframes glow-pulse{0%{opacity:.6;transform:translate(-50%,-50%) scale(1)}100%{opacity:1;transform:translate(-50%,-50%) scale(1.18)}}
@@ -1634,9 +1634,9 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
           <p class="concurso-desc">Volvemos a la cancha. El segundo torneo BTG–SURA se juega en tres sedes: Querétaro, Guadalajara y Ciudad de México.</p>
           <div class="concurso-detail">QRO: 18 mayo · GDL: 28 mayo · CDMX: 4 junio</div>
           <div class="btn-bases btn-bases-multi">
-            <button onclick="openBases('Concursos/padel_CDMX.png')">CDMX</button>
-            <button onclick="openBases('Concursos/padel_QRO.png')">QRO</button>
-            <button onclick="openBases('Concursos/padel_GDL.png')">GDL</button>
+            <button data-bases-src="Concursos/padel_CDMX.png" onclick="openBases('Concursos/padel_CDMX.png')">CDMX</button>
+            <button data-bases-src="Concursos/padel_QRO.png" onclick="openBases('Concursos/padel_QRO.png')">QRO</button>
+            <button data-bases-src="Concursos/padel_GDL.png" onclick="openBases('Concursos/padel_GDL.png')">GDL</button>
           </div>
         </div>
       </div>
@@ -1652,7 +1652,7 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
           <div class="concurso-prize">⚽ MetLife Stadium · NY · 18–20 Jul 2026</div>
           <p class="concurso-desc">Por cada $1M MXN de prima pagada obtienes un boleto de rifa para la Final del Mundial. Sin límite de boletos.</p>
           <div class="concurso-detail">Vuelo CDMX–NY, hospedaje y boleto doble · 1 ene–31 may 2026</div>
-          <div class="btn-bases"><button onclick="openBases('Concursos/Bases_Mundial.png')">Bases completas</button></div>
+          <div class="btn-bases"><button data-bases-src="Concursos/Bases_Mundial.png" onclick="openBases('Concursos/Bases_Mundial.png')">Bases completas</button></div>
         </div>
       </div>
       <!-- === CARD 3: NASCAR === -->
@@ -1681,7 +1681,7 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
           <div class="concurso-prize">🏎 F1 · CDMX · 30 Oct–1 Nov 2026</div>
           <p class="concurso-desc">Sé testigo del regreso de Checo Pérez. Los 24 mejores en prima de crecimiento ganan boletos al Gran Premio de México.</p>
           <div class="concurso-detail">Prima mínima: $200,000 MXN · Mar–Sep 2026 · 24 lugares</div>
-          <div class="btn-bases"><button onclick="openBases('Concursos/Bases_F1.png')">Bases completas</button></div>
+          <div class="btn-bases"><button data-bases-src="Concursos/Bases_F1.png" onclick="openBases('Concursos/Bases_F1.png')">Bases completas</button></div>
         </div>
       </div>
       <!-- === CARD 5: ROMA === -->
@@ -1696,7 +1696,7 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
           <div class="concurso-prize">🌍 Roma, Italia · 1–8 Nov 2026</div>
           <p class="concurso-desc">¿Te quedaste fuera de esta edición? Conoce las bases y comienza a construir tu lugar en la próxima convención BTG.</p>
           <div class="concurso-detail">Ant.: Buenos Aires · Cartagena · Mediterráneo · Punta Cana · Cancún</div>
-          <div class="btn-bases"><button onclick="openBases('Concursos/Bases_convención_BTG_2026.png')">Bases completas</button></div>
+          <div class="btn-bases"><button data-bases-src="Concursos/Bases_convención_BTG_2026.png" onclick="openBases('Concursos/Bases_convención_BTG_2026.png')">Bases completas</button></div>
         </div>
       </div>
     </div>
@@ -1740,6 +1740,23 @@ img.cotiz-img-main.visible{opacity:1;filter:blur(0);transform:perspective(1400px
   </div>
 
 <script>
+// BASES MODAL — defined first so onclick attrs always resolve
+function openBases(src){
+  var ovl=document.getElementById('bases-overlay');
+  var img=document.getElementById('bases-img');
+  if(!ovl||!img)return;
+  img.src=src;
+  ovl.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeBases(){
+  var ovl=document.getElementById('bases-overlay');
+  if(!ovl)return;
+  ovl.classList.remove('open');
+  document.body.style.overflow='';
+  setTimeout(function(){var i=document.getElementById('bases-img');if(i)i.src='';},350);
+}
+
 // COUNTER
 function animateCounter(el){
   const target=+el.dataset.target,dur=2000,t0=performance.now();
@@ -2467,18 +2484,21 @@ if(arc){
 })();
 
 
-function openBases(src){
-  document.getElementById('bases-img').src=src;
-  document.getElementById('bases-overlay').classList.add('open');
-  document.body.style.overflow='hidden';
-}
-function closeBases(){
-  document.getElementById('bases-overlay').classList.remove('open');
-  document.body.style.overflow='';
-  setTimeout(()=>{document.getElementById('bases-img').src='';},350);
-}
-var basesOvl=document.getElementById('bases-overlay');
-if(basesOvl)basesOvl.addEventListener('click',function(e){if(e.target===this)closeBases();});
+// wire up bases buttons + overlay (overlay is after </script> so use DOMContentLoaded)
+(function(){
+  // Buttons are in DOM now — add programmatic listeners
+  document.querySelectorAll('.btn-bases button').forEach(function(btn){
+    var src=btn.getAttribute('data-bases-src');
+    if(!src)return;
+    btn.addEventListener('click',function(e){e.stopPropagation();openBases(src);});
+    btn.addEventListener('touchend',function(e){e.preventDefault();e.stopPropagation();openBases(src);});
+  });
+  // Overlay is parsed after this script — wire via DOMContentLoaded
+  document.addEventListener('DOMContentLoaded',function(){
+    var ovl=document.getElementById('bases-overlay');
+    if(ovl)ovl.addEventListener('click',function(e){if(e.target===ovl)closeBases();});
+  });
+})();
 
 // MOBILE MENU
 (function(){
