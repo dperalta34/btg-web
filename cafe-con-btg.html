@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Café con BTG · Biblioteca Digital · BTG Seguros</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --dark:#04111A;--card:#071C2C;--blue:#1A7FBC;--blue2:#2AACE0;
+  --cyan:#00C9E0;--bl:rgba(255,255,255,0.07);
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;
+}
+html{scroll-behavior:smooth;background:var(--dark)}
+body{font-family:var(--font);color:#E4EEF5;overflow-x:clip;background:var(--dark);-webkit-font-smoothing:antialiased;padding-top:64px}
+
+/* ─── NAV ─── */
+nav{display:flex;align-items:center;justify-content:space-between;padding:14px 60px;background:var(--dark);border-bottom:1px solid var(--bl);position:fixed;top:0;left:0;right:0;width:100%;z-index:300}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{font-size:13px;color:rgba(228,238,245,0.55);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:#E4EEF5}
+.nav-links a.active{color:#E4EEF5}
+.nav-drop{position:relative}
+.nav-drop>a{display:flex;align-items:center;gap:5px}
+.nav-drop>a svg{transition:transform .2s;flex-shrink:0}
+.nav-drop:hover>a svg,.nav-drop:focus-within>a svg{transform:rotate(180deg)}
+.nav-dropmenu{position:absolute;top:calc(100% + 14px);right:0;background:rgba(4,14,26,0.97);backdrop-filter:blur(18px);border:1px solid rgba(26,127,188,0.2);border-radius:12px;padding:6px;min-width:210px;opacity:0;pointer-events:none;transform:translateY(-8px) scale(.97);transition:opacity .22s,transform .22s;z-index:400}
+.nav-drop:hover .nav-dropmenu,.nav-drop:focus-within .nav-dropmenu{opacity:1;pointer-events:all;transform:translateY(0) scale(1)}
+.nav-dropmenu a{display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:8px;font-size:13px;color:rgba(228,238,245,0.6);text-decoration:none;transition:background .15s,color .15s;white-space:nowrap}
+.nav-dropmenu a:hover,.nav-dropmenu a.active{background:rgba(26,127,188,0.15);color:#E4EEF5}
+.nav-dropmenu a svg{flex-shrink:0;color:var(--blue)}
+.nav-social{display:flex;align-items:center;gap:10px}
+.nav-social a{width:36px;height:36px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background .2s;flex-shrink:0}
+.nav-social a:hover{background:var(--blue2)}
+.nav-burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:38px;height:38px;background:rgba(26,127,188,0.1);border:1px solid rgba(26,127,188,0.22);border-radius:10px;cursor:pointer;padding:9px 8px;flex-shrink:0;transition:background .2s;position:relative;z-index:301}
+.nav-burger span{display:block;width:100%;height:2px;background:#E4EEF5;border-radius:2px;transition:transform .38s cubic-bezier(.16,1,.3,1),opacity .22s;transform-origin:center}
+.nav-burger.open{background:rgba(26,127,188,0.2);border-color:rgba(26,127,188,0.4)}
+.nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-burger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* ─── MOBILE MENU ─── */
+#mobile-menu{display:none;position:fixed;inset:0;z-index:500;background:rgba(4,11,18,0.99);opacity:0;visibility:hidden;transition:opacity .28s ease,visibility 0s linear .28s;pointer-events:none;flex-direction:column}
+#mobile-menu.open{opacity:1;visibility:visible;pointer-events:all;transition:opacity .28s ease,visibility 0s linear 0s}
+.mm-topbar{display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:62px;border-bottom:1px solid rgba(255,255,255,0.07);flex-shrink:0}
+.mm-topbar-logo{height:38px;width:auto;display:block}
+.mm-close-btn{width:38px;height:38px;background:rgba(26,127,188,0.1);border:1px solid rgba(26,127,188,0.22);border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#E4EEF5;transition:background .2s;padding:0;flex-shrink:0}
+.mm-close-btn:hover,.mm-close-btn:active{background:rgba(26,127,188,0.25)}
+.mm-links{display:flex;flex-direction:column;gap:0;overflow-y:auto;-webkit-overflow-scrolling:touch;flex:1;padding:4px 24px 0}
+.mm-link{font-size:22px;font-weight:400;color:rgba(228,238,245,0.35);letter-spacing:-.03em;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:space-between;gap:12px;transition:color .22s;text-decoration:none}
+.mm-link svg{flex-shrink:0;opacity:.4;transition:opacity .22s}
+.mm-link:active,.mm-link:hover{color:#E4EEF5}
+.mm-link:hover svg{opacity:.6}
+.mm-link.active{color:var(--cyan,#00C9E0)}
+.mm-item{display:block;padding:0;border-bottom:1px solid rgba(255,255,255,0.05)}
+.mm-item-head{display:flex;align-items:center;justify-content:space-between;padding:14px 0;font-size:22px;font-weight:400;color:rgba(228,238,245,0.28);letter-spacing:-.03em;gap:12px;width:100%;background:none;border:none;cursor:pointer;font-family:var(--font)}
+.mm-item-head:hover,.mm-item-head:active{color:#E4EEF5}
+.mm-item-head.open{color:rgba(228,238,245,0.65)}
+.mm-chevron{transition:transform .3s cubic-bezier(.16,1,.3,1);flex-shrink:0}
+.mm-item-head.open .mm-chevron{transform:rotate(90deg)}
+.mm-sub{max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.16,1,.3,1)}
+.mm-sub.open{max-height:260px}
+.mm-sublink{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 0 13px 18px;font-size:17px;font-weight:400;color:rgba(0,201,224,0.65);letter-spacing:-.02em;text-decoration:none;transition:color .2s}
+.mm-sublink.active{color:var(--cyan)}
+.mm-sublink:hover,.mm-sublink:active{color:var(--cyan)}
+.mm-sublink svg{opacity:0.5;flex-shrink:0}
+.mm-footer{display:flex;align-items:center;justify-content:space-between;padding:16px 24px 28px;border-top:1px solid rgba(255,255,255,0.07);flex-shrink:0}
+.mm-brand{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(228,238,245,0.2)}
+.mm-social{display:flex;gap:10px}
+.mm-social a{width:40px;height:40px;border-radius:50%;background:rgba(26,127,188,0.12);border:1px solid rgba(26,127,188,0.22);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background .2s}
+.mm-social a:hover{background:var(--blue,#1A7FBC)}
+.mm-dot{width:6px;height:6px;border-radius:50%;background:#00C9E0;display:inline-block;margin-right:6px;flex-shrink:0}
+
+/* ─── HERO ─── */
+.cafe-hero{
+  position:relative;padding:80px 60px 72px;overflow:hidden;
+  background:linear-gradient(165deg,#051828 0%,#030d18 60%,#04111a 100%);
+}
+.cafe-hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(26,127,188,0.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(26,127,188,0.06) 1px,transparent 1px);
+  background-size:64px 64px;pointer-events:none;
+}
+.cafe-hero-orb{position:absolute;border-radius:50%;pointer-events:none}
+.cafe-orb-1{width:700px;height:700px;top:-200px;right:-150px;background:radial-gradient(circle,rgba(26,127,188,0.12) 0%,transparent 65%)}
+.cafe-orb-2{width:400px;height:400px;bottom:-100px;left:-80px;background:radial-gradient(circle,rgba(0,201,224,0.07) 0%,transparent 65%)}
+.cafe-hero-inner{position:relative;z-index:2;max-width:1240px;margin:0 auto;display:flex;align-items:center;gap:80px}
+.cafe-hero-text{flex:1;min-width:0}
+.cafe-eyebrow{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.cafe-eyebrow::before{content:'';width:24px;height:1px;background:rgba(26,127,188,0.7)}
+.cafe-h1{font-size:clamp(42px,5.5vw,72px);font-weight:800;letter-spacing:-.04em;line-height:1;color:#F5F9FC;margin-bottom:20px}
+.cafe-h1 em{font-style:normal;color:var(--cyan);text-shadow:0 0 40px rgba(0,201,224,0.35)}
+.cafe-sub{font-size:16px;color:rgba(228,238,245,0.5);line-height:1.7;max-width:520px;margin-bottom:32px}
+.cafe-stats{display:flex;gap:12px;flex-wrap:wrap}
+.cafe-stat-pill{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:8px 18px;border-radius:20px;
+  background:rgba(26,127,188,0.1);border:1px solid rgba(26,127,188,0.22);
+  font-size:12px;font-weight:700;color:rgba(228,238,245,0.7);letter-spacing:.04em;
+}
+.cafe-stat-pill span{color:var(--cyan)}
+
+/* ─── Hero Visual: Play Ring ─── */
+.cafe-hero-visual{
+  flex-shrink:0;width:320px;position:relative;
+  display:flex;align-items:center;justify-content:center;
+  padding:48px 20px;
+}
+.cafe-ring-wrap{position:relative;width:220px;height:220px;display:flex;align-items:center;justify-content:center}
+.cafe-ring{
+  position:absolute;border-radius:50%;border:1px solid rgba(26,127,188,0.18);
+}
+.cafe-ring:nth-child(1){width:220px;height:220px;border-color:rgba(26,127,188,0.22);animation:ringPulse 3s ease-in-out infinite}
+.cafe-ring:nth-child(2){width:170px;height:170px;border-color:rgba(26,127,188,0.32);animation:ringPulse 3s ease-in-out infinite .4s}
+.cafe-ring:nth-child(3){width:124px;height:124px;border-color:rgba(0,201,224,0.3);animation:ringPulse 3s ease-in-out infinite .8s}
+@keyframes ringPulse{
+  0%,100%{transform:scale(1);opacity:.7}
+  50%{transform:scale(1.05);opacity:1}
+}
+.cafe-play-btn{
+  width:80px;height:80px;border-radius:50%;
+  background:linear-gradient(135deg,rgba(26,127,188,0.3),rgba(0,201,224,0.15));
+  border:1px solid rgba(0,201,224,0.4);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;z-index:2;
+  box-shadow:0 0 40px rgba(26,127,188,0.3),0 0 80px rgba(0,201,224,0.1);
+  animation:playGlow 3s ease-in-out infinite;
+}
+@keyframes playGlow{
+  0%,100%{box-shadow:0 0 40px rgba(26,127,188,0.3),0 0 80px rgba(0,201,224,0.1)}
+  50%{box-shadow:0 0 60px rgba(26,127,188,0.5),0 0 100px rgba(0,201,224,0.2)}
+}
+.cafe-play-btn svg{color:var(--cyan);margin-left:5px}
+.cafe-ring-orb{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:240px;height:240px;border-radius:50%;
+  background:radial-gradient(circle,rgba(26,127,188,0.18) 0%,transparent 70%);
+  pointer-events:none;
+}
+
+/* ─── CONTENT TYPE SELECTOR ─── */
+.cafe-type-wrap{max-width:1240px;margin:0 auto;padding:44px 60px 0}
+.cafe-type-sel{display:inline-flex;align-items:center;gap:4px;padding:4px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px}
+.cafe-type-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:10px;font-size:14px;font-weight:600;letter-spacing:-.01em;text-decoration:none;cursor:pointer;background:transparent;border:none;color:rgba(228,238,245,0.38);font-family:var(--font);transition:all .22s}
+.cafe-type-btn.active{background:rgba(26,127,188,0.16);border:1px solid rgba(26,127,188,0.3);color:#E4EEF5;box-shadow:0 2px 12px rgba(26,127,188,0.12)}
+.cafe-type-btn:not(.active):hover{color:rgba(228,238,245,0.65);background:rgba(255,255,255,0.05)}
+
+/* ─── YEAR FILTER (STICKY) ─── */
+.cafe-year-nav{
+  position:sticky;top:64px;z-index:200;
+  background:rgba(4,17,26,0.92);backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(26,127,188,0.1);
+  padding:0 60px;
+}
+.cafe-year-nav-inner{
+  max-width:1240px;margin:0 auto;
+  display:flex;align-items:center;gap:8px;
+  padding:14px 0;
+  overflow-x:auto;scrollbar-width:none;
+}
+.cafe-year-nav-inner::-webkit-scrollbar{display:none}
+.cafe-yr-pill{
+  display:inline-flex;align-items:center;
+  padding:7px 18px;border-radius:20px;
+  font-size:13px;font-weight:600;letter-spacing:.02em;
+  background:transparent;border:1px solid rgba(255,255,255,0.1);
+  color:rgba(228,238,245,0.4);cursor:pointer;font-family:var(--font);
+  transition:all .22s;white-space:nowrap;flex-shrink:0;
+}
+.cafe-yr-pill:hover{color:rgba(228,238,245,0.7);border-color:rgba(26,127,188,0.3);background:rgba(26,127,188,0.08)}
+.cafe-yr-pill.active{background:rgba(26,127,188,0.18);border-color:rgba(26,127,188,0.4);color:#E4EEF5;box-shadow:0 2px 12px rgba(26,127,188,0.15)}
+
+/* ─── MAIN ─── */
+.cafe-main{max-width:1240px;margin:0 auto;padding:60px 60px 80px}
+
+/* ─── YEAR SECTION ─── */
+.cafe-year-section{margin-bottom:72px}
+.cafe-year-header{
+  display:flex;align-items:baseline;gap:20px;
+  margin-bottom:28px;padding-bottom:16px;
+  border-bottom:1px solid rgba(26,127,188,0.12);
+}
+.cafe-year-num{
+  font-size:clamp(40px,5vw,64px);font-weight:900;
+  letter-spacing:-.04em;color:rgba(26,127,188,0.25);
+  line-height:1;
+}
+.cafe-year-label{font-size:13px;font-weight:600;color:rgba(228,238,245,0.35);letter-spacing:.06em;text-transform:uppercase;margin-left:2px}
+.cafe-year-count{margin-left:auto;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(228,238,245,0.25);padding:5px 12px;border:1px solid rgba(255,255,255,0.07);border-radius:20px}
+
+/* ─── VIDEO GRID ─── */
+.cafe-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+
+/* ─── VIDEO CARD ─── */
+.cafe-card{
+  background:rgba(7,20,32,0.8);border:1px solid rgba(255,255,255,0.07);
+  border-radius:16px;overflow:hidden;
+  transition:transform .28s ease,border-color .28s ease,box-shadow .28s ease;
+  display:flex;flex-direction:column;cursor:pointer;
+}
+.cafe-card:hover{
+  transform:translateY(-4px);
+  border-color:rgba(26,127,188,0.28);
+  box-shadow:0 16px 40px rgba(0,0,0,0.35),0 0 40px rgba(26,127,188,0.08);
+}
+.cafe-card-thumb{
+  position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;
+  background:#030e1a;flex-shrink:0;
+}
+/* YouTube thumbnail */
+.cafe-card-thumb img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  filter:brightness(0.75) saturate(0.85);
+  transition:filter .28s ease,transform .28s ease;
+}
+.cafe-card:hover .cafe-card-thumb img{filter:brightness(0.9) saturate(1);transform:scale(1.03)}
+/* StreamYard thumbnail (CSS-only) */
+.cafe-sy-thumb{
+  width:100%;height:100%;
+  background:radial-gradient(ellipse at 60% 40%,rgba(26,127,188,0.35) 0%,rgba(4,11,26,0.9) 55%,#030d1a 100%);
+  position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+  transition:filter .28s ease;
+}
+.cafe-sy-thumb::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(26,127,188,0.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(26,127,188,0.06) 1px,transparent 1px);
+  background-size:28px 28px;
+}
+.cafe-sy-thumb::after{
+  content:'';position:absolute;
+  width:120px;height:120px;border-radius:50%;
+  background:radial-gradient(circle,rgba(26,127,188,0.28) 0%,transparent 70%);
+  top:50%;left:50%;transform:translate(-50%,-50%);
+}
+.cafe-sy-label{
+  position:relative;z-index:2;
+  font-size:9px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(42,172,224,0.55);text-align:center;line-height:1.6;
+}
+.cafe-card:hover .cafe-sy-thumb{filter:brightness(1.2)}
+/* Badges */
+.cafe-ep-badge{
+  position:absolute;top:10px;left:10px;
+  font-size:9px;font-weight:800;letter-spacing:.1em;
+  padding:3px 9px;border-radius:6px;
+  background:rgba(4,11,26,0.85);border:1px solid rgba(255,255,255,0.15);
+  color:rgba(228,238,245,0.7);z-index:3;backdrop-filter:blur(8px);
+}
+.cafe-platform-badge{
+  position:absolute;top:10px;right:10px;
+  font-size:8px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  padding:3px 9px;border-radius:6px;
+  z-index:3;backdrop-filter:blur(8px);
+}
+.badge-yt{background:rgba(180,30,30,0.75);border:1px solid rgba(220,50,50,0.4);color:rgba(255,200,200,0.9)}
+.badge-sy{background:rgba(26,127,188,0.6);border:1px solid rgba(42,172,224,0.4);color:rgba(180,225,245,0.9)}
+/* Play button overlay */
+.cafe-play-overlay{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:2;
+}
+.cafe-play-circle{
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(4,17,26,0.75);border:1.5px solid rgba(255,255,255,0.25);
+  display:flex;align-items:center;justify-content:center;
+  transition:background .28s,border-color .28s,transform .28s,box-shadow .28s;
+  backdrop-filter:blur(6px);
+}
+.cafe-card:hover .cafe-play-circle{
+  background:rgba(26,127,188,0.6);border-color:rgba(0,201,224,0.6);
+  transform:scale(1.12);
+  box-shadow:0 0 24px rgba(0,201,224,0.35);
+}
+.cafe-play-circle svg{color:#fff;margin-left:3px;flex-shrink:0}
+/* Card body */
+.cafe-card-body{padding:14px 16px 16px;flex:1;display:flex;flex-direction:column;gap:4px}
+.cafe-card-ep{font-size:13px;font-weight:700;color:rgba(228,238,245,0.85);letter-spacing:-.01em}
+.cafe-card-yr{font-size:11px;color:rgba(228,238,245,0.3);font-weight:500}
+
+/* ─── YOUTUBE MODAL ─── */
+.yt-modal{
+  position:fixed;inset:0;z-index:900;
+  background:rgba(0,0,0,0.92);backdrop-filter:blur(16px);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity .3s ease,visibility 0s linear .3s;
+}
+.yt-modal.open{opacity:1;visibility:visible;pointer-events:all;transition:opacity .3s ease,visibility 0s linear 0s}
+.yt-modal-inner{
+  position:relative;width:min(900px,90vw);
+  aspect-ratio:16/9;
+}
+.yt-modal-inner iframe{
+  width:100%;height:100%;border:none;border-radius:12px;
+  box-shadow:0 40px 100px rgba(0,0,0,0.7);
+}
+.yt-close{
+  position:absolute;top:-48px;right:0;
+  width:38px;height:38px;border-radius:10px;
+  background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);
+  color:#fff;cursor:pointer;font-size:20px;line-height:1;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s;font-family:var(--font);
+}
+.yt-close:hover{background:rgba(255,255,255,0.2)}
+
+/* ─── FOOTER ─── */
+.cafe-footer{
+  max-width:1240px;margin:0 auto;padding:0 60px 48px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-top:1px solid rgba(255,255,255,0.06);padding-top:28px;
+}
+.cafe-footer-txt{font-size:11px;color:rgba(228,238,245,0.2);letter-spacing:.05em;text-transform:uppercase}
+.privacy-btn{font-size:11px;font-weight:500;color:rgba(228,238,245,0.28);text-decoration:none;border:1px solid rgba(255,255,255,0.1);padding:5px 14px;border-radius:20px;letter-spacing:.04em;transition:color .2s,border-color .2s,background .2s;white-space:nowrap}
+.privacy-btn:hover{color:rgba(228,238,245,0.55);border-color:rgba(26,127,188,0.35);background:rgba(26,127,188,0.07)}
+
+/* ─── MOBILE ─── */
+@media(max-width:768px){
+  #mobile-menu{display:flex}
+  nav{padding:12px 16px;position:fixed}
+  .nav-links{display:none}
+  .nav-social{position:absolute;left:50%;transform:translateX(-50%);gap:8px}
+  .nav-social a{width:30px;height:30px}
+  .nav-burger{display:flex}
+  nav>div img{height:36px !important}
+  body{padding-top:60px}
+
+  .cafe-hero{padding:36px 20px 40px}
+  .cafe-hero-inner{flex-direction:column;align-items:center;gap:36px;text-align:center}
+  .cafe-hero-text{display:flex;flex-direction:column;align-items:center}
+  .cafe-eyebrow{justify-content:center}
+  .cafe-sub{text-align:center;max-width:100%}
+  .cafe-h1{font-size:clamp(36px,11vw,56px)}
+  .cafe-stats{justify-content:center}
+  .cafe-hero-visual{width:100%;padding:16px 0 28px;display:flex;align-items:center;justify-content:center}
+  .cafe-ring-wrap{width:160px;height:160px}
+  .cafe-ring:nth-child(1){width:160px;height:160px}
+  .cafe-ring:nth-child(2){width:122px;height:122px}
+  .cafe-ring:nth-child(3){width:90px;height:90px}
+  .cafe-play-btn{width:60px;height:60px}
+
+  .cafe-type-wrap{padding:28px 18px 0}
+  .cafe-type-btn{font-size:13px;padding:9px 16px}
+
+  .cafe-year-nav{padding:0 18px}
+  .cafe-year-nav-inner{gap:6px;padding:10px 0}
+  .cafe-yr-pill{font-size:12px;padding:6px 14px}
+
+  .cafe-main{padding:36px 18px 52px}
+  .cafe-year-section{margin-bottom:48px}
+  .cafe-year-num{font-size:clamp(32px,9vw,48px)}
+
+  .cafe-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+
+  .cafe-footer{padding:0 18px 36px;flex-direction:column;gap:8px;align-items:flex-start;padding-top:20px}
+
+  .yt-modal-inner{width:94vw}
+  .yt-close{top:-42px;right:0;width:34px;height:34px;font-size:18px}
+}
+@media(max-width:400px){
+  .cafe-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div><a href="index.html" style="display:block"><img id="btg-logo-img" src="btg-logo.png" alt="BTG — Black Tower Group" style="height:56px;width:auto;display:block"></a></div>
+  <ul class="nav-links">
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="index.html#siniestros">Siniestros</a></li>
+    <li><a href="index.html#tecnologia">Multicotizador</a></li>
+    <li><a href="index.html#universidad">Universidad</a></li>
+    <li><a href="index.html#concursos">Concursos</a></li>
+    <li><a href="index.html#credenciales">Credenciales</a></li>
+    <li><a href="bolsa-de-trabajo.html">Bolsa de Trabajo</a></li>
+    <li class="nav-drop">
+      <a href="#" class="active">Material Agentes<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
+      <div class="nav-dropmenu">
+        <a href="boletines.html"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Boletín Agentes</a>
+        <a href="directorio.html"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Directorio BTG</a>
+        <a href="convenciones.html"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Galería Convenciones</a>
+        <a href="biblioteca-digital.html" class="active"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Biblioteca Digital</a>
+      </div>
+    </li>
+  </ul>
+  <div class="nav-social">
+    <a href="https://www.instagram.com/btgseguros/" target="_blank" rel="noopener" title="Instagram"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+    <a href="https://www.facebook.com/BTGSeguros/" target="_blank" rel="noopener" title="Facebook"><svg width="17" height="17" viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+    <a href="https://www.linkedin.com/company/btg-consultores-de-riesgo/" target="_blank" rel="noopener" title="LinkedIn"><svg width="17" height="17" viewBox="0 0 24 24" fill="white"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+  </div>
+  <button class="nav-burger" id="nav-burger" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div id="mobile-menu" role="dialog" aria-label="Navegación">
+  <div class="mm-topbar">
+    <a href="index.html"><img src="btg-logo.png" alt="BTG Seguros" class="mm-topbar-logo"></a>
+    <button class="mm-close-btn" id="mm-close-btn" aria-label="Cerrar menú"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+  <nav class="mm-links">
+    <a href="dashboard.html" class="mm-link">Dashboard<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    <a href="index.html#siniestros" class="mm-link">Siniestros<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    <a href="index.html#tecnologia" class="mm-link">Multicotizador<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    <a href="index.html#universidad" class="mm-link">Universidad<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    <a href="index.html#concursos" class="mm-link">Concursos<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    <a href="index.html#credenciales" class="mm-link">Credenciales<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    <a href="bolsa-de-trabajo.html" class="mm-link">Bolsa de Trabajo<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    <div class="mm-item">
+      <button class="mm-item-head open" id="mm-material">Material Agentes<svg class="mm-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+      <div class="mm-sub open" id="mm-material-sub">
+        <a href="boletines.html" class="mm-sublink">Boletín Agentes<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <a href="directorio.html" class="mm-sublink">Directorio BTG<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <a href="convenciones.html" class="mm-sublink">Galería Convenciones<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <a href="biblioteca-digital.html" class="mm-sublink active">Biblioteca Digital<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+  </nav>
+  <div class="mm-footer">
+    <span class="mm-brand"><span class="mm-dot"></span>BTG Seguros</span>
+    <div class="mm-social">
+      <a href="https://www.instagram.com/btgseguros/" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+      <a href="https://www.facebook.com/BTGSeguros/" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+      <a href="https://www.linkedin.com/company/btg-consultores-de-riesgo/" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="cafe-hero">
+  <div class="cafe-hero-orb cafe-orb-1"></div>
+  <div class="cafe-hero-orb cafe-orb-2"></div>
+  <div class="cafe-hero-inner">
+    <div class="cafe-hero-text">
+      <div class="cafe-eyebrow">BTG Seguros · Biblioteca Digital</div>
+      <h1 class="cafe-h1">Café con<br><em>BTG</em></h1>
+      <p class="cafe-sub">Más de 40 episodios de conversaciones con expertos del sector asegurador, disponibles para nuestros agentes.</p>
+      <div class="cafe-stats">
+        <div class="cafe-stat-pill"><span>41</span>&nbsp;Episodios · 6 Temporadas</div>
+      </div>
+    </div>
+    <div class="cafe-hero-visual" aria-hidden="true">
+      <div class="cafe-ring-orb"></div>
+      <div class="cafe-ring-wrap">
+        <div class="cafe-ring"></div>
+        <div class="cafe-ring"></div>
+        <div class="cafe-ring"></div>
+        <div class="cafe-play-btn">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTENT TYPE SELECTOR -->
+<div class="cafe-type-wrap">
+  <div class="cafe-type-sel">
+    <a href="biblioteca-digital.html" class="cafe-type-btn">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      E-books
+    </a>
+    <button class="cafe-type-btn active">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+      Cafés con BTG
+    </button>
+  </div>
+</div>
+
+<!-- YEAR FILTER -->
+<div class="cafe-year-nav">
+  <div class="cafe-year-nav-inner">
+    <button class="cafe-yr-pill active" data-year="2026">2026</button>
+    <button class="cafe-yr-pill" data-year="2025">2025</button>
+    <button class="cafe-yr-pill" data-year="2024">2024</button>
+    <button class="cafe-yr-pill" data-year="2023">2023</button>
+    <button class="cafe-yr-pill" data-year="2022">2022</button>
+    <button class="cafe-yr-pill" data-year="2021">2021</button>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="cafe-main">
+
+  <!-- ══════════════ 2026 ══════════════ -->
+  <section class="cafe-year-section" id="year-2026">
+    <div class="cafe-year-header">
+      <div class="cafe-year-num">2026</div>
+      <div class="cafe-year-label">Temporada</div>
+      <div class="cafe-year-count">3 episodios</div>
+    </div>
+    <div class="cafe-grid">
+
+      <!-- Ep 1 · StreamYard -->
+      <div class="cafe-card" onclick="openSY('https://streamyard.com/mrzj9tz9wcai')">
+        <div class="cafe-card-thumb">
+          <div class="cafe-sy-thumb">
+            <div class="cafe-sy-label">café con btg</div>
+          </div>
+          <div class="cafe-ep-badge">Ep. 1</div>
+          <span class="cafe-platform-badge badge-sy">StreamYard</span>
+          <div class="cafe-play-overlay">
+            <div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+          </div>
+        </div>
+        <div class="cafe-card-body">
+          <div class="cafe-card-ep">Episodio 1</div>
+          <div class="cafe-card-yr">2026</div>
+        </div>
+      </div>
+
+      <!-- Ep 2 · StreamYard -->
+      <div class="cafe-card" onclick="openSY('https://streamyard.com/26qav34nsrqp')">
+        <div class="cafe-card-thumb">
+          <div class="cafe-sy-thumb">
+            <div class="cafe-sy-label">café con btg</div>
+          </div>
+          <div class="cafe-ep-badge">Ep. 2</div>
+          <span class="cafe-platform-badge badge-sy">StreamYard</span>
+          <div class="cafe-play-overlay">
+            <div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+          </div>
+        </div>
+        <div class="cafe-card-body">
+          <div class="cafe-card-ep">Episodio 2</div>
+          <div class="cafe-card-yr">2026</div>
+        </div>
+      </div>
+
+      <!-- Ep 3 · StreamYard -->
+      <div class="cafe-card" onclick="openSY('https://streamyard.com/sr4j8752q6an')">
+        <div class="cafe-card-thumb">
+          <div class="cafe-sy-thumb">
+            <div class="cafe-sy-label">café con btg</div>
+          </div>
+          <div class="cafe-ep-badge">Ep. 3</div>
+          <span class="cafe-platform-badge badge-sy">StreamYard</span>
+          <div class="cafe-play-overlay">
+            <div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+          </div>
+        </div>
+        <div class="cafe-card-body">
+          <div class="cafe-card-ep">Episodio 3</div>
+          <div class="cafe-card-yr">2026</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════ 2025 ══════════════ -->
+  <section class="cafe-year-section" id="year-2025">
+    <div class="cafe-year-header">
+      <div class="cafe-year-num">2025</div>
+      <div class="cafe-year-label">Temporada</div>
+      <div class="cafe-year-count">9 episodios</div>
+    </div>
+    <div class="cafe-grid">
+
+      <!-- Ep 1 -->
+      <div class="cafe-card" onclick="openSY('https://streamyard.com/arb89f3uzr4x')">
+        <div class="cafe-card-thumb">
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
+          <div class="cafe-ep-badge">Ep. 1</div>
+          <span class="cafe-platform-badge badge-sy">StreamYard</span>
+          <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+        </div>
+        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 1</div><div class="cafe-card-yr">2025</div></div>
+      </div>
+
+      <!-- Ep 2 -->
+      <div class="cafe-card" onclick="openSY('https://streamyard.com/dnwh9sm653zu')">
+        <div class="cafe-card-thumb">
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
+          <div class="cafe-ep-badge">Ep. 2</div>
+          <span class="cafe-platform-badge badge-sy">StreamYard</span>
+          <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+        </div>
+        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 2</div><div class="cafe-card-yr">2025</div></div>
+      </div>
+
+      <!-- Ep 3 -->
+      <div class="cafe-card" onclick="openSY('https://streamyard.com/y9akwpxtjcj7')">
+        <div class="cafe-card-thumb">
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
+          <div class="cafe-ep-badge">Ep. 3</div>
+          <span class="cafe-platform-badge badge-sy">StreamYard</span>
+          <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+        </div>
+        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 3</div><div class="cafe-card-yr">2025</div></div>
+      </div>
+
+      <!-- Ep 4 -->
+      <div class="cafe-card" onclick="openSY('https://streamyard.com/hmichkbpjptc')">
+        <div class="cafe-card-thumb">
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
+          <div class="cafe-ep-badge">Ep. 4</div>
+          <span class="cafe-platform-badge badge-sy">StreamYard</span>
+          <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+        </div>
+        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 4</div><div class="cafe-card-yr">2025</div></div>
+      </div>
+
+      <!-- Ep 5 -->
+      <div class="cafe-card" onclick="openSY('https://streamyard.com/urmed95dy8pr')">
+        <div class="cafe-card-thumb">
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
+          <div class="cafe-ep-badge">Ep. 5</div>
+          <span class="cafe-platform-badge badge-sy">StreamYard</span>
+          <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+        </div>
+        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 5</div><div class="cafe-card-yr">2025</div></div>
+      </div>
+
+      <!-- Ep 6 -->
+      <div class="cafe-card" onclick="openSY('https://streamyard.com/ruj4nh2znkmc')">
+        <div class="cafe-card-thumb">
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
+          <div class="cafe-ep-badge">Ep. 6</div>
+          <span class="cafe-platform-badge badge-sy">StreamYard</span>
+          <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+        </div>
+        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 6</div><div class="cafe-card-yr">2025</div></div>
+      </div>
+
+      <!-- Ep 7 -->
+      <div class="cafe-card" onclick="openSY('https://streamyard.com/5xmzjq86cntw')">
+        <div class="cafe-card-thumb">
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
+          <div class="cafe-ep-badge">Ep. 7</div>
+          <span class="cafe-platform-badge badge-sy">StreamYard</span>
+          <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+        </div>
+        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 7</div><div class="cafe-card-yr">2025</div></div>
+      </div>
+
+      <!-- Ep 8 -->
+      <div class="cafe-card" onclick="openSY('https://streamyard.com/h2r6j4rrkshj')">
+        <div class="cafe-card-thumb">
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
+          <div class="cafe-ep-badge">Ep. 8</div>
+          <span class="cafe-platform-badge badge-sy">StreamYard</span>
+          <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+        </div>
+        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 8</div><div class="cafe-card-yr">2025</div></div>
+      </div>
+
+      <!-- Ep 9 -->
+      <div class="cafe-card" onclick="openSY('https://streamyard.com/n2mmcruaxuxw')">
+        <div class="cafe-card-thumb">
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
+          <div class="cafe-ep-badge">Ep. 9</div>
+          <span class="cafe-platform-badge badge-sy">StreamYard</span>
+          <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+        </div>
+        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 9</div><div class="cafe-card-yr">2025</div></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════ 2024 ══════════════ -->
+  <section class="cafe-year-section" id="year-2024">
+    <div class="cafe-year-header">
+      <div class="cafe-year-num">2024</div>
+      <div class="cafe-year-label">Temporada</div>
+      <div class="cafe-year-count">11 episodios</div>
+    </div>
+    <div class="cafe-grid">
+
+      <!-- Ep 1 -->
+      <div class="cafe-card" onclick="openSY('https://streamyard.com/rvcwevz9r75t')">
+        <div class="cafe-card-thumb">
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
+          <div class="cafe-ep-badge">Ep. 1</div>
+          <span class="cafe-platform-badge badge-sy">StreamYard</span>
+          <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+        </div>
+        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 1</div><div class="cafe-card-yr">2024</div></div>
+      </div>
+
+      <!-- Ep 2 -->
+      <div class="cafe-card" onclick="openSY('https://streamyard.com/hv7g2z3pbm36')">
+        <div class="cafe-card-thumb">
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
+          <div class="cafe-ep-badge">Ep. 2</div>
+          <span class="cafe-platform-badge badge-sy">StreamYard</span>
+          <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+        </div>
+        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 2</div><div class="cafe-card-yr">2024</div></div>
+      </div>
+
+      <!-- Ep 3 -->
+      <div class="cafe-card" onclick="openSY('https://streamyard.com/utz6d6ccak64')">
+        <div class="cafe-card-thumb">
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
+          <div class="cafe-ep-badge">Ep. 3</div>
+          <span class="cafe-platform-badge badge-sy">StreamYard</span>
+          <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+        </div>
+        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 3</div><div class="cafe-card-yr">2024</div></div>
+      </div>
+
+      <!-- Ep 4 -->
+      <div class="cafe-card" onclick="openSY('https://streamyard.com/pn86n2z4j33m')">
+        <div class="cafe-card-thumb">
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
+          <div class="cafe-ep-badge">Ep. 4</div>
+          <span class="cafe-platform-badge badge-sy">StreamYard</span>
+          <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+        </div>
+        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 4</div><div class="cafe-card-yr">2024</div></div>
+      </div>
+
+      <!-- Ep 5 -->
+      <div class="cafe-card" onclick="openSY('https://streamyard.com/hyn7junerjqn')">
+        <div class="cafe-card-thumb">
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
+          <div class="cafe-ep-badge">Ep. 5</div>
+          <span class="cafe-platform-badge badge-sy">StreamYard</span>
+          <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+        </div>
+        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 5</div><div class="cafe-card-yr">2024</div></div>
+      </div>
+
+      <!-- Ep 6 -->
+      <div class="cafe-card" onclick="openSY('https://streamyard.com/m6t3a6dxt77p')">
+        <div class="cafe-card-thumb">
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
+          <div class="cafe-ep-badge">Ep. 6</div>
+          <span class="cafe-platform-badge badge-sy">StreamYard</span>
+          <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+        </div>
+        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 6</div><div class="cafe-card-yr">2024</div></div>
+      </div>
+
+      <!-- Ep 7 -->
+      <div class="cafe-card" onclick="openSY('https://streamyard.com/r6x78uhr7z3v')">
+        <div class="cafe-card-thumb">
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
+          <div class="cafe-ep-badge">Ep. 7</div>
+          <span class="cafe-platform-badge badge-sy">StreamYard</span>
+          <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+        </div>
+        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 7</div><div class="cafe-card-yr">2024</div></div>
+      </div>
+
+      <!-- Ep 8 -->
+      <div class="cafe-card" onclick="openSY('https://streamyard.com/7ajv48t73b2d')">
+        <div class="cafe-card-thumb">
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
+          <div class="cafe-ep-badge">Ep. 8</div>
+          <span class="cafe-platform-badge badge-sy">StreamYard</span>
+          <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+        </div>
+        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 8</div><div class="cafe-card-yr">2024</div></div>
+      </div>
+
+      <!-- Ep 9 -->
+      <div class="cafe-card" onclick="openSY('https://streamyard.com/skfmuv7k4k9u')">
+        <div class="cafe-card-thumb">
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
+          <div class="cafe-ep-badge">Ep. 9</div>
+          <span class="cafe-platform-badge badge-sy">StreamYard</span>
+          <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+        </div>
+        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 9</div><div class="cafe-card-yr">2024</div></div>
+      </div>
+
+      <!-- Ep 10 -->
+      <div class="cafe-card" onclick="openSY('https://streamyard.com/34tuy37vpwds')">
+        <div class="cafe-card-thumb">
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
+          <div class="cafe-ep-badge">Ep. 10</div>
+          <span class="cafe-platform-badge badge-sy">StreamYard</span>
+          <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+        </div>
+        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 10</div><div class="cafe-card-yr">2024</div></div>
+      </div>
+
+      <!-- Ep 11 -->
+      <div class="cafe-card" onclick="openSY('https://streamyard.com/b3xjew7pmhyd')">
+        <div class="cafe-card-thumb">
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
+          <div class="cafe-ep-badge">Ep. 11</div>
+          <span class="cafe-platform-badge badge-sy">StreamYard</span>
+          <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+        </div>
+        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 11</div><div class="cafe-card-yr">2024</div></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════ 2023 ══════════════ -->
+  <section class="cafe-year-section" id="year-2023">
+    <div class="cafe-year-header">
+      <div class="cafe-year-num">2023</div>
+      <div class="cafe-year-label">Temporada</div>
+      <div class="cafe-year-count">4 episodios</div>
+    </div>
+    <div class="cafe-grid">
+
+      <!-- Ep 1 -->
+      <div class="cafe-card" onclick="openSY('https://streamyard.com/rkhbnmvceugb')">
+        <div class="cafe-card-thumb">
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
+          <div class="cafe-ep-badge">Ep. 1</div>
+          <span class="cafe-platform-badge badge-sy">StreamYard</span>
+          <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+        </div>
+        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 1</div><div class="cafe-card-yr">2023</div></div>
+      </div>
+
+      <!-- Ep 2 -->
+      <div class="cafe-card" onclick="openSY('https://streamyard.com/qmdaqg3qndd7')">
+        <div class="cafe-card-thumb">
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
+          <div class="cafe-ep-badge">Ep. 2</div>
+          <span class="cafe-platform-badge badge-sy">StreamYard</span>
+          <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+        </div>
+        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 2</div><div class="cafe-card-yr">2023</div></div>
+      </div>
+
+      <!-- Ep 3 -->
+      <div class="cafe-card" onclick="openSY('https://streamyard.com/xxth8qmqs7rz')">
+        <div class="cafe-card-thumb">
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
+          <div class="cafe-ep-badge">Ep. 3</div>
+          <span class="cafe-platform-badge badge-sy">StreamYard</span>
+          <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+        </div>
+        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 3</div><div class="cafe-card-yr">2023</div></div>
+      </div>
+
+      <!-- Ep 4 -->
+      <div class="cafe-card" onclick="openSY('https://streamyard.com/vaahiiig3n78')">
+        <div class="cafe-card-thumb">
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
+          <div class="cafe-ep-badge">Ep. 4</div>
+          <span class="cafe-platform-badge badge-sy">StreamYard</span>
+          <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+        </div>
+        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 4</div><div class="cafe-card-yr">2023</div></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════ 2022 ══════════════ -->
+  <section class="cafe-year-section" id="year-2022">
+    <div class="cafe-year-header">
+      <div class="cafe-year-num">2022</div>
+      <div class="cafe-year-label">Temporada</div>
+      <div class="cafe-year-count">6 episodios</div>
+    </div>
+    <div class="cafe-grid">
+
+      <!-- Ep 1 -->
+      <div class="cafe-card" onclick="openSY('https://streamyard.com/tu4hkp4pp67r')">
+        <div class="cafe-card-thumb">
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
+          <div class="cafe-ep-badge">Ep. 1</div>
+          <span class="cafe-platform-badge badge-sy">StreamYard</span>
+          <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+        </div>
+        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 1</div><div class="cafe-card-yr">2022</div></div>
+      </div>
+
+      <!-- Ep 2 -->
+      <div class="cafe-card" onclick="openSY('https://streamyard.com/2kh77zihe7zs')">
+        <div class="cafe-card-thumb">
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
+          <div class="cafe-ep-badge">Ep. 2</div>
+          <span class="cafe-platform-badge badge-sy">StreamYard</span>
+          <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+        </div>
+        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 2</div><div class="cafe-card-yr">2022</div></div>
+      </div>
+
+      <!-- Ep 3 -->
+      <div class="cafe-card" onclick="openSY('https://streamyard.com/kq2xq24u9fah')">
+        <div class="cafe-card-thumb">
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
+          <div class="cafe-ep-badge">Ep. 3</div>
+          <span class="cafe-platform-badge badge-sy">StreamYard</span>
+          <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+        </div>
+        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 3</div><div class="cafe-card-yr">2022</div></div>
+      </div>
+
+      <!-- Ep 4 -->
+      <div class="cafe-card" onclick="openSY('https://streamyard.com/w58659q8nj9z')">
+        <div class="cafe-card-thumb">
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
+          <div class="cafe-ep-badge">Ep. 4</div>
+          <span class="cafe-platform-badge badge-sy">StreamYard</span>
+          <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+        </div>
+        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 4</div><div class="cafe-card-yr">2022</div></div>
+      </div>
+
+      <!-- Ep 5 -->
+      <div class="cafe-card" onclick="openSY('https://streamyard.com/zemeqb89b6t3')">
+        <div class="cafe-card-thumb">
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
+          <div class="cafe-ep-badge">Ep. 5</div>
+          <span class="cafe-platform-badge badge-sy">StreamYard</span>
+          <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+        </div>
+        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 5</div><div class="cafe-card-yr">2022</div></div>
+      </div>
+
+      <!-- Ep 6 -->
+      <div class="cafe-card" onclick="openSY('https://streamyard.com/yp3ph9xqqnz2')">
+        <div class="cafe-card-thumb">
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
+          <div class="cafe-ep-badge">Ep. 6</div>
+          <span class="cafe-platform-badge badge-sy">StreamYard</span>
+          <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+        </div>
+        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 6</div><div class="cafe-card-yr">2022</div></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════ 2021 ══════════════ -->
+  <section class="cafe-year-section" id="year-2021">
+    <div class="cafe-year-header">
+      <div class="cafe-year-num">2021</div>
+      <div class="cafe-year-label">Temporada</div>
+      <div class="cafe-year-count">8 episodios</div>
+    </div>
+    <div class="cafe-grid">
+
+      <!-- Ep 1 · YouTube -->
+      <div class="cafe-card" data-yt="dJqk11LuniI" onclick="openYT('dJqk11LuniI')">
+        <div class="cafe-card-thumb">
+          <img src="https://img.youtube.com/vi/dJqk11LuniI/hqdefault.jpg" alt="Café con BTG - Episodio 1 · 2021" loading="lazy">
+          <div class="cafe-ep-badge">Ep. 1</div>
+          <span class="cafe-platform-badge badge-yt">YouTube</span>
+          <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+        </div>
+        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 1</div><div class="cafe-card-yr">2021</div></div>
+      </div>
+
+      <!-- Ep 2 · YouTube -->
+      <div class="cafe-card" data-yt="fHqmGCuObuM" onclick="openYT('fHqmGCuObuM')">
+        <div class="cafe-card-thumb">
+          <img src="https://img.youtube.com/vi/fHqmGCuObuM/hqdefault.jpg" alt="Café con BTG - Episodio 2 · 2021" loading="lazy">
+          <div class="cafe-ep-badge">Ep. 2</div>
+          <span class="cafe-platform-badge badge-yt">YouTube</span>
+          <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+        </div>
+        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 2</div><div class="cafe-card-yr">2021</div></div>
+      </div>
+
+      <!-- Ep 3 · YouTube -->
+      <div class="cafe-card" data-yt="hEDYfgPjk6o" onclick="openYT('hEDYfgPjk6o')">
+        <div class="cafe-card-thumb">
+          <img src="https://img.youtube.com/vi/hEDYfgPjk6o/hqdefault.jpg" alt="Café con BTG - Episodio 3 · 2021" loading="lazy">
+          <div class="cafe-ep-badge">Ep. 3</div>
+          <span class="cafe-platform-badge badge-yt">YouTube</span>
+          <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+        </div>
+        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 3</div><div class="cafe-card-yr">2021</div></div>
+      </div>
+
+      <!-- Ep 4 · YouTube -->
+      <div class="cafe-card" data-yt="Hc5Q6ijup58" onclick="openYT('Hc5Q6ijup58')">
+        <div class="cafe-card-thumb">
+          <img src="https://img.youtube.com/vi/Hc5Q6ijup58/hqdefault.jpg" alt="Café con BTG - Episodio 4 · 2021" loading="lazy">
+          <div class="cafe-ep-badge">Ep. 4</div>
+          <span class="cafe-platform-badge badge-yt">YouTube</span>
+          <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+        </div>
+        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 4</div><div class="cafe-card-yr">2021</div></div>
+      </div>
+
+      <!-- Ep 5 · StreamYard -->
+      <div class="cafe-card" onclick="openSY('https://streamyard.com/u7psj4cxebxy')">
+        <div class="cafe-card-thumb">
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
+          <div class="cafe-ep-badge">Ep. 5</div>
+          <span class="cafe-platform-badge badge-sy">StreamYard</span>
+          <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+        </div>
+        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 5</div><div class="cafe-card-yr">2021</div></div>
+      </div>
+
+      <!-- Ep 6 · StreamYard -->
+      <div class="cafe-card" onclick="openSY('https://streamyard.com/hfrpa4idbkvu')">
+        <div class="cafe-card-thumb">
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
+          <div class="cafe-ep-badge">Ep. 6</div>
+          <span class="cafe-platform-badge badge-sy">StreamYard</span>
+          <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+        </div>
+        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 6</div><div class="cafe-card-yr">2021</div></div>
+      </div>
+
+      <!-- Ep 7 · StreamYard -->
+      <div class="cafe-card" onclick="openSY('https://streamyard.com/u7h7zy3k79tr')">
+        <div class="cafe-card-thumb">
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
+          <div class="cafe-ep-badge">Ep. 7</div>
+          <span class="cafe-platform-badge badge-sy">StreamYard</span>
+          <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+        </div>
+        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 7</div><div class="cafe-card-yr">2021</div></div>
+      </div>
+
+      <!-- Ep 8 · StreamYard -->
+      <div class="cafe-card" onclick="openSY('https://streamyard.com/bufd5wnnkgr8')">
+        <div class="cafe-card-thumb">
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
+          <div class="cafe-ep-badge">Ep. 8</div>
+          <span class="cafe-platform-badge badge-sy">StreamYard</span>
+          <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+        </div>
+        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 8</div><div class="cafe-card-yr">2021</div></div>
+      </div>
+
+    </div>
+  </section>
+
+</div><!-- /cafe-main -->
+
+<!-- YOUTUBE MODAL -->
+<div class="yt-modal" id="yt-modal" role="dialog" aria-label="Reproducir video">
+  <div class="yt-modal-inner" id="yt-modal-inner">
+    <button class="yt-close" id="yt-close" aria-label="Cerrar">&#x2715;</button>
+    <iframe id="yt-iframe" src="" allow="autoplay; fullscreen; encrypted-media" allowfullscreen title="Café con BTG"></iframe>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="cafe-footer">
+  <span class="cafe-footer-txt">BTG Seguros · Café con BTG · Uso exclusivo agentes</span>
+  <a href="aviso-de-privacidad.html" class="privacy-btn">Aviso de Privacidad</a>
+</footer>
+
+<script>
+// ── YouTube modal ──
+var ytModal=document.getElementById('yt-modal');
+var ytIframe=document.getElementById('yt-iframe');
+var ytClose=document.getElementById('yt-close');
+
+function openYT(id){
+  ytIframe.src='https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0';
+  ytModal.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeYT(){
+  ytModal.classList.remove('open');
+  document.body.style.overflow='';
+  setTimeout(function(){ytIframe.src='';},300);
+}
+ytClose.addEventListener('click',closeYT);
+ytModal.addEventListener('click',function(e){if(e.target===ytModal)closeYT();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeYT();});
+
+// ── StreamYard open in new tab ──
+function openSY(url){window.open(url,'_blank','noopener');}
+
+// ── Year filter pills + IntersectionObserver ──
+(function(){
+  var pills=document.querySelectorAll('.cafe-yr-pill');
+  var sections=document.querySelectorAll('.cafe-year-section');
+  var userScrolling=false;
+
+  pills.forEach(function(pill){
+    pill.addEventListener('click',function(){
+      var yr=pill.dataset.year;
+      var target=document.getElementById('year-'+yr);
+      if(!target)return;
+      userScrolling=true;
+      pills.forEach(function(p){p.classList.remove('active');});
+      pill.classList.add('active');
+      // offset: nav (64) + year-nav (~50)
+      var top=target.getBoundingClientRect().top+window.pageYOffset-120;
+      window.scrollTo({top:top,behavior:'smooth'});
+      setTimeout(function(){userScrolling=false;},800);
+    });
+  });
+
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      if(userScrolling)return;
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          var yr=entry.target.id.replace('year-','');
+          pills.forEach(function(p){p.classList.remove('active');});
+          var active=document.querySelector('.cafe-yr-pill[data-year="'+yr+'"]');
+          if(active)active.classList.add('active');
+        }
+      });
+    },{rootMargin:'-120px 0px -55% 0px',threshold:0});
+    sections.forEach(function(s){io.observe(s);});
+  }
+})();
+
+// ── Mobile menu ──
+(function(){
+  var burger=document.getElementById('nav-burger');
+  var menu=document.getElementById('mobile-menu');
+  if(!burger||!menu)return;
+  function openMenu(){burger.classList.add('open');menu.classList.add('open');document.body.style.overflow='hidden';burger.setAttribute('aria-label','Cerrar menú');}
+  function closeMenu(){burger.classList.remove('open');menu.classList.remove('open');document.body.style.overflow='';burger.setAttribute('aria-label','Abrir menú');}
+  burger.addEventListener('click',function(){menu.classList.contains('open')?closeMenu():openMenu();});
+  menu.querySelectorAll('.mm-link').forEach(function(link){link.addEventListener('click',closeMenu);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMenu();});
+  var mmHead=document.getElementById('mm-material');var mmSub=document.getElementById('mm-material-sub');
+  if(mmHead&&mmSub){mmHead.addEventListener('click',function(e){e.preventDefault();mmHead.classList.toggle('open');mmSub.classList.toggle('open');});}
+  var mmCloseBtn=document.getElementById('mm-close-btn');
+  if(mmCloseBtn)mmCloseBtn.addEventListener('click',closeMenu);
+})();
+</script>
+</body>
+</html>

@@ -379,6 +379,14 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 /* ─── PRIVACY BTN ─── */
 .privacy-btn{font-size:11px;font-weight:500;color:rgba(228,238,245,0.28);text-decoration:none;border:1px solid rgba(255,255,255,0.1);padding:5px 14px;border-radius:20px;letter-spacing:.04em;transition:color .2s,border-color .2s,background .2s;white-space:nowrap}
 .privacy-btn:hover{color:rgba(228,238,245,0.55);border-color:rgba(26,127,188,0.35);background:rgba(26,127,188,0.07)}
+
+/* ─── CONTENT TYPE SELECTOR ─── */
+.bib-type-wrap{max-width:1240px;margin:0 auto;padding:44px 60px 0}
+.bib-type-sel{display:inline-flex;align-items:center;gap:4px;padding:4px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px}
+.bib-type-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:10px;font-size:14px;font-weight:600;letter-spacing:-.01em;text-decoration:none;cursor:pointer;background:transparent;border:none;color:rgba(228,238,245,0.38);font-family:var(--font);transition:all .22s}
+.bib-type-btn.active{background:rgba(26,127,188,0.16);border:1px solid rgba(26,127,188,0.3);color:#E4EEF5;box-shadow:0 2px 12px rgba(26,127,188,0.12)}
+.bib-type-btn:not(.active):hover{color:rgba(228,238,245,0.65);background:rgba(255,255,255,0.05)}
+@media(max-width:768px){.bib-type-wrap{padding:28px 18px 0}.bib-type-btn{font-size:13px;padding:9px 16px}}
 </style>
 </head>
 <body>
@@ -474,6 +482,20 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
     </div>
   </div>
 </section>
+
+<!-- CONTENT TYPE SELECTOR -->
+<div class="bib-type-wrap">
+  <div class="bib-type-sel">
+    <button class="bib-type-btn active">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      E-books
+    </button>
+    <a href="cafe-con-btg.html" class="bib-type-btn">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+      Cafés con BTG
+    </a>
+  </div>
+</div>
 
 <!-- MAIN CONTENT -->
 <div class="bib-section">
