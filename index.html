@@ -169,8 +169,8 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 .aseg-nicho{background:rgba(29,158,117,0.12);color:rgba(60,190,150,0.8)}
 /* SUSI MOCKUP + CAMI LIVE */
 .susi-mockup{display:block}.susi-logo-wrap{display:flex;align-items:center;justify-content:center}.susi-wordmark{display:none}.sp-header,.sp-result,.sp-footer,.sp-tabs,.sp-tab,.sp-stat,.sp-badge,.sp-cov,.sp-right,.sp-price,.sp-tag,.sp-sep,.sp-dot{box-sizing:border-box}
-.cami-live{display:none}
-.cami-logo-mobile{display:flex;justify-content:center}.cami-logo-wrap{display:flex;align-items:center;justify-content:center}.cami-mockup{display:block}.cami-tagline{display:block;text-align:center}.cami-desc-m{display:block;text-align:center}.cami-slider-wrap{display:none}.susi-desktop-cta{display:flex}
+.cami-live{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:600;color:rgba(228,238,245,.5);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px}
+.cami-logo-mobile{display:none}.cami-logo-wrap{display:flex;align-items:center;justify-content:center}.cami-mockup{display:block}.cami-tagline{display:block;text-align:center}.cami-desc-m{display:block;text-align:center}.cami-slider-wrap{display:none}.susi-desktop-cta{display:flex}
 /* Hide old CAMI desktop content everywhere */
 .dual-card-dark .h3-dark{display:none}.dual-card-dark .feat-grid{display:none}.dual-card-dark .cami-visual{display:none}.p-old{display:none}.dual-card-dark .cami-desktop-btn{display:block}
 @keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.5)}}
@@ -222,11 +222,15 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 /* SUSI + CAMI */
 .dual-section{background:var(--white);padding:80px 60px}
 .dual-inner{max-width:1100px;margin:0 auto}
-.dual-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:48px;align-items:stretch}
-.dual-card{background:var(--off);border:1px solid var(--ll);border-radius:20px;padding:40px;transition:border-color .3s,transform .3s}
+.dual-grid{display:flex;flex-direction:column;gap:20px;margin-top:48px}
+/* Horizontal cards: SUSI text-left mockup-right, CAMI mockup-left text-right */
+.dual-card{background:var(--off);border:1px solid var(--ll);border-radius:20px;padding:44px 52px;display:flex;flex-direction:row;align-items:center;gap:52px;transition:border-color .3s,transform .3s}
 .dual-card:hover{border-color:var(--blue);transform:translateY(-2px)}
-.dual-card-dark{background:var(--dark);border:1px solid var(--bl);border-radius:20px;padding:40px;transition:border-color .3s,transform .3s}
-.dual-card-dark:hover{border-color:var(--blue);transform:translateY(-2px)}
+.dual-card-dark{background:var(--dark);border:1px solid var(--bl);border-radius:20px;padding:44px 52px;display:flex;flex-direction:row-reverse;align-items:center;gap:52px;transition:border-color .3s,transform .3s}
+.dual-card-dark:hover{border-color:rgba(0,201,224,.22);transform:translateY(-2px)}
+/* Two-column internals */
+.dual-text-col{flex:0 0 270px;min-width:0;display:flex;flex-direction:column;align-items:center}
+.dual-mockup-col{flex:1;min-width:0}
 .susi-logo-mobile{display:flex;justify-content:center}.dual-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:980px;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px}
 .badge-blue{background:rgba(26,127,188,0.1);border:1px solid rgba(26,127,188,0.2);color:var(--blue)}
 .badge-cyan{background:rgba(0,201,224,0.08);border:1px solid rgba(0,201,224,0.15);color:var(--cyan)}
@@ -530,10 +534,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 .cami-desc-m{display:block;font-size:13px;font-weight:300;color:rgba(228,238,245,0.45);line-height:1.6;margin-bottom:14px}
 .dual-card-dark .dual-badge{display:flex;justify-content:center;margin-left:auto;margin-right:auto}
 .dual-card-dark .h3-dark{display:none}
-.dual-card-dark .feat-grid{display:none}
 .dual-card-dark .cami-visual{display:none}
-.dual-card-dark .cami-desktop-btn{display:none}
-.dual-card-dark .cami-live{display:none}
 .dual-card-dark>p.p-old{display:none}
 /* CAMI mockup */
 .cami-mockup{display:flex;flex-direction:column;background:#fff;border:1px solid rgba(0,201,224,0.2);border-radius:14px;overflow:hidden;margin:14px 0;box-shadow:0 4px 24px rgba(0,0,0,0.08);width:100%}
@@ -657,8 +658,13 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 
   /* SUSI + CAMI */
   .dual-section{padding:20px 16px}
-  .dual-grid{grid-template-columns:1fr;gap:14px;margin-top:20px}
-  .dual-card,.dual-card-dark{padding:18px 16px;border-radius:16px;align-items:center}
+  .dual-grid{gap:14px;margin-top:20px}
+  .dual-card,.dual-card-dark{flex-direction:column;padding:18px 16px;border-radius:16px;gap:0}
+  .dual-text-col,.dual-mockup-col{flex:none;width:100%}
+  .cami-logo-mobile{display:flex !important}
+  .cami-live{display:none}
+  .dual-card-dark .feat-grid{display:none !important}
+  .dual-card-dark .cami-desktop-btn{display:none !important}
   .dual-card h3,.dual-card-dark h3{font-size:18px;margin-bottom:8px}
   .feat-grid{grid-template-columns:1fr 1fr;gap:8px}
   .feat-item,.feat-item-dark{padding:8px 10px;font-size:12px;gap:6px;border-radius:8px}
@@ -795,25 +801,38 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
   .aseg-logo img[src*="La_Latino"]{transform:scale(1.6)}
   .aseg-logo img[src*="GMX"]{transform:scale(1.45)}
   .aseg-logo img[src*="Mapfre"]{transform:scale(0.93)}
-  .dual-card,.dual-card-dark{display:flex;flex-direction:column;align-items:center;text-align:center;padding:36px 32px;justify-content:flex-start}
+  /* Horizontal two-column layout */
+  .dual-card{flex-direction:row;align-items:center;gap:52px;padding:44px 52px;text-align:left;justify-content:flex-start}
+  .dual-card-dark{flex-direction:row-reverse;align-items:center;gap:52px;padding:44px 52px;text-align:left;justify-content:flex-start}
   .dual-grid{align-items:stretch}
-  .susi-logo-mobile,.cami-logo-mobile{width:100%}
-  .susi-logo-wrap,.cami-logo-wrap{width:100%}
-  .susi-logo-wrap img{width:100%;max-height:200px;object-fit:contain}
-  .cami-logo-wrap img{width:100%;max-height:200px;object-fit:contain;filter:brightness(0) invert(1) drop-shadow(0 0 10px rgba(0,201,224,0.3))}
-  .dual-card .p-light,.cami-desc-m{font-size:15px !important;font-weight:400 !important}
-  .dual-card .p-light strong,.cami-desc-m strong{font-size:1.12em;font-weight:900 !important;color:#1A7FBC}
-  .dual-card-dark .cami-desc-m strong{color:#00C9E0}
-  .susi-mockup,.cami-mockup{width:100%;margin:12px 0;flex:1}
-  .susi-desktop-cta-wrap,.cami-desktop-btn{margin-top:auto;width:100%}
+  .dual-text-col{flex:0 0 300px;align-items:flex-start}
+  .dual-mockup-col{flex:1;min-width:0}
+  /* Hide mobile logos on desktop */
+  .susi-logo-mobile,.cami-logo-mobile{display:none !important}
+  /* SUSI text col */
+  .dual-card .dual-badge{margin-left:0;margin-right:0}
+  .susi-tagline{font-size:14px;color:rgba(30,50,80,0.6);margin:4px 0 10px}
+  .susi-desc{font-size:13px;line-height:1.6;margin-bottom:0}
+  /* CAMI text col */
+  .dual-card-dark .dual-badge{margin-left:0;margin-right:0}
+  .dual-card-dark .cami-tagline{text-align:left;font-size:14px;margin-bottom:8px}
+  .dual-card-dark .cami-desc-m{text-align:left;font-size:13px;margin-bottom:14px}
+  .dual-card-dark .cami-live{display:flex}
+  .dual-card-dark .feat-grid{display:grid;margin:12px 0}
+  .dual-card-dark .cami-desktop-btn{display:block;width:100%;margin-top:16px}
+  /* Mockup sizing */
+  .susi-mockup{width:100%;margin:0}
+  .cami-mockup{width:100%;margin:0}
+  /* SUSI CTA below mockup */
+  .susi-desktop-cta-wrap{width:100%;margin-top:12px}
   .susi-slider{display:none}
-  .susi-desktop-cta,.dual-card-dark .cami-desktop-btn{display:flex !important;width:100%}
-  .btn-premium{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px 24px;border-radius:14px;font-size:15px;font-weight:700;letter-spacing:.04em;text-decoration:none;transition:transform .2s,box-shadow .2s}
+  .susi-desktop-cta{display:flex !important;width:100%}
+  .btn-premium{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:14px 20px;border-radius:12px;font-size:14px;font-weight:700;letter-spacing:.04em;text-decoration:none;transition:transform .2s,box-shadow .2s}
   .btn-premium:hover{transform:translateY(-2px)}
   .btn-premium-susi{background:linear-gradient(135deg,#0d5c8a,#1A7FBC);color:#fff;box-shadow:0 4px 20px rgba(26,127,188,0.4)}
   .btn-premium-susi:hover{box-shadow:0 8px 28px rgba(26,127,188,0.55)}
-  .btn-premium-cami{background:#fff;color:#1A7FBC;box-shadow:0 4px 20px rgba(0,0,0,0.15);border:2px solid rgba(26,127,188,0.2)}
-  .btn-premium-cami:hover{box-shadow:0 8px 28px rgba(26,127,188,0.3);border-color:rgba(26,127,188,0.5)}
+  .btn-premium-cami{background:linear-gradient(135deg,rgba(0,201,224,.12),rgba(0,201,224,.06));color:var(--cyan);border:1px solid rgba(0,201,224,0.3);box-shadow:0 4px 20px rgba(0,0,0,0.12)}
+  .btn-premium-cami:hover{box-shadow:0 8px 28px rgba(0,201,224,0.2);border-color:rgba(0,201,224,0.55)}
   .btn-premium svg{flex-shrink:0}
 }
 /* ─── PRIVACY BTN ─── */
@@ -1155,14 +1174,19 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
     <h2 class="sec-h2 h2-light" style="display:none">Soluciones para<br>nuestros agentes</h2>
     <div class="dual-grid">
       <div class="dual-card reveal-left">
-        <div class="susi-logo-mobile">
-          <div class="susi-logo-wrap">
-            <img src="SUSI/Logosuok.png" alt="SUSI BTG">
+        <!-- Text col: logo, badge, tagline, desc, CTA -->
+        <div class="dual-text-col">
+          <div class="susi-logo-mobile">
+            <div class="susi-logo-wrap">
+              <img src="SUSI/Logosuok.png" alt="SUSI BTG">
+            </div>
           </div>
+          <div class="dual-badge badge-blue">SUSI BTG</div>
+          <p class="susi-tagline"><strong>Su</strong> <strong>S</strong>istema <strong>I</strong>nteligente</p>
+          <p class="p-light susi-desc" style="line-height:1.6;margin-bottom:14px;text-align:center"><strong class="highlight-word">Multicotizador</strong> diseñado para nuestros agentes</p>
         </div>
-        <div class="dual-badge badge-blue">SUSI BTG</div>
-        <p class="susi-tagline"><strong>Su</strong> <strong>S</strong>istema <strong>I</strong>nteligente</p>
-        <p class="p-light susi-desc" style="line-height:1.6;margin-bottom:14px;text-align:center"><strong class="highlight-word">Multicotizador</strong> diseñado para nuestros agentes</p>
+        <!-- Mockup col: interactive widget + CTA -->
+        <div class="dual-mockup-col">
         <div class="susi-mockup">
           <input type="radio" name="sptab" id="sptab-autos" checked class="sp-radio">
           <input type="radio" name="sptab" id="sptab-gmm" class="sp-radio">
@@ -1260,36 +1284,36 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
             Entrar a SUSI
           </a>
         </div>
-      </div>
+        </div><!-- /dual-mockup-col -->
+      </div><!-- /dual-card SUSI -->
       <div class="dual-card-dark reveal-right" id="siniestros">
-        <!-- Mobile logo -->
-        <div class="cami-logo-mobile">
-          <div class="cami-logo-wrap">
-            <img src="CAMI/Logocaok.png" alt="CAMI BTG">
+        <!-- Text col: right side on desktop (row-reverse), top on mobile -->
+        <div class="dual-text-col">
+          <!-- Mobile logo (hidden on desktop) -->
+          <div class="cami-logo-mobile">
+            <div class="cami-logo-wrap">
+              <img src="CAMI/Logocaok.png" alt="CAMI BTG">
+            </div>
+          </div>
+          <div class="dual-badge badge-cyan">CAMI BTG</div>
+          <p class="cami-tagline"><strong>C</strong>entro de <strong>A</strong>tención y <strong>M</strong>onitoreo <strong>I</strong>ntegral</p>
+          <p class="cami-desc-m">Seguimiento en tiempo real de tus <strong class="highlight-word cami-hw">siniestros</strong></p>
+          <div class="cami-live"><span class="cami-pulse-dot"></span>Monitoreo en tiempo real</div>
+          <div class="feat-grid">
+            <div class="feat-item-dark"><div class="feat-dot-cyan"></div>Rápida respuesta</div>
+            <div class="feat-item-dark"><div class="feat-dot-cyan"></div>Tiempo real</div>
+            <div class="feat-item-dark"><div class="feat-dot-cyan"></div>Accesibilidad total</div>
+            <div class="feat-item-dark"><div class="feat-dot-cyan"></div>Seguridad de datos</div>
+          </div>
+          <div class="cami-desktop-btn">
+            <a href="https://btgseguros-servicios.freshdesk.com/support/tickets/new" target="_blank" class="btn-premium btn-premium-cami">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              Recibir atención de siniestros
+            </a>
           </div>
         </div>
-        <!-- Badge -->
-        <div class="dual-badge badge-cyan">CAMI BTG</div>
-        <!-- Mobile tagline & desc -->
-        <p class="cami-tagline"><strong>C</strong>entro de <strong>A</strong>tención y <strong>M</strong>onitoreo <strong>I</strong>ntegral</p>
-        <p class="cami-desc-m" style="text-align:center">Seguimiento en tiempo real de tus <strong class="highlight-word cami-hw">siniestros</strong></p>
-        <!-- Desktop-only content -->
-        <div class="cami-live"><span class="cami-pulse-dot"></span>Monitoreo en tiempo real</div>
-        <h3 class="h3-dark">Centro de Atención y Monitoreo Integral</h3>
-        <p class="p-old" style="font-size:14px;font-weight:300;line-height:1.7;margin-bottom:20px;color:rgba(228,238,245,0.45)">Seguimiento en tiempo real de todos tus reclamos desde cualquier dispositivo. Accesible, seguro y siempre disponible.</p>
-        <div class="feat-grid">
-          <div class="feat-item-dark"><div class="feat-dot-cyan"></div>Rápida respuesta</div>
-          <div class="feat-item-dark"><div class="feat-dot-cyan"></div>Seguimiento en tiempo real</div>
-          <div class="feat-item-dark"><div class="feat-dot-cyan"></div>Accesibilidad total</div>
-          <div class="feat-item-dark"><div class="feat-dot-cyan"></div>Seguridad de datos</div>
-        </div>
-        <div class="cami-visual">
-          <div class="cami-row"><span class="cami-lbl">Siniestro GMM · #4821</span><span class="cami-status s-ok">Resuelto</span></div>
-          <div class="cami-row"><span class="cami-lbl">Siniestro Auto · #4807</span><span class="cami-status s-prog">En taller</span></div>
-          <div class="cami-row"><span class="cami-lbl">Reembolso GMM · #4798</span><span class="cami-status s-info">En revisión</span></div>
-          <div class="cami-row"><span class="cami-lbl">Endoso · #4791</span><span class="cami-status s-ok">Emitido</span></div>
-        </div>
-        <!-- Mobile mockup -->
+        <!-- Mockup col: left side on desktop (row-reverse), below on mobile -->
+        <div class="dual-mockup-col">
         <div class="cami-mockup">
           <div class="cm-header">
             <div class="cm-header-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12h6M9 16h4M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2z"/></svg></div>
@@ -1350,14 +1374,9 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
             </div>
           </div>
           <div class="cm-disclaimer">✦ Pantalla ilustrativa · Datos de ejemplo · No representa valores reales</div>
-        </div>
-        <div class="cami-desktop-btn" style="width:100%">
-          <a href="https://btgseguros-servicios.freshdesk.com/support/tickets/new" target="_blank" class="btn-premium btn-premium-cami">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            Recibir atención de siniestros
-          </a>
-        </div>
-      </div>
+        </div><!-- /cami-mockup -->
+        </div><!-- /dual-mockup-col -->
+      </div><!-- /dual-card-dark CAMI -->
     </div>
     <!-- CAMI slider — mobile only, outside cards -->
     <div class="cami-slider-wrap">
