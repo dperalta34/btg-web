@@ -269,12 +269,14 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 .cotiz-section{background:var(--off);padding:48px 60px 0}
 .cotiz-header{max-width:1100px;margin:0 auto;padding-bottom:28px}
 /* Layout: canvas left 360px · steps right flex */
-.cotiz-body{max-width:1100px;margin:0 auto;display:flex;align-items:flex-start;gap:16px;justify-content:center}
-.cotiz-canvas-col{flex:0 0 360px}
+.cotiz-body{max-width:1100px;margin:0 auto;display:flex;align-items:flex-start;gap:32px}
+.cotiz-canvas-col{flex:0 0 460px}
 .cotiz-canvas-wrap{line-height:0}
 #cotiz-canvas{width:100%;height:auto;display:block;mix-blend-mode:multiply}
-/* Steps — fixed width so both cols center together */
-.cotiz-steps-col{flex:0 0 400px;display:flex;flex-direction:column}
+/* Steps — flex:1 fills remaining width; position:relative for timeline line */
+.cotiz-steps-col{flex:1;display:flex;flex-direction:column;position:relative}
+/* Vertical gradient line connecting all 4 bubbles — premium timeline effect */
+.cotiz-steps-col::before{content:'';position:absolute;right:40px;top:44px;bottom:44px;width:2px;background:linear-gradient(180deg,rgba(0,201,224,.35) 0%,rgba(42,172,224,.28) 33%,rgba(26,127,188,.22) 66%,rgba(13,111,168,.14) 100%);border-radius:2px;pointer-events:none}
 /* Per-step accent colors + stagger delay — all colored, bottom step darkest blue */
 .cotiz-step:nth-child(1){--sc:rgba(0,201,224,.4);--sl:#00C9E0;--sd:.0s}
 .cotiz-step:nth-child(2){--sc:rgba(42,172,224,.4);--sl:#2AACE0;--sd:.13s}
@@ -291,7 +293,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 }
 .cotiz-step-in .cotiz-step-bubble{animation:cotiz-pulse 2.6s ease-in-out infinite;animation-delay:var(--sd,0s)}
 /* Connector line — now on RIGHT of bubble (canvas is right) */
-.cotiz-step-side{display:flex;align-items:center;flex-shrink:0;padding-top:3px}
+.cotiz-step-side{display:flex;align-items:center;flex-shrink:0;padding-top:3px;position:relative;z-index:1}
 .cotiz-step-conn{width:22px;height:2px;flex-shrink:0;background:linear-gradient(90deg,var(--sc),rgba(0,0,0,.03))}
 /* Bubble — gradient progression cyan→blue (top to bottom) */
 .cotiz-step-bubble{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;flex-shrink:0}
