@@ -266,20 +266,20 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 .dash-feat-desc{font-size:12px;font-weight:300;color:rgba(228,238,245,0.38);line-height:1.55}
 
 /* COTIZACIONES */
-.cotiz-section{background:var(--off);padding:48px 0 0}
-.cotiz-header{max-width:1100px;margin:0 auto;padding:0 60px 28px}
+.cotiz-section{background:var(--off);padding:48px 60px 0}
+.cotiz-header{max-width:1100px;margin:0 auto;padding-bottom:28px}
 /* Layout: canvas left 360px · steps right flex */
-.cotiz-body{max-width:1100px;margin:0 auto;padding:0 60px;display:flex;align-items:flex-start;gap:16px}
+.cotiz-body{max-width:1100px;margin:0 auto;display:flex;align-items:flex-start;gap:16px}
 .cotiz-canvas-col{flex:0 0 360px}
 .cotiz-canvas-wrap{line-height:0}
 #cotiz-canvas{width:100%;height:auto;display:block;mix-blend-mode:multiply}
 /* Steps — right */
 .cotiz-steps-col{flex:1;display:flex;flex-direction:column}
-/* Per-step accent colors + stagger delay */
+/* Per-step accent colors + stagger delay — all colored, bottom step darkest blue */
 .cotiz-step:nth-child(1){--sc:rgba(0,201,224,.4);--sl:#00C9E0;--sd:.0s}
 .cotiz-step:nth-child(2){--sc:rgba(42,172,224,.4);--sl:#2AACE0;--sd:.13s}
 .cotiz-step:nth-child(3){--sc:rgba(26,127,188,.4);--sl:var(--blue);--sd:.26s}
-.cotiz-step:nth-child(4){--sc:rgba(122,148,162,.22);--sl:var(--muted);--sd:.0s}
+.cotiz-step:nth-child(4){--sc:rgba(13,111,168,.4);--sl:#0D6FA8;--sd:.39s}
 /* Step row — starts hidden, slides in via JS */
 .cotiz-step{display:flex;align-items:flex-start;gap:0;padding:15px 0;border-bottom:1px solid rgba(26,127,188,.07);opacity:0;transform:translateX(20px);transition:opacity .5s ease,transform .5s cubic-bezier(.22,1,.36,1)}
 .cotiz-step:last-child{border-bottom:none}
@@ -290,29 +290,27 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
   55%{box-shadow:0 3px 16px var(--sc),0 0 0 9px rgba(0,0,0,0)}
 }
 .cotiz-step-in .cotiz-step-bubble{animation:cotiz-pulse 2.6s ease-in-out infinite;animation-delay:var(--sd,0s)}
-.cotiz-step:last-child.cotiz-step-in .cotiz-step-bubble{animation:none}
 /* Connector line */
 .cotiz-step-side{display:flex;align-items:center;flex-shrink:0;padding-top:3px}
 .cotiz-step-conn{width:22px;height:2px;flex-shrink:0;background:linear-gradient(90deg,rgba(0,0,0,.03),var(--sc))}
-/* Bubble — color per step */
+/* Bubble — gradient progression cyan→blue (top to bottom) */
 .cotiz-step-bubble{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;flex-shrink:0}
 .cotiz-step:nth-child(1) .cotiz-step-bubble{background:linear-gradient(135deg,#00DBF2,#00C9E0)}
 .cotiz-step:nth-child(2) .cotiz-step-bubble{background:linear-gradient(135deg,#44BBEE,#2AACE0)}
 .cotiz-step:nth-child(3) .cotiz-step-bubble{background:linear-gradient(135deg,#2AACE0,#1A7FBC)}
-.cotiz-step:nth-child(4) .cotiz-step-bubble{background:rgba(122,148,162,.35);color:rgba(255,255,255,.7)}
+.cotiz-step:nth-child(4) .cotiz-step-bubble{background:linear-gradient(135deg,#1A7FBC,#0D6FA8)}
 /* Text info */
 .cotiz-step-info{flex:1;padding-left:16px}
 .cotiz-step-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px;color:var(--sl)}
 .cotiz-step-txt{font-size:14px;font-weight:700;color:var(--text);line-height:1.35;letter-spacing:-.02em}
-.cotiz-step:last-child .cotiz-step-txt{color:var(--muted);font-weight:500}
-/* Ramos strip */
-.cotiz-ramos-strip{background:rgba(26,127,188,.03);border-top:1px solid var(--ll);margin-top:8px}
-.cotiz-ramos-title{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;text-align:center;padding:14px 28px 4px}
-.cotiz-ramos-inner{max-width:1200px;margin:0 auto;padding:6px 28px 14px;display:flex;flex-wrap:nowrap;justify-content:space-between}
+/* Ramos strip — dark background */
+.cotiz-ramos-strip{background:var(--dark);margin-top:0}
+.cotiz-ramos-title{font-size:11px;font-weight:700;color:rgba(228,238,245,.45);text-transform:uppercase;letter-spacing:.12em;text-align:center;padding:20px 28px 6px}
+.cotiz-ramos-inner{max-width:1200px;margin:0 auto;padding:6px 28px 20px;display:flex;flex-wrap:nowrap;justify-content:space-between}
 .cotiz-ramo{display:flex;flex-direction:column;align-items:center;gap:5px;padding:10px 4px;flex:1;min-width:0;border-radius:10px;cursor:default;transition:background .22s,transform .22s}
-.cotiz-ramo:hover{background:rgba(26,127,188,.07);transform:translateY(-2px)}
-.cotiz-ramo svg{width:22px;height:22px;stroke:var(--blue);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
-.cotiz-ramo-nm{font-size:8.5px;font-weight:700;color:var(--text);text-align:center;line-height:1.3;letter-spacing:-.01em}
+.cotiz-ramo:hover{background:rgba(255,255,255,.06);transform:translateY(-2px)}
+.cotiz-ramo svg{width:22px;height:22px;stroke:rgba(228,238,245,.65);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.cotiz-ramo-nm{font-size:8.5px;font-weight:700;color:rgba(228,238,245,.8);text-align:center;line-height:1.3;letter-spacing:-.01em}
 @keyframes glow-pulse{0%{opacity:.6;transform:scale(1)}100%{opacity:1;transform:scale(1.12)}}
 
 /* UNIVERSIDAD */
@@ -685,14 +683,15 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
   .panel-front{width:160px;height:95px}
 
   /* COTIZACIONES */
-  .cotiz-section{padding:24px 0 0}
-  .cotiz-header{padding:0 20px 16px}
-  .cotiz-body{flex-direction:column;padding:0 20px;gap:16px}
+  .cotiz-section{padding:24px 20px 0}
+  .cotiz-header{padding-bottom:16px}
+  .cotiz-body{flex-direction:column;gap:16px}
   .cotiz-canvas-col{flex:0 0 auto;width:100%}
   .cotiz-step{padding:12px 0;opacity:1;transform:none}
   .cotiz-step-bubble{width:30px;height:30px;font-size:12px}
   .cotiz-step-txt{font-size:13px}
-  .cotiz-ramos-title{font-size:10px;padding:12px 16px 4px}
+  .cotiz-ramos-title{font-size:10px;padding:14px 20px 4px}
+  .cotiz-ramos-inner{padding:6px 20px 16px}
 
   /* UNIVERSIDAD */
   .univ-section{padding:20px 0 0}
