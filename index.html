@@ -266,37 +266,26 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 .dash-feat-desc{font-size:12px;font-weight:300;color:rgba(228,238,245,0.38);line-height:1.55}
 
 /* COTIZACIONES */
-.cotiz-section{background:var(--dark);padding:80px 0 88px;overflow:hidden;position:relative}
-.cotiz-section::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,201,224,.18),transparent)}
-.cotiz-top{max-width:1100px;margin:0 auto;padding:0 60px 60px;text-align:center}
-.cotiz-tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);background:rgba(0,201,224,.1);border:1px solid rgba(0,201,224,.25);border-radius:20px;padding:5px 14px;margin-bottom:20px}
-.cotiz-h2{font-size:clamp(32px,4.5vw,52px);font-weight:800;color:#F5F9FC;line-height:1.08;letter-spacing:-.04em;margin-bottom:16px}
-.cotiz-h2 em{color:var(--cyan);font-style:normal}
-.cotiz-lead{font-size:16px;color:rgba(228,238,245,.52);line-height:1.72;max-width:520px;margin:0 auto}
-.cotiz-grid{max-width:1100px;margin:0 auto;padding:0 60px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
-/* Video col */
-.cotiz-vid-col{position:sticky;top:calc(50vh - 200px)}
-.cotiz-vid-glow{position:absolute;inset:-60px;background:radial-gradient(ellipse at 50% 50%,rgba(0,201,224,.16) 0%,rgba(26,127,188,.08) 40%,transparent 70%);filter:blur(48px);pointer-events:none;animation:glow-pulse 5s ease-in-out infinite alternate}
-.cotiz-vid-frame{position:relative;border-radius:18px;overflow:hidden;background:#020c16;box-shadow:0 0 0 1px rgba(255,255,255,.07),0 0 0 8px rgba(255,255,255,.02),0 40px 80px rgba(0,0,0,.55);aspect-ratio:16/9}
-.cotiz-vid-frame video{width:100%;height:100%;object-fit:cover;display:block;border-radius:18px}
-/* Steps col */
+.cotiz-section{background:var(--off);padding:8px 0 0}
+.cotiz-header{max-width:1100px;margin:0 auto;padding:0 60px 0}
+.cotiz-grid-wrap{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;align-items:start;padding:0 60px 52px;gap:48px}
+#cotiz-canvas{width:100%;max-width:560px;height:auto;display:block}
 .cotiz-content{padding-top:8px}
-.cotiz-steps{position:relative;padding-left:0;margin-bottom:44px}
-.cotiz-steps-line{position:absolute;left:19px;top:20px;bottom:20px;width:2px;background:linear-gradient(to bottom,rgba(0,201,224,.6),rgba(26,127,188,.15));border-radius:2px}
-.cotiz-step{display:flex;align-items:flex-start;gap:18px;padding:16px 0;position:relative}
-.cotiz-step-num{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex-shrink:0;background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.1);color:rgba(228,238,245,.4);transition:background .3s,border-color .3s,color .3s}
-.cotiz-step:last-child .cotiz-step-num{background:linear-gradient(135deg,var(--cyan),var(--blue));border-color:transparent;color:#fff;box-shadow:0 0 0 4px rgba(0,201,224,.12),0 4px 16px rgba(0,0,0,.3)}
-.cotiz-step-body{padding-top:8px}
-.cotiz-step-text{font-size:14px;color:rgba(228,238,245,.6);line-height:1.6;font-weight:500}
-.cotiz-step:last-child .cotiz-step-text{color:rgba(228,238,245,.92);font-weight:700;font-size:15px}
-/* Ramos */
-.cotiz-ramos-label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(228,238,245,.28);margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.06)}
-.cotiz-ramos-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.cotiz-ramo{display:flex;align-items:flex-start;gap:10px;padding:11px 14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;transition:background .25s,border-color .25s;cursor:default}
-.cotiz-ramo:hover{background:rgba(26,127,188,.08);border-color:rgba(26,127,188,.22)}
-.cotiz-ramo-dot{width:5px;height:5px;border-radius:50%;background:var(--cyan);flex-shrink:0;margin-top:5px;opacity:.7}
-.cotiz-ramo-name{font-size:12px;font-weight:600;color:rgba(228,238,245,.72);line-height:1.35}
-.cotiz-ramo-sub{font-size:10.5px;color:rgba(228,238,245,.36);line-height:1.4;margin-top:2px}
+.cotiz-steps{position:relative;margin-bottom:36px}
+.cotiz-steps-line{position:absolute;left:19px;top:20px;bottom:20px;width:2px;background:linear-gradient(to bottom,var(--blue),rgba(26,127,188,.12));border-radius:2px}
+.cotiz-step{display:flex;align-items:flex-start;gap:18px;padding:14px 0;position:relative}
+.cotiz-step-num{width:40px;height:40px;border-radius:50%;background:var(--off);border:1.5px solid rgba(26,127,188,.22);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:rgba(26,127,188,.45);flex-shrink:0}
+.cotiz-step:last-child .cotiz-step-num{background:linear-gradient(135deg,var(--blue),#0a4a78);border-color:transparent;color:#fff;box-shadow:0 4px 16px rgba(26,127,188,.28)}
+.cotiz-step-body{padding-top:10px}
+.cotiz-step-text{font-size:14px;color:var(--mid);line-height:1.6;font-weight:500}
+.cotiz-step:last-child .cotiz-step-text{color:var(--blue);font-weight:700;font-size:14.5px}
+.cotiz-ramos-label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--ll)}
+.cotiz-ramos-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.cotiz-ramo{display:flex;align-items:flex-start;gap:9px;padding:10px 12px;background:#fff;border:1px solid var(--ll);border-radius:10px;transition:border-color .25s,box-shadow .25s;cursor:default}
+.cotiz-ramo:hover{border-color:rgba(26,127,188,.28);box-shadow:0 2px 10px rgba(26,127,188,.08)}
+.cotiz-ramo-dot{width:5px;height:5px;border-radius:50%;background:var(--blue);flex-shrink:0;margin-top:5px}
+.cotiz-ramo-name{font-size:12px;font-weight:600;color:var(--text);line-height:1.35}
+.cotiz-ramo-sub{font-size:10.5px;color:var(--muted);margin-top:2px;line-height:1.4}
 @keyframes glow-pulse{0%{opacity:.6;transform:scale(1)}100%{opacity:1;transform:scale(1.12)}}
 
 /* UNIVERSIDAD */
@@ -745,11 +734,11 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
   .aseg-logo img[src*="Prevem"]{transform:scale(2.0)}
 
   /* COTIZACIONES */
-  .cotiz-section{padding:44px 0 52px}
-  .cotiz-top{padding:0 20px 32px}
-  .cotiz-grid{grid-template-columns:1fr;gap:36px;padding:0 20px}
-  .cotiz-vid-col{position:static;top:auto}
+  .cotiz-section{padding:24px 0 0}
+  .cotiz-header{padding:0 20px 10px}
+  .cotiz-grid-wrap{grid-template-columns:1fr;padding:0 20px 32px;gap:24px}
   .cotiz-ramos-grid{grid-template-columns:1fr}
+  #cotiz-canvas{max-width:100% !important;border-radius:8px}
 
   /* UNIVERSIDAD — cédulas en cuadrícula 3×2 en móvil */
   .lpath-wrap{overflow:visible;-webkit-overflow-scrolling:unset;flex-wrap:wrap;justify-content:center;padding:12px 4px 8px;gap:14px 8px}
@@ -1417,23 +1406,15 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 
 <!-- COTIZACIONES EXPRESS -->
 <section class="cotiz-section" id="cotizaciones">
-  <div class="cotiz-top reveal">
-    <span class="cotiz-tag">Respuesta en menos de 24 horas</span>
-    <h2 class="cotiz-h2">Cotizaciones <em>Express</em></h2>
-    <p class="cotiz-lead">3 a 4 opciones claras y confiables por cotización, para una amplia variedad de ramos a nivel nacional.</p>
+  <div class="cotiz-header">
+    <h2 class="sec-h2 h2-light">Cotizaciones Express</h2>
+    <p class="sec-p p-light" style="max-width:560px;margin-top:12px">Respuestas claras y confiables en menos de 24 horas. 3 a 4 opciones por cotización para una amplia variedad de ramos a nivel nacional.</p>
   </div>
-  <div class="cotiz-grid" id="cotiz-scroll-wrap">
-    <!-- VIDEO -->
-    <div class="cotiz-vid-col">
-      <div class="cotiz-vid-glow"></div>
-      <div class="cotiz-vid-frame">
-        <video id="cotiz-video" muted playsinline preload="auto" loop
-          src="Cotización_Express/Animación cotización express OK.mp4"></video>
-      </div>
-    </div>
-    <!-- CONTENT -->
+  <div class="cotiz-grid-wrap" id="cotiz-section">
+    <!-- ANIMACIÓN COHETE (canvas scroll-driven) -->
+    <canvas id="cotiz-canvas" style="width:100%;max-width:560px;height:auto;display:block"></canvas>
+    <!-- CONTENIDO DERECHO -->
     <div class="cotiz-content reveal">
-      <!-- Proceso -->
       <div class="cotiz-steps">
         <div class="cotiz-steps-line"></div>
         <div class="cotiz-step">
@@ -1453,7 +1434,6 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
           <div class="cotiz-step-body"><div class="cotiz-step-text">Entrega de 3 a 4 opciones en menos de 24 horas</div></div>
         </div>
       </div>
-      <!-- Ramos -->
       <div class="cotiz-ramos-label">Ramos disponibles</div>
       <div class="cotiz-ramos-grid">
         <div class="cotiz-ramo"><div class="cotiz-ramo-dot"></div><div><div class="cotiz-ramo-name">Empresarial</div></div></div>
@@ -1867,35 +1847,6 @@ function closeBases(){
   document.body.style.overflow='';
   setTimeout(function(){var i=document.getElementById('bases-img');if(i)i.src='';},350);
 }
-
-// COTIZACIONES VIDEO — scroll-driven + autoplay fallback
-(function(){
-  var vid=document.getElementById('cotiz-video');
-  var wrap=document.getElementById('cotiz-scroll-wrap');
-  if(!vid||!wrap)return;
-  var playing=false;
-  function tryPlay(){if(!playing){vid.play().then(function(){playing=true}).catch(function(){});}}
-  function tryPause(){if(playing){vid.pause();playing=false;}}
-  // Scroll-driven: map scroll progress within section to currentTime
-  function onScroll(){
-    var rect=wrap.getBoundingClientRect();
-    var wH=window.innerHeight;
-    var progress=Math.max(0,Math.min(1,(wH-rect.top)/(wH+rect.height)));
-    if(progress>0&&progress<1){
-      tryPlay();
-      if(vid.duration&&!vid.loop){vid.currentTime=progress*vid.duration;}
-    } else { tryPause(); }
-  }
-  vid.addEventListener('loadedmetadata',function(){
-    window.addEventListener('scroll',onScroll,{passive:true});
-    onScroll();
-  });
-  // IntersectionObserver fallback
-  new IntersectionObserver(function(es){es.forEach(function(e){
-    if(e.isIntersecting)tryPlay(); else tryPause();
-  });},{threshold:0.15}).observe(vid);
-  vid.load();
-})();
 
 // COUNTER
 function animateCounter(el){
@@ -2423,6 +2374,200 @@ window.addEventListener('scroll', () => {
     drawMapFrame(frameIndex);
   }
 });
+
+
+// ── COTIZACIONES SCROLL ANIMATION ──
+const COTIZ_FRAMES = [
+  "frames/cotiz/f000.jpg",
+  "frames/cotiz/f001.jpg",
+  "frames/cotiz/f002.jpg",
+  "frames/cotiz/f003.jpg",
+  "frames/cotiz/f004.jpg",
+  "frames/cotiz/f005.jpg",
+  "frames/cotiz/f006.jpg",
+  "frames/cotiz/f007.jpg",
+  "frames/cotiz/f008.jpg",
+  "frames/cotiz/f009.jpg",
+  "frames/cotiz/f010.jpg",
+  "frames/cotiz/f011.jpg",
+  "frames/cotiz/f012.jpg",
+  "frames/cotiz/f013.jpg",
+  "frames/cotiz/f014.jpg",
+  "frames/cotiz/f015.jpg",
+  "frames/cotiz/f016.jpg",
+  "frames/cotiz/f017.jpg",
+  "frames/cotiz/f018.jpg",
+  "frames/cotiz/f019.jpg",
+  "frames/cotiz/f020.jpg",
+  "frames/cotiz/f021.jpg",
+  "frames/cotiz/f022.jpg",
+  "frames/cotiz/f023.jpg",
+  "frames/cotiz/f024.jpg",
+  "frames/cotiz/f025.jpg",
+  "frames/cotiz/f026.jpg",
+  "frames/cotiz/f027.jpg",
+  "frames/cotiz/f028.jpg",
+  "frames/cotiz/f029.jpg",
+  "frames/cotiz/f030.jpg",
+  "frames/cotiz/f031.jpg",
+  "frames/cotiz/f032.jpg",
+  "frames/cotiz/f033.jpg",
+  "frames/cotiz/f034.jpg",
+  "frames/cotiz/f035.jpg",
+  "frames/cotiz/f036.jpg",
+  "frames/cotiz/f037.jpg",
+  "frames/cotiz/f038.jpg",
+  "frames/cotiz/f039.jpg",
+  "frames/cotiz/f040.jpg",
+  "frames/cotiz/f041.jpg",
+  "frames/cotiz/f042.jpg",
+  "frames/cotiz/f043.jpg",
+  "frames/cotiz/f044.jpg",
+  "frames/cotiz/f045.jpg",
+  "frames/cotiz/f046.jpg",
+  "frames/cotiz/f047.jpg",
+  "frames/cotiz/f048.jpg",
+  "frames/cotiz/f049.jpg",
+  "frames/cotiz/f050.jpg",
+  "frames/cotiz/f051.jpg",
+  "frames/cotiz/f052.jpg",
+  "frames/cotiz/f053.jpg",
+  "frames/cotiz/f054.jpg",
+  "frames/cotiz/f055.jpg",
+  "frames/cotiz/f056.jpg",
+  "frames/cotiz/f057.jpg",
+  "frames/cotiz/f058.jpg",
+  "frames/cotiz/f059.jpg",
+  "frames/cotiz/f060.jpg",
+  "frames/cotiz/f061.jpg",
+  "frames/cotiz/f062.jpg",
+  "frames/cotiz/f063.jpg",
+  "frames/cotiz/f064.jpg",
+  "frames/cotiz/f065.jpg",
+  "frames/cotiz/f066.jpg",
+  "frames/cotiz/f067.jpg",
+  "frames/cotiz/f068.jpg",
+  "frames/cotiz/f069.jpg",
+  "frames/cotiz/f070.jpg",
+  "frames/cotiz/f071.jpg",
+  "frames/cotiz/f072.jpg",
+  "frames/cotiz/f073.jpg",
+  "frames/cotiz/f074.jpg",
+  "frames/cotiz/f075.jpg",
+  "frames/cotiz/f076.jpg",
+  "frames/cotiz/f077.jpg",
+  "frames/cotiz/f078.jpg",
+  "frames/cotiz/f079.jpg",
+  "frames/cotiz/f080.jpg",
+  "frames/cotiz/f081.jpg",
+  "frames/cotiz/f082.jpg",
+  "frames/cotiz/f083.jpg",
+  "frames/cotiz/f084.jpg",
+  "frames/cotiz/f085.jpg",
+  "frames/cotiz/f086.jpg",
+  "frames/cotiz/f087.jpg",
+  "frames/cotiz/f088.jpg",
+  "frames/cotiz/f089.jpg",
+  "frames/cotiz/f090.jpg",
+  "frames/cotiz/f091.jpg",
+  "frames/cotiz/f092.jpg",
+  "frames/cotiz/f093.jpg",
+  "frames/cotiz/f094.jpg",
+  "frames/cotiz/f095.jpg",
+  "frames/cotiz/f096.jpg",
+  "frames/cotiz/f097.jpg",
+  "frames/cotiz/f098.jpg",
+  "frames/cotiz/f099.jpg",
+  "frames/cotiz/f100.jpg",
+  "frames/cotiz/f101.jpg",
+  "frames/cotiz/f102.jpg",
+  "frames/cotiz/f103.jpg",
+  "frames/cotiz/f104.jpg",
+  "frames/cotiz/f105.jpg",
+  "frames/cotiz/f106.jpg",
+  "frames/cotiz/f107.jpg",
+  "frames/cotiz/f108.jpg",
+  "frames/cotiz/f109.jpg",
+  "frames/cotiz/f110.jpg",
+  "frames/cotiz/f111.jpg",
+  "frames/cotiz/f112.jpg",
+  "frames/cotiz/f113.jpg",
+  "frames/cotiz/f114.jpg",
+  "frames/cotiz/f115.jpg",
+  "frames/cotiz/f116.jpg",
+  "frames/cotiz/f117.jpg",
+  "frames/cotiz/f118.jpg",
+  "frames/cotiz/f119.jpg",
+  "frames/cotiz/f120.jpg"
+];
+
+const cotizCanvas = document.getElementById('cotiz-canvas');
+const cotizCtx = cotizCanvas ? cotizCanvas.getContext('2d') : null;
+const cotizTotalFrames = COTIZ_FRAMES.length;
+let cotizCurrentFrame = 0;
+let cotizLoadedImages = new Array(cotizTotalFrames).fill(null);
+
+function loadCotizFrame(i, cb) {
+  if (cotizLoadedImages[i]) { if(cb) cb(); return; }
+  const img = new Image();
+  img.onload = () => { cotizLoadedImages[i] = img; if(cb) cb(); };
+  img.src = COTIZ_FRAMES[i];
+}
+
+const cotizObserver = new IntersectionObserver((entries) => {
+  if (entries[0].isIntersecting) {
+    for(let i=0;i<cotizTotalFrames;i++) loadCotizFrame(i);
+    cotizObserver.disconnect();
+  }
+}, { rootMargin: '500px' });
+if (cotizCanvas) cotizObserver.observe(cotizCanvas);
+
+function drawCotizFrame(index) {
+  const img = cotizLoadedImages[index];
+  if (!img || !cotizCtx) return;
+  cotizCanvas.width = img.naturalWidth;
+  cotizCanvas.height = img.naturalHeight;
+  cotizCtx.clearRect(0, 0, cotizCanvas.width, cotizCanvas.height);
+  cotizCtx.drawImage(img, 0, 0);
+}
+
+const cotizSection = document.getElementById('cotiz-section');
+
+function calcCotizFrame() {
+  if (!cotizSection) return 0;
+  const windowH = window.innerHeight;
+  const isMobile = window.innerWidth < 768;
+  const ref = isMobile && cotizCanvas ? cotizCanvas : cotizSection;
+  const scrollStart = ref.offsetTop - windowH * 1.1;
+  const scrollEnd   = ref.offsetTop - windowH * 0.3;
+  const scrollRange = Math.max(scrollEnd - scrollStart, 1);
+  const progress = Math.max(0, Math.min(1, (window.scrollY - scrollStart) / scrollRange));
+  return Math.min(cotizTotalFrames - 1, Math.floor(progress * cotizTotalFrames));
+}
+
+(function initCotizFrame() {
+  const initFrame = calcCotizFrame();
+  cotizCurrentFrame = initFrame;
+  loadCotizFrame(initFrame, () => drawCotizFrame(initFrame));
+})();
+
+window.addEventListener('scroll', () => {
+  if (!cotizSection || !cotizCtx) return;
+  const windowH = window.innerHeight;
+  const isMobile = window.innerWidth < 768;
+  const ref = isMobile && cotizCanvas ? cotizCanvas : cotizSection;
+  const scrollStart = ref.offsetTop - windowH * 1.1;
+  const scrollEnd   = ref.offsetTop - windowH * 0.3;
+  const scrollRange = Math.max(scrollEnd - scrollStart, 1);
+  const scrolled    = window.scrollY - scrollStart;
+  const progress    = Math.max(0, Math.min(1, scrolled / scrollRange));
+  const frameIndex  = Math.min(cotizTotalFrames - 1, Math.floor(progress * cotizTotalFrames));
+  if (frameIndex !== cotizCurrentFrame) {
+    cotizCurrentFrame = frameIndex;
+    drawCotizFrame(frameIndex);
+  }
+});
+
 
 // SUSI mockup row selection
 (function(){
