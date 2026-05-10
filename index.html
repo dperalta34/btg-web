@@ -801,38 +801,41 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
   .aseg-logo img[src*="La_Latino"]{transform:scale(1.6)}
   .aseg-logo img[src*="GMX"]{transform:scale(1.45)}
   .aseg-logo img[src*="Mapfre"]{transform:scale(0.93)}
-  /* Horizontal two-column layout */
-  .dual-card{flex-direction:row;align-items:center;gap:52px;padding:44px 52px;text-align:left;justify-content:flex-start}
-  .dual-card-dark{flex-direction:row-reverse;align-items:center;gap:52px;padding:44px 52px;text-align:left;justify-content:flex-start}
-  .dual-grid{align-items:stretch}
-  .dual-text-col{flex:0 0 300px;align-items:flex-start}
+  /* Horizontal two-column layout — compact */
+  .dual-card{flex-direction:row;align-items:center;gap:32px;padding:20px 32px;text-align:left;justify-content:flex-start}
+  .dual-card-dark{flex-direction:row-reverse;align-items:center;gap:32px;padding:20px 32px;text-align:left;justify-content:flex-start}
+  .dual-grid{align-items:stretch;gap:12px;margin-top:24px}
+  .dual-text-col{flex:0 0 240px;align-items:flex-start}
   .dual-mockup-col{flex:1;min-width:0}
-  /* Hide mobile logos on desktop */
-  .susi-logo-mobile,.cami-logo-mobile{display:none !important}
+  /* Logos: show compact in text col */
+  .susi-logo-mobile,.cami-logo-mobile{display:flex !important;justify-content:flex-start;margin-bottom:8px}
+  .susi-logo-wrap img{width:auto;max-width:120px;max-height:38px;object-fit:contain}
+  .cami-logo-wrap img{width:auto;max-width:120px;max-height:38px;object-fit:contain;filter:brightness(0) invert(1) drop-shadow(0 0 6px rgba(0,201,224,0.3))}
   /* SUSI text col */
-  .dual-card .dual-badge{margin-left:0;margin-right:0}
-  .susi-tagline{font-size:14px;color:rgba(30,50,80,0.6);margin:4px 0 10px}
-  .susi-desc{font-size:13px;line-height:1.6;margin-bottom:0}
+  .dual-card .dual-badge{margin-left:0;margin-right:0;margin-bottom:8px}
+  .susi-tagline{font-size:12px;color:rgba(30,50,80,0.55);margin:2px 0 6px}
+  .susi-desc{font-size:12px;line-height:1.5;margin-bottom:0}
   /* CAMI text col */
-  .dual-card-dark .dual-badge{margin-left:0;margin-right:0}
-  .dual-card-dark .cami-tagline{text-align:left;font-size:14px;margin-bottom:8px}
-  .dual-card-dark .cami-desc-m{text-align:left;font-size:13px;margin-bottom:14px}
-  .dual-card-dark .cami-live{display:flex}
-  .dual-card-dark .feat-grid{display:grid;margin:12px 0}
-  .dual-card-dark .cami-desktop-btn{display:block;width:100%;margin-top:16px}
-  /* Mockup sizing */
-  .susi-mockup{width:100%;margin:0}
-  .cami-mockup{width:100%;margin:0}
+  .dual-card-dark .dual-badge{margin-left:0;margin-right:0;margin-bottom:8px}
+  .dual-card-dark .cami-tagline{text-align:left;font-size:12px;margin-bottom:5px}
+  .dual-card-dark .cami-desc-m{text-align:left;font-size:12px;margin-bottom:10px}
+  .dual-card-dark .cami-live{display:flex;font-size:10px;margin-bottom:8px}
+  .dual-card-dark .feat-grid{display:grid;gap:6px;margin:0 0 10px}
+  .feat-item-dark{font-size:11px;padding:6px 8px}
+  .dual-card-dark .cami-desktop-btn{display:block;width:100%}
+  /* Compact mockups */
+  .susi-mockup{width:100%;margin:0;max-height:260px;overflow:hidden}
+  .cami-mockup{width:100%;margin:0;max-height:240px;overflow:hidden}
   /* SUSI CTA below mockup */
-  .susi-desktop-cta-wrap{width:100%;margin-top:12px}
+  .susi-desktop-cta-wrap{width:100%;margin-top:8px}
   .susi-slider{display:none}
   .susi-desktop-cta{display:flex !important;width:100%}
-  .btn-premium{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:14px 20px;border-radius:12px;font-size:14px;font-weight:700;letter-spacing:.04em;text-decoration:none;transition:transform .2s,box-shadow .2s}
+  .btn-premium{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:10px 16px;border-radius:10px;font-size:13px;font-weight:700;letter-spacing:.04em;text-decoration:none;transition:transform .2s,box-shadow .2s}
   .btn-premium:hover{transform:translateY(-2px)}
-  .btn-premium-susi{background:linear-gradient(135deg,#0d5c8a,#1A7FBC);color:#fff;box-shadow:0 4px 20px rgba(26,127,188,0.4)}
-  .btn-premium-susi:hover{box-shadow:0 8px 28px rgba(26,127,188,0.55)}
-  .btn-premium-cami{background:linear-gradient(135deg,rgba(0,201,224,.12),rgba(0,201,224,.06));color:var(--cyan);border:1px solid rgba(0,201,224,0.3);box-shadow:0 4px 20px rgba(0,0,0,0.12)}
-  .btn-premium-cami:hover{box-shadow:0 8px 28px rgba(0,201,224,0.2);border-color:rgba(0,201,224,0.55)}
+  .btn-premium-susi{background:linear-gradient(135deg,#0d5c8a,#1A7FBC);color:#fff;box-shadow:0 4px 16px rgba(26,127,188,0.4)}
+  .btn-premium-susi:hover{box-shadow:0 6px 22px rgba(26,127,188,0.55)}
+  .btn-premium-cami{background:linear-gradient(135deg,rgba(0,201,224,.12),rgba(0,201,224,.06));color:var(--cyan);border:1px solid rgba(0,201,224,0.3);box-shadow:0 4px 16px rgba(0,0,0,0.12)}
+  .btn-premium-cami:hover{box-shadow:0 6px 22px rgba(0,201,224,0.2);border-color:rgba(0,201,224,0.55)}
   .btn-premium svg{flex-shrink:0}
 }
 /* ─── PRIVACY BTN ─── */
