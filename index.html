@@ -280,8 +280,8 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 .cotiz-step:nth-child(2){--sc:rgba(42,172,224,.4);--sl:#2AACE0;--sd:.13s}
 .cotiz-step:nth-child(3){--sc:rgba(26,127,188,.4);--sl:var(--blue);--sd:.26s}
 .cotiz-step:nth-child(4){--sc:rgba(13,111,168,.4);--sl:#0D6FA8;--sd:.39s}
-/* Step row — starts hidden, slides in via JS */
-.cotiz-step{display:flex;align-items:flex-start;gap:0;padding:15px 0;border-bottom:1px solid rgba(26,127,188,.07);opacity:0;transform:translateX(20px);transition:opacity .5s ease,transform .5s cubic-bezier(.22,1,.36,1)}
+/* Step row — starts hidden, slides in from left via JS */
+.cotiz-step{display:flex;align-items:flex-start;gap:0;padding:15px 0;border-bottom:1px solid rgba(26,127,188,.07);opacity:0;transform:translateX(-20px);transition:opacity .5s ease,transform .5s cubic-bezier(.22,1,.36,1)}
 .cotiz-step:last-child{border-bottom:none}
 .cotiz-step.cotiz-step-in{opacity:1;transform:translateX(0)}
 /* Pulse ring on bubble after entrance */
@@ -290,17 +290,17 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
   55%{box-shadow:0 3px 16px var(--sc),0 0 0 9px rgba(0,0,0,0)}
 }
 .cotiz-step-in .cotiz-step-bubble{animation:cotiz-pulse 2.6s ease-in-out infinite;animation-delay:var(--sd,0s)}
-/* Connector line */
+/* Connector line — now on RIGHT of bubble (canvas is right) */
 .cotiz-step-side{display:flex;align-items:center;flex-shrink:0;padding-top:3px}
-.cotiz-step-conn{width:22px;height:2px;flex-shrink:0;background:linear-gradient(90deg,rgba(0,0,0,.03),var(--sc))}
+.cotiz-step-conn{width:22px;height:2px;flex-shrink:0;background:linear-gradient(90deg,var(--sc),rgba(0,0,0,.03))}
 /* Bubble — gradient progression cyan→blue (top to bottom) */
 .cotiz-step-bubble{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;flex-shrink:0}
 .cotiz-step:nth-child(1) .cotiz-step-bubble{background:linear-gradient(135deg,#00DBF2,#00C9E0)}
 .cotiz-step:nth-child(2) .cotiz-step-bubble{background:linear-gradient(135deg,#44BBEE,#2AACE0)}
 .cotiz-step:nth-child(3) .cotiz-step-bubble{background:linear-gradient(135deg,#2AACE0,#1A7FBC)}
 .cotiz-step:nth-child(4) .cotiz-step-bubble{background:linear-gradient(135deg,#1A7FBC,#0D6FA8)}
-/* Text info */
-.cotiz-step-info{flex:1;padding-left:16px}
+/* Text info — right-aligned since it sits left of the bubble */
+.cotiz-step-info{flex:1;padding-right:16px;text-align:right}
 .cotiz-step-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px;color:var(--sl)}
 .cotiz-step-txt{font-size:14px;font-weight:700;color:var(--text);line-height:1.35;letter-spacing:-.02em}
 /* Ramos strip — light */
@@ -1438,53 +1438,53 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
     <p class="sec-p p-light" style="max-width:780px;margin-top:12px">Respuestas claras y confiables en menos de 24 horas. 3 a 4 opciones por cotización para una amplia variedad de ramos a nivel nacional.</p>
   </div>
   <div class="cotiz-body">
-    <!-- Canvas — left, 240px -->
-    <div class="cotiz-canvas-col">
-      <div class="cotiz-canvas-wrap">
-        <canvas id="cotiz-canvas"></canvas>
-      </div>
-    </div>
-    <!-- Steps — right column, 4→1 top to bottom -->
+    <!-- Steps — left column, 4→1 top to bottom, text right-aligned toward canvas -->
     <div class="cotiz-steps-col">
       <div class="cotiz-step">
-        <div class="cotiz-step-side">
-          <div class="cotiz-step-conn"></div>
-          <div class="cotiz-step-bubble">4</div>
-        </div>
         <div class="cotiz-step-info">
           <div class="cotiz-step-label">Paso 4</div>
           <div class="cotiz-step-txt">Entrega de 3 a 4 opciones en menos de 24 horas</div>
         </div>
+        <div class="cotiz-step-side">
+          <div class="cotiz-step-bubble">4</div>
+          <div class="cotiz-step-conn"></div>
+        </div>
       </div>
       <div class="cotiz-step">
-        <div class="cotiz-step-side">
-          <div class="cotiz-step-conn"></div>
-          <div class="cotiz-step-bubble">3</div>
-        </div>
         <div class="cotiz-step-info">
           <div class="cotiz-step-label">Paso 3</div>
           <div class="cotiz-step-txt">Cotización en aseguradoras</div>
         </div>
+        <div class="cotiz-step-side">
+          <div class="cotiz-step-bubble">3</div>
+          <div class="cotiz-step-conn"></div>
+        </div>
       </div>
       <div class="cotiz-step">
-        <div class="cotiz-step-side">
-          <div class="cotiz-step-conn"></div>
-          <div class="cotiz-step-bubble">2</div>
-        </div>
         <div class="cotiz-step-info">
           <div class="cotiz-step-label">Paso 2</div>
           <div class="cotiz-step-txt">Procesamiento por parte del equipo BTG</div>
         </div>
+        <div class="cotiz-step-side">
+          <div class="cotiz-step-bubble">2</div>
+          <div class="cotiz-step-conn"></div>
+        </div>
       </div>
       <div class="cotiz-step">
-        <div class="cotiz-step-side">
-          <div class="cotiz-step-conn"></div>
-          <div class="cotiz-step-bubble">1</div>
-        </div>
         <div class="cotiz-step-info">
           <div class="cotiz-step-label">Paso 1</div>
           <div class="cotiz-step-txt">Solicitud de cotización por parte del agente</div>
         </div>
+        <div class="cotiz-step-side">
+          <div class="cotiz-step-bubble">1</div>
+          <div class="cotiz-step-conn"></div>
+        </div>
+      </div>
+    </div>
+    <!-- Canvas — right -->
+    <div class="cotiz-canvas-col">
+      <div class="cotiz-canvas-wrap">
+        <canvas id="cotiz-canvas"></canvas>
       </div>
     </div>
   </div>
