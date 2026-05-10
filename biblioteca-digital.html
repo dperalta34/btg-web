@@ -100,18 +100,18 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 }
 .bib-orb-1{width:700px;height:700px;top:-200px;right:-150px;background:radial-gradient(circle,rgba(26,127,188,0.12) 0%,transparent 65%)}
 .bib-orb-2{width:400px;height:400px;bottom:-100px;left:-80px;background:radial-gradient(circle,rgba(0,201,224,0.07) 0%,transparent 65%)}
-.bib-hero-inner{position:relative;z-index:2;max-width:1240px;margin:0 auto;display:flex;align-items:center;gap:48px}
+.bib-hero-inner{position:relative;z-index:2;max-width:1240px;margin:0 auto;display:flex;align-items:center;gap:80px}
 .bib-hero-text{flex:1;min-width:0}
 .bib-eyebrow{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);margin-bottom:16px;display:flex;align-items:center;gap:10px}
 .bib-eyebrow::before{content:'';width:24px;height:1px;background:rgba(26,127,188,0.7)}
 .bib-h1{font-size:clamp(42px,5.5vw,72px);font-weight:800;letter-spacing:-.04em;line-height:1;color:#F5F9FC;margin-bottom:20px}
 .bib-h1 em{font-style:normal;color:var(--cyan);text-shadow:0 0 40px rgba(0,201,224,0.35)}
 .bib-sub{font-size:16px;color:rgba(228,238,245,0.5);line-height:1.7;max-width:520px;margin-bottom:32px}
-/* Hero visual — floating ebook + café screen */
+/* Hero visual — floating ebook */
 .bib-hero-visual{
-  flex-shrink:0;width:480px;position:relative;
-  display:flex;align-items:center;justify-content:center;gap:22px;
-  padding:48px 0;
+  flex-shrink:0;width:320px;position:relative;
+  display:flex;align-items:center;justify-content:center;
+  padding:48px 20px;
 }
 @keyframes bibFloat{
   0%,100%{transform:rotate(-4deg) translateY(0)}
@@ -197,70 +197,6 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
   background:rgba(26,127,188,0.3);
   border-radius:50%;filter:blur(12px);
   animation:bibShadow 4.8s ease-in-out infinite;
-}
-
-/* ─── CAFÉ SCREEN VISUAL ─── */
-@keyframes cafFloat{0%,100%{transform:rotate(3deg) translateY(0)}50%{transform:rotate(3deg) translateY(-12px)}}
-@keyframes cafGlowAnim{0%,100%{transform:translateX(-50%) scaleX(1);opacity:.22}50%{transform:translateX(-50%) scaleX(.75);opacity:.1}}
-@keyframes waveBar{0%,100%{transform:scaleY(1);opacity:.35}50%{transform:scaleY(1.7);opacity:.7}}
-.bib-cafe-wrap{
-  display:flex;flex-direction:column;align-items:center;position:relative;
-  animation:cafFloat 4.2s ease-in-out infinite .7s;
-  filter:drop-shadow(0 22px 38px rgba(0,0,0,0.5)) drop-shadow(0 0 28px rgba(0,201,224,0.13));
-  margin-top:-20px;
-}
-.bib-cafe-screen{
-  width:168px;height:242px;
-  background:linear-gradient(155deg,#061c2e 0%,#040f1c 100%);
-  border:1px solid rgba(0,201,224,0.28);border-radius:16px;
-  overflow:hidden;display:flex;flex-direction:column;position:relative;
-}
-.bib-cafe-screen::before{
-  content:'';position:absolute;inset:0;
-  background-image:linear-gradient(rgba(0,201,224,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,201,224,0.04) 1px,transparent 1px);
-  background-size:18px 18px;pointer-events:none;
-}
-.bib-cafe-topbar{
-  height:26px;background:rgba(0,201,224,0.06);border-bottom:1px solid rgba(0,201,224,0.1);
-  display:flex;align-items:center;padding:0 9px;gap:5px;flex-shrink:0;position:relative;z-index:1;
-}
-.bib-cafe-dot{width:6px;height:6px;border-radius:50%}
-.bib-cafe-dot:nth-child(1){background:rgba(255,80,80,.45)}
-.bib-cafe-dot:nth-child(2){background:rgba(255,180,0,.45)}
-.bib-cafe-dot:nth-child(3){background:rgba(0,210,80,.45)}
-.bib-cafe-content{
-  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:8px;padding:14px;position:relative;z-index:1;
-}
-.bib-cafe-label{font-size:7px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(0,201,224,.45);text-align:center}
-.bib-cafe-cup{color:rgba(0,201,224,.65)}
-.bib-cafe-cup svg{display:block}
-.bib-cafe-screen-title{font-size:13px;font-weight:800;color:#F5F9FC;letter-spacing:-.03em;line-height:1.15;text-align:center}
-.bib-cafe-play{
-  width:30px;height:30px;border-radius:50%;
-  background:rgba(0,201,224,0.14);border:1px solid rgba(0,201,224,0.32);
-  display:flex;align-items:center;justify-content:center;
-}
-.bib-cafe-bottom{
-  padding:7px 12px;border-top:1px solid rgba(0,201,224,.1);
-  background:rgba(0,201,224,.04);flex-shrink:0;position:relative;z-index:1;
-}
-.bib-cafe-wave{display:flex;align-items:flex-end;gap:2px;height:13px;justify-content:center}
-.bib-cafe-bar{width:3px;border-radius:2px;background:rgba(0,201,224,.38);animation:waveBar 1.3s ease-in-out infinite}
-.bib-cafe-bar:nth-child(1){height:4px;animation-delay:0s}
-.bib-cafe-bar:nth-child(2){height:10px;animation-delay:.1s}
-.bib-cafe-bar:nth-child(3){height:6px;animation-delay:.2s}
-.bib-cafe-bar:nth-child(4){height:12px;animation-delay:.3s}
-.bib-cafe-bar:nth-child(5){height:5px;animation-delay:.15s}
-.bib-cafe-bar:nth-child(6){height:9px;animation-delay:.25s}
-.bib-cafe-bar:nth-child(7){height:7px;animation-delay:.05s}
-.bib-cafe-bar:nth-child(8){height:11px;animation-delay:.35s}
-.bib-cafe-bar:nth-child(9){height:4px;animation-delay:.4s}
-.bib-cafe-glow{
-  position:absolute;bottom:12px;left:50%;
-  transform:translateX(-50%);width:130px;height:14px;
-  background:rgba(0,201,224,.22);border-radius:50%;filter:blur(10px);
-  animation:cafGlowAnim 4.2s ease-in-out infinite .7s;
 }
 
 /* ─── SECTION HEADERS ─── */
@@ -414,16 +350,10 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
     width:100%;
     justify-content:center;
     padding:20px 0 36px;
-    gap:14px;
   }
   .bib-ebook-wrap{
     transform-origin:center top;
-    scale:0.75;
-  }
-  .bib-cafe-wrap{
-    transform-origin:center top;
-    scale:0.75;
-    margin-top:-10px;
+    scale:0.82;
   }
 
   .bib-section{padding:36px 18px 52px}
@@ -550,46 +480,6 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
       </div>
       <div class="bib-ebook-glow"></div>
     </div>
-    <!-- Café con BTG screen mockup -->
-    <a href="cafe-con-btg.html" class="bib-cafe-wrap" aria-label="Ver Cafés con BTG" style="text-decoration:none">
-      <div class="bib-cafe-screen">
-        <div class="bib-cafe-topbar">
-          <div class="bib-cafe-dot"></div>
-          <div class="bib-cafe-dot"></div>
-          <div class="bib-cafe-dot"></div>
-        </div>
-        <div class="bib-cafe-content">
-          <div class="bib-cafe-label">Café con BTG</div>
-          <div class="bib-cafe-cup">
-            <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
-              <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
-              <line x1="6" y1="1" x2="6" y2="4"/>
-              <line x1="10" y1="1" x2="10" y2="4"/>
-              <line x1="14" y1="1" x2="14" y2="4"/>
-            </svg>
-          </div>
-          <div class="bib-cafe-screen-title">Café<br>con BTG</div>
-          <div class="bib-cafe-play">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="rgba(0,201,224,0.85)" style="margin-left:2px"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          </div>
-        </div>
-        <div class="bib-cafe-bottom">
-          <div class="bib-cafe-wave">
-            <div class="bib-cafe-bar"></div>
-            <div class="bib-cafe-bar"></div>
-            <div class="bib-cafe-bar"></div>
-            <div class="bib-cafe-bar"></div>
-            <div class="bib-cafe-bar"></div>
-            <div class="bib-cafe-bar"></div>
-            <div class="bib-cafe-bar"></div>
-            <div class="bib-cafe-bar"></div>
-            <div class="bib-cafe-bar"></div>
-          </div>
-        </div>
-      </div>
-      <div class="bib-cafe-glow"></div>
-    </a>
   </div>
 </section>
 
