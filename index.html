@@ -269,12 +269,12 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 .cotiz-section{background:var(--off);padding:48px 60px 0}
 .cotiz-header{max-width:1100px;margin:0 auto;padding-bottom:28px}
 /* Layout: canvas left 360px · steps right flex */
-.cotiz-body{max-width:1100px;margin:0 auto;display:flex;align-items:flex-start;gap:16px}
+.cotiz-body{max-width:1100px;margin:0 auto;display:flex;align-items:flex-start;gap:16px;justify-content:center}
 .cotiz-canvas-col{flex:0 0 360px}
 .cotiz-canvas-wrap{line-height:0}
 #cotiz-canvas{width:100%;height:auto;display:block;mix-blend-mode:multiply}
-/* Steps — right */
-.cotiz-steps-col{flex:1;display:flex;flex-direction:column}
+/* Steps — fixed width so both cols center together */
+.cotiz-steps-col{flex:0 0 400px;display:flex;flex-direction:column}
 /* Per-step accent colors + stagger delay — all colored, bottom step darkest blue */
 .cotiz-step:nth-child(1){--sc:rgba(0,201,224,.4);--sl:#00C9E0;--sd:.0s}
 .cotiz-step:nth-child(2){--sc:rgba(42,172,224,.4);--sl:#2AACE0;--sd:.13s}
