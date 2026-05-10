@@ -285,18 +285,12 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 }
 .cafe-sy-label{
   position:relative;z-index:2;
-  font-size:9px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
-  color:rgba(42,172,224,0.55);text-align:center;line-height:1.6;
+  font-size:12px;font-weight:700;letter-spacing:-.01em;line-height:1.35;
+  color:rgba(228,238,245,0.88);text-align:center;padding:0 14px;
+  text-shadow:0 2px 8px rgba(0,0,0,0.95),0 0 24px rgba(0,0,0,0.6);
 }
-.cafe-card:hover .cafe-sy-thumb{filter:brightness(1.2)}
+.cafe-card:hover .cafe-sy-thumb{filter:brightness(1.15)}
 /* Badges */
-.cafe-ep-badge{
-  position:absolute;top:10px;left:10px;
-  font-size:9px;font-weight:800;letter-spacing:.1em;
-  padding:3px 9px;border-radius:6px;
-  background:rgba(4,11,26,0.85);border:1px solid rgba(255,255,255,0.15);
-  color:rgba(228,238,245,0.7);z-index:3;backdrop-filter:blur(8px);
-}
 .cafe-platform-badge{
   position:absolute;top:10px;right:10px;
   font-size:8px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
@@ -323,9 +317,18 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 }
 .cafe-play-circle svg{color:#fff;margin-left:3px;flex-shrink:0}
 /* Card body */
-.cafe-card-body{padding:14px 16px 16px;flex:1;display:flex;flex-direction:column;gap:4px}
-.cafe-card-ep{font-size:13px;font-weight:700;color:rgba(228,238,245,0.85);letter-spacing:-.01em}
+.cafe-card-body{padding:14px 16px 16px;flex:1;display:flex;flex-direction:column;gap:5px}
+.cafe-card-title{font-size:13px;font-weight:700;color:rgba(228,238,245,0.88);letter-spacing:-.02em;line-height:1.35}
 .cafe-card-yr{font-size:11px;color:rgba(228,238,245,0.3);font-weight:500}
+/* Modal fallback */
+.vid-fallback{
+  position:absolute;bottom:-44px;left:50%;transform:translateX(-50%);
+  font-size:12px;color:rgba(228,238,245,0.45);text-decoration:none;
+  border:1px solid rgba(255,255,255,0.13);padding:6px 18px;border-radius:20px;
+  transition:color .2s,border-color .2s;white-space:nowrap;display:none;
+}
+.vid-fallback:hover{color:rgba(228,238,245,0.85);border-color:rgba(255,255,255,0.32)}
+.vid-fallback.visible{display:block}
 
 /* ─── YOUTUBE MODAL ─── */
 .yt-modal{
@@ -569,56 +572,38 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
     </div>
     <div class="cafe-grid">
 
-      <!-- Ep 1 · StreamYard -->
       <div class="cafe-card" onclick="openSY('https://streamyard.com/mrzj9tz9wcai')">
         <div class="cafe-card-thumb">
-          <div class="cafe-sy-thumb">
-            <div class="cafe-sy-label">café con btg</div>
-          </div>
-          <div class="cafe-ep-badge">Ep. 1</div>
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">Lo que realmente construye confianza</div></div>
           <span class="cafe-platform-badge badge-sy">StreamYard</span>
-          <div class="cafe-play-overlay">
-            <div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
-          </div>
+          <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
         <div class="cafe-card-body">
-          <div class="cafe-card-ep">Episodio 1</div>
+          <div class="cafe-card-title">Lo que realmente construye confianza</div>
           <div class="cafe-card-yr">2026</div>
         </div>
       </div>
 
-      <!-- Ep 2 · StreamYard -->
       <div class="cafe-card" onclick="openSY('https://streamyard.com/26qav34nsrqp')">
         <div class="cafe-card-thumb">
-          <div class="cafe-sy-thumb">
-            <div class="cafe-sy-label">café con btg</div>
-          </div>
-          <div class="cafe-ep-badge">Ep. 2</div>
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">Firme, cercana y estratégica: el perfil femenino en seguros</div></div>
           <span class="cafe-platform-badge badge-sy">StreamYard</span>
-          <div class="cafe-play-overlay">
-            <div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
-          </div>
+          <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
         <div class="cafe-card-body">
-          <div class="cafe-card-ep">Episodio 2</div>
+          <div class="cafe-card-title">Firme, cercana y estratégica: el perfil femenino en seguros</div>
           <div class="cafe-card-yr">2026</div>
         </div>
       </div>
 
-      <!-- Ep 3 · StreamYard -->
       <div class="cafe-card" onclick="openSY('https://streamyard.com/sr4j8752q6an')">
         <div class="cafe-card-thumb">
-          <div class="cafe-sy-thumb">
-            <div class="cafe-sy-label">café con btg</div>
-          </div>
-          <div class="cafe-ep-badge">Ep. 3</div>
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">Tecnología con criterio</div></div>
           <span class="cafe-platform-badge badge-sy">StreamYard</span>
-          <div class="cafe-play-overlay">
-            <div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
-          </div>
+          <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
         <div class="cafe-card-body">
-          <div class="cafe-card-ep">Episodio 3</div>
+          <div class="cafe-card-title">Tecnología con criterio</div>
           <div class="cafe-card-yr">2026</div>
         </div>
       </div>
@@ -635,103 +620,85 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
     </div>
     <div class="cafe-grid">
 
-      <!-- Ep 1 -->
       <div class="cafe-card" onclick="openSY('https://streamyard.com/arb89f3uzr4x')">
         <div class="cafe-card-thumb">
-          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
-          <div class="cafe-ep-badge">Ep. 1</div>
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">Una familia, una visión</div></div>
           <span class="cafe-platform-badge badge-sy">StreamYard</span>
           <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
-        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 1</div><div class="cafe-card-yr">2025</div></div>
+        <div class="cafe-card-body"><div class="cafe-card-title">Una familia, una visión</div><div class="cafe-card-yr">2025</div></div>
       </div>
 
-      <!-- Ep 2 -->
       <div class="cafe-card" onclick="openSY('https://streamyard.com/dnwh9sm653zu')">
         <div class="cafe-card-thumb">
-          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
-          <div class="cafe-ep-badge">Ep. 2</div>
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">IA: Oportunidades y retos en el mundo de los seguros</div></div>
           <span class="cafe-platform-badge badge-sy">StreamYard</span>
           <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
-        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 2</div><div class="cafe-card-yr">2025</div></div>
+        <div class="cafe-card-body"><div class="cafe-card-title">IA: Oportunidades y retos en el mundo de los seguros</div><div class="cafe-card-yr">2025</div></div>
       </div>
 
-      <!-- Ep 3 -->
       <div class="cafe-card" onclick="openSY('https://streamyard.com/y9akwpxtjcj7')">
         <div class="cafe-card-thumb">
-          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
-          <div class="cafe-ep-badge">Ep. 3</div>
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">El poder de la mujer trabajadora</div></div>
           <span class="cafe-platform-badge badge-sy">StreamYard</span>
           <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
-        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 3</div><div class="cafe-card-yr">2025</div></div>
+        <div class="cafe-card-body"><div class="cafe-card-title">El poder de la mujer trabajadora</div><div class="cafe-card-yr">2025</div></div>
       </div>
 
-      <!-- Ep 4 -->
       <div class="cafe-card" onclick="openSY('https://streamyard.com/hmichkbpjptc')">
         <div class="cafe-card-thumb">
-          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
-          <div class="cafe-ep-badge">Ep. 4</div>
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">A toda velocidad: la vida desde el asiento del piloto</div></div>
           <span class="cafe-platform-badge badge-sy">StreamYard</span>
           <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
-        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 4</div><div class="cafe-card-yr">2025</div></div>
+        <div class="cafe-card-body"><div class="cafe-card-title">A toda velocidad: la vida desde el asiento del piloto</div><div class="cafe-card-yr">2025</div></div>
       </div>
 
-      <!-- Ep 5 -->
       <div class="cafe-card" onclick="openSY('https://streamyard.com/urmed95dy8pr')">
         <div class="cafe-card-thumb">
-          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
-          <div class="cafe-ep-badge">Ep. 5</div>
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">Semillas de cambio</div></div>
           <span class="cafe-platform-badge badge-sy">StreamYard</span>
           <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
-        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 5</div><div class="cafe-card-yr">2025</div></div>
+        <div class="cafe-card-body"><div class="cafe-card-title">Semillas de cambio</div><div class="cafe-card-yr">2025</div></div>
       </div>
 
-      <!-- Ep 6 -->
       <div class="cafe-card" onclick="openSY('https://streamyard.com/ruj4nh2znkmc')">
         <div class="cafe-card-thumb">
-          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
-          <div class="cafe-ep-badge">Ep. 6</div>
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">Respaldo experto y capacitación continua</div></div>
           <span class="cafe-platform-badge badge-sy">StreamYard</span>
           <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
-        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 6</div><div class="cafe-card-yr">2025</div></div>
+        <div class="cafe-card-body"><div class="cafe-card-title">Respaldo experto y capacitación continua</div><div class="cafe-card-yr">2025</div></div>
       </div>
 
-      <!-- Ep 7 -->
       <div class="cafe-card" onclick="openSY('https://streamyard.com/5xmzjq86cntw')">
         <div class="cafe-card-thumb">
-          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
-          <div class="cafe-ep-badge">Ep. 7</div>
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">Verdades esenciales del seguro de daños</div></div>
           <span class="cafe-platform-badge badge-sy">StreamYard</span>
           <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
-        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 7</div><div class="cafe-card-yr">2025</div></div>
+        <div class="cafe-card-body"><div class="cafe-card-title">Verdades esenciales del seguro de daños</div><div class="cafe-card-yr">2025</div></div>
       </div>
 
-      <!-- Ep 8 -->
       <div class="cafe-card" onclick="openSY('https://streamyard.com/h2r6j4rrkshj')">
         <div class="cafe-card-thumb">
-          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
-          <div class="cafe-ep-badge">Ep. 8</div>
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">¿Cómo los seguros de GMM transforman la atención y salvan patrimonios?</div></div>
           <span class="cafe-platform-badge badge-sy">StreamYard</span>
           <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
-        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 8</div><div class="cafe-card-yr">2025</div></div>
+        <div class="cafe-card-body"><div class="cafe-card-title">¿Cómo los seguros de GMM transforman la atención y salvan patrimonios?</div><div class="cafe-card-yr">2025</div></div>
       </div>
 
-      <!-- Ep 9 -->
       <div class="cafe-card" onclick="openSY('https://streamyard.com/n2mmcruaxuxw')">
         <div class="cafe-card-thumb">
-          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
-          <div class="cafe-ep-badge">Ep. 9</div>
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">Inteligencia de negocio: datos que transforman</div></div>
           <span class="cafe-platform-badge badge-sy">StreamYard</span>
           <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
-        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 9</div><div class="cafe-card-yr">2025</div></div>
+        <div class="cafe-card-body"><div class="cafe-card-title">Inteligencia de negocio: datos que transforman</div><div class="cafe-card-yr">2025</div></div>
       </div>
 
     </div>
@@ -746,125 +713,103 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
     </div>
     <div class="cafe-grid">
 
-      <!-- Ep 1 -->
       <div class="cafe-card" onclick="openSY('https://streamyard.com/rvcwevz9r75t')">
         <div class="cafe-card-thumb">
-          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
-          <div class="cafe-ep-badge">Ep. 1</div>
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">Sesiones Doradas: Impulsa tu negocio</div></div>
           <span class="cafe-platform-badge badge-sy">StreamYard</span>
           <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
-        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 1</div><div class="cafe-card-yr">2024</div></div>
+        <div class="cafe-card-body"><div class="cafe-card-title">Sesiones Doradas: Impulsa tu negocio</div><div class="cafe-card-yr">2024</div></div>
       </div>
 
-      <!-- Ep 2 -->
       <div class="cafe-card" onclick="openSY('https://streamyard.com/hv7g2z3pbm36')">
         <div class="cafe-card-thumb">
-          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
-          <div class="cafe-ep-badge">Ep. 2</div>
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">Sesiones Doradas: Oportunidades de crecimiento y tendencias</div></div>
           <span class="cafe-platform-badge badge-sy">StreamYard</span>
           <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
-        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 2</div><div class="cafe-card-yr">2024</div></div>
+        <div class="cafe-card-body"><div class="cafe-card-title">Sesiones Doradas: Oportunidades de crecimiento y tendencias</div><div class="cafe-card-yr">2024</div></div>
       </div>
 
-      <!-- Ep 3 -->
       <div class="cafe-card" onclick="openSY('https://streamyard.com/utz6d6ccak64')">
         <div class="cafe-card-thumb">
-          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
-          <div class="cafe-ep-badge">Ep. 3</div>
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">Importancia del ahorro y la jubilación</div></div>
           <span class="cafe-platform-badge badge-sy">StreamYard</span>
           <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
-        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 3</div><div class="cafe-card-yr">2024</div></div>
+        <div class="cafe-card-body"><div class="cafe-card-title">Importancia del ahorro y la jubilación</div><div class="cafe-card-yr">2024</div></div>
       </div>
 
-      <!-- Ep 4 -->
       <div class="cafe-card" onclick="openSY('https://streamyard.com/pn86n2z4j33m')">
         <div class="cafe-card-thumb">
-          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
-          <div class="cafe-ep-badge">Ep. 4</div>
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">Anécdotas y curiosidades en siniestros</div></div>
           <span class="cafe-platform-badge badge-sy">StreamYard</span>
           <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
-        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 4</div><div class="cafe-card-yr">2024</div></div>
+        <div class="cafe-card-body"><div class="cafe-card-title">Anécdotas y curiosidades en siniestros</div><div class="cafe-card-yr">2024</div></div>
       </div>
 
-      <!-- Ep 5 -->
       <div class="cafe-card" onclick="openSY('https://streamyard.com/hyn7junerjqn')">
         <div class="cafe-card-thumb">
-          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
-          <div class="cafe-ep-badge">Ep. 5</div>
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">El seguro de Cyber en la era digital</div></div>
           <span class="cafe-platform-badge badge-sy">StreamYard</span>
           <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
-        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 5</div><div class="cafe-card-yr">2024</div></div>
+        <div class="cafe-card-body"><div class="cafe-card-title">El seguro de Cyber en la era digital</div><div class="cafe-card-yr">2024</div></div>
       </div>
 
-      <!-- Ep 6 -->
       <div class="cafe-card" onclick="openSY('https://streamyard.com/m6t3a6dxt77p')">
         <div class="cafe-card-thumb">
-          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
-          <div class="cafe-ep-badge">Ep. 6</div>
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">¿Cómo te ves dentro de 10 años?</div></div>
           <span class="cafe-platform-badge badge-sy">StreamYard</span>
           <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
-        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 6</div><div class="cafe-card-yr">2024</div></div>
+        <div class="cafe-card-body"><div class="cafe-card-title">¿Cómo te ves dentro de 10 años?</div><div class="cafe-card-yr">2024</div></div>
       </div>
 
-      <!-- Ep 7 -->
       <div class="cafe-card" onclick="openSY('https://streamyard.com/r6x78uhr7z3v')">
         <div class="cafe-card-thumb">
-          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
-          <div class="cafe-ep-badge">Ep. 7</div>
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">Importancia del reconocimiento</div></div>
           <span class="cafe-platform-badge badge-sy">StreamYard</span>
           <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
-        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 7</div><div class="cafe-card-yr">2024</div></div>
+        <div class="cafe-card-body"><div class="cafe-card-title">Importancia del reconocimiento</div><div class="cafe-card-yr">2024</div></div>
       </div>
 
-      <!-- Ep 8 -->
       <div class="cafe-card" onclick="openSY('https://streamyard.com/7ajv48t73b2d')">
         <div class="cafe-card-thumb">
-          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
-          <div class="cafe-ep-badge">Ep. 8</div>
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">Un viaje a la mente de tu consumidor</div></div>
           <span class="cafe-platform-badge badge-sy">StreamYard</span>
           <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
-        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 8</div><div class="cafe-card-yr">2024</div></div>
+        <div class="cafe-card-body"><div class="cafe-card-title">Un viaje a la mente de tu consumidor</div><div class="cafe-card-yr">2024</div></div>
       </div>
 
-      <!-- Ep 9 -->
       <div class="cafe-card" onclick="openSY('https://streamyard.com/skfmuv7k4k9u')">
         <div class="cafe-card-thumb">
-          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
-          <div class="cafe-ep-badge">Ep. 9</div>
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">Gestión de conflictos y entorno laboral saludable</div></div>
           <span class="cafe-platform-badge badge-sy">StreamYard</span>
           <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
-        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 9</div><div class="cafe-card-yr">2024</div></div>
+        <div class="cafe-card-body"><div class="cafe-card-title">Gestión de conflictos y entorno laboral saludable</div><div class="cafe-card-yr">2024</div></div>
       </div>
 
-      <!-- Ep 10 -->
       <div class="cafe-card" onclick="openSY('https://streamyard.com/34tuy37vpwds')">
         <div class="cafe-card-thumb">
-          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
-          <div class="cafe-ep-badge">Ep. 10</div>
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">Importancia de personalizar soluciones</div></div>
           <span class="cafe-platform-badge badge-sy">StreamYard</span>
           <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
-        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 10</div><div class="cafe-card-yr">2024</div></div>
+        <div class="cafe-card-body"><div class="cafe-card-title">Importancia de personalizar soluciones</div><div class="cafe-card-yr">2024</div></div>
       </div>
 
-      <!-- Ep 11 -->
       <div class="cafe-card" onclick="openSY('https://streamyard.com/b3xjew7pmhyd')">
         <div class="cafe-card-thumb">
-          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
-          <div class="cafe-ep-badge">Ep. 11</div>
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">Mitos y verdades en gastos médicos</div></div>
           <span class="cafe-platform-badge badge-sy">StreamYard</span>
           <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
-        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 11</div><div class="cafe-card-yr">2024</div></div>
+        <div class="cafe-card-body"><div class="cafe-card-title">Mitos y verdades en gastos médicos</div><div class="cafe-card-yr">2024</div></div>
       </div>
 
     </div>
@@ -879,48 +824,40 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
     </div>
     <div class="cafe-grid">
 
-      <!-- Ep 1 -->
       <div class="cafe-card" onclick="openSY('https://streamyard.com/rkhbnmvceugb')">
         <div class="cafe-card-thumb">
-          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
-          <div class="cafe-ep-badge">Ep. 1</div>
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">Sitio web para agentes de seguros</div></div>
           <span class="cafe-platform-badge badge-sy">StreamYard</span>
           <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
-        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 1</div><div class="cafe-card-yr">2023</div></div>
+        <div class="cafe-card-body"><div class="cafe-card-title">Sitio web para agentes de seguros</div><div class="cafe-card-yr">2023</div></div>
       </div>
 
-      <!-- Ep 2 -->
       <div class="cafe-card" onclick="openSY('https://streamyard.com/qmdaqg3qndd7')">
         <div class="cafe-card-thumb">
-          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
-          <div class="cafe-ep-badge">Ep. 2</div>
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">Multicotizadores BTG</div></div>
           <span class="cafe-platform-badge badge-sy">StreamYard</span>
           <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
-        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 2</div><div class="cafe-card-yr">2023</div></div>
+        <div class="cafe-card-body"><div class="cafe-card-title">Multicotizadores BTG</div><div class="cafe-card-yr">2023</div></div>
       </div>
 
-      <!-- Ep 3 -->
       <div class="cafe-card" onclick="openSY('https://streamyard.com/xxth8qmqs7rz')">
         <div class="cafe-card-thumb">
-          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
-          <div class="cafe-ep-badge">Ep. 3</div>
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">Universidad BTG renovada</div></div>
           <span class="cafe-platform-badge badge-sy">StreamYard</span>
           <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
-        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 3</div><div class="cafe-card-yr">2023</div></div>
+        <div class="cafe-card-body"><div class="cafe-card-title">Universidad BTG renovada</div><div class="cafe-card-yr">2023</div></div>
       </div>
 
-      <!-- Ep 4 -->
       <div class="cafe-card" onclick="openSY('https://streamyard.com/vaahiiig3n78')">
         <div class="cafe-card-thumb">
-          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
-          <div class="cafe-ep-badge">Ep. 4</div>
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">Diferencia entre GMM y un plan de salud</div></div>
           <span class="cafe-platform-badge badge-sy">StreamYard</span>
           <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
-        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 4</div><div class="cafe-card-yr">2023</div></div>
+        <div class="cafe-card-body"><div class="cafe-card-title">Diferencia entre GMM y un plan de salud</div><div class="cafe-card-yr">2023</div></div>
       </div>
 
     </div>
@@ -935,70 +872,58 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
     </div>
     <div class="cafe-grid">
 
-      <!-- Ep 1 -->
       <div class="cafe-card" onclick="openSY('https://streamyard.com/tu4hkp4pp67r')">
         <div class="cafe-card-thumb">
-          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
-          <div class="cafe-ep-badge">Ep. 1</div>
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">Tendencias en el ramo de automóviles</div></div>
           <span class="cafe-platform-badge badge-sy">StreamYard</span>
           <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
-        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 1</div><div class="cafe-card-yr">2022</div></div>
+        <div class="cafe-card-body"><div class="cafe-card-title">Tendencias en el ramo de automóviles</div><div class="cafe-card-yr">2022</div></div>
       </div>
 
-      <!-- Ep 2 -->
       <div class="cafe-card" onclick="openSY('https://streamyard.com/2kh77zihe7zs')">
         <div class="cafe-card-thumb">
-          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
-          <div class="cafe-ep-badge">Ep. 2</div>
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">Innovación en seguros</div></div>
           <span class="cafe-platform-badge badge-sy">StreamYard</span>
           <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
-        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 2</div><div class="cafe-card-yr">2022</div></div>
+        <div class="cafe-card-body"><div class="cafe-card-title">Innovación en seguros</div><div class="cafe-card-yr">2022</div></div>
       </div>
 
-      <!-- Ep 3 -->
       <div class="cafe-card" onclick="openSY('https://streamyard.com/kq2xq24u9fah')">
         <div class="cafe-card-thumb">
-          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
-          <div class="cafe-ep-badge">Ep. 3</div>
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">¿Por qué los agentes deben estar en redes sociales y cómo?</div></div>
           <span class="cafe-platform-badge badge-sy">StreamYard</span>
           <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
-        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 3</div><div class="cafe-card-yr">2022</div></div>
+        <div class="cafe-card-body"><div class="cafe-card-title">¿Por qué los agentes deben estar en redes sociales y cómo?</div><div class="cafe-card-yr">2022</div></div>
       </div>
 
-      <!-- Ep 4 -->
       <div class="cafe-card" onclick="openSY('https://streamyard.com/w58659q8nj9z')">
         <div class="cafe-card-thumb">
-          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
-          <div class="cafe-ep-badge">Ep. 4</div>
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">Panorama económico en México y los seguros</div></div>
           <span class="cafe-platform-badge badge-sy">StreamYard</span>
           <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
-        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 4</div><div class="cafe-card-yr">2022</div></div>
+        <div class="cafe-card-body"><div class="cafe-card-title">Panorama económico en México y los seguros</div><div class="cafe-card-yr">2022</div></div>
       </div>
 
-      <!-- Ep 5 -->
       <div class="cafe-card" onclick="openSY('https://streamyard.com/zemeqb89b6t3')">
         <div class="cafe-card-thumb">
-          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
-          <div class="cafe-ep-badge">Ep. 5</div>
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">Innovación en el Sector Salud</div></div>
           <span class="cafe-platform-badge badge-sy">StreamYard</span>
           <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
-        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 5</div><div class="cafe-card-yr">2022</div></div>
+        <div class="cafe-card-body"><div class="cafe-card-title">Innovación en el Sector Salud</div><div class="cafe-card-yr">2022</div></div>
       </div>
 
-      <!-- Ep 6 -->
       <div class="cafe-card" onclick="openSY('https://streamyard.com/yp3ph9xqqnz2')">
         <div class="cafe-card-thumb">
-          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
-          <div class="cafe-ep-badge">Ep. 6</div>
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">Programas Multinacionales: Beneficios de la Globalización</div></div>
           <span class="cafe-platform-badge badge-sy">StreamYard</span>
           <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
-        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 6</div><div class="cafe-card-yr">2022</div></div>
+        <div class="cafe-card-body"><div class="cafe-card-title">Programas Multinacionales: Beneficios de la Globalización</div><div class="cafe-card-yr">2022</div></div>
       </div>
 
     </div>
@@ -1013,92 +938,76 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
     </div>
     <div class="cafe-grid">
 
-      <!-- Ep 1 · YouTube -->
-      <div class="cafe-card" data-yt="dJqk11LuniI" onclick="openYT('dJqk11LuniI')">
+      <div class="cafe-card" onclick="openYT('dJqk11LuniI')">
         <div class="cafe-card-thumb">
-          <img src="https://img.youtube.com/vi/dJqk11LuniI/hqdefault.jpg" alt="Café con BTG - Episodio 1 · 2021" loading="lazy">
-          <div class="cafe-ep-badge">Ep. 1</div>
+          <img src="https://img.youtube.com/vi/dJqk11LuniI/hqdefault.jpg" alt="Tiempos de tecnología" loading="lazy">
           <span class="cafe-platform-badge badge-yt">YouTube</span>
           <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
-        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 1</div><div class="cafe-card-yr">2021</div></div>
+        <div class="cafe-card-body"><div class="cafe-card-title">Tiempos de tecnología</div><div class="cafe-card-yr">2021</div></div>
       </div>
 
-      <!-- Ep 2 · YouTube -->
-      <div class="cafe-card" data-yt="fHqmGCuObuM" onclick="openYT('fHqmGCuObuM')">
+      <div class="cafe-card" onclick="openYT('fHqmGCuObuM')">
         <div class="cafe-card-thumb">
-          <img src="https://img.youtube.com/vi/fHqmGCuObuM/hqdefault.jpg" alt="Café con BTG - Episodio 2 · 2021" loading="lazy">
-          <div class="cafe-ep-badge">Ep. 2</div>
+          <img src="https://img.youtube.com/vi/fHqmGCuObuM/hqdefault.jpg" alt="No te preocupes, estás conmigo" loading="lazy">
           <span class="cafe-platform-badge badge-yt">YouTube</span>
           <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
-        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 2</div><div class="cafe-card-yr">2021</div></div>
+        <div class="cafe-card-body"><div class="cafe-card-title">No te preocupes, estás conmigo</div><div class="cafe-card-yr">2021</div></div>
       </div>
 
-      <!-- Ep 3 · YouTube -->
-      <div class="cafe-card" data-yt="hEDYfgPjk6o" onclick="openYT('hEDYfgPjk6o')">
+      <div class="cafe-card" onclick="openYT('hEDYfgPjk6o')">
         <div class="cafe-card-thumb">
-          <img src="https://img.youtube.com/vi/hEDYfgPjk6o/hqdefault.jpg" alt="Café con BTG - Episodio 3 · 2021" loading="lazy">
-          <div class="cafe-ep-badge">Ep. 3</div>
+          <img src="https://img.youtube.com/vi/hEDYfgPjk6o/hqdefault.jpg" alt="Innovación de productos" loading="lazy">
           <span class="cafe-platform-badge badge-yt">YouTube</span>
           <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
-        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 3</div><div class="cafe-card-yr">2021</div></div>
+        <div class="cafe-card-body"><div class="cafe-card-title">Innovación de productos</div><div class="cafe-card-yr">2021</div></div>
       </div>
 
-      <!-- Ep 4 · YouTube -->
-      <div class="cafe-card" data-yt="Hc5Q6ijup58" onclick="openYT('Hc5Q6ijup58')">
+      <div class="cafe-card" onclick="openYT('Hc5Q6ijup58')">
         <div class="cafe-card-thumb">
-          <img src="https://img.youtube.com/vi/Hc5Q6ijup58/hqdefault.jpg" alt="Café con BTG - Episodio 4 · 2021" loading="lazy">
-          <div class="cafe-ep-badge">Ep. 4</div>
+          <img src="https://img.youtube.com/vi/Hc5Q6ijup58/hqdefault.jpg" alt="El agente de México frente otros países" loading="lazy">
           <span class="cafe-platform-badge badge-yt">YouTube</span>
           <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
-        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 4</div><div class="cafe-card-yr">2021</div></div>
+        <div class="cafe-card-body"><div class="cafe-card-title">El agente de México frente otros países</div><div class="cafe-card-yr">2021</div></div>
       </div>
 
-      <!-- Ep 5 · StreamYard -->
       <div class="cafe-card" onclick="openSY('https://streamyard.com/u7psj4cxebxy')">
         <div class="cafe-card-thumb">
-          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
-          <div class="cafe-ep-badge">Ep. 5</div>
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">Cómo vender más si eres feliz</div></div>
           <span class="cafe-platform-badge badge-sy">StreamYard</span>
           <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
-        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 5</div><div class="cafe-card-yr">2021</div></div>
+        <div class="cafe-card-body"><div class="cafe-card-title">Cómo vender más si eres feliz</div><div class="cafe-card-yr">2021</div></div>
       </div>
 
-      <!-- Ep 6 · StreamYard -->
       <div class="cafe-card" onclick="openSY('https://streamyard.com/hfrpa4idbkvu')">
         <div class="cafe-card-thumb">
-          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
-          <div class="cafe-ep-badge">Ep. 6</div>
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">Hospitalización por COVID-19 frente a la nueva ola</div></div>
           <span class="cafe-platform-badge badge-sy">StreamYard</span>
           <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
-        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 6</div><div class="cafe-card-yr">2021</div></div>
+        <div class="cafe-card-body"><div class="cafe-card-title">Hospitalización por COVID-19 frente a la nueva ola</div><div class="cafe-card-yr">2021</div></div>
       </div>
 
-      <!-- Ep 7 · StreamYard -->
       <div class="cafe-card" onclick="openSY('https://streamyard.com/u7h7zy3k79tr')">
         <div class="cafe-card-thumb">
-          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
-          <div class="cafe-ep-badge">Ep. 7</div>
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">Jurisprudencia en agentes de seguros</div></div>
           <span class="cafe-platform-badge badge-sy">StreamYard</span>
           <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
-        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 7</div><div class="cafe-card-yr">2021</div></div>
+        <div class="cafe-card-body"><div class="cafe-card-title">Jurisprudencia en agentes de seguros</div><div class="cafe-card-yr">2021</div></div>
       </div>
 
-      <!-- Ep 8 · StreamYard -->
       <div class="cafe-card" onclick="openSY('https://streamyard.com/bufd5wnnkgr8')">
         <div class="cafe-card-thumb">
-          <div class="cafe-sy-thumb"><div class="cafe-sy-label">café con btg</div></div>
-          <div class="cafe-ep-badge">Ep. 8</div>
+          <div class="cafe-sy-thumb"><div class="cafe-sy-label">El asesor profesional vs el vendedor de seguros</div></div>
           <span class="cafe-platform-badge badge-sy">StreamYard</span>
           <div class="cafe-play-overlay"><div class="cafe-play-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
         </div>
-        <div class="cafe-card-body"><div class="cafe-card-ep">Episodio 8</div><div class="cafe-card-yr">2021</div></div>
+        <div class="cafe-card-body"><div class="cafe-card-title">El asesor profesional vs el vendedor de seguros</div><div class="cafe-card-yr">2021</div></div>
       </div>
 
     </div>
@@ -1106,11 +1015,12 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 
 </div><!-- /cafe-main -->
 
-<!-- YOUTUBE MODAL -->
+<!-- VIDEO MODAL (YouTube + StreamYard) -->
 <div class="yt-modal" id="yt-modal" role="dialog" aria-label="Reproducir video">
   <div class="yt-modal-inner" id="yt-modal-inner">
     <button class="yt-close" id="yt-close" aria-label="Cerrar">&#x2715;</button>
     <iframe id="yt-iframe" src="" allow="autoplay; fullscreen; encrypted-media" allowfullscreen title="Café con BTG"></iframe>
+    <a class="vid-fallback" id="vid-fallback" href="#" target="_blank" rel="noopener">Ver en StreamYard ↗</a>
   </div>
 </div>
 
@@ -1125,23 +1035,29 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 var ytModal=document.getElementById('yt-modal');
 var ytIframe=document.getElementById('yt-iframe');
 var ytClose=document.getElementById('yt-close');
+var vidFallback=document.getElementById('vid-fallback');
 
 function openYT(id){
-  ytIframe.src='https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0';
+  ytIframe.src='https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0';
+  if(vidFallback)vidFallback.classList.remove('visible');
+  ytModal.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function openSY(url){
+  ytIframe.src=url;
+  if(vidFallback){vidFallback.href=url;vidFallback.classList.add('visible');}
   ytModal.classList.add('open');
   document.body.style.overflow='hidden';
 }
 function closeYT(){
   ytModal.classList.remove('open');
   document.body.style.overflow='';
+  if(vidFallback)vidFallback.classList.remove('visible');
   setTimeout(function(){ytIframe.src='';},300);
 }
 ytClose.addEventListener('click',closeYT);
 ytModal.addEventListener('click',function(e){if(e.target===ytModal)closeYT();});
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeYT();});
-
-// ── StreamYard open in new tab ──
-function openSY(url){window.open(url,'_blank','noopener');}
 
 // ── Year filter pills + IntersectionObserver ──
 (function(){
