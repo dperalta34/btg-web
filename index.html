@@ -471,15 +471,29 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
   from{opacity:0;transform:translateY(20px)}
   to  {opacity:1;transform:none}
 }
-@keyframes titleReveal{
-  from{opacity:0;transform:translateY(14px) skewX(-3deg)}
-  to  {opacity:1;transform:none}
-}
 .reveal-card-l,.reveal-card-r{opacity:0;will-change:transform,opacity}
 .reveal-card-l.visible{animation:cardSpringL .95s cubic-bezier(.16,1,.3,1) forwards}
 .reveal-card-r.visible{animation:cardSpringR .95s .12s cubic-bezier(.16,1,.3,1) forwards}
-.dual-platform-title.reveal{opacity:0}
-.dual-platform-title.reveal.visible{animation:titleReveal .55s cubic-bezier(.16,1,.3,1) forwards}
+/* ── Premium section title animations ── */
+@keyframes h2Premium{
+  0%  {opacity:0;transform:translateY(44px) skewY(1.8deg);filter:blur(5px)}
+  55% {filter:blur(0)}
+  100%{opacity:1;transform:none;filter:blur(0)}
+}
+@keyframes tagRevealAnim{
+  from{opacity:0;transform:translateX(-20px);letter-spacing:.2em}
+  to  {opacity:1;transform:none;letter-spacing:.1em}
+}
+@keyframes kickerRevealAnim{
+  from{opacity:0;transform:translateY(12px) scale(.92)}
+  to  {opacity:1;transform:none}
+}
+.h2-anim{opacity:0}
+.h2-anim.visible{animation:h2Premium .82s .06s cubic-bezier(.16,1,.3,1) forwards}
+.tag-anim{opacity:0}
+.tag-anim.visible{animation:tagRevealAnim .5s cubic-bezier(.16,1,.3,1) forwards}
+.kicker-anim{opacity:0}
+.kicker-anim.visible{animation:kickerRevealAnim .45s cubic-bezier(.16,1,.3,1) forwards}
 /* Inner stagger — desktop only */
 @media(min-width:769px){
   .reveal-card-l.visible .dual-text-col>*,
@@ -1179,8 +1193,8 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 <!-- SERVICIOS -->
 <section class="srv-section" id="servicios">
   <div class="srv-inner">
-    <div class="srv-kicker"><span>Servicio único en el mercado</span></div>
-    <h2 class="sec-h2 h2-dark">Atención especializada<br>de <span style="color:var(--blue)">excelencia</span></h2>
+    <div class="srv-kicker kicker-anim"><span>Servicio único en el mercado</span></div>
+    <h2 class="sec-h2 h2-dark h2-anim">Atención especializada<br>de <span style="color:var(--blue)">excelencia</span></h2>
     <p class="sec-p p-dark" style="max-width:580px">Equipos expertos dedicados a acompañar a tus asegurados. Un estándar de <strong>servicio de atención a siniestros único en el mercado.</strong></p>
 
     <div class="srv-strip reveal">
@@ -1245,12 +1259,11 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 <!-- SUSI + CAMI -->
 <section class="dual-section" id="tecnologia">
   <div class="dual-inner">
-    <div class="sec-tag t-blue">Plataformas exclusivas BTG</div>
     <h2 class="sec-h2 h2-light" style="display:none">Soluciones para<br>nuestros agentes</h2>
     <div class="dual-grid">
       <!-- ── SUSI ── -->
       <div class="dual-platform-block">
-        <h2 class="sec-h2 h2-light dual-platform-title reveal">Multicotizador BTG</h2>
+        <h2 class="sec-h2 h2-light dual-platform-title h2-anim">Multicotizador BTG</h2>
       <div class="dual-card reveal-card-l">
         <div class="dual-card-body">
         <!-- Text col -->
@@ -1393,7 +1406,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 
       <!-- ── CAMI ── -->
       <div class="dual-platform-block">
-        <h2 class="sec-h2 h2-light dual-platform-title reveal d2">Atención a Siniestros</h2>
+        <h2 class="sec-h2 h2-light dual-platform-title h2-anim">Atención a Siniestros</h2>
       <div class="dual-card-dark reveal-card-r" id="siniestros">
         <div class="dual-card-body">
         <!-- Text col -->
@@ -1519,8 +1532,8 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 <!-- DASHBOARD -->
 <section class="dash-section">
   <div style="max-width:1100px;margin:0 auto">
-    <div class="sec-tag t-blue">Inteligencia operativa</div>
-    <h2 class="sec-h2 h2-dark" style="margin-top:10px">Dashboard BTG</h2>
+    <div class="sec-tag t-blue tag-anim">Inteligencia operativa</div>
+    <h2 class="sec-h2 h2-dark h2-anim" style="margin-top:10px">Dashboard BTG</h2>
   </div>
   <div class="dash-grid">
     <div class="reveal-left">
@@ -1579,7 +1592,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 <!-- COTIZACIONES EXPRESS -->
 <section class="cotiz-section" id="cotizaciones">
   <div class="cotiz-header">
-    <h2 class="sec-h2 h2-light">Cotizaciones Express</h2>
+    <h2 class="sec-h2 h2-light h2-anim">Cotizaciones Express</h2>
     <p class="sec-p p-light" style="max-width:780px;margin-top:12px"><strong style="color:var(--blue)">Respuestas claras y confiables en menos de 24 horas.</strong> 3 a 4 opciones por cotización para una amplia variedad de ramos a nivel nacional.</p>
   </div>
   <div class="cotiz-body">
@@ -1771,8 +1784,8 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 <!-- CREDENCIALES -->
 <section class="cred-section" id="credenciales">
   <div class="cred-inner">
-    <div class="sec-tag t-blue">Reconocimientos</div>
-    <h2 class="sec-h2 h2-light" style="margin-top:10px">Credenciales y certificaciones BTG</h2>
+    <div class="sec-tag t-blue tag-anim">Reconocimientos</div>
+    <h2 class="sec-h2 h2-light h2-anim" style="margin-top:10px">Credenciales y certificaciones BTG</h2>
     <p class="sec-p p-light" style="max-width:520px;margin-top:12px">Reconocidos por los principales organismos del sector asegurador, laboral e innovación en México.</p>
     <div class="cert-grid reveal">
 
@@ -1844,8 +1857,8 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 <!-- INICIATIVAS SOCIALES -->
 <section class="social-section">
   <div class="social-inner">
-    <div class="sec-tag t-blue" style="margin-bottom:10px">Responsabilidad social</div>
-    <h2 class="sec-h2 h2-light">Iniciativas sociales BTG</h2>
+    <div class="sec-tag t-blue tag-anim" style="margin-bottom:10px">Responsabilidad social</div>
+    <h2 class="sec-h2 h2-light h2-anim">Iniciativas sociales BTG</h2>
     <p class="sec-p p-light" style="max-width:520px;margin:12px auto 0">Comprometidos con el bienestar de la comunidad y el entorno que nos rodea.</p>
 
     <div class="social-strip">
@@ -1908,8 +1921,8 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 <!-- CONCURSOS -->
 <section class="concursos-section" id="concursos">
   <div style="max-width:1100px;margin:0 auto">
-    <div class="sec-tag t-gold">El éxito se celebra a lo grande</div>
-    <h2 class="sec-h2 h2-dark" style="margin-top:10px">Eventos y concursos BTG 2026</h2>
+    <div class="sec-tag t-gold tag-anim">El éxito se celebra a lo grande</div>
+    <h2 class="sec-h2 h2-dark h2-anim" style="margin-top:10px">Eventos y concursos BTG 2026</h2>
     <p class="sec-p p-dark" style="max-width:560px;margin-top:12px">Premiamos tu compromiso con experiencias exclusivas de primer nivel.</p>
     <div class="concursos-grid">
       <!-- === CARD 1: PADEL === -->
@@ -2124,7 +2137,7 @@ document.querySelectorAll('.count-up').forEach(el=>el.textContent='0');
 
 // REVEAL
 const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.1});
-document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-card-l,.reveal-card-r').forEach(el=>ro.observe(el));
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-card-l,.reveal-card-r,.h2-anim,.tag-anim,.kicker-anim').forEach(el=>ro.observe(el));
 // LEARNING PATH ANIMATION
 (function(){
   var wrap=document.getElementById('lpath-wrap');
