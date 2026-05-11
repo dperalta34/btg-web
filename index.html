@@ -542,14 +542,19 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 .susi-tagline strong{font-weight:800;color:var(--blue)}
 .cami-tagline strong{font-weight:800;color:var(--cyan)}
 /* Feature benefit badges in text-col */
-.dual-text-feats{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-.dtf-item{display:flex;flex-direction:column;align-items:center;gap:5px;width:42px}
-.dtf-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.dtf-lbl{font-size:8px;font-weight:600;text-align:center;line-height:1.2;letter-spacing:.02em}
+.dual-text-feats{display:grid;grid-template-columns:repeat(5,1fr);gap:10px 6px;margin-top:14px;width:100%}
+.dual-card-dark .dual-text-feats{grid-template-columns:repeat(4,1fr);gap:10px 10px}
+.dtf-item{display:flex;flex-direction:column;align-items:center;gap:6px}
+.dtf-icon{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.dtf-lbl{font-size:8px;font-weight:600;text-align:center;line-height:1.25;letter-spacing:.02em}
 .dual-card .dtf-icon{background:rgba(26,127,188,0.1);border:1px solid rgba(26,127,188,0.2);color:var(--blue)}
 .dual-card .dtf-lbl{color:rgba(30,50,80,0.5)}
 .dual-card-dark .dtf-icon{background:rgba(0,201,224,0.1);border:1px solid rgba(0,201,224,0.22);color:var(--cyan)}
 .dual-card-dark .dtf-lbl{color:rgba(228,238,245,0.5)}
+/* Disclaimer below mockup windows */
+.dual-mockup-disc{font-size:11px;font-style:italic;font-weight:300;text-align:center;letter-spacing:.02em;margin:10px 0 0;padding:0 4px}
+.dual-card .dual-mockup-disc{color:rgba(30,50,80,0.35)}
+.dual-card-dark .dual-mockup-disc{color:rgba(228,238,245,0.25)}
 /* CAMI mobile */
 .cami-logo-mobile{display:flex !important;justify-content:center;margin-bottom:16px}
 .cami-logo-wrap{display:flex !important;align-items:center;justify-content:center}
@@ -851,7 +856,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
   .susi-tagline{font-size:12px;color:rgba(30,50,80,0.45);margin:0 0 0;letter-spacing:.01em}
   .dual-card-dark .cami-tagline{text-align:left;font-size:12px;margin:0;opacity:.45}
   /* ── Feature badges desktop ── */
-  .dual-text-feats{display:flex !important;margin-top:16px}
+  .dual-text-feats{display:grid !important;margin-top:16px}
   /* ── CAMI live indicator ── */
   .dual-card-dark .cami-live{display:flex;font-size:10px;margin-top:14px}
   /* ── Mockups ── */
@@ -1328,6 +1333,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
           </div>
           <div class="sp-disclaimer">✦ Pantalla ilustrativa · Datos de ejemplo · No representa valores reales</div>
         </div>
+        <p class="dual-mockup-disc">✦ Pantalla ilustrativa · Datos de ejemplo · No representa valores reales</p>
         </div><!-- /dual-mockup-col -->
         </div><!-- /dual-card-body -->
         <!-- CTA full-width abajo -->
@@ -1446,6 +1452,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
           </div>
           <div class="cm-disclaimer">✦ Pantalla ilustrativa · Datos de ejemplo · No representa valores reales</div>
         </div><!-- /cami-mockup -->
+        <p class="dual-mockup-disc">✦ Pantalla ilustrativa · Datos de ejemplo · No representa valores reales</p>
         </div><!-- /dual-mockup-col -->
         </div><!-- /dual-card-body -->
         <!-- CTA full-width abajo -->
