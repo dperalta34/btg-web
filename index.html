@@ -722,6 +722,9 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 
   /* SERVICIOS */
   .srv-section{padding:24px 20px}
+  /* Mobile: reorder — NPS before service cards */
+  .srv-inner{display:flex;flex-direction:column}
+  .srv-strip{order:10;margin-top:24px}
   .srv-strip{display:flex;flex-direction:column;background:none;border:1px solid rgba(255,255,255,0.06);border-radius:14px;margin-top:24px}
   .srv-card{flex-direction:row;align-items:center;padding:16px;gap:16px;text-align:left}
   .srv-card+.srv-card{border-left:none;border-top:1px solid rgba(255,255,255,0.05)}
