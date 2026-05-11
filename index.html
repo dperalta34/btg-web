@@ -223,14 +223,24 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 .dual-section{background:var(--white);padding:80px 60px}
 .dual-inner{max-width:1100px;margin:0 auto}
 .dual-grid{display:flex;flex-direction:column;gap:20px;margin-top:48px}
-/* Horizontal cards: texto izquierda, mockup derecha */
-.dual-card{background:var(--off);border:1px solid var(--ll);border-radius:20px;padding:44px 52px;display:flex;flex-direction:row;align-items:center;gap:52px;transition:border-color .3s,transform .3s}
+/* Cards: columna (cuerpo arriba, botón abajo) */
+.dual-card{background:var(--off);border:1px solid var(--ll);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .3s,transform .3s}
 .dual-card:hover{border-color:var(--blue);transform:translateY(-2px)}
-.dual-card-dark{background:var(--dark);border:1px solid var(--bl);border-radius:20px;padding:44px 52px;display:flex;flex-direction:row;align-items:center;gap:52px;transition:border-color .3s,transform .3s}
+.dual-card-dark{background:var(--dark);border:1px solid var(--bl);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .3s,transform .3s}
 .dual-card-dark:hover{border-color:rgba(0,201,224,.22);transform:translateY(-2px)}
-/* Two-column internals */
-.dual-text-col{flex:0 0 270px;min-width:0;display:flex;flex-direction:column;align-items:center}
+/* Cuerpo: texto izq + mockup der */
+.dual-card-body{display:flex;flex-direction:column;gap:0;flex:1}
+.dual-card-cta{padding:14px 20px}
+.dual-card .dual-card-cta{border-top:1px solid rgba(26,127,188,.1)}
+.dual-card-dark .dual-card-cta{border-top:1px solid rgba(255,255,255,.07)}
+.dual-cta-cami{display:none}
+/* Cols */
+.dual-text-col{min-width:0;display:flex;flex-direction:column;align-items:flex-start}
 .dual-mockup-col{flex:1;min-width:0}
+/* Título grande de cada plataforma */
+.dual-card-title{font-size:22px;font-weight:800;letter-spacing:-.03em;line-height:1.18;margin:8px 0 0}
+.dual-card .dual-card-title{color:var(--text)}
+.dual-card-dark .dual-card-title{color:#EDF5FF}
 .susi-logo-mobile{display:flex;justify-content:center}.dual-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:980px;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px}
 .badge-blue{background:rgba(26,127,188,0.1);border:1px solid rgba(26,127,188,0.2);color:var(--blue)}
 .badge-cyan{background:rgba(0,201,224,0.08);border:1px solid rgba(0,201,224,0.15);color:var(--cyan)}
@@ -659,8 +669,12 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
   /* SUSI + CAMI */
   .dual-section{padding:20px 16px}
   .dual-grid{gap:14px;margin-top:20px}
-  .dual-card,.dual-card-dark{flex-direction:column;padding:18px 16px;border-radius:16px;gap:0}
+  .dual-card,.dual-card-dark{border-radius:16px}
+  .dual-card-body{flex-direction:column;padding:18px 16px 12px}
+  .dual-card-cta{padding:12px 16px}
   .dual-text-col,.dual-mockup-col{flex:none;width:100%}
+  .dual-card-title{font-size:18px;text-align:center}
+  .dual-cta-cami{display:none !important}
   .cami-logo-mobile{display:flex !important}
   .cami-live{display:none}
   .dual-card-dark .feat-grid{display:none !important}
@@ -801,43 +815,42 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
   .aseg-logo img[src*="La_Latino"]{transform:scale(1.6)}
   .aseg-logo img[src*="GMX"]{transform:scale(1.45)}
   .aseg-logo img[src*="Mapfre"]{transform:scale(0.93)}
-  /* Horizontal two-column layout — texto izq, mockup der */
-  .dual-card{flex-direction:row;align-items:center;gap:36px;padding:24px 36px;text-align:left;justify-content:flex-start}
-  .dual-card-dark{flex-direction:row;align-items:center;gap:36px;padding:24px 36px;text-align:left;justify-content:flex-start}
-  .dual-grid{align-items:stretch;gap:14px;margin-top:28px}
-  .dual-text-col{flex:0 0 270px;align-items:flex-start;justify-content:space-between;min-height:260px}
+  /* ── Layout desktop: cuerpo en fila, CTA abajo full-width ── */
+  .dual-grid{align-items:stretch;gap:16px;margin-top:32px}
+  .dual-card-body{flex-direction:row;gap:40px;padding:28px 36px 22px;align-items:center}
+  .dual-text-col{flex:0 0 260px;align-items:flex-start}
   .dual-mockup-col{flex:1;min-width:0}
-  /* ── Logos grandes y protagónicos ── */
-  .susi-logo-mobile,.cami-logo-mobile{display:flex !important;justify-content:flex-start;margin-bottom:12px;width:auto}
+  /* CTA strip */
+  .dual-card-cta{padding:16px 36px}
+  .dual-cta-cami{display:block !important}
+  /* ── Logos protagonistas ── */
+  .susi-logo-mobile,.cami-logo-mobile{display:flex !important;justify-content:flex-start;margin-bottom:14px;width:auto}
   .susi-logo-wrap{justify-content:flex-start !important;width:auto}
   .cami-logo-wrap{justify-content:flex-start !important;width:auto}
-  .susi-logo-wrap img{width:auto;max-width:220px;max-height:72px;object-fit:contain;filter:drop-shadow(0 2px 10px rgba(26,127,188,0.3))}
-  .cami-logo-wrap img{width:auto;max-width:220px;max-height:72px;object-fit:contain;filter:brightness(0) invert(1) drop-shadow(0 2px 14px rgba(0,201,224,0.55))}
-  /* ── SUSI text col ── */
-  .dual-card .dual-badge{margin-left:0;margin-right:0;margin-bottom:10px}
-  .susi-tagline{font-size:12px;color:rgba(30,50,80,0.5);margin:0 0 6px;letter-spacing:.01em}
-  .susi-desc{font-size:12px;line-height:1.55;margin-bottom:0;color:var(--text);opacity:.75}
-  /* ── CAMI text col ── */
-  .dual-card-dark .dual-badge{margin-left:0;margin-right:0;margin-bottom:10px}
-  .dual-card-dark .cami-tagline{text-align:left;font-size:12px;margin-bottom:5px;opacity:.7}
-  .dual-card-dark .cami-desc-m{text-align:left;font-size:12px;line-height:1.55;margin-bottom:10px;opacity:.65}
-  .dual-card-dark .cami-live{display:flex;font-size:10px;margin-bottom:10px}
-  .dual-card-dark .feat-grid{display:grid;gap:5px;margin:0}
-  .feat-item-dark{font-size:11px;padding:5px 8px}
-  .dual-card-dark .cami-desktop-btn{display:block;width:100%;margin-top:14px}
+  .susi-logo-wrap img{width:auto;max-width:200px;max-height:68px;object-fit:contain;filter:drop-shadow(0 2px 12px rgba(26,127,188,0.35))}
+  .cami-logo-wrap img{width:auto;max-width:200px;max-height:68px;object-fit:contain;filter:brightness(0) invert(1) drop-shadow(0 2px 14px rgba(0,201,224,0.55))}
+  /* ── Badge ── */
+  .dual-card .dual-badge,.dual-card-dark .dual-badge{margin-left:0;margin-right:0;margin-bottom:8px}
+  /* ── Tagline sutil ── */
+  .susi-tagline{font-size:11px;color:rgba(30,50,80,0.45);margin:0 0 4px;letter-spacing:.01em}
+  .dual-card-dark .cami-tagline{text-align:left;font-size:11px;margin:0 0 4px;opacity:.45}
+  /* ── Título grande ── */
+  .dual-card-title{font-size:22px;margin:6px 0 0}
+  /* ── CAMI extras ── */
+  .dual-card-dark .cami-live{display:flex;font-size:10px;margin-top:12px}
   /* ── Mockups compactos ── */
-  .susi-mockup{width:100%;margin:0;max-height:260px;overflow:hidden}
-  .cami-mockup{width:100%;margin:0;max-height:248px;overflow:hidden}
-  /* ── SUSI CTA (botón en text-col, slider en mockup-col) ── */
-  .susi-desktop-cta-wrap{display:none}
-  .susi-desktop-cta{display:flex !important;width:100%;margin-top:14px}
-  /* ── Botones: mismo tamaño y forma ── */
-  .btn-premium{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:13px 20px;border-radius:12px;font-size:13px;font-weight:800;letter-spacing:.06em;text-decoration:none;text-transform:uppercase;transition:transform .2s ease,box-shadow .2s ease}
+  .susi-mockup{width:100%;margin:0;max-height:256px;overflow:hidden}
+  .cami-mockup{width:100%;margin:0;max-height:244px;overflow:hidden}
+  /* ── Slider oculto, botón visible ── */
+  .susi-slider{display:none}
+  .susi-desktop-cta{display:flex !important;width:100%}
+  /* ── Botones: idénticos en tamaño y forma ── */
+  .btn-premium{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px 24px;border-radius:12px;font-size:13px;font-weight:800;letter-spacing:.08em;text-decoration:none;text-transform:uppercase;transition:transform .18s ease,box-shadow .18s ease}
   .btn-premium:hover{transform:translateY(-2px)}
-  .btn-premium-susi{background:linear-gradient(135deg,#0d5c8a 0%,#1A7FBC 50%,#2196F3 100%);color:#fff;box-shadow:0 6px 24px rgba(26,127,188,0.55),0 2px 8px rgba(0,0,0,0.15);border:1px solid rgba(255,255,255,0.15)}
-  .btn-premium-susi:hover{box-shadow:0 10px 32px rgba(26,127,188,0.7),0 2px 8px rgba(0,0,0,0.2)}
-  .btn-premium-cami{background:linear-gradient(135deg,#00C9E0 0%,#00A8C0 100%);color:#04111A;font-weight:800;box-shadow:0 6px 24px rgba(0,201,224,0.5),0 2px 8px rgba(0,0,0,0.2);border:1px solid rgba(0,220,248,0.3)}
-  .btn-premium-cami:hover{box-shadow:0 10px 32px rgba(0,201,224,0.65),0 2px 8px rgba(0,0,0,0.25)}
+  .btn-premium-susi{background:linear-gradient(135deg,#0a4f7a 0%,#1A7FBC 55%,#2196F3 100%);color:#fff;box-shadow:0 6px 28px rgba(26,127,188,0.6),inset 0 1px 0 rgba(255,255,255,0.15)}
+  .btn-premium-susi:hover{box-shadow:0 10px 36px rgba(26,127,188,0.75),inset 0 1px 0 rgba(255,255,255,0.2)}
+  .btn-premium-cami{background:linear-gradient(135deg,#00D4EC 0%,#00A8C0 100%);color:#04111A;box-shadow:0 6px 28px rgba(0,201,224,0.55),inset 0 1px 0 rgba(255,255,255,0.25)}
+  .btn-premium-cami:hover{box-shadow:0 10px 36px rgba(0,201,224,0.7),inset 0 1px 0 rgba(255,255,255,0.3)}
   .btn-premium svg{flex-shrink:0;width:15px;height:15px}
 }
 /* ─── PRIVACY BTN ─── */
@@ -1179,7 +1192,8 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
     <h2 class="sec-h2 h2-light" style="display:none">Soluciones para<br>nuestros agentes</h2>
     <div class="dual-grid">
       <div class="dual-card reveal-left">
-        <!-- Text col: logo, badge, tagline, desc, CTA -->
+        <div class="dual-card-body">
+        <!-- Text col -->
         <div class="dual-text-col">
           <div class="susi-logo-mobile">
             <div class="susi-logo-wrap">
@@ -1187,14 +1201,10 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
             </div>
           </div>
           <div class="dual-badge badge-blue">SUSI BTG</div>
-          <p class="susi-tagline"><strong>Su</strong> <strong>S</strong>istema <strong>I</strong>nteligente</p>
-          <p class="p-light susi-desc" style="line-height:1.6;margin-bottom:14px;text-align:center"><strong class="highlight-word">Multicotizador</strong> diseñado para nuestros agentes</p>
-          <a href="https://btg.segupoliza.com/#/pages/signin" target="_blank" class="btn-premium btn-premium-susi susi-desktop-cta">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            Entrar a SUSI
-          </a>
+          <p class="susi-tagline">Su Sistema Inteligente</p>
+          <h2 class="dual-card-title">Multicotizador BTG</h2>
         </div>
-        <!-- Mockup col: interactive widget -->
+        <!-- Mockup col -->
         <div class="dual-mockup-col">
         <div class="susi-mockup">
           <input type="radio" name="sptab" id="sptab-autos" checked class="sp-radio">
@@ -1278,7 +1288,10 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
           </div>
           <div class="sp-disclaimer">✦ Pantalla ilustrativa · Datos de ejemplo · No representa valores reales</div>
         </div>
-        <div class="susi-desktop-cta-wrap">
+        </div><!-- /dual-mockup-col -->
+        </div><!-- /dual-card-body -->
+        <!-- CTA full-width abajo -->
+        <div class="dual-card-cta">
           <div class="susi-slider" id="susiSlider" data-url="https://btg.segupoliza.com/#/pages/signin">
             <div class="susi-slider-track">
               <div class="susi-slider-fill" id="susiSliderFill"></div>
@@ -1288,36 +1301,27 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
               </div>
             </div>
           </div>
+          <a href="https://btg.segupoliza.com/#/pages/signin" target="_blank" class="btn-premium btn-premium-susi susi-desktop-cta">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            Entrar a SUSI
+          </a>
         </div>
-        </div><!-- /dual-mockup-col -->
       </div><!-- /dual-card SUSI -->
       <div class="dual-card-dark reveal-right" id="siniestros">
-        <!-- Text col: right side on desktop (row-reverse), top on mobile -->
+        <div class="dual-card-body">
+        <!-- Text col -->
         <div class="dual-text-col">
-          <!-- Mobile logo (hidden on desktop) -->
           <div class="cami-logo-mobile">
             <div class="cami-logo-wrap">
               <img src="CAMI/Logocaok.png" alt="CAMI BTG">
             </div>
           </div>
           <div class="dual-badge badge-cyan">CAMI BTG</div>
-          <p class="cami-tagline"><strong>C</strong>entro de <strong>A</strong>tención y <strong>M</strong>onitoreo <strong>I</strong>ntegral</p>
-          <p class="cami-desc-m">Seguimiento en tiempo real de tus <strong class="highlight-word cami-hw">siniestros</strong></p>
+          <p class="cami-tagline">Centro de Atención y Monitoreo Integral</p>
+          <h2 class="dual-card-title">Atención a Siniestros</h2>
           <div class="cami-live"><span class="cami-pulse-dot"></span>Monitoreo en tiempo real</div>
-          <div class="feat-grid">
-            <div class="feat-item-dark"><div class="feat-dot-cyan"></div>Rápida respuesta</div>
-            <div class="feat-item-dark"><div class="feat-dot-cyan"></div>Tiempo real</div>
-            <div class="feat-item-dark"><div class="feat-dot-cyan"></div>Accesibilidad total</div>
-            <div class="feat-item-dark"><div class="feat-dot-cyan"></div>Seguridad de datos</div>
-          </div>
-          <div class="cami-desktop-btn">
-            <a href="https://btgseguros-servicios.freshdesk.com/support/tickets/new" target="_blank" class="btn-premium btn-premium-cami">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-              Recibir atención de siniestros
-            </a>
-          </div>
         </div>
-        <!-- Mockup col: left side on desktop (row-reverse), below on mobile -->
+        <!-- Mockup col -->
         <div class="dual-mockup-col">
         <div class="cami-mockup">
           <div class="cm-header">
@@ -1381,6 +1385,14 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
           <div class="cm-disclaimer">✦ Pantalla ilustrativa · Datos de ejemplo · No representa valores reales</div>
         </div><!-- /cami-mockup -->
         </div><!-- /dual-mockup-col -->
+        </div><!-- /dual-card-body -->
+        <!-- CTA full-width abajo -->
+        <div class="dual-card-cta dual-cta-cami">
+          <a href="https://btgseguros-servicios.freshdesk.com/support/tickets/new" target="_blank" class="btn-premium btn-premium-cami">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            Recibir atención de siniestros
+          </a>
+        </div>
       </div><!-- /dual-card-dark CAMI -->
     </div>
     <!-- CAMI slider — mobile only, outside cards -->
