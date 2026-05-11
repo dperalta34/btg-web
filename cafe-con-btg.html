@@ -105,8 +105,8 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 /* ─── Hero Visual: Café Screen (horizontal) ─── */
 .cafe-hero-visual{
   flex-shrink:0;width:420px;position:relative;
-  display:flex;align-items:center;justify-content:center;
-  padding:40px 20px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:40px 20px 32px;
 }
 @keyframes cafFloat{0%,100%{transform:rotate(-2deg) translateY(0)}50%{transform:rotate(-2deg) translateY(-10px)}}
 @keyframes cafGlowAnim{0%,100%{transform:translateX(-50%) scaleX(1);opacity:.22}50%{transform:translateX(-50%) scaleX(.75);opacity:.1}}
@@ -178,11 +178,22 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 .cafe-screen-bar:nth-child(8){height:85%;animation:waveBar 1.1s ease-in-out infinite .84s}
 .cafe-screen-bar:nth-child(9){height:50%;animation:waveBar 1.1s ease-in-out infinite .96s}
 /* ── Spotify badge ── */
-.cafe-spotify{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:28px}
-.cafe-spotify-label{font-size:12px;font-weight:400;color:rgba(228,238,245,0.45);letter-spacing:.03em;text-align:center;line-height:1.5}
-.cafe-spotify-link{display:inline-flex;transition:transform .22s ease,filter .22s ease}
-.cafe-spotify-link:hover{transform:scale(1.06);filter:brightness(1.1)}
-.cafe-spotify-link img{height:44px;width:auto;display:block}
+.cafe-spotify{
+  display:flex;align-items:center;gap:16px;
+  margin-top:28px;
+  background:rgba(29,185,84,0.07);
+  border:1px solid rgba(29,185,84,0.22);
+  border-radius:16px;
+  padding:14px 22px;
+  backdrop-filter:blur(8px);
+  transition:background .25s,border-color .25s,transform .22s;
+}
+.cafe-spotify:hover{background:rgba(29,185,84,0.13);border-color:rgba(29,185,84,0.4);transform:translateY(-2px)}
+.cafe-spotify-label{font-size:13px;font-weight:400;color:rgba(228,238,245,0.7);line-height:1.45;letter-spacing:.01em}
+.cafe-spotify-label strong{color:#1DB954;font-weight:700}
+.cafe-spotify-link{display:flex;flex-shrink:0;transition:transform .22s}
+.cafe-spotify-link:hover{transform:scale(1.08)}
+.cafe-spotify-link img{height:38px;width:auto;display:block}
 .cafe-screen-glow{
   position:absolute;bottom:-8px;left:50%;
   transform:translateX(-50%);
@@ -382,8 +393,11 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
   .cafe-sub{text-align:center;max-width:100%}
   .cafe-h1{font-size:clamp(36px,11vw,56px)}
   .cafe-stats{justify-content:center}
-  .cafe-hero-visual{width:100%;padding:16px 0 28px;display:flex;align-items:center;justify-content:center}
+  .cafe-hero-visual{width:100%;padding:16px 0 24px;display:flex;flex-direction:column;align-items:center;justify-content:center}
   .cafe-screen-wrap{transform-origin:center top;scale:0.78}
+  .cafe-spotify{margin-top:20px;padding:12px 18px;gap:12px}
+  .cafe-spotify-label{font-size:12px}
+  .cafe-spotify-link img{height:32px}
 
   .cafe-type-wrap{padding:28px 18px 0}
   .cafe-type-btn{font-size:13px;padding:9px 16px}
@@ -524,12 +538,12 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
         </div>
         <div class="cafe-screen-glow"></div>
       </div>
-      <div class="cafe-spotify">
-        <p class="cafe-spotify-label">Escucha el Café con BTG<br>en formato de podcast en:</p>
-        <a class="cafe-spotify-link" href="https://open.spotify.com/show/25tzFcQKCyDEk9THbeIOM5?si=ae1942156e4d431c" target="_blank" rel="noopener" aria-label="Escuchar en Spotify">
+      <a class="cafe-spotify" href="https://open.spotify.com/show/25tzFcQKCyDEk9THbeIOM5?si=ae1942156e4d431c" target="_blank" rel="noopener" aria-label="Escuchar Café con BTG en Spotify">
+        <p class="cafe-spotify-label">Escucha el <strong>Café con BTG</strong><br>en formato de podcast en:</p>
+        <span class="cafe-spotify-link">
           <img src="Logo spotify.png" alt="Spotify">
-        </a>
-      </div>
+        </span>
+      </a>
     </div>
   </div>
 </section>
