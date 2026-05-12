@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>BTG Runner · BTG Seguros</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --dark:#04111A;--card:#071C2C;--blue:#1A7FBC;--cyan:#00C9E0;--gold:#F0B429;
+  --bl:rgba(255,255,255,0.07);
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;
+}
+html,body{height:100%;background:var(--dark);font-family:var(--font);color:#E4EEF5;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+/* NAV */
+nav{display:flex;align-items:center;justify-content:space-between;padding:14px 40px;background:rgba(4,17,26,0.95);border-bottom:1px solid var(--bl);position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(12px)}
+.nav-logo img{height:48px;width:auto;display:block}
+.nav-back{font-size:13px;color:rgba(228,238,245,0.45);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color .2s}
+.nav-back:hover{color:#E4EEF5}
+
+/* HERO */
+.game-hero{padding:100px 24px 32px;text-align:center;position:relative;overflow:hidden;background:linear-gradient(180deg,#030d18 0%,var(--dark) 100%)}
+.game-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(26,127,188,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(26,127,188,0.04) 1px,transparent 1px);background-size:48px 48px;pointer-events:none}
+.game-eyebrow{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:12px}
+.game-h1{font-size:clamp(38px,7vw,72px);font-weight:800;letter-spacing:-.04em;line-height:1;color:#F5F9FC;margin-bottom:10px}
+.game-h1 span{color:var(--cyan)}
+.game-sub{font-size:15px;color:rgba(228,238,245,0.45);max-width:480px;margin:0 auto 28px;line-height:1.6}
+.prize-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(240,180,41,0.1);border:1px solid rgba(240,180,41,0.3);border-radius:980px;padding:7px 18px;font-size:12px;font-weight:600;color:var(--gold);letter-spacing:.04em;margin-bottom:0}
+.prize-pill svg{flex-shrink:0}
+
+/* GAME WRAPPER */
+.game-wrap{max-width:860px;margin:28px auto 0;padding:0 16px 60px;display:flex;flex-direction:column;gap:20px}
+
+/* SCREENS */
+.screen{display:none;flex-direction:column;align-items:center;gap:20px}
+.screen.active{display:flex}
+
+/* START SCREEN */
+.start-card{background:rgba(7,28,44,0.8);border:1px solid rgba(26,127,188,0.2);border-radius:20px;padding:36px 40px;width:100%;max-width:480px;display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center}
+.start-rocket{font-size:64px;line-height:1;filter:drop-shadow(0 0 20px rgba(0,201,224,0.5))}
+.start-title{font-size:22px;font-weight:700;color:#F5F9FC;letter-spacing:-.02em}
+.start-desc{font-size:13px;color:rgba(228,238,245,0.45);line-height:1.6}
+.nick-label{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(228,238,245,0.35);align-self:flex-start}
+.nick-input{width:100%;padding:13px 18px;background:rgba(26,127,188,0.08);border:1px solid rgba(26,127,188,0.25);border-radius:12px;color:#E4EEF5;font-size:16px;font-family:var(--font);outline:none;transition:border-color .2s}
+.nick-input:focus{border-color:var(--cyan)}
+.nick-input::placeholder{color:rgba(228,238,245,0.2)}
+.btn-play{width:100%;padding:16px;background:linear-gradient(135deg,#0a4f7a,#1A7FBC,#2196F3);border:none;border-radius:14px;color:#fff;font-size:15px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:transform .18s,box-shadow .18s;box-shadow:0 6px 28px rgba(26,127,188,0.5)}
+.btn-play:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(26,127,188,0.65)}
+.btn-play:active{transform:translateY(0)}
+.controls-hint{font-size:12px;color:rgba(228,238,245,0.25);display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+.controls-hint span{display:flex;align-items:center;gap:5px}
+
+/* CANVAS */
+#gameCanvas{width:100%;border-radius:16px;border:1px solid rgba(26,127,188,0.2);display:block;touch-action:none;cursor:pointer}
+
+/* HUD overlay */
+.game-hud{display:flex;justify-content:space-between;align-items:center;padding:8px 4px;font-size:13px;color:rgba(228,238,245,0.5)}
+.hud-score{font-size:22px;font-weight:700;color:var(--cyan);letter-spacing:-.02em}
+.hud-nick{font-size:13px;color:rgba(228,238,245,0.4)}
+.hud-best{font-size:12px;color:rgba(228,238,245,0.25)}
+
+/* GAME OVER */
+.gameover-card{background:rgba(7,28,44,0.95);border:1px solid rgba(26,127,188,0.25);border-radius:20px;padding:36px 40px;width:100%;max-width:480px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:16px}
+.gameover-title{font-size:28px;font-weight:800;letter-spacing:-.03em;color:#F5F9FC}
+.gameover-score{font-size:64px;font-weight:700;color:var(--cyan);letter-spacing:-.04em;line-height:1}
+.gameover-label{font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(228,238,245,0.3)}
+.gameover-record{font-size:13px;color:var(--gold);font-weight:600;display:none}
+.btn-row{display:flex;gap:10px;width:100%}
+.btn-retry{flex:1;padding:14px;background:rgba(26,127,188,0.15);border:1px solid rgba(26,127,188,0.3);border-radius:12px;color:#E4EEF5;font-size:14px;font-weight:700;cursor:pointer;transition:background .2s}
+.btn-retry:hover{background:rgba(26,127,188,0.25)}
+.btn-share{flex:1;padding:14px;background:rgba(0,201,224,0.12);border:1px solid rgba(0,201,224,0.25);border-radius:12px;color:var(--cyan);font-size:14px;font-weight:700;cursor:pointer;transition:background .2s}
+.btn-share:hover{background:rgba(0,201,224,0.22)}
+.btn-share.copied{background:rgba(0,200,80,0.15);border-color:rgba(0,200,80,0.3);color:#4ade80}
+
+/* LEADERBOARD */
+.lb-wrap{width:100%}
+.lb-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.lb-title{font-size:16px;font-weight:700;color:#F5F9FC;letter-spacing:-.02em}
+.lb-month{font-size:11px;font-weight:500;color:rgba(228,238,245,0.3);letter-spacing:.06em;text-transform:uppercase;margin-left:auto}
+.lb-table{width:100%;border-radius:14px;overflow:hidden;border:1px solid rgba(26,127,188,0.15)}
+.lb-row{display:flex;align-items:center;gap:12px;padding:12px 18px;background:rgba(7,28,44,0.7);border-bottom:1px solid rgba(255,255,255,0.04)}
+.lb-row:last-child{border-bottom:none}
+.lb-row.highlight{background:rgba(26,127,188,0.12)}
+.lb-pos{font-size:14px;font-weight:700;width:28px;text-align:center;color:rgba(228,238,245,0.25)}
+.lb-pos.gold{color:var(--gold)}
+.lb-pos.silver{color:#94A3B8}
+.lb-pos.bronze{color:#CD7F32}
+.lb-nick{flex:1;font-size:14px;color:rgba(228,238,245,0.75);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lb-pts{font-size:15px;font-weight:700;color:var(--cyan);letter-spacing:-.02em}
+.lb-date{font-size:11px;color:rgba(228,238,245,0.2);width:60px;text-align:right}
+.lb-empty{padding:28px;text-align:center;font-size:13px;color:rgba(228,238,245,0.25);background:rgba(7,28,44,0.7);border-radius:14px;border:1px solid rgba(26,127,188,0.1)}
+
+@media(max-width:600px){
+  nav{padding:12px 16px}
+  .game-hero{padding:88px 16px 24px}
+  .start-card,.gameover-card{padding:24px 20px}
+  .game-wrap{padding:0 12px 40px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo"><a href="index.html"><img src="btg-logo.png" alt="BTG Seguros"></a></div>
+  <a href="index.html" class="nav-back">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Regresar
+  </a>
+</nav>
+
+<div class="game-hero">
+  <div class="game-eyebrow">BTG Seguros · Juego exclusivo</div>
+  <h1 class="game-h1">BTG <span>Runner</span></h1>
+  <p class="game-sub">Pilota el cohete BTG, colecta pólizas y esquiva obstáculos. El agente con más puntos al cierre de mes se lleva el premio.</p>
+  <div class="prize-pill">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+    Premio mensual para el agente #1
+  </div>
+</div>
+
+<div class="game-wrap">
+
+  <!-- START SCREEN -->
+  <div class="screen active" id="screen-start">
+    <div class="start-card">
+      <div class="start-rocket">🚀</div>
+      <div class="start-title">¿Listo para despegar?</div>
+      <p class="start-desc">Ingresa tu nickname para que tu puntaje aparezca en el marcador. ¡Cada póliza que recolectas vale +10 pts!</p>
+      <span class="nick-label">Tu nickname</span>
+      <input class="nick-input" id="nickInput" type="text" maxlength="20" placeholder="Ej: AgenteBTG01" autocomplete="off">
+      <button class="btn-play" id="btnPlay">🚀 Despegar</button>
+      <div class="controls-hint">
+        <span>⎵ Espacio / Clic — Saltar</span>
+        <span>🤳 Toque — Saltar</span>
+        <span>↑↑ Doble salto</span>
+      </div>
+    </div>
+    <div class="lb-wrap" id="lb-start"></div>
+  </div>
+
+  <!-- GAME SCREEN -->
+  <div class="screen" id="screen-game">
+    <div class="game-hud" style="width:100%">
+      <span class="hud-nick" id="hudNick"></span>
+      <span class="hud-score" id="hudScore">0</span>
+      <span class="hud-best" id="hudBest"></span>
+    </div>
+    <canvas id="gameCanvas" width="828" height="300"></canvas>
+    <div style="font-size:11px;color:rgba(228,238,245,0.2);text-align:center">Espacio · Clic · Toque para saltar &nbsp;|&nbsp; Doble salto disponible</div>
+  </div>
+
+  <!-- GAME OVER SCREEN -->
+  <div class="screen" id="screen-over">
+    <div class="gameover-card">
+      <div class="gameover-title">¡Fin del vuelo!</div>
+      <div class="gameover-score" id="finalScore">0</div>
+      <div class="gameover-label">puntos</div>
+      <div class="gameover-record" id="recordMsg">🏆 ¡Nuevo récord personal!</div>
+      <div class="btn-row">
+        <button class="btn-retry" id="btnRetry">↺ Reintentar</button>
+        <button class="btn-share" id="btnShare">📋 Copiar puntaje</button>
+      </div>
+    </div>
+    <div class="lb-wrap" id="lb-over"></div>
+  </div>
+
+</div>
+
+<script>
+// ─── LEADERBOARD (localStorage) ───────────────────────────────────────────
+const LS_KEY = 'btg_runner_scores';
+const LS_BEST = 'btg_runner_best';
+
+function getScores() {
+  try { return JSON.parse(localStorage.getItem(LS_KEY) || '[]'); } catch(e) { return []; }
+}
+function saveScore(nick, pts) {
+  const scores = getScores();
+  const now = new Date();
+  scores.push({ nick: nick.trim() || 'Anónimo', pts, date: now.toLocaleDateString('es-MX', {day:'2-digit',month:'2-digit'}) });
+  scores.sort((a,b) => b.pts - a.pts);
+  localStorage.setItem(LS_KEY, JSON.stringify(scores.slice(0, 50)));
+}
+function getBest() { return parseInt(localStorage.getItem(LS_BEST) || '0'); }
+function updateBest(pts) {
+  if (pts > getBest()) { localStorage.setItem(LS_BEST, pts); return true; }
+  return false;
+}
+function renderLeaderboard(containerId, highlightNick) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  const scores = getScores();
+  if (!scores.length) {
+    el.innerHTML = '<div class="lb-empty">Sé el primero en el marcador 🚀</div>';
+    return;
+  }
+  const medals = ['gold','silver','bronze'];
+  let html = '<div class="lb-header"><span class="lb-title">🏆 Marcador del mes</span><span class="lb-month">' +
+    new Date().toLocaleDateString('es-MX',{month:'long',year:'numeric'}) + '</span></div><div class="lb-table">';
+  scores.slice(0, 10).forEach((s, i) => {
+    const hl = s.nick === highlightNick ? ' highlight' : '';
+    const medal = medals[i] ? ` ${medals[i]}` : '';
+    html += `<div class="lb-row${hl}">
+      <span class="lb-pos${medal}">${i+1}</span>
+      <span class="lb-nick">${s.nick}</span>
+      <span class="lb-pts">${s.pts.toLocaleString()}</span>
+      <span class="lb-date">${s.date}</span>
+    </div>`;
+  });
+  html += '</div>';
+  el.innerHTML = html;
+}
+
+// ─── GAME ENGINE ──────────────────────────────────────────────────────────
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+const W = canvas.width, H = canvas.height;
+const GROUND = H - 52;
+const GRAVITY = 0.55, JUMP = -13;
+
+let nickname = 'Agente';
+let gameState = 'idle'; // idle | playing | dead
+let score = 0, frameCount = 0, speed = 4, rafId = null;
+let nextObs = 90, nextPol = 70;
+
+// Stars
+const stars = Array.from({length:90}, () => ({
+  x: Math.random()*W, y: Math.random()*GROUND,
+  r: Math.random()*1.4+0.3, spd: Math.random()*0.4+0.1
+}));
+
+// Player
+const P = {
+  x:110, y:GROUND-50, w:34, h:48, vy:0, jumps:0,
+  reset(){ this.y=GROUND-this.h; this.vy=0; this.jumps=0; },
+  jump(){ if(this.jumps<2){ this.vy=JUMP; this.jumps++; } },
+  update(){
+    this.vy+=GRAVITY; this.y+=this.vy;
+    if(this.y>=GROUND-this.h){ this.y=GROUND-this.h; this.vy=0; this.jumps=0; }
+  },
+  draw(){
+    const cx=this.x+this.w/2, cy=this.y+this.h/2;
+    ctx.save(); ctx.translate(cx,cy);
+    // Flame
+    if(gameState==='playing'){
+      const fh=12+Math.random()*8;
+      const grad=ctx.createLinearGradient(0,this.h/3,0,this.h/3+fh);
+      grad.addColorStop(0,'rgba(255,160,30,0.95)');
+      grad.addColorStop(1,'rgba(255,60,0,0)');
+      ctx.fillStyle=grad;
+      ctx.beginPath(); ctx.moveTo(-9,this.h/3); ctx.lineTo(9,this.h/3); ctx.lineTo(0,this.h/3+fh); ctx.closePath(); ctx.fill();
+    }
+    // Body
+    ctx.fillStyle='#1A7FBC';
+    ctx.beginPath(); ctx.moveTo(0,-this.h/2); ctx.lineTo(this.w/2,this.h/3); ctx.lineTo(-this.w/2,this.h/3); ctx.closePath(); ctx.fill();
+    // Fins
+    ctx.fillStyle='#0d5a8a';
+    ctx.beginPath(); ctx.moveTo(this.w/2,this.h/3); ctx.lineTo(this.w/2+10,this.h/2); ctx.lineTo(this.w/2-2,this.h/2); ctx.closePath(); ctx.fill();
+    ctx.beginPath(); ctx.moveTo(-this.w/2,this.h/3); ctx.lineTo(-this.w/2-10,this.h/2); ctx.lineTo(-this.w/2+2,this.h/2); ctx.closePath(); ctx.fill();
+    // Nose
+    ctx.fillStyle='#00C9E0';
+    ctx.beginPath(); ctx.moveTo(0,-this.h/2); ctx.lineTo(this.w/3,-this.h/5); ctx.lineTo(-this.w/3,-this.h/5); ctx.closePath(); ctx.fill();
+    // Window
+    ctx.fillStyle='rgba(228,238,245,0.85)'; ctx.beginPath(); ctx.arc(0,0,7,0,Math.PI*2); ctx.fill();
+    ctx.fillStyle='rgba(26,127,188,0.5)'; ctx.beginPath(); ctx.arc(0,0,4,0,Math.PI*2); ctx.fill();
+    ctx.restore();
+  }
+};
+
+let obstacles=[], policies=[], particles=[];
+
+function spawnObstacle(){
+  const t=Math.random()<0.45?'asteroid':'barrier';
+  const h=38+Math.random()*55;
+  obstacles.push({x:W+20,y:GROUND-h,w:t==='asteroid'?36:24,h,t,rot:0});
+}
+function spawnPolicy(){
+  policies.push({x:W+20,y:GROUND-90-Math.random()*70,w:26,h:32,col:false,a:1});
+}
+function spawnParticles(x,y,color){
+  for(let i=0;i<8;i++){
+    const a=Math.random()*Math.PI*2, spd=2+Math.random()*3;
+    particles.push({x,y,vx:Math.cos(a)*spd,vy:Math.sin(a)*spd-2,a:1,color,r:3+Math.random()*3});
+  }
+}
+
+function hits(a,b,m=7){ return !(a.x+a.w-m<b.x||a.x+m>b.x+b.w||a.y+a.h-m<b.y||a.y+m>b.y+b.h); }
+
+function resetGame(){
+  obstacles=[]; policies=[]; particles=[];
+  score=0; frameCount=0; speed=4; nextObs=90; nextPol=70;
+  P.reset();
+}
+
+function update(){
+  if(gameState!=='playing') return;
+  frameCount++;
+  score=Math.floor(frameCount/5);
+  speed=Math.min(4+score/120, 11);
+
+  P.update();
+
+  // Obstacles
+  if(--nextObs<=0){
+    spawnObstacle();
+    nextObs=Math.max(30, 55+Math.random()*70-speed*4);
+  }
+  for(let i=obstacles.length-1;i>=0;i--){
+    const o=obstacles[i];
+    o.x-=speed; if(o.t==='asteroid') o.rot+=0.04;
+    if(o.x+o.w<0){ obstacles.splice(i,1); continue; }
+    if(hits(P,o)){ die(); return; }
+  }
+
+  // Policies
+  if(--nextPol<=0){
+    spawnPolicy();
+    nextPol=60+Math.random()*60;
+  }
+  for(let i=policies.length-1;i>=0;i--){
+    const p=policies[i];
+    p.x-=speed;
+    if(p.x+p.w<0){ policies.splice(i,1); continue; }
+    if(!p.col && hits(P,p,4)){ p.col=true; score+=10; frameCount+=50; spawnParticles(p.x+p.w/2,p.y+p.h/2,'#00C9E0'); }
+    if(p.col){ p.a-=0.12; if(p.a<=0) policies.splice(i,1); }
+  }
+
+  // Particles
+  for(let i=particles.length-1;i>=0;i--){
+    const p=particles[i];
+    p.x+=p.vx; p.y+=p.vy; p.vy+=0.2; p.a-=0.06;
+    if(p.a<=0) particles.splice(i,1);
+  }
+
+  // Update HUD
+  document.getElementById('hudScore').textContent=score.toLocaleString()+' pts';
+}
+
+function die(){
+  gameState='dead';
+  const isRecord=updateBest(score);
+  saveScore(nickname, score);
+  document.getElementById('finalScore').textContent=score.toLocaleString();
+  const recMsg=document.getElementById('recordMsg');
+  if(isRecord){ recMsg.style.display='block'; } else { recMsg.style.display='none'; }
+  showScreen('over');
+  renderLeaderboard('lb-over', nickname);
+}
+
+function draw(){
+  // BG
+  const bg=ctx.createLinearGradient(0,0,0,H);
+  bg.addColorStop(0,'#030c16'); bg.addColorStop(1,'#04111A');
+  ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
+
+  // Stars
+  stars.forEach(s=>{
+    s.x-=s.spd; if(s.x<0) s.x=W;
+    ctx.beginPath(); ctx.fillStyle=`rgba(228,238,245,${0.25+s.r*0.2})`;
+    ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fill();
+  });
+
+  // Ground
+  const grd=ctx.createLinearGradient(0,GROUND,0,H);
+  grd.addColorStop(0,'rgba(26,127,188,0.2)'); grd.addColorStop(1,'rgba(26,127,188,0.05)');
+  ctx.fillStyle=grd; ctx.fillRect(0,GROUND,W,H-GROUND);
+  ctx.strokeStyle='rgba(0,201,224,0.35)'; ctx.lineWidth=1.5;
+  ctx.beginPath(); ctx.moveTo(0,GROUND); ctx.lineTo(W,GROUND); ctx.stroke();
+
+  // Obstacles
+  obstacles.forEach(o=>{
+    ctx.save(); ctx.translate(o.x+o.w/2,o.y+o.h/2);
+    if(o.t==='asteroid'){
+      ctx.rotate(o.rot);
+      const aGrad=ctx.createRadialGradient(-o.w/5,-o.h/5,2,0,0,o.w/2);
+      aGrad.addColorStop(0,'#546e8a'); aGrad.addColorStop(1,'#2d3748');
+      ctx.fillStyle=aGrad;
+      ctx.beginPath();
+      for(let i=0;i<8;i++){
+        const a=(i/8)*Math.PI*2, r=o.w/2*(0.8+Math.sin(i*2.3)*0.2);
+        i===0?ctx.moveTo(Math.cos(a)*r,Math.sin(a)*r):ctx.lineTo(Math.cos(a)*r,Math.sin(a)*r);
+      }
+      ctx.closePath(); ctx.fill();
+      ctx.fillStyle='rgba(255,255,255,0.12)'; ctx.beginPath(); ctx.arc(-o.w/5,-o.h/5,o.w/6,0,Math.PI*2); ctx.fill();
+    } else {
+      // Barrier (burocracia roja)
+      ctx.fillStyle='#C0392B';
+      ctx.fillRect(-o.w/2,-o.h/2,o.w,o.h);
+      ctx.fillStyle='rgba(255,255,255,0.18)';
+      for(let j=-2;j<=2;j++){
+        ctx.fillRect(-o.w/2, j*(o.h/5)-2, o.w, 4);
+      }
+      ctx.fillStyle='rgba(0,0,0,0.2)';
+      ctx.fillRect(o.w/2-6,-o.h/2,6,o.h);
+    }
+    ctx.restore();
+  });
+
+  // Policies (pólizas)
+  policies.forEach(p=>{
+    ctx.save(); ctx.globalAlpha=p.a;
+    ctx.translate(p.x+p.w/2, p.y+p.h/2);
+    // Glow
+    if(!p.col){
+      const glow=ctx.createRadialGradient(0,0,4,0,0,22);
+      glow.addColorStop(0,'rgba(0,201,224,0.25)'); glow.addColorStop(1,'transparent');
+      ctx.fillStyle=glow; ctx.beginPath(); ctx.arc(0,0,22,0,Math.PI*2); ctx.fill();
+    }
+    // Document
+    ctx.fillStyle=p.col?'rgba(0,200,100,0.9)':'rgba(0,201,224,0.92)';
+    ctx.beginPath(); ctx.roundRect(-p.w/2,-p.h/2,p.w,p.h,4); ctx.fill();
+    ctx.fillStyle='rgba(4,17,26,0.6)';
+    ctx.fillRect(-p.w/2+5,-p.h/2+8,p.w-10,3);
+    ctx.fillRect(-p.w/2+5,-p.h/2+16,p.w-10,3);
+    ctx.fillRect(-p.w/2+5,-p.h/2+24,p.w-16,3);
+    // Checkmark
+    ctx.strokeStyle='rgba(4,17,26,0.8)'; ctx.lineWidth=2.5; ctx.lineCap='round'; ctx.lineJoin='round';
+    ctx.beginPath(); ctx.moveTo(-5,6); ctx.lineTo(-1,11); ctx.lineTo(7,-1); ctx.stroke();
+    ctx.restore();
+  });
+
+  // Particles
+  particles.forEach(p=>{
+    ctx.save(); ctx.globalAlpha=p.a;
+    ctx.fillStyle=p.color;
+    ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
+    ctx.restore();
+  });
+
+  // Player
+  P.draw();
+
+  // Game over flash
+  if(gameState==='dead'){
+    ctx.fillStyle='rgba(200,30,30,0.15)';
+    ctx.fillRect(0,0,W,H);
+  }
+}
+
+function loop(){
+  update(); draw();
+  if(gameState!=='idle') rafId=requestAnimationFrame(loop);
+}
+
+function startGame(){
+  const nick=document.getElementById('nickInput').value.trim();
+  if(!nick){ document.getElementById('nickInput').focus(); document.getElementById('nickInput').style.borderColor='var(--cyan)'; return; }
+  nickname=nick;
+  document.getElementById('hudNick').textContent=nick;
+  document.getElementById('hudBest').textContent='Mejor: '+getBest().toLocaleString();
+  resetGame();
+  gameState='playing';
+  showScreen('game');
+  if(rafId) cancelAnimationFrame(rafId);
+  loop();
+}
+
+function retryGame(){
+  resetGame();
+  gameState='playing';
+  document.getElementById('hudScore').textContent='0 pts';
+  showScreen('game');
+  if(rafId) cancelAnimationFrame(rafId);
+  loop();
+}
+
+function showScreen(name){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('screen-'+name).classList.add('active');
+}
+
+// Controls
+function jumpAction(){ if(gameState==='playing') P.jump(); }
+document.addEventListener('keydown', e=>{
+  if(e.code==='Space'||e.code==='ArrowUp'){ e.preventDefault(); jumpAction(); }
+});
+canvas.addEventListener('click', jumpAction);
+canvas.addEventListener('touchstart', e=>{ e.preventDefault(); jumpAction(); }, {passive:false});
+
+document.getElementById('btnPlay').addEventListener('click', startGame);
+document.getElementById('nickInput').addEventListener('keydown', e=>{ if(e.key==='Enter') startGame(); });
+
+document.getElementById('btnRetry').addEventListener('click', retryGame);
+
+document.getElementById('btnShare').addEventListener('click', function(){
+  const msg=`🚀 Jugué BTG Runner y obtuve ${score.toLocaleString()} puntos como ${nickname}. ¿Puedes superarme? soybtg.com/juego`;
+  navigator.clipboard.writeText(msg).then(()=>{
+    this.textContent='✓ ¡Copiado!';
+    this.classList.add('copied');
+    setTimeout(()=>{ this.textContent='📋 Copiar puntaje'; this.classList.remove('copied'); },2500);
+  });
+});
+
+// Init leaderboard on start screen
+renderLeaderboard('lb-start','');
+</script>
+</body>
+</html>
