@@ -573,42 +573,31 @@ function draw(){
     ctx.restore();
   });
 
-  // Policies (pólizas) — con logo BTG
+  // Policies (pólizas) — fondo cyan original + logo BTG negro centrado
   policies.forEach(p=>{
     ctx.save(); ctx.globalAlpha=p.a;
     ctx.translate(p.x+p.w/2, p.y+p.h/2);
     const pw=p.w, ph=p.h;
-    // Glow exterior
+    // Glow exterior (original)
     if(!p.col){
-      const glow=ctx.createRadialGradient(0,0,6,0,0,32);
-      glow.addColorStop(0,'rgba(0,201,224,0.30)'); glow.addColorStop(1,'transparent');
-      ctx.fillStyle=glow; ctx.beginPath(); ctx.arc(0,0,32,0,Math.PI*2); ctx.fill();
+      const glow=ctx.createRadialGradient(0,0,4,0,0,28);
+      glow.addColorStop(0,'rgba(0,201,224,0.25)'); glow.addColorStop(1,'transparent');
+      ctx.fillStyle=glow; ctx.beginPath(); ctx.arc(0,0,28,0,Math.PI*2); ctx.fill();
     }
-    // Card background — dark navy para que el logo blanco contraste
-    ctx.fillStyle=p.col?'rgba(0,180,90,0.92)':'#071C2C';
-    ctx.beginPath(); ctx.roundRect(-pw/2,-ph/2,pw,ph,6); ctx.fill();
-    // Border cyan
-    ctx.strokeStyle=p.col?'rgba(0,220,110,0.8)':'rgba(0,201,224,0.6)';
-    ctx.lineWidth=1.5;
-    ctx.beginPath(); ctx.roundRect(-pw/2,-ph/2,pw,ph,6); ctx.stroke();
-    // "PÓLIZA" label top
-    ctx.fillStyle=p.col?'rgba(255,255,255,0.7)':'rgba(0,201,224,0.65)';
-    ctx.font='bold 7px sans-serif';
-    ctx.textAlign='center';
-    ctx.fillText('PÓLIZA', 0, -ph/2+10);
-    // BTG logo image centered
-    if(btgLogoImg.complete && btgLogoImg.naturalWidth>0){
+    // Card — color original cyan / verde al recolectar
+    ctx.fillStyle=p.col?'rgba(0,200,100,0.9)':'rgba(0,201,224,0.92)';
+    ctx.beginPath(); ctx.roundRect(-pw/2,-ph/2,pw,ph,5); ctx.fill();
+    // Logo BTG negro centrado (brightness(0) convierte blanco→negro, transparente queda transparente)
+    if(btgLogoImg.complete && btgLogoImg.naturalWidth>0 && !p.col){
       const lw=pw-10, lh=lw*(btgLogoImg.naturalHeight/btgLogoImg.naturalWidth);
-      ctx.drawImage(btgLogoImg, -lw/2, -lh/2-2, lw, lh);
+      ctx.filter='brightness(0)';
+      ctx.drawImage(btgLogoImg, -lw/2, -lh/2, lw, lh);
+      ctx.filter='none';
     }
-    // Thin separator line
-    ctx.strokeStyle=p.col?'rgba(255,255,255,0.2)':'rgba(0,201,224,0.2)';
-    ctx.lineWidth=0.8;
-    ctx.beginPath(); ctx.moveTo(-pw/2+6, ph/2-14); ctx.lineTo(pw/2-6, ph/2-14); ctx.stroke();
-    // Checkmark bottom on collect
+    // Checkmark al recolectar (original)
     if(p.col){
-      ctx.strokeStyle='rgba(255,255,255,0.9)'; ctx.lineWidth=2.5; ctx.lineCap='round'; ctx.lineJoin='round';
-      ctx.beginPath(); ctx.moveTo(-6, ph/2-8); ctx.lineTo(-2, ph/2-4); ctx.lineTo(7, ph/2-12); ctx.stroke();
+      ctx.strokeStyle='rgba(4,17,26,0.8)'; ctx.lineWidth=2.5; ctx.lineCap='round'; ctx.lineJoin='round';
+      ctx.beginPath(); ctx.moveTo(-7,2); ctx.lineTo(-2,8); ctx.lineTo(8,-5); ctx.stroke();
     }
     ctx.restore();
   });
