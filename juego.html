@@ -117,7 +117,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 4
 <div class="game-hero">
   <div class="game-eyebrow">BTG Seguros · Juego exclusivo</div>
   <h1 class="game-h1">BTG <span>Runner</span></h1>
-  <p class="game-sub">Pilota el cohete BTG, colecta pólizas y esquiva obstáculos. El agente con más puntos al cierre de mes se lleva el premio.</p>
+  <p class="game-sub">Maneja el cohete BTG, colecta pólizas y esquiva obstáculos. El agente con más puntos al cierre de mes se lleva el premio.</p>
   <div class="prize-pill">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
     Premio mensual para el agente #1
@@ -413,9 +413,28 @@ const P = {
     ctx.fillStyle='#00C9E0';
     ctx.beginPath(); ctx.moveTo(0,-this.h/2); ctx.lineTo(this.w/3,-this.h/5); ctx.lineTo(-this.w/3,-this.h/5); ctx.closePath(); ctx.fill();
 
-    // Window
-    ctx.fillStyle='rgba(228,238,245,0.85)'; ctx.beginPath(); ctx.arc(0,0,7,0,Math.PI*2); ctx.fill();
-    ctx.fillStyle='rgba(26,127,188,0.5)'; ctx.beginPath(); ctx.arc(0,0,4,0,Math.PI*2); ctx.fill();
+    // Window — BTG towers logo
+    ctx.save();
+    // White outer ring
+    ctx.fillStyle='rgba(228,238,245,0.92)';
+    ctx.beginPath(); ctx.arc(0,0,7.5,0,Math.PI*2); ctx.fill();
+    // Clip to circle and fill dark bg
+    ctx.beginPath(); ctx.arc(0,0,6.8,0,Math.PI*2); ctx.clip();
+    ctx.fillStyle='#04111A';
+    ctx.fillRect(-7,-7,14,14);
+    // BTG towers — three buildings, tallest in center
+    ctx.fillStyle='rgba(0,201,224,0.95)';
+    // Left tower
+    ctx.fillRect(-5.5, 0.5, 2.2, 5);
+    ctx.fillRect(-5.0, -1.2, 1.2, 1.7); // penthouse
+    // Center tower (tallest)
+    ctx.fillRect(-1.4, -4.5, 2.8, 10);
+    ctx.fillRect(-0.8, -6.0, 1.6, 1.5); // spire base
+    ctx.fillRect(-0.3, -7.0, 0.6, 1.0); // spire tip
+    // Right tower
+    ctx.fillRect(3.3, -1.8, 2.2, 7.3);
+    ctx.fillRect(3.7, -3.0, 1.4, 1.2); // penthouse
+    ctx.restore();
 
     ctx.restore();
   }
