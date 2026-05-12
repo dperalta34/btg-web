@@ -598,7 +598,9 @@ function draw(){
       ctx.imageSmoothingEnabled = true;
       ctx.imageSmoothingQuality = 'high';
       if(polizaImg.complete && polizaImg.naturalWidth>0){
-        ctx.drawImage(polizaImg, -pw/2, -ph/2, pw, ph);
+        // Zoom in 1.7x para que el logo llene la tarjeta sin márgenes excesivos
+        const s=1.7, dw=pw*s, dh=ph*s;
+        ctx.drawImage(polizaImg, -dw/2, -dh/2, dw, dh);
       } else {
         ctx.fillStyle='rgba(0,201,224,0.92)';
         ctx.fillRect(-pw/2,-ph/2,pw,ph);
