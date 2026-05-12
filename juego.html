@@ -440,7 +440,7 @@ function spawnObstacle(){
   obstacles.push({x:W+20,y:GROUND-h,w:t==='asteroid'?36:24,h,t,rot:0});
 }
 function spawnPolicy(){
-  policies.push({x:W+20,y:GROUND-115-Math.random()*70,w:62,h:62,col:false,a:1});
+  policies.push({x:W+20,y:GROUND-115-Math.random()*70,w:52,h:66,col:false,a:1});
 }
 function spawnParticles(x,y,color){
   for(let i=0;i<10;i++){
@@ -592,22 +592,21 @@ function draw(){
       ctx.fillStyle=glow; ctx.beginPath(); ctx.arc(0,0,30,0,Math.PI*2); ctx.fill();
     }
     if(!p.col){
-      // Clip circular — forma premium, logo centrado nítido
+      // Clip documento/hoja con esquinas redondeadas
       ctx.save();
-      const r = pw/2;
-      ctx.beginPath(); ctx.arc(0, 0, r, 0, Math.PI*2); ctx.clip();
+      ctx.beginPath(); ctx.roundRect(-pw/2, -ph/2, pw, ph, 7); ctx.clip();
       ctx.imageSmoothingEnabled = true;
       ctx.imageSmoothingQuality = 'high';
       if(polizaImg.complete && polizaImg.naturalWidth>0){
-        ctx.drawImage(polizaImg, -r, -r, pw, pw);
+        ctx.drawImage(polizaImg, -pw/2, -ph/2, pw, ph);
       } else {
         ctx.fillStyle='rgba(0,201,224,0.92)';
-        ctx.arc(0,0,r,0,Math.PI*2); ctx.fill();
+        ctx.fillRect(-pw/2,-ph/2,pw,ph);
       }
       ctx.restore();
       // Borde cyan brillante
       ctx.strokeStyle='rgba(0,201,224,0.9)'; ctx.lineWidth=2;
-      ctx.beginPath(); ctx.arc(0,0,r,0,Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.roundRect(-pw/2,-ph/2,pw,ph,7); ctx.stroke();
     } else {
       // Al recolectar: flash verde + checkmark
       ctx.fillStyle='rgba(0,200,100,0.92)';
