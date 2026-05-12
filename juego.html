@@ -303,6 +303,10 @@ const ctx = canvas.getContext('2d');
 const W = canvas.width, H = canvas.height;
 const GROUND = H - 52;
 
+// Preload BTG logo for policies
+const btgLogoImg = new Image();
+btgLogoImg.src = 'btg-logo.png';
+
 // Physics — snappier, more precise feel
 const GRAVITY = 0.62;
 const JUMP_FORCE = -13.5;
@@ -413,28 +417,9 @@ const P = {
     ctx.fillStyle='#00C9E0';
     ctx.beginPath(); ctx.moveTo(0,-this.h/2); ctx.lineTo(this.w/3,-this.h/5); ctx.lineTo(-this.w/3,-this.h/5); ctx.closePath(); ctx.fill();
 
-    // Window — BTG towers logo
-    ctx.save();
-    // White outer ring
-    ctx.fillStyle='rgba(228,238,245,0.92)';
-    ctx.beginPath(); ctx.arc(0,0,7.5,0,Math.PI*2); ctx.fill();
-    // Clip to circle and fill dark bg
-    ctx.beginPath(); ctx.arc(0,0,6.8,0,Math.PI*2); ctx.clip();
-    ctx.fillStyle='#04111A';
-    ctx.fillRect(-7,-7,14,14);
-    // BTG towers — three buildings, tallest in center
-    ctx.fillStyle='rgba(0,201,224,0.95)';
-    // Left tower
-    ctx.fillRect(-5.5, 0.5, 2.2, 5);
-    ctx.fillRect(-5.0, -1.2, 1.2, 1.7); // penthouse
-    // Center tower (tallest)
-    ctx.fillRect(-1.4, -4.5, 2.8, 10);
-    ctx.fillRect(-0.8, -6.0, 1.6, 1.5); // spire base
-    ctx.fillRect(-0.3, -7.0, 0.6, 1.0); // spire tip
-    // Right tower
-    ctx.fillRect(3.3, -1.8, 2.2, 7.3);
-    ctx.fillRect(3.7, -3.0, 1.4, 1.2); // penthouse
-    ctx.restore();
+    // Window (original)
+    ctx.fillStyle='rgba(228,238,245,0.85)'; ctx.beginPath(); ctx.arc(0,0,7,0,Math.PI*2); ctx.fill();
+    ctx.fillStyle='rgba(26,127,188,0.5)'; ctx.beginPath(); ctx.arc(0,0,4,0,Math.PI*2); ctx.fill();
 
     ctx.restore();
   }
@@ -448,7 +433,7 @@ function spawnObstacle(){
   obstacles.push({x:W+20,y:GROUND-h,w:t==='asteroid'?36:24,h,t,rot:0});
 }
 function spawnPolicy(){
-  policies.push({x:W+20,y:GROUND-90-Math.random()*70,w:26,h:32,col:false,a:1});
+  policies.push({x:W+20,y:GROUND-100-Math.random()*70,w:44,h:52,col:false,a:1});
 }
 function spawnParticles(x,y,color){
   for(let i=0;i<10;i++){
@@ -588,23 +573,43 @@ function draw(){
     ctx.restore();
   });
 
-  // Policies (pólizas)
+  // Policies (pólizas) — con logo BTG
   policies.forEach(p=>{
     ctx.save(); ctx.globalAlpha=p.a;
     ctx.translate(p.x+p.w/2, p.y+p.h/2);
+    const pw=p.w, ph=p.h;
+    // Glow exterior
     if(!p.col){
-      const glow=ctx.createRadialGradient(0,0,4,0,0,22);
-      glow.addColorStop(0,'rgba(0,201,224,0.25)'); glow.addColorStop(1,'transparent');
-      ctx.fillStyle=glow; ctx.beginPath(); ctx.arc(0,0,22,0,Math.PI*2); ctx.fill();
+      const glow=ctx.createRadialGradient(0,0,6,0,0,32);
+      glow.addColorStop(0,'rgba(0,201,224,0.30)'); glow.addColorStop(1,'transparent');
+      ctx.fillStyle=glow; ctx.beginPath(); ctx.arc(0,0,32,0,Math.PI*2); ctx.fill();
     }
-    ctx.fillStyle=p.col?'rgba(0,200,100,0.9)':'rgba(0,201,224,0.92)';
-    ctx.beginPath(); ctx.roundRect(-p.w/2,-p.h/2,p.w,p.h,4); ctx.fill();
-    ctx.fillStyle='rgba(4,17,26,0.6)';
-    ctx.fillRect(-p.w/2+5,-p.h/2+8,p.w-10,3);
-    ctx.fillRect(-p.w/2+5,-p.h/2+16,p.w-10,3);
-    ctx.fillRect(-p.w/2+5,-p.h/2+24,p.w-16,3);
-    ctx.strokeStyle='rgba(4,17,26,0.8)'; ctx.lineWidth=2.5; ctx.lineCap='round'; ctx.lineJoin='round';
-    ctx.beginPath(); ctx.moveTo(-5,6); ctx.lineTo(-1,11); ctx.lineTo(7,-1); ctx.stroke();
+    // Card background — dark navy para que el logo blanco contraste
+    ctx.fillStyle=p.col?'rgba(0,180,90,0.92)':'#071C2C';
+    ctx.beginPath(); ctx.roundRect(-pw/2,-ph/2,pw,ph,6); ctx.fill();
+    // Border cyan
+    ctx.strokeStyle=p.col?'rgba(0,220,110,0.8)':'rgba(0,201,224,0.6)';
+    ctx.lineWidth=1.5;
+    ctx.beginPath(); ctx.roundRect(-pw/2,-ph/2,pw,ph,6); ctx.stroke();
+    // "PÓLIZA" label top
+    ctx.fillStyle=p.col?'rgba(255,255,255,0.7)':'rgba(0,201,224,0.65)';
+    ctx.font='bold 7px sans-serif';
+    ctx.textAlign='center';
+    ctx.fillText('PÓLIZA', 0, -ph/2+10);
+    // BTG logo image centered
+    if(btgLogoImg.complete && btgLogoImg.naturalWidth>0){
+      const lw=pw-10, lh=lw*(btgLogoImg.naturalHeight/btgLogoImg.naturalWidth);
+      ctx.drawImage(btgLogoImg, -lw/2, -lh/2-2, lw, lh);
+    }
+    // Thin separator line
+    ctx.strokeStyle=p.col?'rgba(255,255,255,0.2)':'rgba(0,201,224,0.2)';
+    ctx.lineWidth=0.8;
+    ctx.beginPath(); ctx.moveTo(-pw/2+6, ph/2-14); ctx.lineTo(pw/2-6, ph/2-14); ctx.stroke();
+    // Checkmark bottom on collect
+    if(p.col){
+      ctx.strokeStyle='rgba(255,255,255,0.9)'; ctx.lineWidth=2.5; ctx.lineCap='round'; ctx.lineJoin='round';
+      ctx.beginPath(); ctx.moveTo(-6, ph/2-8); ctx.lineTo(-2, ph/2-4); ctx.lineTo(7, ph/2-12); ctx.stroke();
+    }
     ctx.restore();
   });
 
