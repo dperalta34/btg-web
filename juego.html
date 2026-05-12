@@ -91,6 +91,11 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 4
 .lb-date{font-size:11px;color:rgba(228,238,245,0.2);width:60px;text-align:right}
 .lb-empty{padding:28px;text-align:center;font-size:13px;color:rgba(228,238,245,0.25);background:rgba(7,28,44,0.7);border-radius:14px;border:1px solid rgba(26,127,188,0.1)}
 
+/* SOUND TOGGLE */
+.sound-btn{position:fixed;bottom:20px;right:20px;width:42px;height:42px;border-radius:50%;background:rgba(7,28,44,0.9);border:1px solid rgba(26,127,188,0.3);color:rgba(228,238,245,0.6);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:200;backdrop-filter:blur(8px)}
+.sound-btn:hover{border-color:var(--cyan);color:#E4EEF5}
+.sound-btn.muted{opacity:.45}
+
 @media(max-width:600px){
   nav{padding:12px 16px}
   .game-hero{padding:88px 16px 24px}
@@ -167,7 +172,87 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 4
 
 </div>
 
+<!-- Sound toggle button -->
+<button class="sound-btn" id="soundBtn" title="Sonido">🔊</button>
+
 <script>
+// ─── AUDIO ENGINE ─────────────────────────────────────────────────────────────
+let audioCtx = null;
+let soundEnabled = true;
+
+function getAudio() {
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+  return audioCtx;
+}
+
+function playTone(freq, type, duration, volume, delay=0, freqEnd=null) {
+  if (!soundEnabled) return;
+  try {
+    const ac = getAudio();
+    const osc = ac.createOscillator();
+    const gain = ac.createGain();
+    osc.connect(gain); gain.connect(ac.destination);
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, ac.currentTime + delay);
+    if (freqEnd) osc.frequency.exponentialRampToValueAtTime(freqEnd, ac.currentTime + delay + duration * 0.8);
+    gain.gain.setValueAtTime(volume, ac.currentTime + delay);
+    gain.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + delay + duration);
+    osc.start(ac.currentTime + delay);
+    osc.stop(ac.currentTime + delay + duration + 0.02);
+  } catch(e) {}
+}
+
+function playJump() {
+  // Snappy rising sweep — first jump
+  playTone(200, 'sine', 0.14, 0.28, 0, 520);
+}
+
+function playDoubleJump() {
+  // Two-tone sparkle — distinguishable from first jump
+  playTone(440, 'sine', 0.10, 0.22, 0, 660);
+  playTone(660, 'sine', 0.10, 0.18, 0.07, 880);
+}
+
+function playCollect() {
+  // Ascending chime — satisfying reward
+  const notes = [523, 659, 784, 1047];
+  notes.forEach((f, i) => playTone(f, 'sine', 0.22, 0.20, i * 0.06));
+}
+
+function playCrash() {
+  // Descending crunch — immediate impact feedback
+  playTone(180, 'sawtooth', 0.32, 0.40, 0, 45);
+  playTone(90, 'square', 0.20, 0.18, 0.05, 40);
+}
+
+function playGameOver() {
+  // Dramatic descending fanfare
+  playTone(392, 'sine', 0.18, 0.30, 0);
+  playTone(330, 'sine', 0.18, 0.28, 0.18);
+  playTone(262, 'sine', 0.28, 0.32, 0.36);
+}
+
+function playNewRecord() {
+  // Ascending celebration
+  [523, 659, 784, 1047].forEach((f, i) => playTone(f, 'sine', 0.18, 0.22, i * 0.09));
+  playTone(1047, 'sine', 0.35, 0.20, 0.40, 1568);
+}
+
+function playMilestone() {
+  // Short speed-up beep
+  playTone(880, 'sine', 0.08, 0.15, 0, 1100);
+  playTone(1100, 'sine', 0.08, 0.12, 0.08);
+}
+
+// Sound toggle button
+const soundBtn = document.getElementById('soundBtn');
+soundBtn.addEventListener('click', () => {
+  soundEnabled = !soundEnabled;
+  soundBtn.textContent = soundEnabled ? '🔊' : '🔇';
+  soundBtn.classList.toggle('muted', !soundEnabled);
+});
+
 // ─── LEADERBOARD (localStorage) ───────────────────────────────────────────
 const LS_KEY = 'btg_runner_scores';
 const LS_BEST = 'btg_runner_best';
@@ -217,12 +302,17 @@ const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 const W = canvas.width, H = canvas.height;
 const GROUND = H - 52;
-const GRAVITY = 0.55, JUMP = -13;
+
+// Physics — snappier, more precise feel
+const GRAVITY = 0.62;
+const JUMP_FORCE = -13.5;
+const JUMP_HOLD_GRAVITY = 0.38;  // reduced gravity while holding jump (variable height)
 
 let nickname = 'Agente';
 let gameState = 'idle'; // idle | playing | dead
 let score = 0, frameCount = 0, speed = 4, rafId = null;
 let nextObs = 90, nextPol = 70;
+let lastMilestone = 0; // for speed-up sound
 
 // Stars
 const stars = Array.from({length:90}, () => ({
@@ -233,37 +323,100 @@ const stars = Array.from({length:90}, () => ({
 // Player
 const P = {
   x:110, y:GROUND-50, w:34, h:48, vy:0, jumps:0,
-  reset(){ this.y=GROUND-this.h; this.vy=0; this.jumps=0; },
-  jump(){ if(this.jumps<2){ this.vy=JUMP; this.jumps++; } },
-  update(){
-    this.vy+=GRAVITY; this.y+=this.vy;
-    if(this.y>=GROUND-this.h){ this.y=GROUND-this.h; this.vy=0; this.jumps=0; }
+  jumpHeld: false,
+  coyoteFrames: 0,   // frames since left ground (for coyote time)
+  jumpBuffer: 0,     // frames jump was pressed before landing
+  onGround: false,
+
+  reset(){
+    this.y=GROUND-this.h; this.vy=0; this.jumps=0;
+    this.jumpHeld=false; this.coyoteFrames=0; this.jumpBuffer=0; this.onGround=true;
   },
+
+  jump(){
+    const canJump = this.jumps === 0 || this.coyoteFrames <= 6;
+    if (canJump && this.jumps < 1) {
+      this.vy = JUMP_FORCE;
+      this.jumps = 1;
+      this.jumpHeld = true;
+      this.coyoteFrames = 999; // prevent coyote re-use
+      playJump();
+    } else if (this.jumps === 1 && this.coyoteFrames > 6) {
+      // Double jump
+      this.vy = JUMP_FORCE * 0.92;
+      this.jumps = 2;
+      this.jumpHeld = true;
+      playDoubleJump();
+    }
+  },
+
+  releaseJump(){
+    this.jumpHeld = false;
+  },
+
+  update(){
+    const wasOnGround = this.onGround;
+
+    // Variable jump height: hold key = floatier apex
+    const grav = (this.jumpHeld && this.vy < 0) ? JUMP_HOLD_GRAVITY : GRAVITY;
+    this.vy += grav;
+    this.y  += this.vy;
+
+    this.onGround = this.y >= GROUND - this.h;
+    if (this.onGround) {
+      this.y = GROUND - this.h;
+      this.vy = 0;
+      this.jumps = 0;
+      this.coyoteFrames = 0;
+      // Landing jump buffer
+      if (this.jumpBuffer > 0) {
+        this.jump();
+        this.jumpBuffer = 0;
+      }
+    } else {
+      if (wasOnGround) this.coyoteFrames = 0;
+      else this.coyoteFrames++;
+      if (this.jumpBuffer > 0) this.jumpBuffer--;
+    }
+  },
+
   draw(){
     const cx=this.x+this.w/2, cy=this.y+this.h/2;
     ctx.save(); ctx.translate(cx,cy);
-    // Flame
+
+    // Tilt based on velocity for feedback
+    const tilt = Math.max(-0.18, Math.min(0.18, this.vy * 0.012));
+    ctx.rotate(tilt);
+
+    // Flame — bigger when ascending
     if(gameState==='playing'){
-      const fh=12+Math.random()*8;
+      const thrust = this.vy < 0 ? 1.4 : 0.8;
+      const fh=(12+Math.random()*8)*thrust;
       const grad=ctx.createLinearGradient(0,this.h/3,0,this.h/3+fh);
       grad.addColorStop(0,'rgba(255,160,30,0.95)');
+      grad.addColorStop(0.5,'rgba(255,80,10,0.6)');
       grad.addColorStop(1,'rgba(255,60,0,0)');
       ctx.fillStyle=grad;
       ctx.beginPath(); ctx.moveTo(-9,this.h/3); ctx.lineTo(9,this.h/3); ctx.lineTo(0,this.h/3+fh); ctx.closePath(); ctx.fill();
     }
+
     // Body
     ctx.fillStyle='#1A7FBC';
     ctx.beginPath(); ctx.moveTo(0,-this.h/2); ctx.lineTo(this.w/2,this.h/3); ctx.lineTo(-this.w/2,this.h/3); ctx.closePath(); ctx.fill();
+
     // Fins
     ctx.fillStyle='#0d5a8a';
     ctx.beginPath(); ctx.moveTo(this.w/2,this.h/3); ctx.lineTo(this.w/2+10,this.h/2); ctx.lineTo(this.w/2-2,this.h/2); ctx.closePath(); ctx.fill();
     ctx.beginPath(); ctx.moveTo(-this.w/2,this.h/3); ctx.lineTo(-this.w/2-10,this.h/2); ctx.lineTo(-this.w/2+2,this.h/2); ctx.closePath(); ctx.fill();
+
     // Nose
     ctx.fillStyle='#00C9E0';
     ctx.beginPath(); ctx.moveTo(0,-this.h/2); ctx.lineTo(this.w/3,-this.h/5); ctx.lineTo(-this.w/3,-this.h/5); ctx.closePath(); ctx.fill();
+
     // Window
     ctx.fillStyle='rgba(228,238,245,0.85)'; ctx.beginPath(); ctx.arc(0,0,7,0,Math.PI*2); ctx.fill();
     ctx.fillStyle='rgba(26,127,188,0.5)'; ctx.beginPath(); ctx.arc(0,0,4,0,Math.PI*2); ctx.fill();
+
     ctx.restore();
   }
 };
@@ -279,9 +432,9 @@ function spawnPolicy(){
   policies.push({x:W+20,y:GROUND-90-Math.random()*70,w:26,h:32,col:false,a:1});
 }
 function spawnParticles(x,y,color){
-  for(let i=0;i<8;i++){
-    const a=Math.random()*Math.PI*2, spd=2+Math.random()*3;
-    particles.push({x,y,vx:Math.cos(a)*spd,vy:Math.sin(a)*spd-2,a:1,color,r:3+Math.random()*3});
+  for(let i=0;i<10;i++){
+    const a=Math.random()*Math.PI*2, spd=2+Math.random()*4;
+    particles.push({x,y,vx:Math.cos(a)*spd,vy:Math.sin(a)*spd-2.5,a:1,color,r:2+Math.random()*4});
   }
 }
 
@@ -289,7 +442,7 @@ function hits(a,b,m=7){ return !(a.x+a.w-m<b.x||a.x+m>b.x+b.w||a.y+a.h-m<b.y||a.
 
 function resetGame(){
   obstacles=[]; policies=[]; particles=[];
-  score=0; frameCount=0; speed=4; nextObs=90; nextPol=70;
+  score=0; frameCount=0; speed=4; nextObs=90; nextPol=70; lastMilestone=0;
   P.reset();
 }
 
@@ -297,7 +450,15 @@ function update(){
   if(gameState!=='playing') return;
   frameCount++;
   score=Math.floor(frameCount/5);
+
+  // Speed milestone sound every 50 pts
+  const speedPrev = speed;
   speed=Math.min(4+score/120, 11);
+  const milestone = Math.floor(score/50);
+  if (milestone > lastMilestone && score > 20) {
+    lastMilestone = milestone;
+    playMilestone();
+  }
 
   P.update();
 
@@ -322,7 +483,11 @@ function update(){
     const p=policies[i];
     p.x-=speed;
     if(p.x+p.w<0){ policies.splice(i,1); continue; }
-    if(!p.col && hits(P,p,4)){ p.col=true; score+=10; frameCount+=50; spawnParticles(p.x+p.w/2,p.y+p.h/2,'#00C9E0'); }
+    if(!p.col && hits(P,p,4)){
+      p.col=true; score+=10; frameCount+=50;
+      spawnParticles(p.x+p.w/2,p.y+p.h/2,'#00C9E0');
+      playCollect();
+    }
     if(p.col){ p.a-=0.12; if(p.a<=0) policies.splice(i,1); }
   }
 
@@ -333,19 +498,27 @@ function update(){
     if(p.a<=0) particles.splice(i,1);
   }
 
-  // Update HUD
   document.getElementById('hudScore').textContent=score.toLocaleString()+' pts';
 }
 
 function die(){
   gameState='dead';
-  const isRecord=updateBest(score);
-  saveScore(nickname, score);
-  document.getElementById('finalScore').textContent=score.toLocaleString();
-  const recMsg=document.getElementById('recordMsg');
-  if(isRecord){ recMsg.style.display='block'; } else { recMsg.style.display='none'; }
-  showScreen('over');
-  renderLeaderboard('lb-over', nickname);
+  playCrash();
+  setTimeout(() => {
+    const isRecord=updateBest(score);
+    saveScore(nickname, score);
+    document.getElementById('finalScore').textContent=score.toLocaleString();
+    const recMsg=document.getElementById('recordMsg');
+    if(isRecord){
+      recMsg.style.display='block';
+      setTimeout(playNewRecord, 300);
+    } else {
+      recMsg.style.display='none';
+      setTimeout(playGameOver, 200);
+    }
+    showScreen('over');
+    renderLeaderboard('lb-over', nickname);
+  }, 400);
 }
 
 function draw(){
@@ -384,7 +557,6 @@ function draw(){
       ctx.closePath(); ctx.fill();
       ctx.fillStyle='rgba(255,255,255,0.12)'; ctx.beginPath(); ctx.arc(-o.w/5,-o.h/5,o.w/6,0,Math.PI*2); ctx.fill();
     } else {
-      // Barrier (burocracia roja)
       ctx.fillStyle='#C0392B';
       ctx.fillRect(-o.w/2,-o.h/2,o.w,o.h);
       ctx.fillStyle='rgba(255,255,255,0.18)';
@@ -401,20 +573,17 @@ function draw(){
   policies.forEach(p=>{
     ctx.save(); ctx.globalAlpha=p.a;
     ctx.translate(p.x+p.w/2, p.y+p.h/2);
-    // Glow
     if(!p.col){
       const glow=ctx.createRadialGradient(0,0,4,0,0,22);
       glow.addColorStop(0,'rgba(0,201,224,0.25)'); glow.addColorStop(1,'transparent');
       ctx.fillStyle=glow; ctx.beginPath(); ctx.arc(0,0,22,0,Math.PI*2); ctx.fill();
     }
-    // Document
     ctx.fillStyle=p.col?'rgba(0,200,100,0.9)':'rgba(0,201,224,0.92)';
     ctx.beginPath(); ctx.roundRect(-p.w/2,-p.h/2,p.w,p.h,4); ctx.fill();
     ctx.fillStyle='rgba(4,17,26,0.6)';
     ctx.fillRect(-p.w/2+5,-p.h/2+8,p.w-10,3);
     ctx.fillRect(-p.w/2+5,-p.h/2+16,p.w-10,3);
     ctx.fillRect(-p.w/2+5,-p.h/2+24,p.w-16,3);
-    // Checkmark
     ctx.strokeStyle='rgba(4,17,26,0.8)'; ctx.lineWidth=2.5; ctx.lineCap='round'; ctx.lineJoin='round';
     ctx.beginPath(); ctx.moveTo(-5,6); ctx.lineTo(-1,11); ctx.lineTo(7,-1); ctx.stroke();
     ctx.restore();
@@ -428,12 +597,11 @@ function draw(){
     ctx.restore();
   });
 
-  // Player
   P.draw();
 
-  // Game over flash
+  // Red flash on death
   if(gameState==='dead'){
-    ctx.fillStyle='rgba(200,30,30,0.15)';
+    ctx.fillStyle='rgba(200,30,30,0.18)';
     ctx.fillRect(0,0,W,H);
   }
 }
@@ -470,17 +638,39 @@ function showScreen(name){
   document.getElementById('screen-'+name).classList.add('active');
 }
 
-// Controls
-function jumpAction(){ if(gameState==='playing') P.jump(); }
+// ─── CONTROLS ───────────────────────────────────────────────────────────────
+function jumpAction(){
+  if(gameState==='playing'){
+    if(!P.onGround && P.jumps === 0 && P.coyoteFrames > 6) {
+      // buffer the jump
+      P.jumpBuffer = 8;
+    } else {
+      P.jump();
+    }
+  }
+}
+function releaseAction(){ if(gameState==='playing') P.releaseJump(); }
+
 document.addEventListener('keydown', e=>{
   if(e.code==='Space'||e.code==='ArrowUp'){ e.preventDefault(); jumpAction(); }
 });
+document.addEventListener('keyup', e=>{
+  if(e.code==='Space'||e.code==='ArrowUp') releaseAction();
+});
+
 canvas.addEventListener('click', jumpAction);
-canvas.addEventListener('touchstart', e=>{ e.preventDefault(); jumpAction(); }, {passive:false});
+
+canvas.addEventListener('touchstart', e=>{
+  e.preventDefault();
+  jumpAction();
+}, {passive:false});
+canvas.addEventListener('touchend', e=>{
+  e.preventDefault();
+  releaseAction();
+}, {passive:false});
 
 document.getElementById('btnPlay').addEventListener('click', startGame);
 document.getElementById('nickInput').addEventListener('keydown', e=>{ if(e.key==='Enter') startGame(); });
-
 document.getElementById('btnRetry').addEventListener('click', retryGame);
 
 document.getElementById('btnShare').addEventListener('click', function(){
