@@ -27,20 +27,18 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 .nav-drop{position:relative}
 .nav-drop>a{display:flex;align-items:center;gap:5px}
 .nav-drop>a svg{transition:transform .2s;flex-shrink:0}
-.nav-drop.drop-open>a svg,.nav-drop:focus-within>a svg{transform:rotate(180deg)}
+.nav-drop.drop-open>a svg{transform:rotate(180deg)}
 .nav-dropmenu{
-  /* top:100% sin gap — el mouse nunca sale de .nav-drop al bajar al menú (fix Safari) */
-  position:absolute;top:100%;right:0;
+  position:absolute;top:100%;right:0;margin-top:8px;
   background:rgba(4,14,26,0.97);backdrop-filter:blur(18px);
   border:1px solid rgba(26,127,188,0.2);border-radius:12px;
-  /* padding-top reemplaza el gap visual sin crear aire vacío */
-  padding:14px 6px 6px;min-width:186px;
+  padding:6px;min-width:186px;
   opacity:0;pointer-events:none;
   transform:translateY(-8px) scale(.97);
   transition:opacity .22s,transform .22s;
   z-index:400;
 }
-.nav-drop.drop-open .nav-dropmenu,.nav-drop:hover .nav-dropmenu,.nav-drop:focus-within .nav-dropmenu{
+.nav-drop.drop-open .nav-dropmenu{
   opacity:1;pointer-events:all;transform:translateY(0) scale(1);
 }
 .nav-dropmenu a{
@@ -857,7 +855,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
   .aseg-item{padding:0 12px;height:54px;gap:8px}
   .aseg-logo{width:80px;height:34px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
   .aseg-logo img,.aseg-logo svg{width:auto;height:auto;max-width:80px;max-height:30px}
-  .aseg-logo img[src*="Thona"]{transform:rotate(180deg)}
+  .aseg-logo img[src*="Thona"]{transform:scale(1.45)}
   .aseg-logo img[src*="Skandia"]{max-height:14px}
   .aseg-logo img[src*="Sura"]{transform:scale(1.3)}
   .aseg-logo img[src*="Chubb"]{transform:scale(1.3)}
@@ -1153,7 +1151,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
         <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/Axa.png" alt="AXA" loading="eager"></div><div class="aseg-type aseg-est">Estratégica</div></div>
         <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/AIG.png" alt="AIG" loading="eager"></div><div class="aseg-type aseg-est">Estratégica</div></div>
         <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/plan_seguro_logo2.png" alt="Plan Seguro" loading="eager"></div><div class="aseg-type aseg-est">Estratégica</div></div>
-        <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/Thona.png" alt="Thona Seguros" loading="eager"></div><div class="aseg-type aseg-est">Estratégica</div></div>
+        <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/Thona.png?v=2" alt="Thona Seguros" loading="eager"></div><div class="aseg-type aseg-est">Estratégica</div></div>
         <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/La_Latino.png" alt="La Latino Seguros" loading="eager"></div><div class="aseg-type aseg-est">Estratégica</div></div>
         <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/General_de_seguros_.webp" alt="General de Seguros" loading="eager"></div><div class="aseg-type aseg-est">Estratégica</div></div>
         <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/Ana.png" alt="ANA Seguros" loading="eager"></div><div class="aseg-type aseg-est">Estratégica</div></div>
@@ -1182,7 +1180,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
         <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/Axa.png" alt="" loading="eager"></div><div class="aseg-type aseg-est">Estratégica</div></div>
         <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/AIG.png" alt="" loading="eager"></div><div class="aseg-type aseg-est">Estratégica</div></div>
         <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/plan_seguro_logo2.png" alt="" loading="eager"></div><div class="aseg-type aseg-est">Estratégica</div></div>
-        <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/Thona.png" alt="" loading="eager"></div><div class="aseg-type aseg-est">Estratégica</div></div>
+        <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/Thona.png?v=2" alt="" loading="eager"></div><div class="aseg-type aseg-est">Estratégica</div></div>
         <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/La_Latino.png" alt="" loading="eager"></div><div class="aseg-type aseg-est">Estratégica</div></div>
         <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/General_de_seguros_.webp" alt="" loading="eager"></div><div class="aseg-type aseg-est">Estratégica</div></div>
         <div class="aseg-item"><div class="aseg-logo"><img src="Logos_Aseguradoras/Ana.png" alt="" loading="eager"></div><div class="aseg-type aseg-est">Estratégica</div></div>
@@ -1862,6 +1860,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
       <a href="https://www.reforma.com/conoce-a-las-organizaciones-reconocidas/ar2984811" target="_blank" class="medio-btn">Reforma</a>
       <a href="https://lideresmexicanos.com/entrevistas/btg-consultores-de-riesgo" target="_blank" class="medio-btn">Líderes Mexicanos</a>
       <a href="https://issuu.com/expansionpublishing/docs/expansion_1294_compressed" target="_blank" class="medio-btn">Expansión</a>
+      <a href="https://www.elasegurador.com.mx/blog/el-asesor-de-riesgos-en-la-era-digital-tecnologia-con-proposito-humano/" target="_blank" class="medio-btn">El Asegurador</a>
     </div>
   </div>
 </section>
@@ -3089,17 +3088,20 @@ document.addEventListener('DOMContentLoaded',function(){
   var ovl=document.getElementById('bases-overlay');
   if(ovl)ovl.addEventListener('click',function(e){if(e.target===ovl)closeBases();});
 
-// ── Dropdown nav: fix Safari ────────────────────────────────────────────────
-// Estrategia principal: top:100% sin gap (ver CSS) — mouse nunca abandona .nav-drop.
-// JS como refuerzo: delay 350ms + listeners en el menú mismo por si acaso.
+// Dropdown nav: click-to-toggle (confiable en Safari, Chrome, Firefox)
 document.querySelectorAll('.nav-drop').forEach(function(drop){
-  var timer;
-  var menu=drop.querySelector('.nav-dropmenu');
-  function open(){ clearTimeout(timer); drop.classList.add('drop-open'); }
-  function close(){ timer=setTimeout(function(){ drop.classList.remove('drop-open'); },350); }
-  drop.addEventListener('mouseenter',open);
-  drop.addEventListener('mouseleave',close);
-  if(menu){ menu.addEventListener('mouseenter',open); menu.addEventListener('mouseleave',close); }
+  var trigger = drop.querySelector('a');
+  trigger.addEventListener('click', function(e){
+    e.preventDefault();
+    var isOpen = drop.classList.contains('drop-open');
+    document.querySelectorAll('.nav-drop.drop-open').forEach(function(d){ d.classList.remove('drop-open'); });
+    if(!isOpen) drop.classList.add('drop-open');
+  });
+});
+document.addEventListener('click', function(e){
+  if(!e.target.closest('.nav-drop')){
+    document.querySelectorAll('.nav-drop.drop-open').forEach(function(d){ d.classList.remove('drop-open'); });
+  }
 });
 
 });
