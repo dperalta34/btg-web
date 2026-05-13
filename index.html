@@ -28,19 +28,19 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 .nav-drop>a{display:flex;align-items:center;gap:5px}
 .nav-drop>a svg{transition:transform .2s;flex-shrink:0}
 .nav-drop.drop-open>a svg,.nav-drop:focus-within>a svg{transform:rotate(180deg)}
-/* Puente invisible que cubre el gap — evita que Safari cierre el menú al cruzarlo */
-.nav-drop::after{content:'';position:absolute;top:100%;left:-10px;right:-10px;height:20px;display:block}
 .nav-dropmenu{
-  position:absolute;top:calc(100% + 14px);right:0;
+  /* top:100% sin gap — el mouse nunca sale de .nav-drop al bajar al menú (fix Safari) */
+  position:absolute;top:100%;right:0;
   background:rgba(4,14,26,0.97);backdrop-filter:blur(18px);
   border:1px solid rgba(26,127,188,0.2);border-radius:12px;
-  padding:6px;min-width:186px;
+  /* padding-top reemplaza el gap visual sin crear aire vacío */
+  padding:14px 6px 6px;min-width:186px;
   opacity:0;pointer-events:none;
   transform:translateY(-8px) scale(.97);
   transition:opacity .22s,transform .22s;
   z-index:400;
 }
-.nav-drop.drop-open .nav-dropmenu,.nav-drop:focus-within .nav-dropmenu{
+.nav-drop.drop-open .nav-dropmenu,.nav-drop:hover .nav-dropmenu,.nav-drop:focus-within .nav-dropmenu{
   opacity:1;pointer-events:all;transform:translateY(0) scale(1);
 }
 .nav-dropmenu a{
@@ -3089,18 +3089,17 @@ document.addEventListener('DOMContentLoaded',function(){
   var ovl=document.getElementById('bases-overlay');
   if(ovl)ovl.addEventListener('click',function(e){if(e.target===ovl)closeBases();});
 
-// ── Dropdown nav: JS con delay de cierre — fix Safari ──────────────────────
-// Safari pierde :hover al cruzar el gap entre trigger y menú.
-// Solución: abrir inmediato, cerrar con 220ms de gracia.
+// ── Dropdown nav: fix Safari ────────────────────────────────────────────────
+// Estrategia principal: top:100% sin gap (ver CSS) — mouse nunca abandona .nav-drop.
+// JS como refuerzo: delay 350ms + listeners en el menú mismo por si acaso.
 document.querySelectorAll('.nav-drop').forEach(function(drop){
   var timer;
-  drop.addEventListener('mouseenter',function(){
-    clearTimeout(timer);
-    drop.classList.add('drop-open');
-  });
-  drop.addEventListener('mouseleave',function(){
-    timer=setTimeout(function(){ drop.classList.remove('drop-open'); },220);
-  });
+  var menu=drop.querySelector('.nav-dropmenu');
+  function open(){ clearTimeout(timer); drop.classList.add('drop-open'); }
+  function close(){ timer=setTimeout(function(){ drop.classList.remove('drop-open'); },350); }
+  drop.addEventListener('mouseenter',open);
+  drop.addEventListener('mouseleave',close);
+  if(menu){ menu.addEventListener('mouseenter',open); menu.addEventListener('mouseleave',close); }
 });
 
 });
