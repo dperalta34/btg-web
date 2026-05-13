@@ -27,7 +27,9 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 .nav-drop{position:relative}
 .nav-drop>a{display:flex;align-items:center;gap:5px}
 .nav-drop>a svg{transition:transform .2s;flex-shrink:0}
-.nav-drop:hover>a svg,.nav-drop:focus-within>a svg{transform:rotate(180deg)}
+.nav-drop.drop-open>a svg,.nav-drop:focus-within>a svg{transform:rotate(180deg)}
+/* Puente invisible que cubre el gap — evita que Safari cierre el menú al cruzarlo */
+.nav-drop::after{content:'';position:absolute;top:100%;left:-10px;right:-10px;height:20px;display:block}
 .nav-dropmenu{
   position:absolute;top:calc(100% + 14px);right:0;
   background:rgba(4,14,26,0.97);backdrop-filter:blur(18px);
@@ -38,7 +40,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
   transition:opacity .22s,transform .22s;
   z-index:400;
 }
-.nav-drop:hover .nav-dropmenu,.nav-drop:focus-within .nav-dropmenu{
+.nav-drop.drop-open .nav-dropmenu,.nav-drop:focus-within .nav-dropmenu{
   opacity:1;pointer-events:all;transform:translateY(0) scale(1);
 }
 .nav-dropmenu a{
@@ -3086,6 +3088,21 @@ document.querySelectorAll('.btn-bases button[data-bases-src]').forEach(function(
 document.addEventListener('DOMContentLoaded',function(){
   var ovl=document.getElementById('bases-overlay');
   if(ovl)ovl.addEventListener('click',function(e){if(e.target===ovl)closeBases();});
+
+// ── Dropdown nav: JS con delay de cierre — fix Safari ──────────────────────
+// Safari pierde :hover al cruzar el gap entre trigger y menú.
+// Solución: abrir inmediato, cerrar con 220ms de gracia.
+document.querySelectorAll('.nav-drop').forEach(function(drop){
+  var timer;
+  drop.addEventListener('mouseenter',function(){
+    clearTimeout(timer);
+    drop.classList.add('drop-open');
+  });
+  drop.addEventListener('mouseleave',function(){
+    timer=setTimeout(function(){ drop.classList.remove('drop-open'); },220);
+  });
+});
+
 });
 
 
