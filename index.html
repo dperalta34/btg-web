@@ -3083,7 +3083,7 @@ if(arc){
 document.querySelectorAll('.btn-bases button[data-bases-src]').forEach(function(btn){
   btn.addEventListener('click',function(){openBases(btn.getAttribute('data-bases-src'));});
 });
-// bases-overlay click-outside: wired at DOMContentLoaded (overlay is after </script>)
+// bases-overlay click-outside: wired at DOMContentLoaded
 document.addEventListener('DOMContentLoaded',function(){
   var ovl=document.getElementById('bases-overlay');
   if(ovl)ovl.addEventListener('click',function(e){if(e.target===ovl)closeBases();});
