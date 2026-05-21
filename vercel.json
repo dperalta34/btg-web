@@ -3,5 +3,12 @@
     "api/upload-factura.js": {
       "maxDuration": 30
     }
-  }
+  },
+  "redirects": [
+    { "source": "/bolsadetrabajo", "destination": "/bolsa-de-trabajo.html", "permanent": false },
+    { "source": "/boletines", "destination": "/boletines.html", "permanent": false },
+    { "source": "/directorio-btg", "destination": "/directorio.html", "permanent": false },
+    { "source": "/convenciones", "destination": "/convenciones.html", "permanent": false },
+    { "source": "/biblioteca-digital", "destination": "/biblioteca-digital.html", "permanent": false }
+  ]
 }
