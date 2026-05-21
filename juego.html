@@ -175,6 +175,8 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 4
 <!-- Sound toggle button -->
 <button class="sound-btn" id="soundBtn" title="Sonido">🔊</button>
 
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 <script>
 // ─── AUDIO ENGINE ─────────────────────────────────────────────────────────────
 let audioCtx = null;
@@ -253,19 +255,27 @@ soundBtn.addEventListener('click', () => {
   soundBtn.classList.toggle('muted', !soundEnabled);
 });
 
-// ─── LEADERBOARD (localStorage) ───────────────────────────────────────────
-const LS_KEY = 'btg_runner_scores';
+// ─── LEADERBOARD (Firebase Realtime Database) ─────────────────────────────
 const LS_BEST = 'btg_runner_best';
+const _fbCfg = {
+  apiKey: "AIzaSyCfjdJ0Bo3L8wI_3kagGQ2xKuRFcTupieQ",
+  authDomain: "btg-juego.firebaseapp.com",
+  databaseURL: "https://btg-juego-default-rtdb.firebaseio.com",
+  projectId: "btg-juego",
+  storageBucket: "btg-juego.firebasestorage.app",
+  messagingSenderId: "795081525833",
+  appId: "1:795081525833:web:680cee2aa2e4f0e7bbcd98"
+};
+if (!firebase.apps.length) firebase.initializeApp(_fbCfg);
+const _lbRef = firebase.database().ref('leaderboard');
 
-function getScores() {
-  try { return JSON.parse(localStorage.getItem(LS_KEY) || '[]'); } catch(e) { return []; }
-}
 function saveScore(nick, pts) {
-  const scores = getScores();
   const now = new Date();
-  scores.push({ nick: nick.trim() || 'Anónimo', pts, date: now.toLocaleDateString('es-MX', {day:'2-digit',month:'2-digit'}) });
-  scores.sort((a,b) => b.pts - a.pts);
-  localStorage.setItem(LS_KEY, JSON.stringify(scores.slice(0, 50)));
+  _lbRef.push({
+    nick: (nick || '').trim() || 'Anónimo',
+    pts: pts,
+    date: now.toLocaleDateString('es-MX', {day:'2-digit', month:'2-digit'})
+  });
 }
 function getBest() { return parseInt(localStorage.getItem(LS_BEST) || '0'); }
 function updateBest(pts) {
@@ -275,26 +285,31 @@ function updateBest(pts) {
 function renderLeaderboard(containerId, highlightNick) {
   const el = document.getElementById(containerId);
   if (!el) return;
-  const scores = getScores();
-  if (!scores.length) {
-    el.innerHTML = '<div class="lb-empty">Sé el primero en el marcador 🚀</div>';
-    return;
-  }
-  const medals = ['gold','silver','bronze'];
-  let html = '<div class="lb-header"><span class="lb-title">🏆 Marcador del mes</span><span class="lb-month">' +
-    new Date().toLocaleDateString('es-MX',{month:'long',year:'numeric'}) + '</span></div><div class="lb-table">';
-  scores.slice(0, 10).forEach((s, i) => {
-    const hl = s.nick === highlightNick ? ' highlight' : '';
-    const medal = medals[i] ? ` ${medals[i]}` : '';
-    html += `<div class="lb-row${hl}">
-      <span class="lb-pos${medal}">${i+1}</span>
-      <span class="lb-nick">${s.nick}</span>
-      <span class="lb-pts">${s.pts.toLocaleString()}</span>
-      <span class="lb-date">${s.date}</span>
-    </div>`;
+  el.innerHTML = '<div class="lb-empty">Cargando marcador… 🚀</div>';
+  _lbRef.orderByChild('pts').limitToLast(10).once('value', function(snap) {
+    const scores = [];
+    snap.forEach(function(c) { scores.push(c.val()); });
+    scores.sort((a, b) => b.pts - a.pts);
+    if (!scores.length) {
+      el.innerHTML = '<div class="lb-empty">Sé el primero en el marcador 🚀</div>';
+      return;
+    }
+    const medals = ['gold','silver','bronze'];
+    let html = '<div class="lb-header"><span class="lb-title">🏆 Marcador global</span><span class="lb-month">' +
+      new Date().toLocaleDateString('es-MX',{month:'long',year:'numeric'}) + '</span></div><div class="lb-table">';
+    scores.forEach((s, i) => {
+      const hl = s.nick === highlightNick ? ' highlight' : '';
+      const medal = medals[i] ? ` ${medals[i]}` : '';
+      html += `<div class="lb-row${hl}">
+        <span class="lb-pos${medal}">${i+1}</span>
+        <span class="lb-nick">${s.nick}</span>
+        <span class="lb-pts">${s.pts.toLocaleString()}</span>
+        <span class="lb-date">${s.date}</span>
+      </div>`;
+    });
+    html += '</div>';
+    el.innerHTML = html;
   });
-  html += '</div>';
-  el.innerHTML = html;
 }
 
 // ─── GAME ENGINE ──────────────────────────────────────────────────────────
