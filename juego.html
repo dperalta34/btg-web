@@ -286,7 +286,7 @@ function renderLeaderboard(containerId, highlightNick) {
   const el = document.getElementById(containerId);
   if (!el) return;
   el.innerHTML = '<div class="lb-empty">Cargando marcador… 🚀</div>';
-  _lbRef.orderByChild('pts').limitToLast(10).once('value', function(snap) {
+  _lbRef.orderByChild('pts').limitToLast(10).on('value', function(snap) {
     const scores = [];
     snap.forEach(function(c) { scores.push(c.val()); });
     scores.sort((a, b) => b.pts - a.pts);
@@ -309,6 +309,9 @@ function renderLeaderboard(containerId, highlightNick) {
     });
     html += '</div>';
     el.innerHTML = html;
+  }, function(err) {
+    el.innerHTML = '<div class="lb-empty">Error cargando marcador</div>';
+    console.error('Firebase error:', err);
   });
 }
 
