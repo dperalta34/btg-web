@@ -5,7 +5,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Dashboard BTG Seguros</title>
-<link rel="stylesheet" href="assets/css/upload-modal.css">
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
   :root{
@@ -80,14 +79,6 @@
 <!-- ── BARRA SUPERIOR FACTURACIÓN ────────────────────────────────────────── -->
 <div class="fac-bar">
   <span class="fac-bar-title">Dashboard BTG</span>
-  <button class="fac-open-btn" id="facOpenBtn" type="button">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-      <polyline points="17 8 12 3 7 8"/>
-      <line x1="12" y1="3" x2="12" y2="15"/>
-    </svg>
-    Subir Factura
-  </button>
 </div>
 
 <!-- ── POWER BI IFRAME ────────────────────────────────────────────────────── -->
@@ -105,132 +96,5 @@
   </iframe>
 </div>
 
-<!-- ── MODAL SUBIR FACTURA ────────────────────────────────────────────────── -->
-<div class="fac-overlay" id="facOverlay" role="dialog" aria-modal="true" aria-label="Subir Factura">
-  <div class="fac-modal" id="facModal">
-
-    <!-- Close X -->
-    <button class="fac-modal-close" id="facCloseBtn" type="button" aria-label="Cerrar">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-      </svg>
-    </button>
-
-    <!-- FORM VIEW -->
-    <div id="facFormView">
-      <img src="btg-logo.png" alt="BTG Seguros" style="height:36px;display:block;margin-bottom:20px;opacity:.9">
-      <div class="fac-eyebrow">Facturación de comisiones</div>
-      <div class="fac-modal-title">Subir Factura</div>
-      <div class="fac-modal-sub">Para liberar el pago de tus comisiones del mes</div>
-
-      <form class="fac-form" id="facForm" novalidate autocomplete="off">
-
-        <!-- Nombre -->
-        <div class="fac-field">
-          <label class="fac-label" for="facNombre">Nombre del agente</label>
-          <input class="fac-input" type="text" id="facNombre" name="nombre"
-                 placeholder="Nombre completo" autocomplete="name" required>
-          <span class="fac-err" id="errNombre"></span>
-        </div>
-
-        <!-- Correo -->
-        <div class="fac-field">
-          <label class="fac-label" for="facCorreo">Correo del agente</label>
-          <input class="fac-input" type="email" id="facCorreo" name="correo"
-                 placeholder="agente@correo.com" autocomplete="email" required>
-          <span class="fac-err" id="errCorreo"></span>
-        </div>
-
-        <!-- Mes + Monto -->
-        <div class="fac-row">
-          <div class="fac-field">
-            <label class="fac-label">Mes facturado</label>
-            <div class="fac-mes-row">
-              <div class="fac-select-wrap">
-                <select class="fac-select" id="facSelMes" name="mes_mes" required>
-                  <option value="">Mes</option>
-                </select>
-              </div>
-              <div class="fac-select-wrap">
-                <select class="fac-select" id="facSelAnio" name="mes_anio" required>
-                  <option value="">Año</option>
-                </select>
-              </div>
-            </div>
-            <span class="fac-err" id="errMes"></span>
-          </div>
-          <div class="fac-field">
-            <label class="fac-label" for="facMonto">Monto (MXN)</label>
-            <input class="fac-input" type="number" id="facMonto" name="monto"
-                   placeholder="0.00" min="0" step="0.01" required>
-            <span class="fac-err" id="errMonto"></span>
-          </div>
-        </div>
-
-        <!-- PDF Drop zone -->
-        <div class="fac-field">
-          <label class="fac-label">Factura PDF</label>
-          <div class="fac-drop" id="facDropPDF">
-            <input type="file" id="facFilePDF" name="pdf" accept=".pdf" tabindex="-1">
-            <div class="fac-drop-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
-              </svg>
-            </div>
-            <div class="fac-drop-label">Arrastra el PDF aquí o <span>selecciona</span></div>
-            <div class="fac-drop-hint">Solo .pdf · Máximo 10 MB</div>
-            <div class="fac-drop-file" id="facFilePDFName">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
-              </svg>
-              <span class="fac-drop-filename"></span>
-              <span class="fac-drop-replace" data-target="facFilePDF">Cambiar</span>
-            </div>
-          </div>
-          <span class="fac-err" id="errPDF"></span>
-        </div>
-
-        <!-- XML Drop zone -->
-        <div class="fac-field">
-          <label class="fac-label">CFDI XML</label>
-          <div class="fac-drop" id="facDropXML">
-            <input type="file" id="facFileXML" name="xml" accept=".xml" tabindex="-1">
-            <div class="fac-drop-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
-              </svg>
-            </div>
-            <div class="fac-drop-label">Arrastra el XML aquí o <span>selecciona</span></div>
-            <div class="fac-drop-hint">Solo .xml · Máximo 10 MB</div>
-            <div class="fac-drop-file" id="facFileXMLName">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
-              </svg>
-              <span class="fac-drop-filename"></span>
-              <span class="fac-drop-replace" data-target="facFileXML">Cambiar</span>
-            </div>
-          </div>
-          <span class="fac-err" id="errXML"></span>
-        </div>
-
-        <div class="fac-divider"></div>
-
-        <!-- Submit -->
-        <button type="submit" class="fac-submit" id="facSubmit">
-          <div class="fac-spinner"></div>
-          <span class="fac-btn-text">Enviar factura</span>
-        </button>
-        <button type="button" class="fac-cancel-btn" id="facCancelBtn">Cancelar</button>
-
-      </form>
-    </div><!-- /facFormView -->
-
-    <!-- RESULT VIEW (success / error — populated by JS) -->
-    <div class="fac-result" id="facResult"></div>
-
-  </div><!-- /fac-modal -->
-</div><!-- /fac-overlay -->
-
-<script src="assets/js/upload-modal.js"></script>
 </body>
 </html>
