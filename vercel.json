@@ -5,6 +5,7 @@
     }
   },
   "redirects": [
+    { "source": "/susi", "destination": "/#tecnologia", "permanent": false },
     { "source": "/bolsadetrabajo", "destination": "/bolsa-de-trabajo.html", "permanent": false },
     { "source": "/boletines", "destination": "/boletines.html", "permanent": false },
     { "source": "/directorio-btg", "destination": "/directorio.html", "permanent": false },
