@@ -678,6 +678,22 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 .cami-slider .susi-slider-label{background:linear-gradient(90deg,rgba(255,255,255,0.25) 15%,rgba(255,255,255,1) 50%,rgba(255,255,255,0.25) 85%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:cami-shimmer 2.4s infinite linear;font-size:14px;font-weight:700;letter-spacing:.05em}
 .cami-thumb-white{background:#fff !important;color:#071829 !important;box-shadow:0 2px 10px rgba(0,0,0,0.2) !important}
 @keyframes cami-shimmer{0%{background-position:150% 0}100%{background-position:-150% 0}}
+/* Sin Contacts 3-card grid */
+.sin-contacts{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(255,255,255,0.08)}
+.sin-contact-card{display:flex;flex-direction:column;align-items:center;text-align:center;padding:32px 20px 28px;border-right:1px solid rgba(255,255,255,0.08)}
+.sin-contact-card:last-child{border-right:none}
+.sin-icon-wrap{width:60px;height:60px;display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+.sin-divider{width:56px;height:1px;background:rgba(255,255,255,0.2);margin:0 auto 14px}
+.sin-role{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#00C9E0;margin-bottom:10px}
+.sin-email-display{font-size:13px;font-weight:600;color:rgba(228,238,245,0.85);margin-bottom:18px;word-break:break-all;line-height:1.4}
+.sin-cta-btn{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:8px;background:rgba(0,201,224,0.08);border:1px solid rgba(0,201,224,0.25);color:#00C9E0;font-size:12px;font-weight:600;letter-spacing:.02em;text-decoration:none;transition:all .2s;margin-bottom:12px}
+.sin-cta-btn:hover{background:rgba(0,201,224,0.18);border-color:rgba(0,201,224,0.5)}
+.sin-note{font-size:10.5px;color:rgba(228,238,245,0.28);line-height:1.5}
+@media(max-width:768px){
+  .sin-contacts{grid-template-columns:1fr;border-top:none}
+  .sin-contact-card{border-right:none;border-bottom:1px solid rgba(255,255,255,0.08);padding:28px 20px}
+  .sin-contact-card:last-child{border-bottom:none}
+}
 
 .cami-live{display:none}
 
@@ -1523,27 +1539,70 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
         </div><!-- /dual-mockup-col -->
         </div><!-- /dual-card-body -->
         <!-- CTA full-width abajo -->
-        <div class="dual-card-cta dual-cta-cami">
-          <a href="https://btgseguros-servicios.freshdesk.com/support/tickets/new" target="_blank" class="btn-premium btn-premium-cami">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            Recibir atención de siniestros
-          </a>
+        <!-- 3 canales de contacto siniestros -->
+        <div class="sin-contacts">
+          <!-- Dr. BTG -->
+          <div class="sin-contact-card">
+            <div class="sin-icon-wrap">
+              <svg width="54" height="54" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M27 5C15 5 10 14 10 22C10 30 16 38 27 40C38 38 44 30 44 22C44 14 39 5 27 5Z" stroke="white" stroke-width="2" fill="none"/>
+                <line x1="11" y1="24" x2="43" y2="24" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M11 24Q11 40 27 42Q43 40 43 24" stroke="white" stroke-width="2" fill="none"/>
+                <line x1="27" y1="30" x2="27" y2="38" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                <line x1="22" y1="34" x2="32" y2="34" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                <line x1="10" y1="23" x2="6" y2="28" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+                <line x1="44" y1="23" x2="48" y2="28" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="sin-divider"></div>
+            <div class="sin-role">Dr. BTG</div>
+            <div class="sin-email-display">doctor@btgseguros.com</div>
+            <a href="mailto:doctor@btgseguros.com" class="sin-cta-btn">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              Click aquí para contacto
+            </a>
+            <div class="sin-note">Manda un correo a doctor@btgseguros.com</div>
+          </div>
+          <!-- Escudería BTG -->
+          <div class="sin-contact-card">
+            <div class="sin-icon-wrap">
+              <svg width="54" height="54" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M27 5C14 5 9 16 9 26C9 38 17 49 27 49C37 49 45 38 45 26C45 16 40 5 27 5Z" stroke="white" stroke-width="2" fill="none"/>
+                <path d="M16 24C16 24 16 34 27 34C38 34 38 24 38 24C38 19 33 16 27 16C21 16 16 19 16 24Z" stroke="white" stroke-width="1.8" fill="none"/>
+              </svg>
+            </div>
+            <div class="sin-divider"></div>
+            <div class="sin-role">Escudería BTG</div>
+            <div class="sin-email-display">escuderia@btgseguros.com</div>
+            <a href="mailto:escuderia@btgseguros.com" class="sin-cta-btn">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              Click aquí para contacto
+            </a>
+            <div class="sin-note">Manda un correo a escuderia@btgseguros.com</div>
+          </div>
+          <!-- Ingeniero BTG -->
+          <div class="sin-contact-card">
+            <div class="sin-icon-wrap">
+              <svg width="54" height="54" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 33C8 18 18 13 27 13C36 13 46 18 46 33" stroke="white" stroke-width="2" fill="none"/>
+                <line x1="5" y1="36" x2="49" y2="36" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+                <path d="M10 36Q10 42 27 42Q44 42 44 36" stroke="white" stroke-width="2" fill="none"/>
+                <line x1="27" y1="13" x2="27" y2="7" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="sin-divider"></div>
+            <div class="sin-role">Ingeniero BTG</div>
+            <div class="sin-email-display">ingeniero@btgseguros.com</div>
+            <a href="mailto:ingeniero@btgseguros.com" class="sin-cta-btn">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              Click aquí para contacto
+            </a>
+            <div class="sin-note">Manda un correo a ingeniero@btgseguros.com</div>
+          </div>
         </div>
       </div><!-- /dual-card-dark CAMI -->
       </div><!-- /dual-platform-block CAMI -->
     </div><!-- /dual-grid -->
-    <!-- CAMI slider — mobile only, outside cards -->
-    <div class="cami-slider-wrap">
-      <div class="cami-slider" id="camiSlider" data-url="https://btgseguros-servicios.freshdesk.com/support/tickets/new">
-        <div class="susi-slider-track cami-track-blue">
-          <div class="susi-slider-fill" id="camiSliderFill"></div>
-          <span class="susi-slider-label" id="camiSliderLabel">Desliza para recibir atención</span>
-          <div class="susi-slider-thumb cami-thumb-white" id="camiSliderThumb">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-        </div>
-      </div>
-    </div>
   </div><!-- /dual-inner -->
 </section>
 
