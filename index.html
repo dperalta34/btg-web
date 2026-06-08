@@ -682,7 +682,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 .sin-contacts{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(255,255,255,0.08)}
 .sin-contact-card{display:flex;flex-direction:column;align-items:center;text-align:center;padding:32px 20px 28px;border-right:1px solid rgba(255,255,255,0.08)}
 .sin-contact-card:last-child{border-right:none}
-.sin-icon-wrap{width:60px;height:60px;display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+.sin-icon-wrap{width:80px;height:80px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;background:rgba(10,31,53,0.85);border-radius:50%;border:1px solid rgba(255,255,255,0.07)}
 .sin-divider{width:56px;height:1px;background:rgba(255,255,255,0.2);margin:0 auto 14px}
 .sin-role{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#00C9E0;margin-bottom:10px}
 .sin-email-display{font-size:13px;font-weight:600;color:rgba(228,238,245,0.85);margin-bottom:18px;word-break:break-all;line-height:1.4}
@@ -1544,14 +1544,18 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
           <!-- Dr. BTG -->
           <div class="sin-contact-card">
             <div class="sin-icon-wrap">
-              <svg width="54" height="54" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M27 5C15 5 10 14 10 22C10 30 16 38 27 40C38 38 44 30 44 22C44 14 39 5 27 5Z" stroke="white" stroke-width="2" fill="none"/>
-                <line x1="11" y1="24" x2="43" y2="24" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
-                <path d="M11 24Q11 40 27 42Q43 40 43 24" stroke="white" stroke-width="2" fill="none"/>
-                <line x1="27" y1="30" x2="27" y2="38" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                <line x1="22" y1="34" x2="32" y2="34" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                <line x1="10" y1="23" x2="6" y2="28" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
-                <line x1="44" y1="23" x2="48" y2="28" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <!-- Mask body -->
+                <path d="M10 14 Q10 8 20 8 Q30 8 30 14 L30 26 Q30 34 20 34 Q10 34 10 26 Z"/>
+                <!-- Cross -->
+                <line x1="20" y1="18" x2="20" y2="27"/>
+                <line x1="15.5" y1="22.5" x2="24.5" y2="22.5"/>
+                <!-- Ear straps left -->
+                <line x1="10" y1="18" x2="6" y2="16"/>
+                <line x1="10" y1="24" x2="6" y2="26"/>
+                <!-- Ear straps right -->
+                <line x1="30" y1="18" x2="34" y2="16"/>
+                <line x1="30" y1="24" x2="34" y2="26"/>
               </svg>
             </div>
             <div class="sin-divider"></div>
@@ -1566,9 +1570,13 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
           <!-- Escudería BTG -->
           <div class="sin-contact-card">
             <div class="sin-icon-wrap">
-              <svg width="54" height="54" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M27 5C14 5 9 16 9 26C9 38 17 49 27 49C37 49 45 38 45 26C45 16 40 5 27 5Z" stroke="white" stroke-width="2" fill="none"/>
-                <path d="M16 24C16 24 16 34 27 34C38 34 38 24 38 24C38 19 33 16 27 16C21 16 16 19 16 24Z" stroke="white" stroke-width="1.8" fill="none"/>
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <!-- Outer head/balaclava shape -->
+                <path d="M20 3 C10 3 6 11 6 19 C6 30 12 37 20 37 C28 37 34 30 34 19 C34 11 30 3 20 3Z"/>
+                <!-- Face oval opening -->
+                <ellipse cx="20" cy="19" rx="8" ry="9"/>
+                <!-- Chin/neck area -->
+                <path d="M12 34 Q12 40 20 40 Q28 40 28 34"/>
               </svg>
             </div>
             <div class="sin-divider"></div>
@@ -1583,11 +1591,15 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
           <!-- Ingeniero BTG -->
           <div class="sin-contact-card">
             <div class="sin-icon-wrap">
-              <svg width="54" height="54" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M8 33C8 18 18 13 27 13C36 13 46 18 46 33" stroke="white" stroke-width="2" fill="none"/>
-                <line x1="5" y1="36" x2="49" y2="36" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
-                <path d="M10 36Q10 42 27 42Q44 42 44 36" stroke="white" stroke-width="2" fill="none"/>
-                <line x1="27" y1="13" x2="27" y2="7" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <!-- Hat dome -->
+                <path d="M6 27 Q6 12 20 10 Q34 12 34 27"/>
+                <!-- Crown pin -->
+                <line x1="20" y1="10" x2="20" y2="5"/>
+                <!-- Brim (full width, extends beyond dome) -->
+                <line x1="3" y1="29" x2="37" y2="29"/>
+                <!-- Under-brim rounded bottom -->
+                <path d="M6 29 Q6 34 20 34 Q34 34 34 29"/>
               </svg>
             </div>
             <div class="sin-divider"></div>
