@@ -670,6 +670,13 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 .dash-slider .susi-slider-track{height:58px;border-radius:29px}
 .dash-slider .susi-slider-label{background:linear-gradient(90deg,rgba(255,255,255,0.25) 15%,rgba(255,255,255,1) 50%,rgba(255,255,255,0.25) 85%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:cami-shimmer 2.4s infinite linear;font-size:14px;font-weight:700;letter-spacing:.05em}
 .dash-thumb{background:#fff !important;color:#1A7FBC !important;box-shadow:0 2px 10px rgba(0,0,0,0.2) !important}
+/* Dashboard CTA row + bonus badge */
+.dash-cta-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:24px}
+.dash-bonus-badge{display:inline-flex;align-items:center;gap:10px;padding:10px 18px 10px 14px;background:linear-gradient(135deg,rgba(0,201,224,0.12),rgba(26,127,188,0.05));border:1px solid rgba(0,201,224,0.32);border-radius:980px;font-size:12.5px;font-weight:600;color:#E4EEF5;letter-spacing:.01em;box-shadow:0 4px 18px rgba(0,201,224,0.14),inset 0 1px 0 rgba(255,255,255,0.05);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);line-height:1.3}
+.dash-bonus-badge strong{color:#00C9E0;font-weight:800}
+.dash-bonus-dot{width:8px;height:8px;border-radius:50%;background:#00E58F;flex-shrink:0;position:relative;box-shadow:0 0 0 0 rgba(0,229,143,.75);animation:dashBonusPulse 1.9s ease-out infinite}
+@keyframes dashBonusPulse{0%{box-shadow:0 0 0 0 rgba(0,229,143,.75)}70%{box-shadow:0 0 0 11px rgba(0,229,143,0)}100%{box-shadow:0 0 0 0 rgba(0,229,143,0)}}
+@media(max-width:768px){.dash-cta-row{margin-top:18px;gap:12px}.dash-bonus-badge{font-size:11.5px;padding:8px 14px 8px 12px;width:100%;justify-content:center}}
 /* CAMI slider */
 .cami-slider-wrap{display:none}
 .cami-slider{width:100%;user-select:none;-webkit-user-select:none;touch-action:pan-y}
@@ -1644,8 +1651,14 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
         <div class="dash-feat"><div class="dash-feat-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><div class="dash-feat-title">Avance de convención y bono</div><div class="dash-feat-desc">Seguimiento en tiempo real a tus metas de producción BTG</div></div></div>
         <div class="dash-feat"><div class="dash-feat-icon"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div><div class="dash-feat-title">Siniestros y agenda comercial</div><div class="dash-feat-desc">Estado de siniestros activos, cotizaciones express y reuniones</div></div></div>
       </div>
-      <div class="dash-btn-desktop" style="margin-top:24px">
-        <a href="dashboard.html" class="btn-primary" target="_blank">Entrar al Dashboard →</a>
+      <div class="dash-cta-row">
+        <div class="dash-btn-desktop">
+          <a href="dashboard.html" class="btn-primary" target="_blank">Entrar al Dashboard →</a>
+        </div>
+        <div class="dash-bonus-badge">
+          <span class="dash-bonus-dot"></span>
+          <span class="dash-bonus-text">Cifras de <strong>bono mensual de Junio</strong> disponibles en el dashboard</span>
+        </div>
       </div>
       <div class="dash-slider-wrap">
         <div class="dash-slider" id="dashSlider" data-url="dashboard.html">
