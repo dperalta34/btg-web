@@ -676,7 +676,10 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
 .dash-bonus-badge strong{color:#00C9E0;font-weight:800}
 .dash-bonus-dot{width:8px;height:8px;border-radius:50%;background:#00E58F;flex-shrink:0;position:relative;box-shadow:0 0 0 0 rgba(0,229,143,.75);animation:dashBonusPulse 1.9s ease-out infinite}
 @keyframes dashBonusPulse{0%{box-shadow:0 0 0 0 rgba(0,229,143,.75)}70%{box-shadow:0 0 0 11px rgba(0,229,143,0)}100%{box-shadow:0 0 0 0 rgba(0,229,143,0)}}
-@media(max-width:768px){.dash-cta-row{margin-top:18px;gap:12px}.dash-bonus-badge{font-size:11.5px;padding:8px 14px 8px 12px;width:100%;justify-content:center}}
+.dash-hours-badge{display:inline-flex;align-items:center;gap:9px;margin-top:10px;padding:8px 16px 8px 13px;background:rgba(26,127,188,0.06);border:1px solid rgba(26,127,188,0.22);border-radius:980px;font-size:11.5px;font-weight:500;color:rgba(228,238,245,0.72);letter-spacing:.01em;line-height:1.3}
+.dash-hours-badge svg{color:#1A7FBC;flex-shrink:0}
+.dash-hours-badge strong{color:rgba(228,238,245,0.92);font-weight:700}
+@media(max-width:768px){.dash-cta-row{margin-top:18px;gap:12px}.dash-bonus-badge{font-size:11.5px;padding:8px 14px 8px 12px;width:100%;justify-content:center}.dash-hours-badge{font-size:11px;width:100%;justify-content:center;padding:7px 14px 7px 12px}}
 /* CAMI slider */
 .cami-slider-wrap{display:none}
 .cami-slider{width:100%;user-select:none;-webkit-user-select:none;touch-action:pan-y}
@@ -1659,6 +1662,10 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 6
           <span class="dash-bonus-dot"></span>
           <span class="dash-bonus-text">Cifras de <strong>bono mensual de Junio</strong> disponibles en el dashboard</span>
         </div>
+      </div>
+      <div class="dash-hours-badge">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span>Consultas disponibles <strong>lunes a viernes · 7:00 – 22:00 hrs</strong></span>
       </div>
       <div class="dash-slider-wrap">
         <div class="dash-slider" id="dashSlider" data-url="dashboard.html">
