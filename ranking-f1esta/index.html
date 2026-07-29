@@ -1,0 +1,1695 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Ranking F1esta · BTG × Zurich</title>
+    <link rel="icon" type="image/png" href="/favicon_btg.png" />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      :root {
+        --dark: #081a26;
+        --darker: #04111a;
+        --card: #0d2233;
+        --card-2: #12293c;
+        --blue: #1a7fbc;
+        --blue2: #2aace0;
+        --cyan: #00c9e0;
+        --gold: #b8962e;
+        --text: #e4eef5;
+        --text-strong: #f5f9fc;
+        --muted: rgba(228, 238, 245, 0.55);
+        --line: rgba(255, 255, 255, 0.07);
+
+        --red: #ea1f27;
+        --red-glow: rgba(234, 31, 39, 0.5);
+        --sky: #4fc3f7;
+        --sky-glow: rgba(79, 195, 247, 0.5);
+        --amber: #ffb94a;
+        --amber-glow: rgba(255, 185, 74, 0.5);
+        --gray: #8a94a0;
+        --gray-glow: rgba(138, 148, 160, 0.45);
+
+        --font: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+          "Helvetica Neue", Arial, sans-serif;
+      }
+
+      /* ============ SITE NAV (copiado de soybtg.com) ============ */
+      nav.site-nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 60px;
+        background: var(--dark);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        z-index: 300;
+      }
+      nav.site-nav .nav-links {
+        display: flex;
+        gap: 28px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      nav.site-nav .nav-links a {
+        font-size: 13px;
+        color: rgba(228, 238, 245, 0.55);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      nav.site-nav .nav-links a:hover {
+        color: #e4eef5;
+      }
+      .nav-drop {
+        position: relative;
+      }
+      .nav-drop > a {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .nav-drop > a svg {
+        transition: transform 0.2s;
+        flex-shrink: 0;
+      }
+      .nav-drop.drop-open > a svg {
+        transform: rotate(180deg);
+      }
+      .nav-dropmenu {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        margin-top: 8px;
+        background: rgba(4, 14, 26, 0.97);
+        backdrop-filter: blur(18px);
+        border: 1px solid rgba(26, 127, 188, 0.2);
+        border-radius: 12px;
+        padding: 6px;
+        min-width: 186px;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-8px) scale(0.97);
+        transition: opacity 0.22s, transform 0.22s;
+        z-index: 400;
+      }
+      .nav-drop.drop-open .nav-dropmenu {
+        opacity: 1;
+        pointer-events: all;
+        transform: translateY(0) scale(1);
+      }
+      .nav-dropmenu a {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        padding: 9px 12px;
+        border-radius: 8px;
+        font-size: 13px;
+        color: rgba(228, 238, 245, 0.6);
+        text-decoration: none;
+        transition: background 0.15s, color 0.15s;
+        white-space: nowrap;
+      }
+      .nav-dropmenu a:hover {
+        background: rgba(26, 127, 188, 0.12);
+        color: #e4eef5;
+      }
+      .nav-dropmenu a svg {
+        flex-shrink: 0;
+        color: var(--blue);
+      }
+      .nav-social {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .nav-social a {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: var(--blue);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        transition: background 0.2s;
+        flex-shrink: 0;
+      }
+      .nav-social a:hover {
+        background: var(--blue2);
+      }
+      .nav-social a.wa-btn {
+        background: #25d366;
+      }
+      .nav-social a.wa-btn:hover {
+        background: #1ebe57;
+      }
+      .mm-social a.wa-btn {
+        background: #25d366;
+      }
+      .mm-social a.wa-btn:hover {
+        background: #1ebe57;
+      }
+      .nav-burger {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        width: 38px;
+        height: 38px;
+        background: rgba(26, 127, 188, 0.1);
+        border: 1px solid rgba(26, 127, 188, 0.22);
+        border-radius: 10px;
+        cursor: pointer;
+        padding: 9px 8px;
+        flex-shrink: 0;
+        transition: background 0.2s;
+        position: relative;
+        z-index: 301;
+      }
+      .nav-burger span {
+        display: block;
+        width: 100%;
+        height: 2px;
+        background: #e4eef5;
+        border-radius: 2px;
+        transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1),
+          opacity 0.22s, width 0.3s;
+        transform-origin: center;
+      }
+      .nav-burger.open {
+        background: rgba(26, 127, 188, 0.2);
+        border-color: rgba(26, 127, 188, 0.4);
+      }
+      .nav-burger.open span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+      .nav-burger.open span:nth-child(2) {
+        opacity: 0;
+        transform: scaleX(0);
+      }
+      .nav-burger.open span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+
+      #mobile-menu {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 500;
+        background: rgba(4, 11, 18, 0.99);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.28s ease, visibility 0s linear 0.28s;
+        pointer-events: none;
+        flex-direction: column;
+      }
+      #mobile-menu.open {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: all;
+        transition: opacity 0.28s ease, visibility 0s linear 0s;
+      }
+      .mm-topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+        height: 62px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+        flex-shrink: 0;
+      }
+      .mm-topbar-logo {
+        height: 38px;
+        width: auto;
+        display: block;
+      }
+      .mm-close-btn {
+        width: 38px;
+        height: 38px;
+        background: rgba(26, 127, 188, 0.1);
+        border: 1px solid rgba(26, 127, 188, 0.22);
+        border-radius: 10px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #e4eef5;
+        transition: background 0.2s;
+        padding: 0;
+        flex-shrink: 0;
+      }
+      .mm-close-btn:hover,
+      .mm-close-btn:active {
+        background: rgba(26, 127, 188, 0.25);
+      }
+      .mm-links {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        flex: 1;
+        padding: 4px 24px 0;
+      }
+      .mm-link {
+        font-size: 22px;
+        font-weight: 400;
+        color: rgba(228, 238, 245, 0.35);
+        letter-spacing: -0.03em;
+        padding: 14px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        transition: color 0.22s;
+        text-decoration: none;
+      }
+      .mm-link svg {
+        flex-shrink: 0;
+        opacity: 0.4;
+        transition: opacity 0.22s;
+      }
+      .mm-link:active,
+      .mm-link:hover {
+        color: #e4eef5;
+      }
+      .mm-link:hover svg {
+        opacity: 0.6;
+      }
+      .mm-item {
+        display: block;
+        padding: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .mm-item-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 0;
+        font-size: 22px;
+        font-weight: 400;
+        color: rgba(228, 238, 245, 0.35);
+        letter-spacing: -0.03em;
+        gap: 12px;
+        width: 100%;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+        text-decoration: none;
+      }
+      .mm-item-head:hover,
+      .mm-item-head:active {
+        color: #e4eef5;
+      }
+      .mm-item-head.open {
+        color: rgba(228, 238, 245, 0.7);
+      }
+      .mm-chevron {
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        flex-shrink: 0;
+        opacity: 0.4;
+      }
+      .mm-item-head.open .mm-chevron {
+        transform: rotate(90deg);
+        opacity: 0.7;
+      }
+      .mm-sub {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .mm-sub.open {
+        max-height: 300px;
+      }
+      .mm-sublink {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 9px 0 13px 16px;
+        font-size: 17px;
+        font-weight: 400;
+        color: rgba(0, 201, 224, 0.6);
+        letter-spacing: -0.02em;
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .mm-sublink:hover,
+      .mm-sublink:active {
+        color: #00c9e0;
+      }
+      .mm-sublink svg {
+        opacity: 0.5;
+        flex-shrink: 0;
+      }
+      .mm-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 24px 28px;
+        border-top: 1px solid rgba(255, 255, 255, 0.07);
+        flex-shrink: 0;
+      }
+      .mm-brand {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(228, 238, 245, 0.2);
+      }
+      .mm-social {
+        display: flex;
+        gap: 10px;
+      }
+      .mm-social a {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(26, 127, 188, 0.12);
+        border: 1px solid rgba(26, 127, 188, 0.22);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        transition: background 0.2s;
+      }
+      .mm-social a:hover {
+        background: var(--blue);
+      }
+      .mm-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #00c9e0;
+        display: inline-block;
+        margin-right: 6px;
+        flex-shrink: 0;
+      }
+
+      @media (max-width: 768px) {
+        #mobile-menu {
+          display: flex;
+        }
+        nav.site-nav {
+          padding: 12px 16px;
+        }
+        nav.site-nav .nav-links {
+          display: none;
+        }
+        nav.site-nav .nav-social {
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+          gap: 8px;
+        }
+        nav.site-nav .nav-social a {
+          width: 30px;
+          height: 30px;
+        }
+        .nav-burger {
+          display: flex;
+        }
+        nav.site-nav > div img {
+          height: 40px;
+        }
+      }
+      /* ============ END SITE NAV ============ */
+
+      html {
+        background: var(--darker);
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+      }
+
+      body {
+        background:
+          radial-gradient(
+            ellipse 90% 55% at 50% 0%,
+            rgba(184, 150, 46, 0.14),
+            transparent 65%
+          ),
+          radial-gradient(
+            ellipse 60% 40% at 50% 100%,
+            rgba(234, 31, 39, 0.05),
+            transparent 60%
+          ),
+          var(--darker);
+        color: var(--text);
+        font-family: var(--font);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        min-height: 100vh;
+        overflow-x: hidden;
+        padding-top: 64px;
+      }
+      @media (max-width: 768px) {
+        body {
+          padding-top: 60px;
+        }
+      }
+
+      /* ---- Top bar ---- */
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 16px 28px;
+        border-bottom: 1px solid var(--line);
+        background: rgba(4, 17, 26, 0.7);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        position: sticky;
+        top: 0;
+        z-index: 50;
+      }
+
+      .topbar .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 14px;
+        border-radius: 999px;
+        background: rgba(184, 150, 46, 0.1);
+        border: 1px solid rgba(184, 150, 46, 0.35);
+        font-size: 10.5px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--gold);
+      }
+
+      .topbar .badge .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--gold);
+        box-shadow: 0 0 8px var(--gold);
+        animation: pulseDot 1.6s ease-in-out infinite;
+      }
+
+      @keyframes pulseDot {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.35;
+        }
+      }
+
+      @media (max-width: 540px) {
+        .topbar {
+          padding: 12px 16px;
+        }
+        .topbar .badge {
+          font-size: 9.5px;
+          padding: 5px 10px;
+          letter-spacing: 0.1em;
+        }
+      }
+
+      /* ---- Hero ---- */
+      .hero {
+        text-align: center;
+        padding: 56px 24px 22px;
+        max-width: 780px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .cobrand {
+        display: inline-flex;
+        align-items: center;
+        gap: 18px;
+        padding: 10px 18px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid var(--line);
+        backdrop-filter: blur(6px);
+      }
+
+      .cobrand img {
+        display: block;
+        height: 24px;
+        width: auto;
+        opacity: 0.95;
+      }
+
+      .cobrand img.btg {
+        height: 44px;
+      }
+
+      .cobrand .x {
+        font-size: 16px;
+        font-weight: 300;
+        color: rgba(228, 238, 245, 0.4);
+        letter-spacing: 0;
+      }
+
+      .hero .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 18px;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--gold);
+      }
+
+      .hero .eyebrow::before,
+      .hero .eyebrow::after {
+        content: "";
+        width: 22px;
+        height: 1px;
+        background: var(--gold);
+        opacity: 0.6;
+      }
+
+      .hero h1 {
+        margin-top: 12px;
+        font-size: clamp(1.2rem, 3.6vw, 1.8rem);
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        line-height: 1;
+        background: linear-gradient(
+          90deg,
+          var(--red),
+          #ffffff 50%,
+          var(--gold)
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+      }
+
+      @media (max-width: 540px) {
+        .hero {
+          padding: 40px 18px 6px;
+        }
+        .cobrand {
+          gap: 14px;
+          padding: 8px 14px;
+        }
+        .cobrand img {
+          height: 20px;
+        }
+        .cobrand img.btg {
+          height: 36px;
+        }
+        .hero .eyebrow {
+          font-size: 9.5px;
+          letter-spacing: 0.16em;
+          margin-top: 10px;
+        }
+        .hero .eyebrow::before,
+        .hero .eyebrow::after {
+          width: 16px;
+        }
+      }
+
+      /* ---- Checkered banner ---- */
+      .checker {
+        max-width: 520px;
+        margin: 12px auto 0;
+        padding: 0 24px;
+      }
+
+      .checker-inner {
+        height: 8px;
+        background-image:
+          linear-gradient(45deg, #1a2530 25%, transparent 25%),
+          linear-gradient(-45deg, #1a2530 25%, transparent 25%),
+          linear-gradient(45deg, transparent 75%, #1a2530 75%),
+          linear-gradient(-45deg, transparent 75%, #1a2530 75%);
+        background-size: 8px 8px;
+        background-position: 0 0, 0 4px, 4px -4px, -4px 0;
+        border-radius: 3px;
+        opacity: 0.55;
+      }
+
+      /* ---- Category separator ---- */
+      .cat-sep {
+        max-width: 520px;
+        margin: 24px auto 18px;
+        padding: 0 20px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .cat-sep .line {
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.14),
+          transparent
+        );
+      }
+
+      .cat-sep .tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 5px 10px 5px 12px;
+        border-radius: 999px;
+        font-size: 9.5px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .cat-sep .tag .swatch {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+      }
+
+      .cat-sep .tag .count {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 20px;
+        height: 18px;
+        padding: 0 6px;
+        border-radius: 999px;
+        background: rgba(0, 0, 0, 0.35);
+        font-family: "SF Mono", Menlo, ui-monospace, monospace;
+        font-size: 9.5px;
+        letter-spacing: 0;
+      }
+
+      .cat-sep .tag.red {
+        background: rgba(234, 31, 39, 0.1);
+        border: 1px solid rgba(234, 31, 39, 0.4);
+        color: var(--red);
+      }
+      .cat-sep .tag.red .swatch {
+        background: var(--red);
+        box-shadow: 0 0 8px var(--red-glow);
+      }
+      .cat-sep .tag.sky {
+        background: rgba(79, 195, 247, 0.08);
+        border: 1px solid rgba(79, 195, 247, 0.4);
+        color: var(--sky);
+      }
+      .cat-sep .tag.sky .swatch {
+        background: var(--sky);
+        box-shadow: 0 0 8px var(--sky-glow);
+      }
+      .cat-sep .tag.amber {
+        background: rgba(255, 185, 74, 0.08);
+        border: 1px solid rgba(255, 185, 74, 0.4);
+        color: var(--amber);
+      }
+      .cat-sep .tag.amber .swatch {
+        background: var(--amber);
+        box-shadow: 0 0 8px var(--amber-glow);
+      }
+      .cat-sep .tag.gray {
+        background: rgba(138, 148, 160, 0.08);
+        border: 1px solid rgba(138, 148, 160, 0.4);
+        color: var(--gray);
+      }
+      .cat-sep .tag.gray .swatch {
+        background: var(--gray);
+        box-shadow: 0 0 8px var(--gray-glow);
+      }
+
+      /* ---- Grid ---- */
+      .grid {
+        max-width: 460px;
+        margin: 0 auto;
+        padding: 0 16px;
+        position: relative;
+      }
+
+      .center-line {
+        position: absolute;
+        top: 2px;
+        bottom: 2px;
+        left: 50%;
+        width: 2px;
+        background: repeating-linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.2) 0,
+          rgba(255, 255, 255, 0.2) 5px,
+          transparent 5px,
+          transparent 10px
+        );
+        transform: translateX(-50%);
+        z-index: 0;
+      }
+
+      /* Each slot occupies half width, fixed height → staggered stack */
+      .slot {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0 10px;
+        height: 28px;
+        width: 50%;
+        position: relative;
+        z-index: 1;
+      }
+
+      .slot.left {
+        margin-right: auto;
+        justify-content: flex-end;
+        text-align: right;
+        padding-right: 16px;
+      }
+
+      .slot.right {
+        margin-left: auto;
+        justify-content: flex-start;
+        padding-left: 16px;
+      }
+
+      /* Reveal — more pronounced slide in from each side */
+      .slot {
+        opacity: 0;
+        transition: opacity 0.85s ease,
+          transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .slot.left {
+        transform: translateX(-90px);
+      }
+
+      .slot.right {
+        transform: translateX(90px);
+      }
+
+      .slot.reveal {
+        opacity: 1;
+        transform: translate(0, 0);
+      }
+
+      /* Car — explicit width & height on container, SVG fills 100% */
+      .car {
+        width: 16px;
+        height: 28px;
+        flex-shrink: 0;
+        transition: transform 0.35s ease;
+        line-height: 0;
+      }
+
+      .car svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+
+      .car.red {
+        filter: drop-shadow(0 2px 6px var(--red-glow));
+      }
+      .car.sky {
+        filter: drop-shadow(0 2px 6px var(--sky-glow));
+      }
+      .car.amber {
+        filter: drop-shadow(0 2px 6px var(--amber-glow));
+      }
+      .car.gray {
+        filter: drop-shadow(0 2px 6px var(--gray-glow));
+      }
+
+      .slot:hover .car {
+        transform: scale(1.25);
+      }
+
+      /* Label */
+      .label {
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+        min-width: 0;
+        line-height: 1;
+      }
+
+      .slot.left .label {
+        flex-direction: row-reverse;
+      }
+
+      .label .pos {
+        font-family: "SF Mono", Menlo, ui-monospace, monospace;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        min-width: 18px;
+      }
+
+      .slot.left .label .pos {
+        text-align: left;
+      }
+
+      .slot.right .label .pos {
+        text-align: right;
+      }
+
+      .label .name {
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--text-strong);
+        letter-spacing: -0.01em;
+        white-space: nowrap;
+      }
+
+      .slot.red .label .pos {
+        color: var(--red);
+      }
+      .slot.sky .label .pos {
+        color: var(--sky);
+      }
+      .slot.amber .label .pos {
+        color: var(--amber);
+      }
+      .slot.gray .label .pos {
+        color: var(--gray);
+      }
+
+      /* Mobile compact but still clean */
+      @media (max-width: 540px) {
+        .grid {
+          max-width: 100%;
+          padding: 0 8px;
+        }
+        .slot {
+          padding: 0 5px;
+          gap: 6px;
+          height: 24px;
+        }
+        .slot.left {
+          padding-right: 10px;
+        }
+        .slot.right {
+          padding-left: 10px;
+        }
+        .car {
+          width: 14px;
+          height: 24px;
+        }
+        .label {
+          gap: 4px;
+        }
+        .label .name {
+          font-size: 10.5px;
+        }
+        .label .pos {
+          font-size: 8.5px;
+          min-width: 16px;
+        }
+      }
+
+      /* ---- Legend (compact inline pills) ---- */
+      .legend {
+        max-width: 520px;
+        margin: 14px auto 0;
+        padding: 0 16px;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .legend-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 12px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid var(--line);
+        font-size: 10.5px;
+        color: var(--text);
+        font-weight: 500;
+      }
+
+      .legend-pill .swatch {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+      }
+
+      .legend-pill.red .swatch {
+        background: var(--red);
+        box-shadow: 0 0 6px var(--red-glow);
+      }
+      .legend-pill.sky .swatch {
+        background: var(--sky);
+        box-shadow: 0 0 6px var(--sky-glow);
+      }
+      .legend-pill.amber .swatch {
+        background: var(--amber);
+        box-shadow: 0 0 6px var(--amber-glow);
+      }
+      .legend-pill.gray .swatch {
+        background: var(--gray);
+        box-shadow: 0 0 6px var(--gray-glow);
+      }
+
+      .legend-pill .rng {
+        font-family: "SF Mono", Menlo, ui-monospace, monospace;
+        font-size: 9.5px;
+        opacity: 0.55;
+      }
+
+      /* Footer */
+      footer {
+        margin-top: 20px;
+        padding: 14px 20px 20px;
+        text-align: center;
+        color: rgba(228, 238, 245, 0.35);
+        font-size: 10.5px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- SVG symbol: one F1 car defined once, reused with different colors -->
+    <svg
+      width="0"
+      height="0"
+      style="position: absolute"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <symbol id="f1car" viewBox="0 0 120 220">
+        <rect x="8" y="8" width="104" height="10" rx="2" fill="currentColor" />
+        <rect x="4" y="6" width="8" height="18" rx="1.5" fill="currentColor" />
+        <rect x="108" y="6" width="8" height="18" rx="1.5" fill="currentColor" />
+        <path d="M50 22 L70 22 L74 60 L46 60 Z" fill="currentColor" />
+        <path
+          d="M28 62 L92 62 L104 108 L100 168 L20 168 L16 108 Z"
+          fill="currentColor"
+        />
+        <path
+          d="M50 78 Q60 74 70 78 L72 110 Q60 106 48 110 Z"
+          fill="rgba(0,0,0,0.28)"
+        />
+        <ellipse cx="60" cy="94" rx="10" ry="12" fill="rgba(255,255,255,0.9)" />
+        <ellipse cx="60" cy="96" rx="8" ry="5" fill="rgba(0,0,0,0.5)" />
+        <rect x="0" y="52" width="16" height="30" rx="3" fill="#1a1a1a" />
+        <rect x="104" y="52" width="16" height="30" rx="3" fill="#1a1a1a" />
+        <rect x="0" y="140" width="20" height="38" rx="3" fill="#1a1a1a" />
+        <rect x="100" y="140" width="20" height="38" rx="3" fill="#1a1a1a" />
+        <rect x="20" y="182" width="80" height="8" rx="2" fill="currentColor" />
+        <rect x="16" y="178" width="8" height="18" rx="1.5" fill="currentColor" />
+        <rect x="96" y="178" width="8" height="18" rx="1.5" fill="currentColor" />
+        <rect
+          x="24"
+          y="192"
+          width="72"
+          height="6"
+          rx="1.5"
+          fill="currentColor"
+          opacity="0.7"
+        />
+        <rect x="30" y="200" width="60" height="8" rx="1" fill="rgba(0,0,0,0.35)" />
+      </symbol>
+    </svg>
+
+    <!-- SITE NAV -->
+    <nav class="site-nav">
+      <div>
+        <a href="/"
+          ><img
+            src="/btg-logo.png"
+            alt="BTG — Black Tower Group"
+            style="height: 56px; width: auto; display: block"
+        /></a>
+      </div>
+      <ul class="nav-links">
+        <li><a href="/dashboard.html">Dashboard</a></li>
+        <li><a href="/#siniestros">Siniestros</a></li>
+        <li><a href="/#tecnologia">Multicotizador</a></li>
+        <li><a href="/#universidad">Universidad</a></li>
+        <li><a href="/#concursos">Concursos</a></li>
+        <li><a href="/#credenciales">Credenciales</a></li>
+        <li><a href="/bolsa-de-trabajo.html">Bolsa de Trabajo</a></li>
+        <li class="nav-drop">
+          <a href="#"
+            >Material Agentes<svg
+              width="11"
+              height="11"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="6 9 12 15 18 9" /></svg
+          ></a>
+          <div class="nav-dropmenu">
+            <a href="/boletines.html">
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                />
+                <polyline points="14 2 14 8 20 8" />
+              </svg>
+              Boletín Agentes
+            </a>
+            <a href="/directorio.html">
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+              Directorio BTG
+            </a>
+            <a href="/convenciones.html">
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="3" y="3" width="7" height="7" rx="1" />
+                <rect x="14" y="3" width="7" height="7" rx="1" />
+                <rect x="3" y="14" width="7" height="7" rx="1" />
+                <rect x="14" y="14" width="7" height="7" rx="1" />
+              </svg>
+              Galería Convenciones
+            </a>
+            <a href="/biblioteca-digital.html">
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+              </svg>
+              Biblioteca Digital
+            </a>
+          </div>
+        </li>
+      </ul>
+      <div class="nav-social">
+        <a
+          href="https://www.instagram.com/btgseguros/"
+          target="_blank"
+          rel="noopener"
+          title="Instagram BTG"
+        >
+          <svg
+            width="17"
+            height="17"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="white"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="2" y="2" width="20" height="20" rx="5" />
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+          </svg>
+        </a>
+        <a
+          href="https://www.facebook.com/BTGSeguros/"
+          target="_blank"
+          rel="noopener"
+          title="Facebook BTG"
+        >
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="white">
+            <path
+              d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+            />
+          </svg>
+        </a>
+        <a
+          href="https://www.linkedin.com/company/btg-consultores-de-riesgo/"
+          target="_blank"
+          rel="noopener"
+          title="LinkedIn BTG"
+        >
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="white">
+            <path
+              d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"
+            />
+            <rect x="2" y="9" width="4" height="12" />
+            <circle cx="4" cy="4" r="2" />
+          </svg>
+        </a>
+        <a
+          href="https://wa.me/5215579094480"
+          target="_blank"
+          rel="noopener"
+          title="WhatsApp BTG"
+          class="wa-btn"
+        >
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="white">
+            <path
+              d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.978-1.426A9.956 9.956 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm4.93 13.57c-.207.583-1.215 1.12-1.66 1.163-.444.044-.43.332-2.716-.567-2.286-.9-3.66-3.176-3.77-3.321-.11-.146-.9-1.195-.9-2.278 0-1.083.566-1.617.767-1.837.2-.22.437-.274.583-.274l.42.008c.135.006.316-.051.495.378.183.436.62 1.507.674 1.616.054.11.09.238.018.383-.073.146-.11.237-.218.365l-.328.38c-.11.127-.225.265-.097.52.128.254.57 1.004 1.226 1.624.843.79 1.554 1.035 1.808 1.148.255.11.403.092.55-.055.146-.147.626-.73.793-.98.167-.25.334-.208.562-.125.23.083 1.458.687 1.708.813.25.125.416.188.477.29.062.104.062.6-.145 1.18z"
+            />
+          </svg>
+        </a>
+      </div>
+      <button class="nav-burger" id="nav-burger" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <div id="mobile-menu" role="dialog" aria-label="Navegación">
+      <div class="mm-topbar">
+        <a href="/"
+          ><img
+            src="/btg-logo.png"
+            alt="BTG Seguros"
+            class="mm-topbar-logo"
+        /></a>
+        <button
+          class="mm-close-btn"
+          id="mm-close-btn"
+          aria-label="Cerrar menú"
+        >
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+      </div>
+      <nav class="mm-links">
+        <a href="/dashboard.html" class="mm-link"
+          >Dashboard<svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M5 12h14M12 5l7 7-7 7" /></svg
+        ></a>
+        <a href="/#siniestros" class="mm-link"
+          >Siniestros<svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M5 12h14M12 5l7 7-7 7" /></svg
+        ></a>
+        <a href="/#tecnologia" class="mm-link"
+          >Multicotizador<svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M5 12h14M12 5l7 7-7 7" /></svg
+        ></a>
+        <a href="/#universidad" class="mm-link"
+          >Universidad<svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M5 12h14M12 5l7 7-7 7" /></svg
+        ></a>
+        <a href="/#concursos" class="mm-link"
+          >Concursos<svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M5 12h14M12 5l7 7-7 7" /></svg
+        ></a>
+        <a href="/#credenciales" class="mm-link"
+          >Credenciales<svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M5 12h14M12 5l7 7-7 7" /></svg
+        ></a>
+        <a href="/bolsa-de-trabajo.html" class="mm-link"
+          >Bolsa de Trabajo<svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M5 12h14M12 5l7 7-7 7" /></svg
+        ></a>
+        <div class="mm-item">
+          <a href="#" class="mm-item-head" id="mm-material"
+            >Material Agentes
+            <svg
+              class="mm-chevron"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+          <div class="mm-sub" id="mm-material-sub">
+            <a href="/boletines.html" class="mm-sublink"
+              >Boletín Agentes
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" /></svg
+            ></a>
+            <a href="/directorio.html" class="mm-sublink"
+              >Directorio BTG
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" /></svg
+            ></a>
+            <a href="/convenciones.html" class="mm-sublink"
+              >Galería Convenciones
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" /></svg
+            ></a>
+            <a href="/biblioteca-digital.html" class="mm-sublink"
+              >Biblioteca Digital<svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" /></svg
+            ></a>
+          </div>
+        </div>
+      </nav>
+      <div class="mm-footer">
+        <span class="mm-brand"
+          ><span class="mm-dot"></span>BTG Seguros</span
+        >
+        <div class="mm-social">
+          <a
+            href="https://www.instagram.com/btgseguros/"
+            target="_blank"
+            rel="noopener"
+            title="Instagram"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="white"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="2" y="2" width="20" height="20" rx="5" />
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+            </svg>
+          </a>
+          <a
+            href="https://www.facebook.com/BTGSeguros/"
+            target="_blank"
+            rel="noopener"
+            title="Facebook"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
+              <path
+                d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+              />
+            </svg>
+          </a>
+          <a
+            href="https://www.linkedin.com/company/btg-consultores-de-riesgo/"
+            target="_blank"
+            rel="noopener"
+            title="LinkedIn"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
+              <path
+                d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"
+              />
+              <rect x="2" y="9" width="4" height="12" />
+              <circle cx="4" cy="4" r="2" />
+            </svg>
+          </a>
+          <a
+            href="https://wa.me/5215579094480"
+            target="_blank"
+            rel="noopener"
+            class="wa-btn"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
+              <path
+                d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.978-1.426A9.956 9.956 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm4.93 13.57c-.207.583-1.215 1.12-1.66 1.163-.444.044-.43.332-2.716-.567-2.286-.9-3.66-3.176-3.77-3.321-.11-.146-.9-1.195-.9-2.278 0-1.083.566-1.617.767-1.837.2-.22.437-.274.583-.274l.42.008c.135.006.316-.051.495.378.183.436.62 1.507.674 1.616.054.11.09.238.018.383-.073.146-.11.237-.218.365l-.328.38c-.11.127-.225.265-.097.52.128.254.57 1.004 1.226 1.624.843.79 1.554 1.035 1.808 1.148.255.11.403.092.55-.055.146-.147.626-.73.793-.98.167-.25.334-.208.562-.125.23.083 1.458.687 1.708.813.25.125.416.188.477.29.062.104.062.6-.145 1.18z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <section class="hero">
+      <div class="cobrand">
+        <img class="btg" src="/btg-logo.png" alt="BTG Seguros" />
+        <span class="x">×</span>
+        <img src="/ranking-f1/zurich-logo.png" alt="Zurich" />
+      </div>
+
+      <div class="eyebrow">F1esta en el Autódromo</div>
+
+      <h1>Ranking F1</h1>
+    </section>
+
+    <!-- CARRERA -->
+    <div class="cat-sep">
+      <div class="line"></div>
+      <span class="tag red"
+        ><span class="swatch"></span>Carrera · 01 Nov<span class="count">1</span></span
+      >
+      <div class="line"></div>
+    </div>
+
+    <div class="grid">
+      <div class="center-line"></div>
+
+      <div class="slot right red" data-reveal>
+        <div class="car red">
+          <svg viewBox="0 0 120 220" preserveAspectRatio="xMidYMid meet"><use href="#f1car" style="color: var(--red)" /></svg>
+        </div>
+        <div class="label">
+          <div class="pos">01</div>
+          <div class="name">MAR</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CLASIFICACIÓN -->
+    <div class="cat-sep">
+      <div class="line"></div>
+      <span class="tag sky"
+        ><span class="swatch"></span>Clasificación · 31 Oct<span class="count">1</span></span
+      >
+      <div class="line"></div>
+    </div>
+
+    <div class="grid">
+      <div class="center-line"></div>
+
+      <div class="slot left sky" data-reveal>
+        <div class="label">
+          <div class="pos">02</div>
+          <div class="name">JORAR</div>
+        </div>
+        <div class="car sky">
+          <svg viewBox="0 0 120 220" preserveAspectRatio="xMidYMid meet"><use href="#f1car" style="color: var(--sky)" /></svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRÁCTICAS -->
+    <div class="cat-sep">
+      <div class="line"></div>
+      <span class="tag amber"
+        ><span class="swatch"></span>Prácticas · 30 Oct<span class="count">1</span></span
+      >
+      <div class="line"></div>
+    </div>
+
+    <div class="grid">
+      <div class="center-line"></div>
+
+      <div class="slot right amber" data-reveal>
+        <div class="car amber">
+          <svg viewBox="0 0 120 220" preserveAspectRatio="xMidYMid meet"><use href="#f1car" style="color: var(--amber)" /></svg>
+        </div>
+        <div class="label">
+          <div class="pos">03</div>
+          <div class="name">DAVER</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- POR CLASIFICAR -->
+    <div class="cat-sep">
+      <div class="line"></div>
+      <span class="tag gray"
+        ><span class="swatch"></span>Por clasificar<span class="count">3</span></span
+      >
+      <div class="line"></div>
+    </div>
+
+    <div class="grid">
+      <div class="center-line"></div>
+
+      <div class="slot left gray" data-reveal>
+        <div class="label">
+          <div class="pos">04</div>
+          <div class="name">R.VALLE</div>
+        </div>
+        <div class="car gray">
+          <svg viewBox="0 0 120 220" preserveAspectRatio="xMidYMid meet"><use href="#f1car" style="color: var(--gray)" /></svg>
+        </div>
+      </div>
+      <div class="slot right gray" data-reveal>
+        <div class="car gray">
+          <svg viewBox="0 0 120 220" preserveAspectRatio="xMidYMid meet"><use href="#f1car" style="color: var(--gray)" /></svg>
+        </div>
+        <div class="label">
+          <div class="pos">05</div>
+          <div class="name">DAFIR</div>
+        </div>
+      </div>
+      <div class="slot left gray" data-reveal>
+        <div class="label">
+          <div class="pos">06</div>
+          <div class="name">MEL</div>
+        </div>
+        <div class="car gray">
+          <svg viewBox="0 0 120 220" preserveAspectRatio="xMidYMid meet"><use href="#f1car" style="color: var(--gray)" /></svg>
+        </div>
+      </div>
+    </div>
+
+    <section class="legend">
+      <span class="legend-pill red"
+        ><span class="swatch"></span>Carrera<span class="rng">1</span></span
+      >
+      <span class="legend-pill sky"
+        ><span class="swatch"></span>Clasificación<span class="rng">2</span></span
+      >
+      <span class="legend-pill amber"
+        ><span class="swatch"></span>Prácticas<span class="rng">3</span></span
+      >
+      <span class="legend-pill gray"
+        ><span class="swatch"></span>Por clasificar<span class="rng">4–6</span></span
+      >
+    </section>
+
+    <footer>F1esta en el Autódromo · Gran Premio de México 2026</footer>
+
+    <script>
+      const slots = document.querySelectorAll("[data-reveal]");
+      const allSlots = Array.prototype.slice.call(slots);
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const idx = allSlots.indexOf(entry.target);
+              setTimeout(
+                () => entry.target.classList.add("reveal"),
+                (idx % 6) * 130,
+              );
+              io.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.15, rootMargin: "0px 0px -10% 0px" },
+      );
+      slots.forEach((s) => io.observe(s));
+
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        slots.forEach((s) => s.classList.add("reveal"));
+      }
+
+      // ============ SITE NAV interactions ============
+      (function () {
+        var burger = document.getElementById("nav-burger");
+        var menu = document.getElementById("mobile-menu");
+        if (!burger || !menu) return;
+        function openMenu() {
+          burger.classList.add("open");
+          menu.classList.add("open");
+          document.body.style.overflow = "hidden";
+          burger.setAttribute("aria-label", "Cerrar menú");
+        }
+        function closeMenu() {
+          burger.classList.remove("open");
+          menu.classList.remove("open");
+          document.body.style.overflow = "";
+          burger.setAttribute("aria-label", "Abrir menú");
+        }
+        burger.addEventListener("click", function () {
+          menu.classList.contains("open") ? closeMenu() : openMenu();
+        });
+        menu.querySelectorAll(".mm-link").forEach(function (link) {
+          link.addEventListener("click", closeMenu);
+        });
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape") closeMenu();
+        });
+        var mmHead = document.getElementById("mm-material");
+        var mmSub = document.getElementById("mm-material-sub");
+        if (mmHead && mmSub) {
+          mmHead.addEventListener("click", function (e) {
+            e.preventDefault();
+            mmHead.classList.toggle("open");
+            mmSub.classList.toggle("open");
+          });
+        }
+        var mmCloseBtn = document.getElementById("mm-close-btn");
+        if (mmCloseBtn) mmCloseBtn.addEventListener("click", closeMenu);
+      })();
+
+      // Desktop dropdown (Material Agentes)
+      document.querySelectorAll(".nav-drop").forEach(function (drop) {
+        var trigger = drop.querySelector("a");
+        trigger.addEventListener("click", function (e) {
+          e.preventDefault();
+          var isOpen = drop.classList.contains("drop-open");
+          document
+            .querySelectorAll(".nav-drop.drop-open")
+            .forEach(function (d) {
+              d.classList.remove("drop-open");
+            });
+          if (!isOpen) drop.classList.add("drop-open");
+        });
+      });
+      document.addEventListener("click", function (e) {
+        if (!e.target.closest(".nav-drop")) {
+          document
+            .querySelectorAll(".nav-drop.drop-open")
+            .forEach(function (d) {
+              d.classList.remove("drop-open");
+            });
+        }
+      });
+    </script>
+  </body>
+</html>
