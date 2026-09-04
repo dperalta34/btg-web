@@ -12,8 +12,8 @@
 <meta property="og:description" content="Hay caminos que se recorren. Y otros que hacen historia.">
 <meta property="og:type" content="website">
 
-<link rel="preload" as="image" href="/CEVER/frames-hd/f_0001.webp" type="image/webp">
-<link rel="preload" as="image" href="/CEVER/frames-hd/f_0420.webp" type="image/webp">
+<link rel="preload" as="image" href="/CEVER/fx/f_0001.webp" type="image/webp" fetchpriority="high">
+<link rel="preload" as="image" href="/CEVER/fx/f_0315.webp" type="image/webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
@@ -182,9 +182,9 @@ img{display:block;max-width:100%}
 
 <script>
 (function(){
-  const FRAMES = 420;
+  const FRAMES = 315;
   const isMobile = window.matchMedia('(max-width:720px)').matches;
-  const dir = isMobile ? '/CEVER/frames-hd-m' : '/CEVER/frames-hd';
+  const dir = isMobile ? '/CEVER/fx-m' : '/CEVER/fx';
   const pad = (n) => String(n).padStart(4, '0');
   const framePath = (i) => dir + '/f_' + pad(i + 1) + '.webp';
 
