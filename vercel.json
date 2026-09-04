@@ -10,6 +10,7 @@
     { "source": "/boletines", "destination": "/boletines.html", "permanent": false },
     { "source": "/directorio-btg", "destination": "/directorio.html", "permanent": false },
     { "source": "/convenciones", "destination": "/convenciones.html", "permanent": false },
-    { "source": "/biblioteca-digital", "destination": "/biblioteca-digital.html", "permanent": false }
+    { "source": "/biblioteca-digital", "destination": "/biblioteca-digital.html", "permanent": false },
+    { "source": "/cever", "destination": "/cever.html", "permanent": false }
   ]
 }
