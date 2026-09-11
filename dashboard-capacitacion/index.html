@@ -310,18 +310,36 @@
         .speed-btn { font-size: 10.5px; min-width: 38px; padding: 0 6px; }
       }
 
-      /* ---- Info block ---- */
-      .info { max-width: 900px; margin: 0 auto; padding: 0 24px 60px; text-align: center; color: var(--muted); font-size: 13px; }
-      .info .kbd-hint { display: inline-flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 12px; }
-      .info kbd {
-        display: inline-flex; align-items: center; gap: 6px;
-        padding: 4px 10px; border-radius: 6px;
-        background: rgba(255,255,255,0.04); border: 1px solid var(--line);
-        font-family: "SF Mono", Menlo, ui-monospace, monospace;
-        font-size: 10.5px; color: var(--text);
+      /* ---- CTA block ---- */
+      .cta { max-width: 720px; margin: 0 auto; padding: 8px 24px 60px; text-align: center; }
+      .cta-btn {
+        display: inline-flex; align-items: center; gap: 12px;
+        padding: 16px 32px; border-radius: 999px;
+        background: linear-gradient(135deg, var(--blue), var(--blue2));
+        color: #fff; font-size: 15px; font-weight: 700;
+        text-decoration: none; letter-spacing: -0.01em;
+        box-shadow: 0 12px 32px rgba(26,127,188,0.4), inset 0 0 0 1px rgba(255,255,255,0.15);
+        transition: transform 0.22s cubic-bezier(0.16,1,0.3,1), box-shadow 0.22s;
       }
-      .info kbd span { color: var(--muted); font-family: var(--font); font-size: 10.5px; }
-      @media (max-width: 540px) { .info { padding: 0 16px 40px; } .info .kbd-hint { display: none; } }
+      .cta-btn:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 18px 44px rgba(26,127,188,0.55), inset 0 0 0 1px rgba(255,255,255,0.2); }
+      .cta-btn:active { transform: translateY(0) scale(0.98); }
+      .cta-btn svg { transition: transform 0.22s; }
+      .cta-btn:hover svg { transform: translateX(3px); }
+      .cta-note {
+        margin-top: 24px;
+        color: var(--muted);
+        font-size: 13.5px;
+        line-height: 1.65;
+        max-width: 560px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .cta-note strong { color: var(--text); font-weight: 600; }
+      @media (max-width: 540px) {
+        .cta { padding: 4px 20px 40px; }
+        .cta-btn { padding: 14px 26px; font-size: 14px; }
+        .cta-note { font-size: 12.5px; }
+      }
 
       footer { padding: 20px; text-align: center; color: rgba(228,238,245,0.35); font-size: 10.5px; border-top: 1px solid var(--line); }
     </style>
@@ -484,17 +502,15 @@
       </div>
     </div>
 
-    <div class="info">
-      <p>Atajos de teclado</p>
-      <div class="kbd-hint">
-        <kbd>Space</kbd><span>Reproducir / Pausar</span>
-        <kbd>← →</kbd><span>±5s</span>
-        <kbd>J K L</kbd><span>±10s / Pausar</span>
-        <kbd>F</kbd><span>Pantalla completa</span>
-        <kbd>M</kbd><span>Silenciar</span>
-        <kbd>0-9</kbd><span>Saltar %</span>
-      </div>
-    </div>
+    <section class="cta">
+      <a href="/dashboard" class="cta-btn">
+        <span>Ingresar al dashboard</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+      <p class="cta-note">
+        Recuerda que si tienes cualquier duda, puedes acercarte a tu <strong>comercial correspondiente</strong> para que te ayude con todo lo relacionado al dashboard. ¡Muchas gracias!
+      </p>
+    </section>
 
     <footer>BTG Seguros · Universidad BTG · Capacitación Dashboard</footer>
 
