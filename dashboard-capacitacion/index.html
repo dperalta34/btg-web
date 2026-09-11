@@ -1,0 +1,767 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Capacitación Dashboard · BTG Seguros</title>
+    <link rel="icon" type="image/png" href="/favicon_btg.png" />
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      :root {
+        --dark: #081a26;
+        --darker: #04111a;
+        --card: #0d2233;
+        --card-2: #12293c;
+        --blue: #1a7fbc;
+        --blue2: #2aace0;
+        --cyan: #00c9e0;
+        --gold: #b8962e;
+        --text: #e4eef5;
+        --text-strong: #f5f9fc;
+        --muted: rgba(228, 238, 245, 0.55);
+        --line: rgba(255, 255, 255, 0.07);
+        --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+      }
+
+      /* ============ SITE NAV ============ */
+      nav.site-nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 60px; background: var(--dark); border-bottom: 1px solid rgba(255,255,255,0.07); position: fixed; top: 0; left: 0; right: 0; width: 100%; z-index: 300; }
+      nav.site-nav .nav-links { display: flex; gap: 28px; list-style: none; margin: 0; padding: 0; }
+      nav.site-nav .nav-links a { font-size: 13px; color: rgba(228,238,245,0.55); text-decoration: none; transition: color 0.2s; }
+      nav.site-nav .nav-links a:hover { color: #e4eef5; }
+      .nav-drop { position: relative; }
+      .nav-drop > a { display: flex; align-items: center; gap: 5px; }
+      .nav-drop > a svg { transition: transform 0.2s; flex-shrink: 0; }
+      .nav-drop.drop-open > a svg { transform: rotate(180deg); }
+      .nav-dropmenu { position: absolute; top: 100%; right: 0; margin-top: 8px; background: rgba(4,14,26,0.97); backdrop-filter: blur(18px); border: 1px solid rgba(26,127,188,0.2); border-radius: 12px; padding: 6px; min-width: 186px; opacity: 0; pointer-events: none; transform: translateY(-8px) scale(0.97); transition: opacity 0.22s, transform 0.22s; z-index: 400; }
+      .nav-drop.drop-open .nav-dropmenu { opacity: 1; pointer-events: all; transform: translateY(0) scale(1); }
+      .nav-dropmenu a { display: flex; align-items: center; gap: 9px; padding: 9px 12px; border-radius: 8px; font-size: 13px; color: rgba(228,238,245,0.6); text-decoration: none; transition: background 0.15s, color 0.15s; white-space: nowrap; }
+      .nav-dropmenu a:hover { background: rgba(26,127,188,0.12); color: #e4eef5; }
+      .nav-dropmenu a svg { flex-shrink: 0; color: var(--blue); }
+      .nav-social { display: flex; align-items: center; gap: 10px; }
+      .nav-social a { width: 36px; height: 36px; border-radius: 50%; background: var(--blue); display: flex; align-items: center; justify-content: center; text-decoration: none; transition: background 0.2s; flex-shrink: 0; }
+      .nav-social a:hover { background: var(--blue2); }
+      .nav-social a.wa-btn { background: #25d366; }
+      .nav-social a.wa-btn:hover { background: #1ebe57; }
+      .mm-social a.wa-btn { background: #25d366; }
+      .mm-social a.wa-btn:hover { background: #1ebe57; }
+      .nav-burger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 38px; height: 38px; background: rgba(26,127,188,0.1); border: 1px solid rgba(26,127,188,0.22); border-radius: 10px; cursor: pointer; padding: 9px 8px; flex-shrink: 0; transition: background 0.2s; position: relative; z-index: 301; }
+      .nav-burger span { display: block; width: 100%; height: 2px; background: #e4eef5; border-radius: 2px; transition: transform 0.38s cubic-bezier(0.16,1,0.3,1), opacity 0.22s, width 0.3s; transform-origin: center; }
+      .nav-burger.open { background: rgba(26,127,188,0.2); border-color: rgba(26,127,188,0.4); }
+      .nav-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+      .nav-burger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+      .nav-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+      #mobile-menu { display: none; position: fixed; inset: 0; z-index: 500; background: rgba(4,11,18,0.99); opacity: 0; visibility: hidden; transition: opacity 0.28s ease, visibility 0s linear 0.28s; pointer-events: none; flex-direction: column; }
+      #mobile-menu.open { opacity: 1; visibility: visible; pointer-events: all; transition: opacity 0.28s ease, visibility 0s linear 0s; }
+      .mm-topbar { display: flex; align-items: center; justify-content: space-between; padding: 0 20px; height: 62px; border-bottom: 1px solid rgba(255,255,255,0.07); flex-shrink: 0; }
+      .mm-topbar-logo { height: 38px; width: auto; display: block; }
+      .mm-close-btn { width: 38px; height: 38px; background: rgba(26,127,188,0.1); border: 1px solid rgba(26,127,188,0.22); border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #e4eef5; transition: background 0.2s; padding: 0; flex-shrink: 0; }
+      .mm-close-btn:hover, .mm-close-btn:active { background: rgba(26,127,188,0.25); }
+      .mm-links { display: flex; flex-direction: column; gap: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; flex: 1; padding: 4px 24px 0; }
+      .mm-link { font-size: 22px; font-weight: 400; color: rgba(228,238,245,0.35); letter-spacing: -0.03em; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; gap: 12px; transition: color 0.22s; text-decoration: none; }
+      .mm-link svg { flex-shrink: 0; opacity: 0.4; transition: opacity 0.22s; }
+      .mm-link:active, .mm-link:hover { color: #e4eef5; }
+      .mm-link:hover svg { opacity: 0.6; }
+      .mm-item { display: block; padding: 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+      .mm-item-head { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; font-size: 22px; font-weight: 400; color: rgba(228,238,245,0.35); letter-spacing: -0.03em; gap: 12px; width: 100%; background: none; border: none; cursor: pointer; font-family: inherit; text-decoration: none; }
+      .mm-item-head:hover, .mm-item-head:active { color: #e4eef5; }
+      .mm-item-head.open { color: rgba(228,238,245,0.7); }
+      .mm-chevron { transition: transform 0.3s cubic-bezier(0.16,1,0.3,1); flex-shrink: 0; opacity: 0.4; }
+      .mm-item-head.open .mm-chevron { transform: rotate(90deg); opacity: 0.7; }
+      .mm-sub { max-height: 0; overflow: hidden; transition: max-height 0.35s cubic-bezier(0.16,1,0.3,1); }
+      .mm-sub.open { max-height: 300px; }
+      .mm-sublink { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 9px 0 13px 16px; font-size: 17px; font-weight: 400; color: rgba(0,201,224,0.6); letter-spacing: -0.02em; text-decoration: none; transition: color 0.2s; }
+      .mm-sublink:hover, .mm-sublink:active { color: #00c9e0; }
+      .mm-sublink svg { opacity: 0.5; flex-shrink: 0; }
+      .mm-footer { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px 28px; border-top: 1px solid rgba(255,255,255,0.07); flex-shrink: 0; }
+      .mm-brand { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(228,238,245,0.2); }
+      .mm-social { display: flex; gap: 10px; }
+      .mm-social a { width: 40px; height: 40px; border-radius: 50%; background: rgba(26,127,188,0.12); border: 1px solid rgba(26,127,188,0.22); display: flex; align-items: center; justify-content: center; text-decoration: none; transition: background 0.2s; }
+      .mm-social a:hover { background: var(--blue); }
+      .mm-dot { width: 6px; height: 6px; border-radius: 50%; background: #00c9e0; display: inline-block; margin-right: 6px; flex-shrink: 0; }
+      @media (max-width: 768px) {
+        #mobile-menu { display: flex; }
+        nav.site-nav { padding: 12px 16px; }
+        nav.site-nav .nav-links { display: none; }
+        nav.site-nav .nav-social { position: absolute; left: 50%; transform: translateX(-50%); gap: 8px; }
+        nav.site-nav .nav-social a { width: 30px; height: 30px; }
+        .nav-burger { display: flex; }
+        nav.site-nav > div img { height: 40px; }
+      }
+      /* ============ END SITE NAV ============ */
+
+      html { background: var(--darker); scroll-behavior: smooth; overflow-x: hidden; }
+      body {
+        background:
+          radial-gradient(ellipse 90% 55% at 50% 0%, rgba(26,127,188,0.12), transparent 65%),
+          radial-gradient(ellipse 60% 40% at 50% 100%, rgba(184,150,46,0.05), transparent 60%),
+          var(--darker);
+        color: var(--text); font-family: var(--font); line-height: 1.6;
+        -webkit-font-smoothing: antialiased; min-height: 100vh; overflow-x: hidden;
+        padding-top: 64px;
+      }
+      @media (max-width: 768px) { body { padding-top: 60px; } }
+
+      /* ---- Hero ---- */
+      .hero { text-align: center; padding: 48px 24px 28px; max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
+      .cobrand { display: inline-flex; align-items: center; gap: 14px; padding: 10px 18px; border-radius: 999px; background: rgba(255,255,255,0.02); border: 1px solid var(--line); backdrop-filter: blur(6px); }
+      .cobrand img { display: block; height: 40px; width: auto; opacity: 0.95; }
+      .hero .eyebrow { display: inline-flex; align-items: center; gap: 10px; margin-top: 18px; font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); }
+      .hero .eyebrow::before, .hero .eyebrow::after { content: ""; width: 22px; height: 1px; background: var(--gold); opacity: 0.6; }
+      .hero h1 { margin-top: 14px; font-size: clamp(1.8rem, 4.5vw, 2.6rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.05; background: linear-gradient(90deg, var(--blue2), #ffffff 55%, var(--gold)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; }
+      .hero p.lead { margin-top: 14px; color: var(--muted); font-size: 14px; max-width: 620px; }
+      @media (max-width: 540px) {
+        .hero { padding: 32px 18px 20px; }
+        .cobrand img { height: 32px; }
+      }
+
+      /* ---- Player wrapper ---- */
+      .player-wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px 40px; }
+      @media (max-width: 540px) { .player-wrap { padding: 0 12px 32px; } }
+
+      .player {
+        position: relative;
+        aspect-ratio: 3 / 2;
+        background: #000;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow:
+          0 30px 80px rgba(0,0,0,0.6),
+          0 0 0 1px rgba(26,127,188,0.25),
+          inset 0 0 0 1px rgba(255,255,255,0.03);
+        cursor: pointer;
+      }
+      .player.fs-active { border-radius: 0; }
+      .player video { width: 100%; height: 100%; display: block; object-fit: contain; background: #000; }
+
+      /* Poster / Big play overlay */
+      .poster {
+        position: absolute; inset: 0;
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        background:
+          radial-gradient(ellipse 60% 55% at 50% 45%, rgba(26,127,188,0.35), transparent 70%),
+          linear-gradient(180deg, rgba(4,17,26,0.75), rgba(4,17,26,0.95));
+        transition: opacity 0.5s ease, visibility 0s linear 0.5s;
+        z-index: 10;
+        gap: 22px;
+      }
+      .poster.hidden { opacity: 0; visibility: hidden; }
+      .poster-brand { display: flex; align-items: center; gap: 14px; opacity: 0.85; }
+      .poster-brand img { height: 48px; width: auto; display: block; }
+      .poster-title { text-align: center; padding: 0 20px; }
+      .poster-title .tag { display: inline-block; padding: 5px 12px; border-radius: 999px; background: rgba(184,150,46,0.12); border: 1px solid rgba(184,150,46,0.35); font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+      .poster-title h2 { font-size: clamp(1.1rem, 2.8vw, 1.6rem); font-weight: 700; color: var(--text-strong); letter-spacing: -0.02em; }
+      .poster-title p { margin-top: 6px; font-size: 12.5px; color: var(--muted); }
+      .big-play {
+        width: 92px; height: 92px; border-radius: 50%;
+        background: linear-gradient(135deg, var(--blue), var(--blue2));
+        border: none; cursor: pointer;
+        display: flex; align-items: center; justify-content: center;
+        color: #fff;
+        box-shadow: 0 20px 55px rgba(26,127,188,0.55), 0 0 0 1px rgba(255,255,255,0.12) inset;
+        transition: transform 0.28s cubic-bezier(0.16,1,0.3,1), box-shadow 0.28s;
+        position: relative;
+      }
+      .big-play::before {
+        content: ""; position: absolute; inset: -12px; border-radius: 50%;
+        border: 2px solid rgba(26,127,188,0.35);
+        animation: ping 2.2s cubic-bezier(0,0,0.2,1) infinite;
+      }
+      @keyframes ping { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(1.5); opacity: 0; } }
+      .big-play:hover { transform: scale(1.08); box-shadow: 0 25px 65px rgba(26,127,188,0.7); }
+      .big-play svg { margin-left: 5px; }
+      @media (max-width: 540px) {
+        .big-play { width: 72px; height: 72px; }
+        .big-play svg { width: 28px; height: 28px; }
+        .poster-brand img { height: 36px; }
+      }
+
+      /* Center click overlay (for pause when playing) */
+      .click-shield { position: absolute; inset: 0; z-index: 5; }
+
+      /* Play/Pause flash animation */
+      .flash-icon {
+        position: absolute; top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        width: 84px; height: 84px; border-radius: 50%;
+        background: rgba(4,17,26,0.72);
+        display: flex; align-items: center; justify-content: center;
+        color: #fff;
+        opacity: 0; pointer-events: none;
+        z-index: 11;
+        backdrop-filter: blur(8px);
+      }
+      .flash-icon.show { animation: flashPop 0.55s ease-out; }
+      @keyframes flashPop {
+        0% { opacity: 0; transform: translate(-50%, -50%) scale(0.7); }
+        40% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        100% { opacity: 0; transform: translate(-50%, -50%) scale(1.25); }
+      }
+
+      /* Loading spinner */
+      .loader {
+        position: absolute; top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        width: 56px; height: 56px;
+        border: 3px solid rgba(255,255,255,0.15);
+        border-top-color: var(--blue2);
+        border-radius: 50%;
+        animation: spin 0.9s linear infinite;
+        opacity: 0; pointer-events: none;
+        z-index: 9;
+        transition: opacity 0.2s;
+      }
+      .loader.show { opacity: 1; }
+      @keyframes spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
+
+      /* ============ CONTROLS ============ */
+      .controls {
+        position: absolute; left: 0; right: 0; bottom: 0;
+        padding: 60px 18px 14px;
+        background: linear-gradient(to top, rgba(4,11,18,0.95) 0%, rgba(4,11,18,0.7) 55%, transparent 100%);
+        z-index: 20;
+        opacity: 1;
+        transition: opacity 0.35s ease;
+      }
+      .player.hide-ui .controls { opacity: 0; pointer-events: none; }
+      .player.hide-ui { cursor: none; }
+
+      /* Progress */
+      .progress-wrap { position: relative; height: 22px; display: flex; align-items: center; margin-bottom: 6px; cursor: pointer; }
+      .progress-bar { position: relative; width: 100%; height: 4px; background: rgba(255,255,255,0.18); border-radius: 999px; overflow: visible; transition: height 0.18s ease; }
+      .progress-wrap:hover .progress-bar { height: 6px; }
+      .buffer { position: absolute; top: 0; left: 0; height: 100%; background: rgba(255,255,255,0.24); border-radius: 999px; }
+      .played { position: absolute; top: 0; left: 0; height: 100%; background: linear-gradient(90deg, var(--blue), var(--cyan)); border-radius: 999px; }
+      .played::after {
+        content: ""; position: absolute; right: -7px; top: 50%;
+        width: 14px; height: 14px; border-radius: 50%;
+        background: #fff;
+        transform: translateY(-50%) scale(0);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+        transition: transform 0.18s ease;
+      }
+      .progress-wrap:hover .played::after { transform: translateY(-50%) scale(1); }
+      .progress-tooltip {
+        position: absolute; bottom: 24px; transform: translateX(-50%);
+        padding: 4px 10px; border-radius: 6px;
+        background: rgba(4,11,18,0.95); border: 1px solid rgba(255,255,255,0.08);
+        color: #fff; font-size: 11px; font-family: "SF Mono", Menlo, ui-monospace, monospace;
+        pointer-events: none; opacity: 0; transition: opacity 0.15s;
+        white-space: nowrap;
+      }
+      .progress-wrap:hover .progress-tooltip { opacity: 1; }
+
+      /* Bar */
+      .bar { display: flex; align-items: center; gap: 6px; padding: 0 2px; }
+      .btn-ctl {
+        display: inline-flex; align-items: center; justify-content: center;
+        width: 38px; height: 38px; border-radius: 10px;
+        background: transparent; border: none; cursor: pointer;
+        color: var(--text-strong); transition: background 0.18s, transform 0.18s;
+      }
+      .btn-ctl:hover { background: rgba(255,255,255,0.08); }
+      .btn-ctl:active { transform: scale(0.94); }
+      .btn-ctl svg { display: block; }
+      .time { font-family: "SF Mono", Menlo, ui-monospace, monospace; font-size: 12px; color: var(--text); letter-spacing: 0.02em; padding: 0 4px; min-width: 92px; }
+      .time .sep { color: var(--muted); margin: 0 5px; }
+      .time .dur { color: var(--muted); }
+      .spacer { flex: 1; }
+
+      /* Volume */
+      .vol-wrap { display: flex; align-items: center; gap: 4px; overflow: hidden; }
+      .vol-slider { width: 0; opacity: 0; transition: width 0.28s ease, opacity 0.28s ease; height: 24px; display: flex; align-items: center; }
+      .vol-wrap:hover .vol-slider, .vol-wrap.active .vol-slider { width: 80px; opacity: 1; }
+      .vol-slider input { -webkit-appearance: none; appearance: none; width: 76px; height: 3px; background: rgba(255,255,255,0.2); border-radius: 999px; outline: none; cursor: pointer; }
+      .vol-slider input::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 12px; height: 12px; border-radius: 50%; background: #fff; cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.4); }
+      .vol-slider input::-moz-range-thumb { width: 12px; height: 12px; border-radius: 50%; background: #fff; border: none; cursor: pointer; }
+
+      /* Speed dropdown */
+      .speed-wrap { position: relative; }
+      .speed-btn { font-family: "SF Mono", Menlo, ui-monospace, monospace; font-size: 11.5px; padding: 0 10px; min-width: 46px; height: 38px; border-radius: 10px; background: transparent; border: none; cursor: pointer; color: var(--text-strong); transition: background 0.18s; letter-spacing: 0.02em; }
+      .speed-btn:hover { background: rgba(255,255,255,0.08); }
+      .speed-menu {
+        position: absolute; bottom: 46px; right: 0;
+        background: rgba(4,14,26,0.98); backdrop-filter: blur(20px);
+        border: 1px solid rgba(255,255,255,0.08); border-radius: 12px;
+        padding: 6px; min-width: 100px;
+        opacity: 0; pointer-events: none; transform: translateY(6px) scale(0.96);
+        transition: opacity 0.2s, transform 0.2s;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+      }
+      .speed-menu.open { opacity: 1; pointer-events: all; transform: translateY(0) scale(1); }
+      .speed-menu button {
+        display: flex; align-items: center; justify-content: space-between; gap: 12px;
+        width: 100%; padding: 8px 12px; border-radius: 8px;
+        background: transparent; border: none; cursor: pointer;
+        color: var(--text); font-family: inherit; font-size: 12px;
+        transition: background 0.15s;
+      }
+      .speed-menu button:hover { background: rgba(26,127,188,0.15); }
+      .speed-menu button.active { color: var(--blue2); }
+      .speed-menu button .check { opacity: 0; }
+      .speed-menu button.active .check { opacity: 1; }
+
+      @media (max-width: 540px) {
+        .controls { padding: 44px 10px 8px; }
+        .btn-ctl { width: 34px; height: 34px; }
+        .time { font-size: 11px; min-width: 78px; }
+        .vol-wrap:hover .vol-slider, .vol-wrap.active .vol-slider { width: 60px; }
+        .vol-slider input { width: 56px; }
+        .speed-btn { font-size: 10.5px; min-width: 38px; padding: 0 6px; }
+      }
+
+      /* ---- Info block ---- */
+      .info { max-width: 900px; margin: 0 auto; padding: 0 24px 60px; text-align: center; color: var(--muted); font-size: 13px; }
+      .info .kbd-hint { display: inline-flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 12px; }
+      .info kbd {
+        display: inline-flex; align-items: center; gap: 6px;
+        padding: 4px 10px; border-radius: 6px;
+        background: rgba(255,255,255,0.04); border: 1px solid var(--line);
+        font-family: "SF Mono", Menlo, ui-monospace, monospace;
+        font-size: 10.5px; color: var(--text);
+      }
+      .info kbd span { color: var(--muted); font-family: var(--font); font-size: 10.5px; }
+      @media (max-width: 540px) { .info { padding: 0 16px 40px; } .info .kbd-hint { display: none; } }
+
+      footer { padding: 20px; text-align: center; color: rgba(228,238,245,0.35); font-size: 10.5px; border-top: 1px solid var(--line); }
+    </style>
+  </head>
+  <body>
+    <!-- SITE NAV -->
+    <nav class="site-nav">
+      <div>
+        <a href="/"><img src="/btg-logo.png" alt="BTG — Black Tower Group" style="height: 56px; width: auto; display: block" /></a>
+      </div>
+      <ul class="nav-links">
+        <li><a href="/dashboard.html">Dashboard</a></li>
+        <li><a href="/#siniestros">Siniestros</a></li>
+        <li><a href="/#tecnologia">Multicotizador</a></li>
+        <li><a href="/#universidad">Universidad</a></li>
+        <li><a href="/#concursos">Concursos</a></li>
+        <li><a href="/#credenciales">Credenciales</a></li>
+        <li><a href="/bolsa-de-trabajo.html">Bolsa de Trabajo</a></li>
+        <li class="nav-drop">
+          <a href="#">Material Agentes<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9" /></svg></a>
+          <div class="nav-dropmenu">
+            <a href="/boletines.html"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Boletín Agentes</a>
+            <a href="/directorio.html"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Directorio BTG</a>
+            <a href="/convenciones.html"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Galería Convenciones</a>
+            <a href="/biblioteca-digital.html"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Biblioteca Digital</a>
+          </div>
+        </li>
+      </ul>
+      <div class="nav-social">
+        <a href="https://www.instagram.com/btgseguros/" target="_blank" rel="noopener" title="Instagram BTG"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        <a href="https://www.facebook.com/BTGSeguros/" target="_blank" rel="noopener" title="Facebook BTG"><svg width="17" height="17" viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        <a href="https://www.linkedin.com/company/btg-consultores-de-riesgo/" target="_blank" rel="noopener" title="LinkedIn BTG"><svg width="17" height="17" viewBox="0 0 24 24" fill="white"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+        <a href="https://wa.me/5215579094480" target="_blank" rel="noopener" title="WhatsApp BTG" class="wa-btn"><svg width="17" height="17" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.978-1.426A9.956 9.956 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm4.93 13.57c-.207.583-1.215 1.12-1.66 1.163-.444.044-.43.332-2.716-.567-2.286-.9-3.66-3.176-3.77-3.321-.11-.146-.9-1.195-.9-2.278 0-1.083.566-1.617.767-1.837.2-.22.437-.274.583-.274l.42.008c.135.006.316-.051.495.378.183.436.62 1.507.674 1.616.054.11.09.238.018.383-.073.146-.11.237-.218.365l-.328.38c-.11.127-.225.265-.097.52.128.254.57 1.004 1.226 1.624.843.79 1.554 1.035 1.808 1.148.255.11.403.092.55-.055.146-.147.626-.73.793-.98.167-.25.334-.208.562-.125.23.083 1.458.687 1.708.813.25.125.416.188.477.29.062.104.062.6-.145 1.18z"/></svg></a>
+      </div>
+      <button class="nav-burger" id="nav-burger" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <div id="mobile-menu" role="dialog" aria-label="Navegación">
+      <div class="mm-topbar">
+        <a href="/"><img src="/btg-logo.png" alt="BTG Seguros" class="mm-topbar-logo" /></a>
+        <button class="mm-close-btn" id="mm-close-btn" aria-label="Cerrar menú"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      </div>
+      <nav class="mm-links">
+        <a href="/dashboard.html" class="mm-link">Dashboard<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <a href="/#siniestros" class="mm-link">Siniestros<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <a href="/#tecnologia" class="mm-link">Multicotizador<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <a href="/#universidad" class="mm-link">Universidad<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <a href="/#concursos" class="mm-link">Concursos<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <a href="/#credenciales" class="mm-link">Credenciales<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <a href="/bolsa-de-trabajo.html" class="mm-link">Bolsa de Trabajo<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <div class="mm-item">
+          <a href="#" class="mm-item-head" id="mm-material">Material Agentes<svg class="mm-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          <div class="mm-sub" id="mm-material-sub">
+            <a href="/boletines.html" class="mm-sublink">Boletín Agentes<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            <a href="/directorio.html" class="mm-sublink">Directorio BTG<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            <a href="/convenciones.html" class="mm-sublink">Galería Convenciones<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            <a href="/biblioteca-digital.html" class="mm-sublink">Biblioteca Digital<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </div>
+      </nav>
+      <div class="mm-footer">
+        <span class="mm-brand"><span class="mm-dot"></span>BTG Seguros</span>
+        <div class="mm-social">
+          <a href="https://www.instagram.com/btgseguros/" target="_blank" rel="noopener" title="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="https://www.facebook.com/BTGSeguros/" target="_blank" rel="noopener" title="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="https://www.linkedin.com/company/btg-consultores-de-riesgo/" target="_blank" rel="noopener" title="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="https://wa.me/5215579094480" target="_blank" rel="noopener" class="wa-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.978-1.426A9.956 9.956 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm4.93 13.57c-.207.583-1.215 1.12-1.66 1.163-.444.044-.43.332-2.716-.567-2.286-.9-3.66-3.176-3.77-3.321-.11-.146-.9-1.195-.9-2.278 0-1.083.566-1.617.767-1.837.2-.22.437-.274.583-.274l.42.008c.135.006.316-.051.495.378.183.436.62 1.507.674 1.616.054.11.09.238.018.383-.073.146-.11.237-.218.365l-.328.38c-.11.127-.225.265-.097.52.128.254.57 1.004 1.226 1.624.843.79 1.554 1.035 1.808 1.148.255.11.403.092.55-.055.146-.147.626-.73.793-.98.167-.25.334-.208.562-.125.23.083 1.458.687 1.708.813.25.125.416.188.477.29.062.104.062.6-.145 1.18z"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+    <section class="hero">
+      <div class="cobrand">
+        <img src="/btg-logo.png" alt="BTG Seguros" />
+      </div>
+      <div class="eyebrow">Universidad BTG</div>
+      <h1>Capacitación Dashboard</h1>
+      <p class="lead">Sesión completa de capacitación sobre el uso del Dashboard BTG. Aprende a navegar, generar reportes y aprovechar cada herramienta.</p>
+    </section>
+
+    <div class="player-wrap">
+      <div class="player" id="player">
+        <video id="video" preload="metadata" playsinline crossorigin="anonymous">
+          <source src="capacitacion.mp4" type="video/mp4" />
+          Tu navegador no soporta la reproducción de video.
+        </video>
+
+        <div class="click-shield" id="click-shield"></div>
+
+        <div class="loader" id="loader"></div>
+
+        <div class="flash-icon" id="flash-icon">
+          <svg id="flash-svg" width="42" height="42" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+
+        <div class="poster" id="poster">
+          <div class="poster-brand">
+            <img src="/btg-logo.png" alt="BTG" />
+          </div>
+          <button class="big-play" id="big-play" aria-label="Reproducir">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <div class="poster-title">
+            <div class="tag">Universidad BTG</div>
+            <h2>Capacitación Dashboard</h2>
+            <p>Presiona para iniciar la reproducción</p>
+          </div>
+        </div>
+
+        <div class="controls" id="controls">
+          <div class="progress-wrap" id="progress-wrap">
+            <div class="progress-bar">
+              <div class="buffer" id="buffer"></div>
+              <div class="played" id="played"></div>
+            </div>
+            <div class="progress-tooltip" id="progress-tooltip">0:00</div>
+          </div>
+          <div class="bar">
+            <button class="btn-ctl" id="btn-play" aria-label="Reproducir / Pausar">
+              <svg id="icon-play" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+            <button class="btn-ctl" id="btn-back10" aria-label="Retroceder 10s">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4L6 10l6 6v-4a6 6 0 1 1-6 6"/><text x="12" y="15" font-size="7" font-weight="700" text-anchor="middle" fill="currentColor" stroke="none">10</text></svg>
+            </button>
+            <button class="btn-ctl" id="btn-fwd10" aria-label="Adelantar 10s">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4l6 6-6 6v-4a6 6 0 1 0 6 6"/><text x="12" y="15" font-size="7" font-weight="700" text-anchor="middle" fill="currentColor" stroke="none">10</text></svg>
+            </button>
+            <div class="vol-wrap" id="vol-wrap">
+              <button class="btn-ctl" id="btn-mute" aria-label="Silenciar">
+                <svg id="icon-vol" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 8.03v7.94A4.5 4.5 0 0 0 16.5 12zM14 3.23v2.06a7 7 0 0 1 0 13.42v2.06a9 9 0 0 0 0-17.54z"/></svg>
+              </button>
+              <div class="vol-slider">
+                <input type="range" id="vol" min="0" max="1" step="0.01" value="1" aria-label="Volumen"/>
+              </div>
+            </div>
+            <div class="time">
+              <span id="cur">0:00</span><span class="sep">/</span><span class="dur" id="dur">0:00</span>
+            </div>
+            <div class="spacer"></div>
+            <div class="speed-wrap">
+              <button class="speed-btn" id="btn-speed">1×</button>
+              <div class="speed-menu" id="speed-menu">
+                <button data-rate="0.5">0.5× <span class="check">✓</span></button>
+                <button data-rate="0.75">0.75× <span class="check">✓</span></button>
+                <button data-rate="1" class="active">1× <span class="check">✓</span></button>
+                <button data-rate="1.25">1.25× <span class="check">✓</span></button>
+                <button data-rate="1.5">1.5× <span class="check">✓</span></button>
+                <button data-rate="2">2× <span class="check">✓</span></button>
+              </div>
+            </div>
+            <button class="btn-ctl" id="btn-pip" aria-label="Picture in Picture" title="Picture in Picture">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><rect x="12" y="11" width="8" height="6" rx="1" fill="currentColor"/></svg>
+            </button>
+            <button class="btn-ctl" id="btn-fs" aria-label="Pantalla completa">
+              <svg id="icon-fs" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info">
+      <p>Atajos de teclado</p>
+      <div class="kbd-hint">
+        <kbd>Space</kbd><span>Reproducir / Pausar</span>
+        <kbd>← →</kbd><span>±5s</span>
+        <kbd>J K L</kbd><span>±10s / Pausar</span>
+        <kbd>F</kbd><span>Pantalla completa</span>
+        <kbd>M</kbd><span>Silenciar</span>
+        <kbd>0-9</kbd><span>Saltar %</span>
+      </div>
+    </div>
+
+    <footer>BTG Seguros · Universidad BTG · Capacitación Dashboard</footer>
+
+    <script>
+      // ============ SITE NAV ============
+      (function () {
+        var burger = document.getElementById("nav-burger");
+        var menu = document.getElementById("mobile-menu");
+        if (!burger || !menu) return;
+        function openMenu() { burger.classList.add("open"); menu.classList.add("open"); document.body.style.overflow = "hidden"; }
+        function closeMenu() { burger.classList.remove("open"); menu.classList.remove("open"); document.body.style.overflow = ""; }
+        burger.addEventListener("click", function () { menu.classList.contains("open") ? closeMenu() : openMenu(); });
+        menu.querySelectorAll(".mm-link").forEach(function (link) { link.addEventListener("click", closeMenu); });
+        document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeMenu(); });
+        var mmHead = document.getElementById("mm-material");
+        var mmSub = document.getElementById("mm-material-sub");
+        if (mmHead && mmSub) {
+          mmHead.addEventListener("click", function (e) { e.preventDefault(); mmHead.classList.toggle("open"); mmSub.classList.toggle("open"); });
+        }
+        var mmCloseBtn = document.getElementById("mm-close-btn");
+        if (mmCloseBtn) mmCloseBtn.addEventListener("click", closeMenu);
+      })();
+      document.querySelectorAll(".nav-drop").forEach(function (drop) {
+        var trigger = drop.querySelector("a");
+        trigger.addEventListener("click", function (e) {
+          e.preventDefault();
+          var isOpen = drop.classList.contains("drop-open");
+          document.querySelectorAll(".nav-drop.drop-open").forEach(function (d) { d.classList.remove("drop-open"); });
+          if (!isOpen) drop.classList.add("drop-open");
+        });
+      });
+      document.addEventListener("click", function (e) {
+        if (!e.target.closest(".nav-drop")) {
+          document.querySelectorAll(".nav-drop.drop-open").forEach(function (d) { d.classList.remove("drop-open"); });
+        }
+      });
+
+      // ============ PLAYER ============
+      const player = document.getElementById("player");
+      const video = document.getElementById("video");
+      const poster = document.getElementById("poster");
+      const bigPlay = document.getElementById("big-play");
+      const clickShield = document.getElementById("click-shield");
+      const loader = document.getElementById("loader");
+      const flashIcon = document.getElementById("flash-icon");
+      const flashSvg = document.getElementById("flash-svg");
+      const controls = document.getElementById("controls");
+      const progWrap = document.getElementById("progress-wrap");
+      const played = document.getElementById("played");
+      const buffer = document.getElementById("buffer");
+      const progTooltip = document.getElementById("progress-tooltip");
+      const btnPlay = document.getElementById("btn-play");
+      const iconPlay = document.getElementById("icon-play");
+      const btnBack10 = document.getElementById("btn-back10");
+      const btnFwd10 = document.getElementById("btn-fwd10");
+      const btnMute = document.getElementById("btn-mute");
+      const iconVol = document.getElementById("icon-vol");
+      const volInput = document.getElementById("vol");
+      const curEl = document.getElementById("cur");
+      const durEl = document.getElementById("dur");
+      const btnSpeed = document.getElementById("btn-speed");
+      const speedMenu = document.getElementById("speed-menu");
+      const btnPip = document.getElementById("btn-pip");
+      const btnFs = document.getElementById("btn-fs");
+
+      const ICON_PLAY = '<path d="M8 5v14l11-7z"/>';
+      const ICON_PAUSE = '<path d="M6 4h4v16H6zM14 4h4v16h-4z"/>';
+      const ICON_VOL_ON = '<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 8.03v7.94A4.5 4.5 0 0 0 16.5 12zM14 3.23v2.06a7 7 0 0 1 0 13.42v2.06a9 9 0 0 0 0-17.54z"/>';
+      const ICON_VOL_MID = '<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 8.03v7.94A4.5 4.5 0 0 0 16.5 12z"/>';
+      const ICON_VOL_OFF = '<path d="M16.5 12A4.5 4.5 0 0 0 14 8.03v2.21l2.45 2.45c.03-.22.05-.45.05-.69zM19 12c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.796 8.796 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>';
+
+      const fmtTime = (s) => {
+        if (!isFinite(s)) return "0:00";
+        s = Math.max(0, Math.floor(s));
+        const h = Math.floor(s / 3600);
+        const m = Math.floor((s % 3600) / 60);
+        const sec = s % 60;
+        const pad = (n) => String(n).padStart(2, "0");
+        return h > 0 ? `${h}:${pad(m)}:${pad(sec)}` : `${m}:${pad(sec)}`;
+      };
+
+      let hideTimer = null;
+      const scheduleHide = () => {
+        clearTimeout(hideTimer);
+        if (!video.paused) {
+          hideTimer = setTimeout(() => player.classList.add("hide-ui"), 2600);
+        }
+      };
+      const showUI = () => {
+        player.classList.remove("hide-ui");
+        scheduleHide();
+      };
+
+      // Start playback
+      const startPlay = () => {
+        poster.classList.add("hidden");
+        video.play();
+      };
+      bigPlay.addEventListener("click", startPlay);
+      poster.addEventListener("click", (e) => {
+        if (e.target === poster || e.target.closest(".poster-title") || e.target.closest(".poster-brand")) startPlay();
+      });
+
+      // Click shield toggles play/pause
+      const togglePlay = () => {
+        if (video.paused) { video.play(); } else { video.pause(); }
+      };
+      clickShield.addEventListener("click", togglePlay);
+      clickShield.addEventListener("dblclick", () => toggleFullscreen());
+
+      video.addEventListener("play", () => {
+        iconPlay.innerHTML = ICON_PAUSE;
+        showFlash(ICON_PLAY);
+        scheduleHide();
+      });
+      video.addEventListener("pause", () => {
+        iconPlay.innerHTML = ICON_PLAY;
+        if (!video.ended) showFlash(ICON_PAUSE);
+        clearTimeout(hideTimer);
+        player.classList.remove("hide-ui");
+      });
+      video.addEventListener("ended", () => {
+        iconPlay.innerHTML = ICON_PLAY;
+        poster.classList.remove("hidden");
+      });
+      video.addEventListener("waiting", () => loader.classList.add("show"));
+      video.addEventListener("canplay", () => loader.classList.remove("show"));
+      video.addEventListener("playing", () => loader.classList.remove("show"));
+
+      const showFlash = (iconPath) => {
+        flashSvg.innerHTML = iconPath;
+        flashIcon.classList.remove("show");
+        void flashIcon.offsetWidth;
+        flashIcon.classList.add("show");
+      };
+
+      btnPlay.addEventListener("click", togglePlay);
+      btnBack10.addEventListener("click", () => { video.currentTime = Math.max(0, video.currentTime - 10); });
+      btnFwd10.addEventListener("click", () => { video.currentTime = Math.min(video.duration || 0, video.currentTime + 10); });
+
+      // Progress
+      video.addEventListener("timeupdate", () => {
+        const pct = (video.currentTime / video.duration) * 100 || 0;
+        played.style.width = pct + "%";
+        curEl.textContent = fmtTime(video.currentTime);
+      });
+      video.addEventListener("loadedmetadata", () => {
+        durEl.textContent = fmtTime(video.duration);
+      });
+      video.addEventListener("progress", () => {
+        if (video.buffered.length) {
+          const end = video.buffered.end(video.buffered.length - 1);
+          buffer.style.width = ((end / video.duration) * 100) + "%";
+        }
+      });
+
+      let scrubbing = false;
+      const scrubTo = (clientX) => {
+        const rect = progWrap.getBoundingClientRect();
+        const pct = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width));
+        if (isFinite(video.duration)) video.currentTime = pct * video.duration;
+      };
+      progWrap.addEventListener("mousedown", (e) => { scrubbing = true; scrubTo(e.clientX); });
+      window.addEventListener("mouseup", () => { scrubbing = false; });
+      window.addEventListener("mousemove", (e) => {
+        if (scrubbing) scrubTo(e.clientX);
+        // tooltip
+        const rect = progWrap.getBoundingClientRect();
+        if (e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top - 20 && e.clientY <= rect.bottom) {
+          const pct = (e.clientX - rect.left) / rect.width;
+          const t = pct * (video.duration || 0);
+          progTooltip.style.left = ((e.clientX - rect.left)) + "px";
+          progTooltip.textContent = fmtTime(t);
+        }
+      });
+      progWrap.addEventListener("touchstart", (e) => { scrubbing = true; scrubTo(e.touches[0].clientX); }, { passive: true });
+      progWrap.addEventListener("touchmove", (e) => { if (scrubbing) scrubTo(e.touches[0].clientX); }, { passive: true });
+      progWrap.addEventListener("touchend", () => { scrubbing = false; });
+
+      // Volume
+      const setVolIcon = () => {
+        if (video.muted || video.volume === 0) iconVol.innerHTML = ICON_VOL_OFF;
+        else if (video.volume < 0.5) iconVol.innerHTML = ICON_VOL_MID;
+        else iconVol.innerHTML = ICON_VOL_ON;
+      };
+      volInput.addEventListener("input", (e) => {
+        video.volume = parseFloat(e.target.value);
+        video.muted = video.volume === 0;
+        setVolIcon();
+      });
+      btnMute.addEventListener("click", () => {
+        video.muted = !video.muted;
+        if (!video.muted && video.volume === 0) { video.volume = 0.5; volInput.value = 0.5; }
+        setVolIcon();
+      });
+      video.addEventListener("volumechange", () => {
+        volInput.value = video.muted ? 0 : video.volume;
+        setVolIcon();
+      });
+
+      // Speed
+      btnSpeed.addEventListener("click", (e) => {
+        e.stopPropagation();
+        speedMenu.classList.toggle("open");
+      });
+      document.addEventListener("click", (e) => {
+        if (!e.target.closest(".speed-wrap")) speedMenu.classList.remove("open");
+      });
+      speedMenu.querySelectorAll("button").forEach((b) => {
+        b.addEventListener("click", () => {
+          const rate = parseFloat(b.dataset.rate);
+          video.playbackRate = rate;
+          speedMenu.querySelectorAll("button").forEach(x => x.classList.remove("active"));
+          b.classList.add("active");
+          btnSpeed.textContent = (rate === 1 ? "1×" : rate + "×");
+          speedMenu.classList.remove("open");
+        });
+      });
+
+      // PiP
+      btnPip.addEventListener("click", async () => {
+        try {
+          if (document.pictureInPictureElement) await document.exitPictureInPicture();
+          else await video.requestPictureInPicture();
+        } catch (err) {}
+      });
+      if (!document.pictureInPictureEnabled) btnPip.style.display = "none";
+
+      // Fullscreen
+      const toggleFullscreen = () => {
+        if (!document.fullscreenElement) {
+          (player.requestFullscreen || player.webkitRequestFullscreen).call(player);
+        } else {
+          (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+        }
+      };
+      btnFs.addEventListener("click", toggleFullscreen);
+      document.addEventListener("fullscreenchange", () => {
+        if (document.fullscreenElement) player.classList.add("fs-active");
+        else player.classList.remove("fs-active");
+      });
+
+      // Mouse activity
+      ["mousemove","touchstart"].forEach(ev => player.addEventListener(ev, showUI));
+      player.addEventListener("mouseleave", () => {
+        if (!video.paused) player.classList.add("hide-ui");
+      });
+
+      // Keyboard shortcuts
+      document.addEventListener("keydown", (e) => {
+        if (e.target.tagName === "INPUT") return;
+        switch(e.key.toLowerCase()) {
+          case " ": case "k": e.preventDefault(); togglePlay(); break;
+          case "arrowleft": video.currentTime = Math.max(0, video.currentTime - 5); showUI(); break;
+          case "arrowright": video.currentTime = Math.min(video.duration||0, video.currentTime + 5); showUI(); break;
+          case "j": video.currentTime = Math.max(0, video.currentTime - 10); showUI(); break;
+          case "l": video.currentTime = Math.min(video.duration||0, video.currentTime + 10); showUI(); break;
+          case "f": e.preventDefault(); toggleFullscreen(); break;
+          case "m": video.muted = !video.muted; setVolIcon(); break;
+          case "arrowup": e.preventDefault(); video.volume = Math.min(1, video.volume + 0.05); volInput.value = video.volume; setVolIcon(); break;
+          case "arrowdown": e.preventDefault(); video.volume = Math.max(0, video.volume - 0.05); volInput.value = video.volume; setVolIcon(); break;
+        }
+        if (/^[0-9]$/.test(e.key) && video.duration) {
+          video.currentTime = (parseInt(e.key,10) / 10) * video.duration;
+          showUI();
+        }
+      });
+    </script>
+  </body>
+</html>
