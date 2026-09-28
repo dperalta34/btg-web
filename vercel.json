@@ -27,6 +27,7 @@
     { "source": "/biblioteca-digital", "destination": "/biblioteca-digital.html", "permanent": false },
     { "source": "/cever", "destination": "/cever.html", "permanent": false },
     { "source": "/dashboard", "destination": "/dashboard.html", "permanent": false },
-    { "source": "/formulario-builders", "destination": "/formulario-builders.html", "permanent": false }
+    { "source": "/formulario-builders", "destination": "/formulario-builders.html", "permanent": false },
+    { "source": "/propuesta-bewell", "destination": "/propuesta-bewell.html", "permanent": false }
   ]
 }
