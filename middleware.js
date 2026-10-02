@@ -5,12 +5,45 @@ export const config = {
     '/propuesta-flexngate',
     '/propuesta-flexngate.html',
     '/propuesta-flexngate/login',
+    '/flexngate-proposal',
+    '/flexngate-proposal.html',
+    '/flexngate-proposal/login',
   ],
 };
 
 const COOKIE_NAME = 'pfng_auth';
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 30;
 const NOINDEX = 'noindex, nofollow, noarchive';
+
+const ROUTES = {
+  es: {
+    base: '/propuesta-flexngate',
+    html: '/propuesta-flexngate.html',
+    login: '/propuesta-flexngate/login',
+    title: 'Acceso · BTG',
+    heading: 'Propuesta privada',
+    sub: 'Ingresa la contraseña para continuar.',
+    label: 'Contraseña',
+    submit: 'Ver propuesta',
+    errorMsg: 'Contraseña incorrecta.',
+  },
+  en: {
+    base: '/flexngate-proposal',
+    html: '/flexngate-proposal.html',
+    login: '/flexngate-proposal/login',
+    title: 'Access · BTG',
+    heading: 'Private proposal',
+    sub: 'Enter the password to continue.',
+    label: 'Password',
+    submit: 'View proposal',
+    errorMsg: 'Incorrect password.',
+  },
+};
+
+function routeFor(pathname) {
+  if (pathname.startsWith('/flexngate-proposal')) return ROUTES.en;
+  return ROUTES.es;
+}
 
 async function sha256Hex(input) {
   const data = new TextEncoder().encode(input);
@@ -41,15 +74,15 @@ function timingSafeEqual(a, b) {
   return diff === 0;
 }
 
-function loginHtml({ error } = { error: false }) {
-  const msg = error ? 'Contraseña incorrecta.' : '';
+function loginHtml(route, { error } = { error: false }) {
+  const msg = error ? route.errorMsg : '';
   return `<!doctype html>
 <html lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex, nofollow, noarchive">
-<title>Acceso · BTG</title>
+<title>${route.title}</title>
 <link rel="icon" href="/favicon_btg.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -77,12 +110,12 @@ footer{margin-top:26px;color:var(--on2);text-align:center;font-size:10.5px;lette
 <body>
 <main class="card" role="main">
   <div class="logo"><img src="/logo-btg-blanco-hd.png" alt="BTG"></div>
-  <h1>Propuesta privada</h1>
-  <p class="sub">Ingresa la contraseña para continuar.</p>
-  <form method="POST" action="/propuesta-flexngate/login" autocomplete="off">
-    <label for="p">Contraseña</label>
+  <h1>${route.heading}</h1>
+  <p class="sub">${route.sub}</p>
+  <form method="POST" action="${route.login}" autocomplete="off">
+    <label for="p">${route.label}</label>
     <input id="p" name="password" type="password" autofocus required>
-    <button type="submit">Ver propuesta</button>
+    <button type="submit">${route.submit}</button>
     <p class="err" role="alert" aria-live="polite">${msg}</p>
   </form>
   <footer>BTG · Black Tower Group</footer>
@@ -91,8 +124,8 @@ footer{margin-top:26px;color:var(--on2);text-align:center;font-size:10.5px;lette
 </html>`;
 }
 
-function loginResponse({ status = 200, error = false } = {}) {
-  return new Response(loginHtml({ error }), {
+function loginResponse(route, { status = 200, error = false } = {}) {
+  return new Response(loginHtml(route, { error }), {
     status,
     headers: {
       'Content-Type': 'text/html; charset=utf-8',
@@ -105,6 +138,7 @@ function loginResponse({ status = 200, error = false } = {}) {
 export default async function middleware(request) {
   const url = new URL(request.url);
   const pathname = url.pathname;
+  const route = routeFor(pathname);
   const password = process.env.PROPUESTA_FNG_PASSWORD;
 
   if (!password) {
@@ -114,7 +148,7 @@ export default async function middleware(request) {
     });
   }
 
-  if (pathname === '/propuesta-flexngate/login') {
+  if (pathname === route.login) {
     if (request.method === 'POST') {
       let submitted = '';
       try {
@@ -128,16 +162,16 @@ export default async function middleware(request) {
         return new Response(null, {
           status: 303,
           headers: {
-            Location: '/propuesta-flexngate',
+            Location: route.base,
             'Set-Cookie': `${COOKIE_NAME}=${token}; Path=/; Max-Age=${COOKIE_MAX_AGE}; HttpOnly; Secure; SameSite=Lax`,
             'Cache-Control': 'no-store',
             'X-Robots-Tag': NOINDEX,
           },
         });
       }
-      return loginResponse({ status: 401, error: true });
+      return loginResponse(route, { status: 401, error: true });
     }
-    return loginResponse();
+    return loginResponse(route);
   }
 
   const token = readCookie(request, COOKIE_NAME);
@@ -145,11 +179,11 @@ export default async function middleware(request) {
   const authed = token && timingSafeEqual(token, expected);
 
   if (!authed) {
-    return loginResponse();
+    return loginResponse(route);
   }
 
-  if (pathname === '/propuesta-flexngate') {
-    return rewrite(new URL('/propuesta-flexngate.html', request.url), {
+  if (pathname === route.base) {
+    return rewrite(new URL(route.html, request.url), {
       headers: { 'X-Robots-Tag': NOINDEX, 'Cache-Control': 'private, no-store' },
     });
   }
