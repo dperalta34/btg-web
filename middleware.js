@@ -8,18 +8,24 @@ export const config = {
     '/flexngate-proposal',
     '/flexngate-proposal.html',
     '/flexngate-proposal/login',
+    '/blacktower-curriculum',
+    '/blacktower-curriculum/',
+    '/blacktower-curriculum.html',
+    '/blacktower-curriculum/login',
   ],
 };
 
-const COOKIE_NAME = 'pfng_auth';
-const COOKIE_MAX_AGE = 60 * 60 * 24 * 30;
 const NOINDEX = 'noindex, nofollow, noarchive';
+const COOKIE_MAX_AGE = 60 * 60 * 24 * 30;
 
 const ROUTES = {
   es: {
+    key: 'propuesta-flexngate',
+    cookie: 'pfng_auth',
     base: '/propuesta-flexngate',
     html: '/propuesta-flexngate.html',
     login: '/propuesta-flexngate/login',
+    password: () => process.env.PROPUESTA_FNG_PASSWORD,
     title: 'Acceso · BTG',
     heading: 'Propuesta privada',
     sub: 'Ingresa la contraseña para continuar.',
@@ -28,9 +34,12 @@ const ROUTES = {
     errorMsg: 'Contraseña incorrecta.',
   },
   en: {
+    key: 'flexngate-proposal',
+    cookie: 'pfng_auth',
     base: '/flexngate-proposal',
     html: '/flexngate-proposal.html',
     login: '/flexngate-proposal/login',
+    password: () => process.env.PROPUESTA_FNG_PASSWORD,
     title: 'Access · BTG',
     heading: 'Private proposal',
     sub: 'Enter the password to continue.',
@@ -38,9 +47,24 @@ const ROUTES = {
     submit: 'View proposal',
     errorMsg: 'Incorrect password.',
   },
+  cv: {
+    key: 'blacktower-curriculum',
+    cookie: 'btgcv_auth',
+    base: '/blacktower-curriculum',
+    html: '/blacktower-curriculum.html',
+    login: '/blacktower-curriculum/login',
+    password: () => process.env.BLACKTOWER_CV_PASSWORD || 'BlackTower-CV',
+    title: 'Acceso · BTG · Currículum',
+    heading: 'Currículum empresarial',
+    sub: 'Ingresa la contraseña para acceder al currículum.',
+    label: 'Contraseña',
+    submit: 'Ver currículum',
+    errorMsg: 'Contraseña incorrecta.',
+  },
 };
 
 function routeFor(pathname) {
+  if (pathname.startsWith('/blacktower-curriculum')) return ROUTES.cv;
   if (pathname.startsWith('/flexngate-proposal')) return ROUTES.en;
   return ROUTES.es;
 }
@@ -53,8 +77,8 @@ async function sha256Hex(input) {
     .join('');
 }
 
-function expectedToken(password) {
-  return sha256Hex(`propuesta-flexngate|v1|${password}`);
+function expectedToken(route, password) {
+  return sha256Hex(`${route.key}|v1|${password}`);
 }
 
 function readCookie(request, name) {
@@ -137,9 +161,10 @@ function loginResponse(route, { status = 200, error = false } = {}) {
 
 export default async function middleware(request) {
   const url = new URL(request.url);
-  const pathname = url.pathname;
+  let pathname = url.pathname;
+  if (pathname.length > 1 && pathname.endsWith('/')) pathname = pathname.slice(0, -1);
   const route = routeFor(pathname);
-  const password = process.env.PROPUESTA_FNG_PASSWORD;
+  const password = route.password();
 
   if (!password) {
     return new Response('Servicio no disponible.', {
@@ -158,12 +183,12 @@ export default async function middleware(request) {
         submitted = '';
       }
       if (timingSafeEqual(submitted, password)) {
-        const token = await expectedToken(password);
+        const token = await expectedToken(route, password);
         return new Response(null, {
           status: 303,
           headers: {
             Location: route.base,
-            'Set-Cookie': `${COOKIE_NAME}=${token}; Path=/; Max-Age=${COOKIE_MAX_AGE}; HttpOnly; Secure; SameSite=Lax`,
+            'Set-Cookie': `${route.cookie}=${token}; Path=/; Max-Age=${COOKIE_MAX_AGE}; HttpOnly; Secure; SameSite=Lax`,
             'Cache-Control': 'no-store',
             'X-Robots-Tag': NOINDEX,
           },
@@ -174,8 +199,8 @@ export default async function middleware(request) {
     return loginResponse(route);
   }
 
-  const token = readCookie(request, COOKIE_NAME);
-  const expected = await expectedToken(password);
+  const token = readCookie(request, route.cookie);
+  const expected = await expectedToken(route, password);
   const authed = token && timingSafeEqual(token, expected);
 
   if (!authed) {
