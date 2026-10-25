@@ -135,12 +135,14 @@
     animation:rise 1.2s var(--ease) 3.0s forwards;
   }
   .hero::before{
-    /* warm aura */
-    content:"";position:absolute;inset:-22% -40%;z-index:-1;
-    background:
-      radial-gradient(55% 50% at 50% 48%, rgba(255,196,130,.55) 0%, rgba(217,180,106,.2) 32%, transparent 65%),
-      radial-gradient(70% 60% at 50% 48%, rgba(217,180,106,.2) 0%, transparent 60%);
-    filter:blur(24px);
+    /* warm aura — circular and generous para que no se noten esquinas */
+    content:"";position:absolute;inset:-60% -80%;z-index:-1;border-radius:50%;
+    background:radial-gradient(circle at 50% 50%,
+      rgba(255,196,130,.5) 0%,
+      rgba(217,180,106,.22) 25%,
+      rgba(217,180,106,.08) 45%,
+      transparent 70%);
+    filter:blur(28px);
     opacity:0;
     animation:aura-bloom 2.4s var(--ease) 3.4s forwards, breathe 7s ease-in-out 6s infinite alternate;
   }
@@ -282,7 +284,7 @@
     animation:rise 1.3s var(--ease) 9.2s forwards;
   }
   .brand .logo{
-    width:clamp(140px,30vw,190px);height:auto;
+    width:clamp(70px,16vw,100px);height:auto;
     filter:brightness(0) invert(1) opacity(.85) drop-shadow(0 0 22px rgba(243,231,209,.18));
   }
   .brand::after{
@@ -377,7 +379,7 @@
   </section>
 
   <div class="brand">
-    <img class="logo" src="/regina/logo-btg.png" alt="BTG">
+    <img class="logo" src="/regina/logo-btg-icon.png" alt="BTG">
   </div>
 
 </main>
