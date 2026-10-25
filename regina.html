@@ -203,12 +203,10 @@
     60%{filter:blur(2px) brightness(.85) saturate(.95); transform:scale(1.02)}
     100%{filter:blur(0) brightness(1) saturate(1.05) contrast(1.03); transform:scale(1)}
   }
-  /* Soft inner vignette on photo */
+  /* Soft bottom-only fade — sin viñeta radial para evitar esquinas oscuras */
   .hero .frame::after{
     content:"";position:absolute;inset:0;pointer-events:none;z-index:3;
-    background:
-      radial-gradient(130% 90% at 50% 42%, transparent 55%, rgba(0,0,0,.45) 100%),
-      linear-gradient(180deg, transparent 70%, rgba(4,10,18,.55) 100%);
+    background:linear-gradient(180deg, transparent 72%, rgba(4,10,18,.35) 100%);
   }
   /* Golden light sweep across the frame — passes once */
   .hero .frame::before{
