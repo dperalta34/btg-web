@@ -29,6 +29,7 @@
     { "source": "/dashboard", "destination": "/dashboard.html", "permanent": false },
     { "source": "/formulario-builders", "destination": "/formulario-builders.html", "permanent": false },
     { "source": "/propuesta-bewell", "destination": "/propuesta-bewell.html", "permanent": false },
-    { "source": "/checklist-bewell", "destination": "/checklist-bewell.html", "permanent": false }
+    { "source": "/checklist-bewell", "destination": "/checklist-bewell.html", "permanent": false },
+    { "source": "/regina", "destination": "/regina.html", "permanent": false }
   ]
 }
