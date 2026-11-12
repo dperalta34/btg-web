@@ -7,29 +7,97 @@
   "headers": [
     {
       "source": "/CEVER/fx/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     },
     {
       "source": "/CEVER/fx-m/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     },
     {
       "source": "/CEVER/logo-btg-blanco.png",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     }
   ],
   "redirects": [
-    { "source": "/susi", "destination": "/#tecnologia", "permanent": false },
-    { "source": "/bolsadetrabajo", "destination": "/bolsa-de-trabajo.html", "permanent": false },
-    { "source": "/boletines", "destination": "/boletines.html", "permanent": false },
-    { "source": "/directorio-btg", "destination": "/directorio.html", "permanent": false },
-    { "source": "/convenciones", "destination": "/convenciones.html", "permanent": false },
-    { "source": "/biblioteca-digital", "destination": "/biblioteca-digital.html", "permanent": false },
-    { "source": "/cever", "destination": "/cever.html", "permanent": false },
-    { "source": "/dashboard", "destination": "/dashboard.html", "permanent": false },
-    { "source": "/formulario-builders", "destination": "/formulario-builders.html", "permanent": false },
-    { "source": "/propuesta-bewell", "destination": "/propuesta-bewell.html", "permanent": false },
-    { "source": "/checklist-bewell", "destination": "/checklist-bewell.html", "permanent": false },
-    { "source": "/regina", "destination": "/regina.html", "permanent": false }
+    {
+      "source": "/susi",
+      "destination": "/#tecnologia",
+      "permanent": false
+    },
+    {
+      "source": "/bolsadetrabajo",
+      "destination": "/bolsa-de-trabajo.html",
+      "permanent": false
+    },
+    {
+      "source": "/boletines",
+      "destination": "/boletines.html",
+      "permanent": false
+    },
+    {
+      "source": "/directorio-btg",
+      "destination": "/directorio.html",
+      "permanent": false
+    },
+    {
+      "source": "/convenciones",
+      "destination": "/convenciones.html",
+      "permanent": false
+    },
+    {
+      "source": "/biblioteca-digital",
+      "destination": "/biblioteca-digital.html",
+      "permanent": false
+    },
+    {
+      "source": "/cever",
+      "destination": "/cever.html",
+      "permanent": false
+    },
+    {
+      "source": "/dashboard",
+      "destination": "/dashboard.html",
+      "permanent": false
+    },
+    {
+      "source": "/formulario-builders",
+      "destination": "/formulario-builders.html",
+      "permanent": false
+    },
+    {
+      "source": "/propuesta-bewell",
+      "destination": "/propuesta-bewell.html",
+      "permanent": false
+    },
+    {
+      "source": "/checklist-bewell",
+      "destination": "/checklist-bewell.html",
+      "permanent": false
+    },
+    {
+      "source": "/regina",
+      "destination": "/regina.html",
+      "permanent": false
+    },
+    {
+      "source": "/black-credito",
+      "destination": "/black-credito.html",
+      "permanent": false
+    }
   ]
 }
