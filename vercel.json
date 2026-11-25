@@ -98,6 +98,11 @@
       "source": "/black-credito",
       "destination": "/black-credito.html",
       "permanent": false
+    },
+    {
+      "source": "/presentacion-rocket",
+      "destination": "/presentacion-rocket.html",
+      "permanent": false
     }
   ]
 }
